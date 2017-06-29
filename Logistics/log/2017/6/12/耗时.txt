@@ -1,0 +1,7 @@
+[内容]:耗时0s [方法名]:Page_Load [代码文件路径]:F:\Users\Administrator\Source\Repos\物流系统\Logistics\Login\Login.aspx.cs [代码行号]:37 [Time]:2017-06-12 12:38:22.637
+[内容]:耗时0s [方法名]:Page_Load [代码文件路径]:F:\Users\Administrator\Source\Repos\物流系统\Logistics\Login\Login.aspx.cs [代码行号]:37 [Time]:2017-06-12 12:57:33.843
+[内容]:耗时1281s [方法名]:Page_Load [代码文件路径]:F:\Users\Administrator\Source\Repos\物流系统\Logistics\Login\Login.aspx.cs [代码行号]:37 [Time]:2017-06-12 12:57:37.819
+[内容]:耗时0s [方法名]:Page_Load [代码文件路径]:F:\Users\Administrator\Source\Repos\物流系统\Logistics\Login\Login.aspx.cs [代码行号]:37 [Time]:2017-06-12 12:57:38.893
+[内容]:耗时3s [方法名]:Page_Load [代码文件路径]:F:\Users\Administrator\Source\Repos\物流系统\Logistics\Login\Login.aspx.cs [代码行号]:37 [Time]:2017-06-12 12:57:40.094
+[内容]:耗时0s [方法名]:Page_Load [代码文件路径]:F:\Users\Administrator\Source\Repos\物流系统\Logistics\Login\Login.aspx.cs [代码行号]:37 [Time]:2017-06-12 12:57:40.817
+[内容]:耗时0s [方法名]:Page_Load [代码文件路径]:F:\Users\Administrator\Source\Repos\物流系统\Logistics\Login\Login.aspx.cs [代码行号]:37 [Time]:2017-06-12 13:03:13.913

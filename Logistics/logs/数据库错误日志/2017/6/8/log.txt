@@ -1,0 +1,3 @@
+错误:insert into LC_Line (LineID,Start,End,UserID,Phone,DateTime) values(de40b0010d084bbd,1,2,3,1515151,2017-06-08 10:44:40)Select @@Identity内容关键字 'End' 附近有语法错误。|2017-06-08 10:44:40.395|Add|D:\物流项目\Logistics\DAL\DAL\LC_Line.cs|17
+错误:insert into LC_Line (LineID,Start,End,UserID,Phone,DateTime) values(5cfbf31dedae9948,1,1,1,123,2017-06-08 10:53:09)Select @@Identity内容关键字 'End' 附近有语法错误。|2017-06-08 10:53:37.645|Add|D:\物流项目\Logistics\DAL\DAL\LC_Line.cs|17
+错误:insert into LC_Line ([LineID],[Start],[End],[UserID],[Phone],[DateTime]) values(f96f027a4f94339f,123,1,1,111,2017-06-08 11:03:42)Select @@Identity内容列名 'End' 无效。|2017-06-08 11:03:54.921|Add|D:\物流项目\Logistics\DAL\DAL\LC_Line.cs|17

@@ -1,0 +1,715 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2D6DEE1C-6774-4D36-9E86-E20F65B99913}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Logistics</RootNamespace>
+    <AssemblyName>Logistics</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CustomExtensions, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\物流项目\Logistics\Logistics\yinyong\CustomExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SuperCommand">
+      <HintPath>..\..\..\..\..\..\物流项目\Logistics\Logistics\yinyong\SuperCommand.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperDataBase, Version=2.4.1.8, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\物流项目\Logistics\Logistics\yinyong\SuperDataBase.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.3.1\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="ThoughtWorks.QRCode, Version=1.0.4778.30637, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThoughtWorks.QRCode.1.1.0\lib\ThoughtWorks.QRCode.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Tools, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\物流项目\Logistics\Logistics\yinyong\Tools.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Command\GetAddressNextList.aspx" />
+    <Content Include="Command\GetLineListFromLogisticsId.aspx" />
+    <Content Include="GetQR.aspx" />
+    <Content Include="LC\Business\DschargeGood\IndexDhg.aspx" />
+    <Content Include="LC\Business\DschargeGood\LC_Handle.aspx" />
+    <Content Include="LC\Business\DschargeGood\LC_Success.aspx" />
+    <Content Include="LC\Business\DschargeGood\LC_TransferEdit.aspx" />
+    <Content Include="LC\Business\MeetCar\LC_GoodDetails.aspx" />
+    <Content Include="LC\Business\MeetCar\LC_IndexMC.aspx" />
+    <Content Include="LC\Business\MeetCar\LC_Success.aspx" />
+    <Content Include="LC\Business\PretendCar\LC_Commodity.aspx" />
+    <Content Include="LC\Business\PretendCar\LC_IndexPC.aspx" />
+    <Content Include="LC\Business\PretendCar\LC_Success.aspx" />
+    <Content Include="LC\Business\PretendCar\LC_Vehicle.aspx" />
+    <Content Include="LC\Business\ReceiptGood\LC_GoodsReceipt.aspx" />
+    <Content Include="LC\Business\ReceiptGood\LC_RgDetails.aspx" />
+    <Content Include="LC\Business\ReceiptGood\LC_Success.aspx" />
+    <Content Include="LC\Customer\Contact\LC_AddCt.aspx" />
+    <Content Include="LC\Customer\Contact\LC_IndexCt.aspx" />
+    <Content Include="LC\Customer\DeliverGood\CT_DeliverAdd.aspx" />
+    <Content Include="LC\Customer\DeliverGood\CT_Delivergod.aspx" />
+    <Content Include="LC\Customer\DeliverGood\CT_Success.aspx" />
+    <Content Include="LC\Customer\Other\CT_Order\Index_CT_Order.aspx" />
+    <Content Include="LC\Customer\Other\CT_Personal\LC_CT_Personal.aspx" />
+    <Content Include="LC\Customer\SignGood\LC_IndexSG.aspx" />
+    <Content Include="LC\Customer\SignGood\LC_SgDetails.aspx" />
+    <Content Include="LC\Customer\SignGood\LC_Success.aspx" />
+    <Content Include="LC\Customer\SignGood\LC_Transfer.aspx" />
+    <Content Include="LC\Customer\TrackGood\LC_IndexTK.aspx" />
+    <Content Include="LC\Customer\TrackGood\LC_TkDetails.aspx" />
+    <Content Include="LC\Index\LC_Index.aspx" />
+    <Content Include="LC\Index\LC_IndexGL.aspx" />
+    <Content Include="LC\Index\LC_IndexKH.aspx" />
+    <Content Include="LC\Index\LC_IndexSon.aspx" />
+    <Content Include="LC\Index\LC_IndexYW.aspx" />
+    <Content Include="LC\Manage\Accredit\LC_Accredit.aspx" />
+    <Content Include="LC\Manage\Accredit\LC_AccreditNo.aspx" />
+    <Content Include="LC\Manage\Accredit\LC_AccreditYes.aspx" />
+    <Content Include="LC\Manage\Line\LC_Line.aspx" />
+    <Content Include="LC\Manage\Line\LC_LineAdd.aspx" />
+    <Content Include="LC\Manage\Line\LC_LineDetails.aspx" />
+    <Content Include="LC\Manage\Vehicle\LC_Vehicle.aspx" />
+    <Content Include="LC\Manage\Vehicle\LC_VehicleAdd.aspx" />
+    <Content Include="LC\Manage\Vehicle\LC_VehicleDetails.aspx" />
+    <Content Include="LC_Pick.aspx" />
+    <Content Include="Login\Login.aspx" />
+    <Content Include="Login\Register.aspx" />
+    <Content Include="Login\RegisterSon.aspx" />
+    <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Style\.DS_Store" />
+    <Content Include="Style\.vscode\launch.json" />
+    <Content Include="Style\.vscode\tasks.json" />
+    <Content Include="Style\css\basic.css" />
+    <Content Include="Style\css\default.css" />
+    <Content Include="Style\css\format.css" />
+    <Content Include="Style\css\global.css" />
+    <Content Include="Style\css\LArea.css" />
+    <Content Include="Style\css\login.css" />
+    <Content Include="Style\css\register.css" />
+    <Content Include="Style\css\SG_area_select.css" />
+    <Content Include="Style\css\style8.css" />
+    <Content Include="Style\css\styles.css" />
+    <Content Include="Style\css\success.css" />
+    <Content Include="Style\font\iconfont.eot" />
+    <Content Include="Style\font\iconfont.ttf" />
+    <Content Include="Style\font\iconfont.woff" />
+    <Content Include="Style\img\code.jpg" />
+    <Content Include="Style\img\home_icon.png" />
+    <Content Include="Style\img\icon2b.png" />
+    <Content Include="Style\img\lock_icon_copy.png" />
+    <Content Include="Style\img\login_bg.png" />
+    <Content Include="Style\img\login_pwd.png" />
+    <Content Include="Style\img\login_qq.png" />
+    <Content Include="Style\img\login_user.png" />
+    <Content Include="Style\img\login_wb.png" />
+    <Content Include="Style\img\msg.png" />
+    <Content Include="Style\img\new_金馆长.jpg" />
+    <Content Include="Style\img\plugmenu1.png" />
+    <Content Include="Style\img\plugmenu2.png" />
+    <Content Include="Style\img\plugmenu3.png" />
+    <Content Include="Style\img\plugmenu4.png" />
+    <Content Include="Style\img\plugmenu5.png" />
+    <Content Include="Style\img\plugmenu6.png" />
+    <Content Include="Style\img\plugmenu8.png" />
+    <Content Include="Style\img\pwd.png" />
+    <Content Include="Style\img\reg_bg.png" />
+    <Content Include="Style\img\send.png" />
+    <Content Include="Style\img\success.png" />
+    <Content Include="Style\img\success_bg.png" />
+    <Content Include="Style\img\Thumbs.db" />
+    <None Include="Properties\PublishProfiles\WuLiu.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="Style\css\iconfont.css" />
+    <Content Include="Style\css\iconlink.css" />
+    <Content Include="Style\css\sjstyle.css" />
+    <Content Include="Style\css\style.css" />
+    <Content Include="Style\css\sui\sm-extend.css" />
+    <Content Include="Style\css\sui\sm-extend.min.css" />
+    <Content Include="Style\css\sui\sm.css" />
+    <Content Include="Style\css\sui\sm.min.css" />
+    <Content Include="Style\css\zbstyle.css" />
+    <Content Include="Style\font\iconfont.svg" />
+    <Content Include="Style\img\1.png" />
+    <Content Include="Style\img\184良食记山楂酒.jpg" />
+    <Content Include="Style\img\4.png" />
+    <Content Include="Style\img\erweima.png" />
+    <Content Include="Style\img\fanxian.png" />
+    <Content Include="Style\img\img_search.png" />
+    <Content Include="Style\img\jizan-img.png" />
+    <Content Include="Style\img\tick.png" />
+    <Content Include="Style\img\touxiang1.jpeg" />
+    <Content Include="Style\img\touxiang2.jpeg" />
+    <Content Include="Style\img\user-img.jpg" />
+    <Content Include="Style\img\user_icon_copy.png" />
+    <Content Include="Style\img\user_name.png" />
+    <Content Include="Style\img\u_s1.png" />
+    <Content Include="Style\img\u_s2.png" />
+    <Content Include="Style\scripts\address.js" />
+    <Content Include="Style\scripts\ai.0.22.9-build00167.js" />
+    <Content Include="Style\scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Style\scripts\all.js" />
+    <Content Include="Style\scripts\classie.js" />
+    <Content Include="Style\scripts\demo7.js" />
+    <Content Include="Style\scripts\iscroll.js" />
+    <Content Include="Style\scripts\jquery-1.7.2.min.js" />
+    <Content Include="Style\scripts\jquery-2.1.1.min.js" />
+    <Content Include="Style\scripts\jquery-ui.min.js" />
+    <Content Include="Style\scripts\jquery.min.js" />
+    <Content Include="Style\scripts\LArea.js" />
+    <Content Include="Style\scripts\LAreaData1.js" />
+    <Content Include="Style\scripts\LAreaData2.js" />
+    <Content Include="Style\scripts\login.js" />
+    <Content Include="Style\scripts\modernizr.custom.js" />
+    <Content Include="Style\scripts\register.js" />
+    <Content Include="Style\scripts\SG_area_select.js" />
+    <Content Include="Style\scripts\sm-city-picker.js" />
+    <Content Include="Style\scripts\sm-city-picker.min.js" />
+    <Content Include="Style\scripts\sm-extend.js" />
+    <Content Include="Style\scripts\sm-extend.min.js" />
+    <Content Include="Style\scripts\sm.js" />
+    <Content Include="Style\scripts\sm.min.js" />
+    <Content Include="Style\scripts\stopExecutionOnTimeout.js" />
+    <Content Include="Style\scripts\tools.js" />
+    <Content Include="Style\scripts\zepto.min.js" />
+    <Content Include="test.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommandRun.cs" />
+    <Compile Include="Command\GetAddressNextList.aspx.cs">
+      <DependentUpon>GetAddressNextList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Command\GetAddressNextList.aspx.designer.cs">
+      <DependentUpon>GetAddressNextList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Command\GetLineListFromLogisticsId.aspx.cs">
+      <DependentUpon>GetLineListFromLogisticsId.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Command\GetLineListFromLogisticsId.aspx.designer.cs">
+      <DependentUpon>GetLineListFromLogisticsId.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetQR.aspx.cs">
+      <DependentUpon>GetQR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetQR.aspx.designer.cs">
+      <DependentUpon>GetQR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HttpContextBase.cs" />
+    <Compile Include="LC\Business\DschargeGood\IndexDhg.aspx.cs">
+      <DependentUpon>IndexDhg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\IndexDhg.aspx.designer.cs">
+      <DependentUpon>IndexDhg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_Handle.aspx.cs">
+      <DependentUpon>LC_Handle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_Handle.aspx.designer.cs">
+      <DependentUpon>LC_Handle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_Success.aspx.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_Success.aspx.designer.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_TransferEdit.aspx.cs">
+      <DependentUpon>LC_TransferEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_TransferEdit.aspx.designer.cs">
+      <DependentUpon>LC_TransferEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\MeetCar\LC_GoodDetails.aspx.cs">
+      <DependentUpon>LC_GoodDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\MeetCar\LC_GoodDetails.aspx.designer.cs">
+      <DependentUpon>LC_GoodDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\MeetCar\LC_IndexMC.aspx.cs">
+      <DependentUpon>LC_IndexMC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\MeetCar\LC_IndexMC.aspx.designer.cs">
+      <DependentUpon>LC_IndexMC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\MeetCar\LC_Success.aspx.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\MeetCar\LC_Success.aspx.designer.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\PretendCar\LC_Commodity.aspx.cs">
+      <DependentUpon>LC_Commodity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\PretendCar\LC_Commodity.aspx.designer.cs">
+      <DependentUpon>LC_Commodity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\PretendCar\LC_IndexPC.aspx.cs">
+      <DependentUpon>LC_IndexPC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\PretendCar\LC_IndexPC.aspx.designer.cs">
+      <DependentUpon>LC_IndexPC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\PretendCar\LC_Success.aspx.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\PretendCar\LC_Success.aspx.designer.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\PretendCar\LC_Vehicle.aspx.cs">
+      <DependentUpon>LC_Vehicle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\PretendCar\LC_Vehicle.aspx.designer.cs">
+      <DependentUpon>LC_Vehicle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\ReceiptGood\LC_GoodsReceipt.aspx.cs">
+      <DependentUpon>LC_GoodsReceipt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\ReceiptGood\LC_GoodsReceipt.aspx.designer.cs">
+      <DependentUpon>LC_GoodsReceipt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\ReceiptGood\LC_RgDetails.aspx.cs">
+      <DependentUpon>LC_RgDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\ReceiptGood\LC_RgDetails.aspx.designer.cs">
+      <DependentUpon>LC_RgDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\ReceiptGood\LC_Success.aspx.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\ReceiptGood\LC_Success.aspx.designer.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Customer\Contact\LC_AddCt.aspx.cs">
+      <DependentUpon>LC_AddCt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Customer\Contact\LC_AddCt.aspx.designer.cs">
+      <DependentUpon>LC_AddCt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Customer\Contact\LC_IndexCt.aspx.cs">
+      <DependentUpon>LC_IndexCt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Customer\Contact\LC_IndexCt.aspx.designer.cs">
+      <DependentUpon>LC_IndexCt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Customer\DeliverGood\CT_DeliverAdd.aspx.cs">
+      <DependentUpon>CT_DeliverAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Customer\DeliverGood\CT_DeliverAdd.aspx.designer.cs">
+      <DependentUpon>CT_DeliverAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Customer\DeliverGood\CT_Delivergod.aspx.cs">
+      <DependentUpon>CT_Delivergod.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Customer\DeliverGood\CT_Delivergod.aspx.designer.cs">
+      <DependentUpon>CT_Delivergod.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Customer\DeliverGood\CT_Success.aspx.cs">
+      <DependentUpon>CT_Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Customer\DeliverGood\CT_Success.aspx.designer.cs">
+      <DependentUpon>CT_Success.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Customer\Other\CT_Order\Index_CT_Order.aspx.cs">
+      <DependentUpon>Index_CT_Order.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Customer\Other\CT_Order\Index_CT_Order.aspx.designer.cs">
+      <DependentUpon>Index_CT_Order.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Customer\Other\CT_Personal\LC_CT_Personal.aspx.cs">
+      <DependentUpon>LC_CT_Personal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Customer\Other\CT_Personal\LC_CT_Personal.aspx.designer.cs">
+      <DependentUpon>LC_CT_Personal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Customer\SignGood\LC_IndexSG.aspx.cs">
+      <DependentUpon>LC_IndexSG.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Customer\SignGood\LC_IndexSG.aspx.designer.cs">
+      <DependentUpon>LC_IndexSG.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Customer\SignGood\LC_SgDetails.aspx.cs">
+      <DependentUpon>LC_SgDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Customer\SignGood\LC_SgDetails.aspx.designer.cs">
+      <DependentUpon>LC_SgDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Customer\SignGood\LC_Success.aspx.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Customer\SignGood\LC_Success.aspx.designer.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Customer\SignGood\LC_Transfer.aspx.cs">
+      <DependentUpon>LC_Transfer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Customer\SignGood\LC_Transfer.aspx.designer.cs">
+      <DependentUpon>LC_Transfer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Customer\TrackGood\LC_IndexTK.aspx.cs">
+      <DependentUpon>LC_IndexTK.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Customer\TrackGood\LC_IndexTK.aspx.designer.cs">
+      <DependentUpon>LC_IndexTK.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Customer\TrackGood\LC_TkDetails.aspx.cs">
+      <DependentUpon>LC_TkDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Customer\TrackGood\LC_TkDetails.aspx.designer.cs">
+      <DependentUpon>LC_TkDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Index\LC_Index.aspx.cs">
+      <DependentUpon>LC_Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Index\LC_Index.aspx.designer.cs">
+      <DependentUpon>LC_Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Index\LC_IndexGL.aspx.cs">
+      <DependentUpon>LC_IndexGL.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Index\LC_IndexGL.aspx.designer.cs">
+      <DependentUpon>LC_IndexGL.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Index\LC_IndexKH.aspx.cs">
+      <DependentUpon>LC_IndexKH.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Index\LC_IndexKH.aspx.designer.cs">
+      <DependentUpon>LC_IndexKH.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Index\LC_IndexSon.aspx.cs">
+      <DependentUpon>LC_IndexSon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Index\LC_IndexSon.aspx.designer.cs">
+      <DependentUpon>LC_IndexSon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Index\LC_IndexYW.aspx.cs">
+      <DependentUpon>LC_IndexYW.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Index\LC_IndexYW.aspx.designer.cs">
+      <DependentUpon>LC_IndexYW.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Manage\Accredit\LC_Accredit.aspx.cs">
+      <DependentUpon>LC_Accredit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Manage\Accredit\LC_Accredit.aspx.designer.cs">
+      <DependentUpon>LC_Accredit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Manage\Accredit\LC_AccreditNo.aspx.cs">
+      <DependentUpon>LC_AccreditNo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Manage\Accredit\LC_AccreditNo.aspx.designer.cs">
+      <DependentUpon>LC_AccreditNo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Manage\Accredit\LC_AccreditYes.aspx.cs">
+      <DependentUpon>LC_AccreditYes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Manage\Accredit\LC_AccreditYes.aspx.designer.cs">
+      <DependentUpon>LC_AccreditYes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Manage\Line\LC_Line.aspx.cs">
+      <DependentUpon>LC_Line.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Manage\Line\LC_Line.aspx.designer.cs">
+      <DependentUpon>LC_Line.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Manage\Line\LC_LineAdd.aspx.cs">
+      <DependentUpon>LC_LineAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Manage\Line\LC_LineAdd.aspx.designer.cs">
+      <DependentUpon>LC_LineAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Manage\Line\LC_LineDetails.aspx.cs">
+      <DependentUpon>LC_LineDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Manage\Line\LC_LineDetails.aspx.designer.cs">
+      <DependentUpon>LC_LineDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Manage\Vehicle\LC_Vehicle.aspx.cs">
+      <DependentUpon>LC_Vehicle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Manage\Vehicle\LC_Vehicle.aspx.designer.cs">
+      <DependentUpon>LC_Vehicle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Manage\Vehicle\LC_VehicleAdd.aspx.cs">
+      <DependentUpon>LC_VehicleAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Manage\Vehicle\LC_VehicleAdd.aspx.designer.cs">
+      <DependentUpon>LC_VehicleAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Manage\Vehicle\LC_VehicleDetails.aspx.cs">
+      <DependentUpon>LC_VehicleDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Manage\Vehicle\LC_VehicleDetails.aspx.designer.cs">
+      <DependentUpon>LC_VehicleDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC_Pick.aspx.cs">
+      <DependentUpon>LC_Pick.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC_Pick.aspx.designer.cs">
+      <DependentUpon>LC_Pick.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LogCommandVO.cs" />
+    <Compile Include="Login\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\RegisterSon.aspx.cs">
+      <DependentUpon>RegisterSon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\RegisterSon.aspx.designer.cs">
+      <DependentUpon>RegisterSon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PageLoginBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="Style\icon\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{87bf59c1-7c45-43b0-98e6-8d7da7d5f81c}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{c613a7b7-5cb4-47fe-8487-929a94231336}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GlobalBLL\GlobalBLL.csproj">
+      <Project>{8391097a-dcf2-425e-b09f-0c07dfdcc74c}</Project>
+      <Name>GlobalBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{ad983845-5fd1-4470-8117-8f016277b941}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>13839</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://192.168.0.200</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:13839/" workingDir="" />
+          </servers>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

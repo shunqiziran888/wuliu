@@ -1,0 +1,1 @@
+[内容]:时间: 951ms Sql:select [ID],[UID],[UserName],[PositionID],[Phone],[CreateTime],[ZNumber],[Password],[ZType],[State] from LC_User [方法名]:Read [代码文件路径]:D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\SuperDataBase\DBCommand\MsSql_DataBaseCommand.cs [代码行号]:350 [Time]:2017-06-06 18:30:21.044

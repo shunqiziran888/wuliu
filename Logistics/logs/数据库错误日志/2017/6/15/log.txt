@@ -1,0 +1,4 @@
+错误:update LC_Customer set [State]=3,[VehicleID]=0 where OrderID in (d94d35c07e8424bb)内容列名 'd94d35c07e8424bb' 无效。|2017-06-15 15:46:38.164|UpdatePC|F:\Users\Administrator\Source\Repos\物流系统\DAL\DAL\LC_Customer.cs|58
+错误:update LC_Customer set [State]=3,[VehicleID]=0 where OrderID in (d94d35c07e8424bb)内容列名 'd94d35c07e8424bb' 无效。|2017-06-15 15:47:59.288|UpdatePC|F:\Users\Administrator\Source\Repos\物流系统\DAL\DAL\LC_Customer.cs|58
+错误:update LC_Customer set [State]=3,[VehicleID]=1 where OrderID in (''d94d35c07e8424bb','de9ee92a5877938b','44c071e37dd57f8b'')内容'd94d35c07e8424bb' 附近有语法错误。|2017-06-15 17:08:03.677|UpdatePC|F:\Users\Administrator\Source\Repos\物流系统\DAL\DAL\LC_Customer.cs|58
+错误:update LC_Customer set [State]=3,[VehicleID]=1 where OrderID in (''d94d35c07e8424bb','de9ee92a5877938b','44c071e37dd57f8b'')内容另一个 SqlParameterCollection 中已包含 SqlParameter。|2017-06-15 17:09:13.272|UpdatePC|F:\Users\Administrator\Source\Repos\物流系统\DAL\DAL\LC_Customer.cs|58

@@ -1,0 +1,1 @@
+[内容]:时间: 1059ms Sql:select top 1 [ID],[UID],[UserName],[PositionID],[Phone],[CreateTime],[ZNumber],[Password],[ZType],[State] from LC_User where ZNumber= and Password= [方法名]:Read [代码文件路径]:D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\SuperDataBase\DBCommand\MsSql_DataBaseCommand.cs [代码行号]:350 [Time]:2017-06-12 12:57:37.818
