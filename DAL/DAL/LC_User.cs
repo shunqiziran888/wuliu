@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Model.Model;
-
+using CustomExtensions;
 namespace DAL.DAL
 {
     /// <summary>
@@ -33,9 +33,13 @@ namespace DAL.DAL
                 return new Tuple<bool, string, List<Model.Model.LC_User>>(true, string.Empty, ids.GetVOList<Model.Model.LC_User>());
             return new Tuple<bool, string, List<Model.Model.LC_User>>(true, "没有任何数据!", new List<Model.Model.LC_User>());
         }
+        /// <summary>
+        /// 获取申请人列表
+        /// </summary>
+        /// <returns></returns>
         public static Tuple<bool, string, List<Model.Model.LC_User>> GetSQList()
         {
-            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "State=0");
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), $"State=0 and ZType={GlobalBLL.AccountTypeEnum.物流公司员工账号.EnumToInt()}");
             ids = db.Read(sql);
             if (!ids.flag)
                 return new Tuple<bool, string, List<Model.Model.LC_User>>(false, ids.errormsg, null);
@@ -45,7 +49,7 @@ namespace DAL.DAL
         }
         public static Tuple<bool, string, List<Model.Model.LC_User>> GetSQAllList()
         {
-            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "State=1");
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), $"State=1  and ZType={GlobalBLL.AccountTypeEnum.物流公司员工账号.EnumToInt()}");
             ids = db.Read(sql);
             if (!ids.flag)
                 return new Tuple<bool, string, List<Model.Model.LC_User>>(false, ids.errormsg, null);

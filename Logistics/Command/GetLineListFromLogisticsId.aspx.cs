@@ -19,8 +19,8 @@ namespace Logistics.Command
                     x.ID,
                     x.Start,
                     x.End,
-                    StartName = GlobalBLL.GlobalAddress.GetAddressFromID(x.Start.ConvertData<int>())?.Item2?.Name,
-                    EndName = GlobalBLL.GlobalAddress.GetAddressFromID(x.End.ConvertData<int>())?.Item2?.Name
+                    StartName = DAL.DAL.DALBase.GetAddressFromID(x.Start.ConvertData<int>())?.Item2?.Name,
+                    EndName = DAL.DAL.DALBase.GetAddressFromID(x.End.ConvertData<int>())?.Item2?.Name
                 };
             })).ToJson());
             Response.End();
