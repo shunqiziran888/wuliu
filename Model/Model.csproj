@@ -35,7 +35,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="SuperDataBase">
-      <HintPath>..\..\..\引用\SuperDataBase.dll</HintPath>
+      <HintPath>D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\运营商API平台\bin\SuperDataBase.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

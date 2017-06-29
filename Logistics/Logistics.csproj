@@ -44,9 +44,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CustomExtensions, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\物流项目\Logistics\Logistics\yinyong\CustomExtensions.dll</HintPath>
+    <Reference Include="CustomExtensions">
+      <HintPath>D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\运营商API平台\bin\CustomExtensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
@@ -89,12 +88,8 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SuperCommand">
-      <HintPath>..\..\..\..\..\..\物流项目\Logistics\Logistics\yinyong\SuperCommand.dll</HintPath>
-    </Reference>
-    <Reference Include="SuperDataBase, Version=2.4.1.8, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\物流项目\Logistics\Logistics\yinyong\SuperDataBase.dll</HintPath>
+    <Reference Include="SuperDataBase">
+      <HintPath>D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\运营商API平台\bin\SuperDataBase.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -119,9 +114,8 @@
       <HintPath>..\packages\ThoughtWorks.QRCode.1.1.0\lib\ThoughtWorks.QRCode.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Tools, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\物流项目\Logistics\Logistics\yinyong\Tools.dll</HintPath>
+    <Reference Include="Tools">
+      <HintPath>D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\运营商API平台\bin\Tools.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -284,7 +278,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandRun.cs" />
     <Compile Include="Command\GetAddressNextList.aspx.cs">
       <DependentUpon>GetAddressNextList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -309,7 +302,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HttpContextBase.cs" />
     <Compile Include="LC\Business\DschargeGood\IndexDhg.aspx.cs">
       <DependentUpon>IndexDhg.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -604,7 +596,6 @@
     <Compile Include="LC_Pick.aspx.designer.cs">
       <DependentUpon>LC_Pick.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LogCommandVO.cs" />
     <Compile Include="Login\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -681,7 +672,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>13839</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

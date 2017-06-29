@@ -77,11 +77,17 @@ namespace DAL.DAL
             Model.Model.w_address_basic_data wabd = null;
             wabd = GetAddressFromID(AreaID)?.Item2;
             allname = wabd?.Name?? string.Empty;
+            if(wabd!=null)
+            {
+                wabd = GetAddressFromID(wabd.TopAddressID.ConvertData<int>()).Item2;
+                allname = (wabd?.Name ?? string.Empty) + " " + allname;
+                if (wabd != null)
+                {
+                    wabd = GetAddressFromID(wabd.TopAddressID.ConvertData<int>()).Item2;
+                    allname = (wabd?.Name ?? string.Empty) + " " + allname;
+                }
+            }
 
-            wabd = GetAddressFromID(wabd.TopAddressID.ConvertData<int>()).Item2;
-            allname = (wabd?.Name ?? string.Empty) +" "+ allname;
-            wabd = GetAddressFromID(wabd.TopAddressID.ConvertData<int>()).Item2;
-            allname = (wabd?.Name ?? string.Empty) + " " + allname;
             return allname;
         }
 
