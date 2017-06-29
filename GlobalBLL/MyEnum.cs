@@ -11,9 +11,10 @@ namespace GlobalBLL
     /// </summary>
     public enum AccountTypeEnum
     {
-        普通用户账号 = 3,
         物流账号 = 1,
-        平台账号 = 2
+        平台账号 = 2,
+        普通用户账号 = 3,
+        物流公司员工账号 =4
     }
 
     public enum YFFSEnum

@@ -65,6 +65,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GlobalBLL\GlobalBLL.csproj">
+      <Project>{8391097a-dcf2-425e-b09f-0c07dfdcc74c}</Project>
+      <Name>GlobalBLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{ad983845-5fd1-4470-8117-8f016277b941}</Project>
       <Name>Model</Name>
