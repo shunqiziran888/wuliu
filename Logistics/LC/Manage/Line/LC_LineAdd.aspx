@@ -136,14 +136,13 @@
 
     })
 
-    function show(id, elename)
-    {
+    function show(id, elename) {
         GetHtml("/Command/GetAddressNextList.aspx", { id: id }, function (data) {
             let list = JSON.parse(data);
             $("#" + elename).empty();
-            for(let i=0;i<list.length;i++)
-            {
-                $("#" + elename).append("<option value='"+list[i].id+"'>"+list[i].Name+"</option>");
+            $("#" + elename).append("<option>请选择</option>");
+            for (let i = 0; i < list.length; i++) {
+                $("#" + elename).append("<option value='" + list[i].id + "'>" + list[i].Name + "</option>");
             }
         });
     }
