@@ -83,10 +83,10 @@
                                 物流
                             </div>
                             <div class="col-40">
-                                <select id="logisticsID" name="logisticsID" onchange="LCID()">
+                                <select id="logisticsID" name="logisticsID" onchange="Test()">
                                     <option>请选择物流</option>
                                     <%foreach (var v in list) { %>
-                                    <option value="<%=v.UID %>"><%=v.LogisticsName %></option>
+                                    <option value="<%=v.UID %>,<%=v.AreaID %>"><%=v.LogisticsName %></option>
                                     <%} %>
                                 </select>
                             </div>
@@ -99,22 +99,26 @@
                                 <input name="SHPhone" type="text" id="SHPhone" size="15">
                             </div>
                         </div>
-                             <div class="row">
-                            <div class="col-30 ">
-                                出发地
-                            </div>
-                            <div class="col-70">
-                                <select id="Initially" name="Initially"> 
-                                </select>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-30 ">
                                 到达地
                             </div>
                             <div class="col-70">
-                                <select id="Destination" name="Destination"> 
-                                </select>
+                                <select id="End1" name="End1" style="width:300px" onchange="show(this.value,'End2');"> 
+                                    <option>请选择</option>
+                                    <%
+                                    foreach (var p in shengList)
+                                    {
+                                     %>
+                                <option value="<%=p.id %>"><%=p.Name %></option>
+                                    
+                                <%
+                                    } %>
+                                </select>省份&nbsp &nbsp &nbsp 
+                                 <select id="End2" name="End2" style="width:300px" onchange="show(this.value,'End');"> 
+                                </select>城市&nbsp &nbsp &nbsp 
+                                 <select id="End" name="End" style="width:300px" > 
+                                </select>区县&nbsp &nbsp &nbsp
                             </div>
                         </div>
                         <div class="row">
@@ -217,21 +221,33 @@
                 router: false
             }
         });
+        //物流筛选地区
         function LCID()
         {
-            var values = $("#logisticsID").val();
-            GetHtml("/Command/GetLineListFromLogisticsId.aspx?logid=" + values, {}, function (data) {
-                var obj = JSON.parse(data);
-                if (obj.Item1 == true) {
-                    $("#Initially").empty();
-                    $("#Destination").empty();
-                    for (var o in obj.Item3) {
-                        let v = obj.Item3[o];
-                        $("#Initially").prepend("<option value=" + v.Start + ">" + v.StartName + "</option>");
-                        $("#Destination").prepend("<option value=" + v.End + ">" + v.EndName + "</option>");
-                    }
+            //var values = $("#logisticsID").val();
+            //GetHtml("/Command/GetLineListFromLogisticsId.aspx?logid=" + values, {}, function (data) {
+            //    var obj = JSON.parse(data);
+            //    if (obj.Item1 == true) {
+            //        $("#Initially").empty();
+            //        $("#Destination").empty();
+            //        for (var o in obj.Item3) {
+            //            let v = obj.Item3[o];
+            //            $("#Initially").prepend("<option value=" + v.Start + ">" + v.StartName + "</option>");
+            //            $("#Destination").prepend("<option value=" + v.End + ">" + v.EndName + "</option>");
+            //        }
+            //    }
+            //}, function (error) {
+            //});
+        }
+
+        function show(id, elename) {
+            GetHtml("/Command/GetAddressNextList.aspx", { id: id }, function (data) {
+                let list = JSON.parse(data);
+                $("#" + elename).empty();
+                $("#" + elename).append("<option>请选择</option>");
+                for (let i = 0; i < list.length; i++) {
+                    $("#" + elename).append("<option value='" + list[i].id + "'>" + list[i].Name + "</option>");
                 }
-            }, function (error) {
             });
         }
     </script>

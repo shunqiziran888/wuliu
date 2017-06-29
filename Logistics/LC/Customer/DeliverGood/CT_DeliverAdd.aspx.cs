@@ -7,14 +7,18 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SuperDataBase;
 using System.Diagnostics;
+using CustomExtensions;
 namespace Logistics.LC.Customer
 {
     public partial class CT_DeliverAdd :PageLoginBase
     {
         public List<Model.Model.LC_User> list = new List<Model.Model.LC_User>();
+        public List<Model.Model.w_address_basic_data> shengList = new List<Model.Model.w_address_basic_data>();
         public List<Model.Model.LC_Line> list2 = new List<Model.Model.LC_Line>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            //获取地区省列表
+            shengList = DAL.DAL.DALBase.GetNextAddressListFromId(1);
             try
             {
                 if (IsPostBack)
@@ -31,10 +35,10 @@ namespace Logistics.LC.Customer
                         FHPhone = Phone,//发货人电话
                         Consignee = GetValue("Consignee"),//收货人名称
                         ConsigneeID = Tools.NewGuid.GuidTo16String(),//收货人ID
-                        logisticsID = GetValue("logisticsID"),//物流
+                        logisticsID = GetValue("logisticsID").StringToArray().GetIndexValue(0),//物流
                         SHPhone = GetValue("SHPhone"),//收货人电话
-                        Destination = GetValue<int>("Destination"),//目的地
-                        Initially = GetValue<int>("Initially"),//出发地
+                        Destination = GetValue<int>("End"),//目的地
+                        Initially = GetValue("Initially").StringToArray().GetIndexValue(1).ConvertData<int>(),//出发地
                         GoodName = GetValue("GoodName"),//货物名称
                         Number = GetValue<int>("Number"),//件数
                         GReceivables = GetValue<decimal>("GReceivables"),//代收款
@@ -65,17 +69,6 @@ namespace Logistics.LC.Customer
                     return;
                 }
                 list = vo1.Item3;
-                //地区
-                string LCID = GetValue("LCID");
-                var vo2 = DAL.DAL.LC_Line.GetXLList(LCID);
-                if (!vo2.Item1)
-                {
-                    //有错误
-                    Debug.Print(vo2.Item2);
-                    return;
-                }
-                list2 = vo2.Item3;
-
             }
             catch (Exception)
             {

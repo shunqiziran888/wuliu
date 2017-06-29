@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="Logistics.Login.Register" %>
-
+<%@ Import Namespace="GlobalBLL" %>
 <!DOCTYPE html>
 
 <html>
@@ -19,7 +19,7 @@ $(window).load(function() {
 </head>
 
 <body>
-<div class="w">
+    <div class="w">
   <!--页面加载 开始-->
   <div id="preloader">
     <div id="status">
@@ -41,9 +41,6 @@ $(window).load(function() {
         <div class="item item-username">
              <input name="UserName" class="txt-input txt-username" type="text" id="UserName" placeholder="用户名称">
           <b class="input-close" style="display: none;"></b> </div>
-        <div class="item item-username">
-            <input name="PositionID" class="txt-input txt-username" type="text" id="PositionID" placeholder="职位">
-          <b class="input-close" style="display:none;"></b> </div>
           <div class="item item-username">
              <input name="Phone" class="txt-input txt-username" type="text" id="Phone" placeholder="手机号">
           <b class="input-close" style="display: none;"></b> </div>
@@ -60,6 +57,23 @@ $(window).load(function() {
                   <option value="3">客户端</option>
               </select>
           <b class="input-close" style="display: none;"></b> </div>
+          <div class="item item-username">
+              <select id="End1" name="End1" style="width:300px" onchange="shows(this.value,'End2');"> 
+                                    <option>请选择</option>
+                                    <%
+                                    foreach (var p in shengList)
+                                    {
+                                     %>
+                                <option value="<%=p.id %>"><%=p.Name %></option>
+                                    
+                                <%
+                                    } %>
+                                </select>省份&nbsp &nbsp &nbsp 
+                                 <select id="End2" name="End2" style="width:300px" onchange="shows(this.value,'End');"> 
+                                </select>城市&nbsp &nbsp &nbsp 
+                                 <select id="End" name="End" style="width:300px" > 
+                                </select>区县&nbsp &nbsp &nbsp
+          </div>
         <div class="item item-captcha">
           <div class="input-info">
             <input id="validateCode" class="txt-input txt-captcha" type="text" placeholder="验证码" autocomplete="off" maxlength="6" size="11">
@@ -68,6 +82,7 @@ $(window).load(function() {
         <div class="ui-btn-wrap"> <a class="ui-btn-lg ui-btn-primary" href="#" onclick="loginwl()">用户注册</a> </div>
       </form>
     </div>
+      <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js"></script>
     <script type="text/javascript" >
     $(function() {
 		$(".input-close").hide();
@@ -164,7 +179,18 @@ $(window).load(function() {
 		}else{
 			$(this).siblings(".input-close").hide();
 		}
-    });
+	});
+
+	function shows(id, elename) {
+	    GetHtml("/Command/GetAddressNextList.aspx", { id: id }, function (data) {
+	        let list = JSON.parse(data);
+	        $("#" + elename).empty();
+	        $("#" + elename).append("<option>请选择</option>");
+	        for (let i = 0; i < list.length; i++) {
+	            $("#" + elename).append("<option value='" + list[i].id + "'>" + list[i].Name + "</option>");
+	        }
+	    });
+	}
 </script>
 </body>
 </html>

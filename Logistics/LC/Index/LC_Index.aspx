@@ -29,7 +29,7 @@
             <!-- 你的html代码 -->
             <div class="content" style="background:#ededed;">
                 <div>
-                    <div><img src="/GetQR.aspx?url=http://wl.mikiboss.com/Login/Register.aspx/&logo=http://wl.mikiboss.com/Style/img/success.png"/></div>
+                    <div><img src="/GetQR.aspx?url=http://192.168.0.200/Login/Register.aspx/&logo=http://192.168.0.200/Style/img/success.png"/></div>
                     <p style="font-size:15px">扫描二维码注册账户</p>
                 </div>
                 <div class="page-index">

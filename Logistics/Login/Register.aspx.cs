@@ -10,8 +10,11 @@ namespace Logistics.Login
     public partial class Register :PageLoginBase
     {
         public Register() : base(false) { }
+        public List<Model.Model.w_address_basic_data> shengList = new List<Model.Model.w_address_basic_data>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            //获取地区省列表
+            shengList = DAL.DAL.DALBase.GetNextAddressListFromId(1);
             if (IsPostBack)
             {
                 try
@@ -23,10 +26,12 @@ namespace Logistics.Login
                         CreateTime = DateTime.Now,
                         Password = GetValue("Password"),
                         Phone = GetValue("Phone"),
-                        PositionID = GetValue<int>("PositionID"),
                         UID = Tools.NewGuid.GuidTo16String(),
                         ZNumber = GetValue("Phone"),
                         ZType = Convert.ToInt32(GetValue("ZType")),
+                        ProvincesID = GetValue<int>("End1"),
+                        CityID = GetValue<int>("End2"),
+                        AreaID = GetValue<int>("End"),
                         State = 0
                     });
 
