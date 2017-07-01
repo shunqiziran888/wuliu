@@ -45,10 +45,10 @@ namespace Logistics.Login
                     {
                         Jump("/LC/Index/LC_Index.aspx");
                     }
-                    //物流子公司
-                    else if (actype == 2)
+                    //物流公司员工
+                    else if (actype == 4)
                     {
-                        Jump("/LC/Index/LC_IndexSon.aspx");
+                        Jump("/LC/Index/LC_Index.aspx");
                     }
                     //客户
                     else if (actype == 3)

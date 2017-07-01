@@ -127,7 +127,7 @@
                                         <span class="col-20"><%=v1.UserName %></span>
                                         <span class="col-30"><%=v1.Phone %></span>
                                         <!--<span class="col-20">17年11月22日</span>-->
-                                        <span class="col-30">管理员</span>
+                                        <span class="col-30">待完善</span>
                                         <span class="col-20"><i class="iconfont icon-shanchu"></i></span>
                                     </li>
                                      <%} %>
@@ -158,7 +158,7 @@
                                         <span class="col-20"><%=v.UserName %></span>
                                         <span class="col-30"><%=v.Phone %></span>
                                         <!--<span class="col-20">17年11月22日</span>-->
-                                        <span class="col-30">管理员</span>
+                                        <span class="col-30">待完善</span>
                                         <span class="col-20 shenhe_btn">
                                             <a href="/LC/Manage/Accredit/LC_AccreditYes.aspx?UID=<%=v.UID %>" class="shenhe_ok">同意</a>
                                             <a href="/LC/Manage/Accredit/LC_AccreditNo.aspx?UID=<%=v.UID %>" class="shenhe_no">拒绝</a>
