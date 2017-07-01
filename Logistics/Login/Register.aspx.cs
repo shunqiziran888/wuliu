@@ -11,6 +11,7 @@ namespace Logistics.Login
     {
         public Register() : base(false) { }
         public List<Model.Model.w_address_basic_data> shengList = new List<Model.Model.w_address_basic_data>();
+        public List<GlobalBLL.Position> ZwList = new List<GlobalBLL.Position>();
         protected void Page_Load(object sender, EventArgs e)
         {
             //获取地区省列表
@@ -22,17 +23,20 @@ namespace Logistics.Login
                     //开始注册
                     Tuple<bool, string> vo = BLL.BLL.LC_User.Add(new Model.Model.LC_User()
                     {
-                        UserName = GetValue("UserName"),
-                        CreateTime = DateTime.Now,
-                        Password = GetValue("Password"),
-                        Phone = GetValue("Phone"),
-                        UID = Tools.NewGuid.GuidTo16String(),
-                        ZNumber = GetValue("Phone"),
-                        ZType = Convert.ToInt32(GetValue("ZType")),
-                        ProvincesID = GetValue<int>("End1"),
-                        CityID = GetValue<int>("End2"),
-                        AreaID = GetValue<int>("End"),
-                        State = 0
+                        LogisticsName = GetValue("LogisticsName"),//公司名称
+                        UserName = GetValue("UserName"),//用户昵称
+                        PositionID = GetValue<int>("PositionID"), //职位
+                        CreateTime = DateTime.Now,//注册时间
+                        Password = GetValue("Password"),//密码
+                        Phone = GetValue("Phone"),//手机号
+                        UID = Tools.NewGuid.GuidTo16String(),//生成ID
+                        ZNumber = GetValue("Phone"),//帐号
+                        ZType = GetValue<int>("ZType"),//帐号类型
+                        ProvincesID = GetValue<int>("End1"),//省份
+                        CityID = GetValue<int>("End2"),//城市
+                        AreaID = GetValue<int>("End"),//区县
+                        State = GetValue<int>("State"),//状态
+                        LCID = GetValue("LCID")//上级物流ID
                     });
 
                     if (vo.Item1)

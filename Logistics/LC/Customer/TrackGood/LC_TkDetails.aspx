@@ -80,7 +80,7 @@
         <div class="page page-current">
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
-                <a class="icon icon-left pull-left" href="javascript:history.go(-1)"></a>
+                <a class="icon icon-left pull-left" href="/LC/Customer/TrackGood/LC_IndexTK.aspx"></a>
                 <h1 class="title">货单详情</h1>
             </header>
 
@@ -106,9 +106,12 @@
                                                         </p>
                                                     </i>
                                                     <i class="zbsh-xd1 row">
-                                                        <p class="zbsh-shr col-50">发货人： <span><%=v.Consignor %></span></p>
-                                                      <p class="zbsh-mdd col-50">电话： <span><%=v.FHPhone %></span></p>
-                                                      
+                                                         <p class="zbsh-shr col-50">发货人： <span><%=v.Consignor %></span></p> 
+                                                        <p class="zbsh-shr col-50">收货人： <span><%=v.Consignee %></span></p> 
+                                                    </i>
+                                                     <i class="zbsh-xd1 row">
+                                                         <p class="zbsh-mdd col-50">发货人电话： <span><%=v.FHPhone %></span></p>
+                                                          <p class="zbsh-mdd col-50">收货人电话： <span><%=v.SHPhone %></span></p>
                                                     </i>
                                                     <i class="zbsh-xd1 row">
                                                       <p class="zbsh-fhr col-50">货名： <span><%=v.GoodName %></span></p>

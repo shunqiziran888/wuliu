@@ -73,7 +73,7 @@
                 <a class="icon icon-left pull-left" href="/LC/Index/LC_IndexYW.aspx"></a>
                 <h1 class="title">收货</h1>
             </header>
-
+            
 
             <div class="content" style="background:#ededed;">
                 <div class="page-index">
@@ -86,9 +86,11 @@
                             <div id="tab1" class="tab active">
                                 <div class="content-block">
                                     <ul class="zbsh-tab1">
+                                          <%if (list.Count > 0)
+        { %>
                                          <%
-    foreach (var v in list)
-    {
+                                             foreach (var v in list)
+                                             {
 
                                      %>
                                         <li class="zbsh-li">
@@ -99,7 +101,7 @@
                                   <p class="zbsh-hh col-50">货号： <span><%=v.GoodNo %></span></p>
                                 </i>
                                                     <i class="zbsh-xd1 row">
-                                  <p class="zbsh-mdd col-50">目标地： <span><%=GlobalAddress.GetAddressFromID(v.Destination.Value)?.Item2?.Name%></span></p>
+                                  <p class="zbsh-mdd col-50">目标地： <span><%=DAL.DAL.DALBase.GetAddressFromID(v.Destination.Value)?.Item2?.Name%></span></p>
                                   <p class="zbsh-hm col-50">货名： <span><%=v.GoodName %></span></p>
                                 </i>
                                                     <i class="zbsh-xd1 row">
@@ -111,10 +113,11 @@
                                   <p class="zbsh-zffs col-50">付费方式： <span><%=v.freightMode.ConvertData<YFFSEnum>().EnumToName() %></span></p>
                                 </i>
                                                      <i class="zbsh-xd1 row">
-                                  <p class="zbsh-yf col-50">目的地： <select id="finish" name="finish" style="width:300px;">
+                                  <p class="zbsh-yf col-50">目的地： <select id="End<%=v.OrderID %>" name="End" style="width:300px;">
                                       <option>请选择</option>
-                                      <%foreach (var v1 in list2) {%>
-                                          <option value="<%=v1.End %>"><%=GlobalAddress.GetAddressFromID(v1.End.Value)?.Item2?.Name%></option>
+                                      <%foreach (var v1 in list2)
+                                          {%>
+                                          <option value="<%=v1.End %>"><%=DAL.DAL.DALBase.GetAddressFromID(v1.End.Value)?.Item2?.Name%></option>
                                       <%} %>
                                                                  </select></p>
                                 </i>
@@ -131,6 +134,11 @@
                                             </div>
                                         </li>
                                         <%} %>
+                                           <%}
+        else
+        {%>
+    <div style="text-align: center; line-height: 200px; overflow:hidden;">无任何数据</div>
+    <%} %>
                                     </ul>
                                 </div>
                             </div>
@@ -175,7 +183,6 @@
         });
 
     </script>
-
 </body>
 
 </html>
@@ -183,14 +190,14 @@
     function UpdateYF(OID)
     {
         var yf = $("#Freight" + OID).val();
-        var finish = $("#finish").val();
-        if (yf != "" && yf != undefined && yf != isNaN)
+        var finish = $("#End" + OID).val();
+        if (yf != "" && yf != undefined &&  finish!="请选择" && finish!=undefined)
         {
             window.location.href = "/LC/Business/ReceiptGood/LC_Success.aspx?OrderID=" + OID + "&YF=" + yf + "&finish="+finish;
         }
         else
         {
-            alert("请填写运费！");
+            alert("运费和目的地不能为空！");
         }
     }
 </script>

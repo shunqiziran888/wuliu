@@ -146,7 +146,7 @@
                 <div class="page-index">
                     <ul class="xiangqing xlmingcheng">
                         <span class="zhuangtai">已装车</span>
-                        <span class="shoufadi"><%=GlobalAddress.GetAddressFromID(CFD)?.Item2?.Name %>---<%=GlobalAddress.GetAddressFromID(MDD)?.Item2?.Name %></span>
+                        <span class="shoufadi"><%=DAL.DAL.DALBase.GetAddressFromID(CFD)?.Item2?.Name %>---<%=DAL.DAL.DALBase.GetAddressFromID(MDD)?.Item2?.Name %></span>
                     </ul>
                     <ul class="xiangqing">
 

@@ -109,6 +109,8 @@
                         <div class="tabs">
                             <div id="tab1" class="tab active">
                                 <ul class="xiangqing">
+                                     <%if (list2.Count > 0)
+        { %>
                                     <li class="row td-header">
                                         <span class="col-20">姓名</span>
                                         <span class="col-30">电话</span>
@@ -129,11 +131,17 @@
                                         <span class="col-20"><i class="iconfont icon-shanchu"></i></span>
                                     </li>
                                      <%} %>
+                                      <%}
+        else
+        {%>
+    <div style="text-align: center; line-height: 200px; overflow:hidden;">无任何数据</div>
+    <%} %>
                                 </ul>
                             </div>
                             <div id="tab2" class="tab">
                                 <ul class="xiangqing">
-
+                                     <%if (list.Count > 0)
+        { %>
                                     <li class="row td-header">
                                         <span class="col-20">姓名</span>
                                         <span class="col-30">电话</span>
@@ -157,6 +165,11 @@
                                         </span>
                                     </li>
                                      <%} %>
+                                    <%}
+        else
+        {%>
+    <div style="text-align: center; line-height: 200px; overflow:hidden;">无任何数据</div>
+    <%} %>
                                 </ul>
                             </div>
 

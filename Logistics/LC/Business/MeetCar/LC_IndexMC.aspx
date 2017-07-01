@@ -57,6 +57,8 @@
                             <div id="tab1" class="tab active">
                                 <div class="content-block">
                                     <ul class="zbsh-tab1">
+                                        <%if (list.Count > 0)
+        { %>
                                          <%
                                     foreach(var v in list)
                                     {
@@ -67,13 +69,13 @@
                                                 <div class="col-90">
                                                     <i class="zbsh-xd1 row">
                                   <p class="zbsh-shr col-50">
-                                  出发地： <span><%=GlobalAddress.GetAddressFromID(v.Initially.Value)?.Item2?.Name %></span></p>
+                                  出发地： <span><%=DAL.DAL.DALBase.GetAddressFromID(v.Initially.Value)?.Item2?.Name %></span></p>
                                   <p class="zbsh-hh col-50">车号： <span><%=v.VehicleID %></span>
                                   </p>
                                 </i>
                                                     <i class="zbsh-xd1 row">
                                   <p class="zbsh-mdd col-50">
-                                  目的地： <span><%=GlobalAddress.GetAddressFromID(v.Destination.Value)?.Item2?.Name %>
+                                  目的地： <span><%=DAL.DAL.DALBase.GetAddressFromID(v.Destination.Value)?.Item2?.Name %>
                                       
                                       
                                       </span>
@@ -99,6 +101,11 @@
                                             </div>
                                         </li>
                                             <%} %>
+                                         <%}
+        else
+        {%>
+    <div style="text-align: center; line-height: 200px; overflow:hidden;">无任何数据</div>
+    <%} %>
                                     </ul>
                                 </div>
                             </div>

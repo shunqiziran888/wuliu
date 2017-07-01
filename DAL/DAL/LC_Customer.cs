@@ -34,7 +34,7 @@ namespace DAL.DAL
         /// <param name="id"></param>
         /// <param name="cH"></param>
         /// <returns></returns>
-        public static Tuple<bool, string> UpdateMC(long id, int cH)
+        public static Tuple<bool, string> UpdateMC(long id, int cH,string UID)
         {
             var box = db.CreateTranSandbox<Tuple<bool,string>>((db) =>
             {
@@ -45,7 +45,8 @@ namespace DAL.DAL
                 #region 更新订单已经到达终点的订单
                 sql = makesql.MakeUpdateSQL(new Model.Model.LC_Customer()
                 {
-                    State = 4
+                    State = 4,
+                    logisticsID = UID
                 }, "Destination=finish and VehicleID=@VehicleID and State=3", new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@VehicleID",cH)
                 });
@@ -57,7 +58,8 @@ namespace DAL.DAL
                 #region 更新订单当前未到终点的订单
                 sql = makesql.MakeUpdateSQL(new Model.Model.LC_Customer()
                 {
-                    State = 7
+                    State = 7,
+                    logisticsID = UID
                 }, "Destination<>finish and VehicleID=@VehicleID and State=3", new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@VehicleID",cH)
                 });
@@ -174,12 +176,33 @@ namespace DAL.DAL
                 return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Customer>());
             return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, "没有任何数据!", new List<Model.Model.LC_Customer>());
         }
-            /// <summary>
-            /// 货物签收-详情列表
-            /// </summary>
-            /// <param name="Phone"></param>
-            /// <param name="OID"></param>
-            /// <returns></returns>
+        /// <summary>
+        /// 货物追踪-收货
+        /// </summary>
+        /// <param name="Phone"></param>
+        /// <returns></returns>
+        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetDGSHList(string Phone)
+        {
+            //两表查询
+            //Type[] tlist = new Type[] {
+            //    typeof(Model.Model.LC_User),
+            //    typeof(Model.Model.LC_Customer)
+            //};
+            //sql = makesql.MakeSelectArrSql(tlist, "{0}.Phone={1}.FHPhone and {0}.ZType=3");
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "SHPhone='" + Phone + "'");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);
+            if (ids.ReadIsOk())
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Customer>());
+            return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, "没有任何数据!", new List<Model.Model.LC_Customer>());
+        }
+        /// <summary>
+        /// 货物签收-详情列表
+        /// </summary>
+        /// <param name="Phone"></param>
+        /// <param name="OID"></param>
+        /// <returns></returns>
         public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetSGList(string Phone,string OID)
         {
             sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "SHPhone='" + Phone + "' and OrderID='"+OID+"'");

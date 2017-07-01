@@ -36,6 +36,8 @@
                 <div class="page-index">
 
                     <ul class="hwqs-ul">
+                        <%if (list.Count > 0)
+        { %>
                          <%
                                foreach(var v in list)
                                {
@@ -72,6 +74,11 @@
                             </div>
                         </li>
                         <%} %>
+                        <%}
+        else
+        {%>
+    <div style="text-align: center; line-height: 200px; overflow:hidden;">无任何数据</div>
+    <%} %>
                     </ul>
                 </div>
             </div>

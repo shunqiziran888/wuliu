@@ -98,7 +98,7 @@
                         <p>货号： <span><%=v.GoodNo %></span></p>
 
                         <li>
-                            目的地： <span><%=GlobalAddress.GetAddressFromID(v.Destination.Value)?.Item2?.Name%></span>
+                            目的地： <span><%=DAL.DAL.DALBase.GetAddressFromID(v.Destination.Value)?.Item2?.Name%></span>
                         </li>
                         <li class=" row">
                             <p class="col-50">发货人： <span><%=v.Consignor %></span></p>

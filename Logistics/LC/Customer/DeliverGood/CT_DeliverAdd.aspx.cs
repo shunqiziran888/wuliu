@@ -15,10 +15,18 @@ namespace Logistics.LC.Customer
         public List<Model.Model.LC_User> list = new List<Model.Model.LC_User>();
         public List<Model.Model.w_address_basic_data> shengList = new List<Model.Model.w_address_basic_data>();
         public List<Model.Model.LC_Line> list2 = new List<Model.Model.LC_Line>();
+        public string shr;
+        public string shrdh;
+        public string mbd;
+        public string uffs;
         protected void Page_Load(object sender, EventArgs e)
         {
             //获取地区省列表
             shengList = DAL.DAL.DALBase.GetNextAddressListFromId(1);
+            shr = GetValue("shr");
+            shrdh = GetValue("shrdh");
+            mbd = GetValue("mbd");
+            uffs = GetValue("uffs");
             try
             {
                 if (IsPostBack)
@@ -27,6 +35,7 @@ namespace Logistics.LC.Customer
                     string UserName=myuservo.username;
                     string Phone = myuservo.phones;
                     int cfd = myuservo.AreaID;
+                    
                     var lcc = new Model.Model.LC_Customer()
                     {
                         OrderID = Tools.NewGuid.GuidTo16String(),//订单ID
@@ -38,7 +47,7 @@ namespace Logistics.LC.Customer
                         logisticsID = GetValue("logisticsID").StringToArray().GetIndexValue(0),//物流
                         SHPhone = GetValue("SHPhone"),//收货人电话
                         Destination = GetValue<int>("End"),//目的地
-                        Initially = GetValue("Initially").StringToArray().GetIndexValue(1).ConvertData<int>(),//出发地
+                        Initially = GetValue("logisticsID").StringToArray().GetIndexValue(1).ConvertData<int>(),//出发地
                         GoodName = GetValue("GoodName"),//货物名称
                         Number = GetValue<int>("Number"),//件数
                         GReceivables = GetValue<decimal>("GReceivables"),//代收款
@@ -60,6 +69,8 @@ namespace Logistics.LC.Customer
                         Alert(vo.Item2);
                     }
                 }
+                var myuservo1 = GetMyLoginUserVO();
+                int CityID = myuservo1.CityID;
                 //物流
                 var vo1 = DAL.DAL.LC_User.GetLCList();
                 if (!vo1.Item1)

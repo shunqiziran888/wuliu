@@ -68,6 +68,7 @@ namespace Model.Model
         /// <summary>
         /// 
         /// </summary>
+        private string _LCID;
         public int? ID
         {
             set { _ID = value;}
@@ -176,6 +177,19 @@ namespace Model.Model
         {
             set { _AreaID = value;}
             get { return _AreaID; }
+        }
+
+        public string LCID
+        {
+            get
+            {
+                return _LCID;
+            }
+
+            set
+            {
+                _LCID = value;
+            }
         }
     }
 }

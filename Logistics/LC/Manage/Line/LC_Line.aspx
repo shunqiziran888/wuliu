@@ -63,6 +63,8 @@
                 </div>
               </div> -->
                     <ul class="dingdan-ul wyfh-ul">
+                        <%if (list.Count > 0)
+        { %>
                         <!-- <p>近期发货列表</p> -->
                          <%
                                     foreach(var v in list)
@@ -85,6 +87,11 @@
                             </a>
                         </li>
                          <%} %>
+                          <%}
+        else
+        {%>
+    <div style="text-align: center; line-height: 200px; overflow:hidden;">无任何数据</div>
+    <%} %>
                     </ul>
                 </div>
             </div>

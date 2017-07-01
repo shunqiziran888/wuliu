@@ -23,7 +23,8 @@ namespace Logistics.LC.Business.MeetCar
             var myuservo = GetMyLoginUserVO();
             if (myuservo.accountType == GlobalBLL.AccountTypeEnum.物流账号 || myuservo.accountType==GlobalBLL.AccountTypeEnum.平台账号)
             {
-                Tuple<bool, string> vo = DAL.DAL.LC_Customer.UpdateMC(myuservo.id, CH);
+              
+                Tuple<bool, string> vo = DAL.DAL.LC_Customer.UpdateMC(myuservo.id, CH,myuservo.uid);
                 if (!vo.Item1)
                 {
                     //有错误

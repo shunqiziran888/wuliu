@@ -47,4 +47,11 @@ namespace GlobalBLL
         我方去送 = 1,
         物流来提 = 2
     }
+    public enum Position
+    {
+        司机=1,
+        财务=2,
+        客服=3,
+        营销员=4
+    }
 }

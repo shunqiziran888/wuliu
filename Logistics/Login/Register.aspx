@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="Logistics.Login.Register" %>
 <%@ Import Namespace="GlobalBLL" %>
 <!DOCTYPE html>
-
 <html>
 <head>
 <meta charset="utf-8">
@@ -38,8 +37,12 @@ $(window).load(function() {
   <div class="page">
     <div class="main">
       <form id="form1" runat="server" method="post" action="?">
+          <%switch (GetValue<AccountTypeEnum>("ZType"))
+              {
+                  case AccountTypeEnum.物流账号:
+                  %>
         <div class="item item-username">
-             <input name="UserName" class="txt-input txt-username" type="text" id="UserName" placeholder="用户名称">
+             <input name="LogisticsName" class="txt-input txt-username" type="text" id="LogisticsName" placeholder="公司名称">
           <b class="input-close" style="display: none;"></b> </div>
           <div class="item item-username">
              <input name="Phone" class="txt-input txt-username" type="text" id="Phone" placeholder="手机号">
@@ -49,20 +52,11 @@ $(window).load(function() {
           <input id="ptext" class="txt-input txt-password plaintext" type="text" placeholder="请输入密码" style="display: none;" name="ptext">
           <b class="tp-btn btn-off"></b> </div>
           <div class="item item-username">
-            <%-- <input name="ZType" class="txt-input txt-username" type="text" id="ZType" placeholder="账号类型">--%>
-              <select name="ZType" class="txt-input txt-username"  id="ZType">
-                  <option>帐号类型</option>
-                  <option value="1">物流总公司</option>
-                  <option value="2">物流子公司</option>
-                  <option value="3">客户端</option>
-              </select>
-          <b class="input-close" style="display: none;"></b> </div>
-          <div class="item item-username">
               <select id="End1" name="End1" style="width:300px" onchange="shows(this.value,'End2');"> 
                                     <option>请选择</option>
                                     <%
-                                    foreach (var p in shengList)
-                                    {
+                                        foreach (var p in shengList)
+                                        {
                                      %>
                                 <option value="<%=p.id %>"><%=p.Name %></option>
                                     
@@ -74,12 +68,93 @@ $(window).load(function() {
                                  <select id="End" name="End" style="width:300px" > 
                                 </select>区县&nbsp &nbsp &nbsp
           </div>
-        <div class="item item-captcha">
-          <div class="input-info">
-            <input id="validateCode" class="txt-input txt-captcha" type="text" placeholder="验证码" autocomplete="off" maxlength="6" size="11">
-            <b id="validateCodeclose" class="input-close" onclick="validateCodeclose();" style="display: block;"></b> <span id="captcha-img"> <img id="code" src="/Style/img/code.jpg" style="width:63px;height:25px;" onclick="closeAndFlush();"> </span> </div>
-        </div>
+          <input type="hidden" id="ZType" name="ZType" value="1"/>
+          <input type="hidden" id="State" name="State" value="1"/>
         <div class="ui-btn-wrap"> <a class="ui-btn-lg ui-btn-primary" href="#" onclick="loginwl()">用户注册</a> </div>
+      <%
+                  break;
+              case AccountTypeEnum.普通用户账号:
+                  %>
+             <div class="item item-username">
+             <input name="UserName" class="txt-input txt-username" type="text" id="UserName" placeholder="用户昵称">
+          <b class="input-close" style="display: none;"></b> </div>
+          <div class="item item-username">
+             <input name="Phone" class="txt-input txt-username" type="text" id="Phone" placeholder="手机号">
+          <b class="input-close" style="display: none;"></b> </div>
+        <div class="item item-password">
+            <input name="Password" class="txt-input txt-password ciphertext" type="text" id="Password" size="15" placeholder="请输入密码" style="display: inline;">
+          <input id="ptext" class="txt-input txt-password plaintext" type="text" placeholder="请输入密码" style="display: none;" name="ptext">
+          <b class="tp-btn btn-off"></b> </div>
+          <div class="item item-username">
+              <select id="End1" name="End1" style="width:300px" onchange="shows(this.value,'End2');"> 
+                                    <option>请选择</option>
+                                    <%
+                                        foreach (var p in shengList)
+                                        {
+                                     %>
+                                <option value="<%=p.id %>"><%=p.Name %></option>
+                                    
+                                <%
+                                    } %>
+                                </select>省份&nbsp &nbsp &nbsp 
+                                 <select id="End2" name="End2" style="width:300px" onchange="shows(this.value,'End');"> 
+                                </select>城市&nbsp &nbsp &nbsp 
+                                 <select id="End" name="End" style="width:300px" > 
+                                </select>区县&nbsp &nbsp &nbsp
+          </div>
+          <input type="hidden" id="ZType" name="ZType" value="3"/>
+          <input type="hidden" id="State" name="State" value="1"/>
+        <div class="ui-btn-wrap"> <a class="ui-btn-lg ui-btn-primary" href="#" onclick="loginwl()">用户注册</a> </div>
+          <%
+                  break;
+              case AccountTypeEnum.物流公司员工账号:
+                                        %>
+          <div class="item item-username">
+             <input name="UserName" class="txt-input txt-username" type="text" id="UserName" placeholder="真实姓名">
+          <b class="input-close" style="display: none;"></b> </div>
+           <div class="item item-username">
+            <%-- <input name="PositionID" class="txt-input txt-username" type="text" id="PositionID" placeholder="职位">--%>
+               <select id="PositionID" name="PositionID">
+                   <option>请选择</option>
+                   <option value="1">司机</option>
+                   <option value="2">财务</option>
+                   <option value="3">客服</option>
+                   <option value="4">营销员</option>
+               </select>
+          <b class="input-close" style="display: none;"></b> </div>
+          <div class="item item-username">
+             <input name="Phone" class="txt-input txt-username" type="text" id="Phone" placeholder="手机号">
+          <b class="input-close" style="display: none;"></b> </div>
+        <div class="item item-password">
+            <input name="Password" class="txt-input txt-password ciphertext" type="text" id="Password" size="15" placeholder="请输入密码" style="display: inline;">
+          <input id="ptext" class="txt-input txt-password plaintext" type="text" placeholder="请输入密码" style="display: none;" name="ptext">
+          <b class="tp-btn btn-off"></b> </div>
+          <div class="item item-username">
+              <select id="End1" name="End1" style="width:300px" onchange="shows(this.value,'End2');"> 
+                                    <option>请选择</option>
+                                    <%
+                                        foreach (var p in shengList)
+                                        {
+                                     %>
+                                <option value="<%=p.id %>"><%=p.Name %></option>
+                                    
+                                <%
+                                    } %>
+                                </select>省份&nbsp &nbsp &nbsp 
+                                 <select id="End2" name="End2" style="width:300px" onchange="shows(this.value,'End');"> 
+                                </select>城市&nbsp &nbsp &nbsp 
+                                 <select id="End" name="End" style="width:300px" > 
+                                </select>区县&nbsp &nbsp &nbsp
+          </div>
+          <input type="hidden" id="ZType" name="ZType" value="4"/>
+          <input type="hidden" id="State" name="State" value="0"/>
+          <input type="hidden" id="LCID" name="LCID" value="<%=GetValue("UID")%>"/>
+        <div class="ui-btn-wrap"> <a class="ui-btn-lg ui-btn-primary" href="#" onclick="loginwl()">用户注册</a> </div>
+
+          <%
+                  break;
+          } 
+          %>
       </form>
     </div>
       <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js"></script>
@@ -181,6 +256,7 @@ $(window).load(function() {
 		}
 	});
 
+
 	function shows(id, elename) {
 	    GetHtml("/Command/GetAddressNextList.aspx", { id: id }, function (data) {
 	        let list = JSON.parse(data);
@@ -191,12 +267,12 @@ $(window).load(function() {
 	        }
 	    });
 	}
+
+	function loginwl() {
+	    document.getElementById("form1").submit();
+	  <%--  var UID = "<%=GetValue("UID")%>";
+	document.getElementById("LCID").value = ""+UID+"";--%>
+	}
 </script>
 </body>
 </html>
-<script type="text/javascript">
-    function loginwl()
-    {
-        document.getElementById("form1").submit();
-    }
-</script>

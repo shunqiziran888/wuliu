@@ -42,13 +42,15 @@
               </div>
               <ul class="dingdan-ul wyfh-ul">
                 <p>近期发货列表</p>
+                   <%if (list.Count > 0)
+        { %>
                    <%
                                     foreach(var v in list)
                                     {
                                         
                                      %>
                   <li class="dingdan-li">
-                    <a href="#" class="row">
+                    <a href="/LC/Customer/DeliverGood/CT_DeliverAdd.aspx?shr=<%=v.Consignee %>&shrdh=<%=v.SHPhone %>&mbd=<%=v.Destination %>&uffs=<%=v.freightMode %>" class="row">
                       <div class="col-90 dingdan-left">
                         <div class="dingdan-top">
                           <div class="dingdan-top1">
@@ -59,7 +61,7 @@
                           </div>
                         </div>
                         <div class="dingdan-bottom">
-                          地址： <span><%=GlobalAddress.GetAddressFromID(v.Destination.Value)?.Item2?.Name %></span>
+                          地址： <span><%=DAL.DAL.DALBase.GetAddressFromID(v.Destination.Value)?.Item2?.Name %></span>
                         </div>
                       </div>
                       <div class="col-10 dingdan-right">
@@ -68,6 +70,11 @@
                     </a>
                   </li>
                   <%} %>
+                   <%}
+        else
+        {%>
+    <div style="text-align: center; line-height: 200px; overflow:hidden;">无任何数据</div>
+    <%} %>
               </ul>
             </div>
           </div>

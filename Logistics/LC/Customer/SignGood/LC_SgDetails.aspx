@@ -118,7 +118,7 @@
                     <div class="l_tx cgfh-main">
                         <div class="row">
                             <div class="col-40 l_zt">
-                                <p>发货地：<%=GlobalAddress.GetAddressFromID(v.Initially.Value)?.Item2?.Name %></p>
+                                <p>发货地：<%=DAL.DAL.DALBase.GetAddressFromID(v.Initially.Value)?.Item2?.Name %></p>
                             </div>
                             <div class="col-60 l_zt">
                                 <p>订单号：<%=v.OrderID %></p>

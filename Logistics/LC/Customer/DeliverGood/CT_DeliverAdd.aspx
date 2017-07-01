@@ -75,7 +75,7 @@
                                 收货人
                             </div>
                             <div class="col-70">
-                                 <input name="Consignee" type="text" id="Consignee" size="15">
+                                 <input name="Consignee" type="text" id="Consignee"  value="<%=shr %>" size ="15">
                             </div>
                         </div>
                         <div class="row">
@@ -83,10 +83,10 @@
                                 物流
                             </div>
                             <div class="col-40">
-                                <select id="logisticsID" name="logisticsID" onchange="Test()">
+                                <select id="logisticsID" name="logisticsID">
                                     <option>请选择物流</option>
                                     <%foreach (var v in list) { %>
-                                    <option value="<%=v.UID %>,<%=v.AreaID %>"><%=v.LogisticsName %></option>
+                                    <option value="<%=v.UID %>,<%=v.AreaID %>,<%=v.PositionID %>,<%=v.CityID %>"><%=v.LogisticsName %>(<%=DAL.DAL.DALBase.GetAddressFromID(v.ProvincesID.Value)?.Item2?.Name %>---<%=DAL.DAL.DALBase.GetAddressFromID(v.CityID.Value)?.Item2?.Name %>---<%=DAL.DAL.DALBase.GetAddressFromID(v.AreaID.Value)?.Item2?.Name %>)</option>
                                     <%} %>
                                 </select>
                             </div>
@@ -96,7 +96,7 @@
                                 收货人电话
                             </div>
                             <div class="col-70">
-                                <input name="SHPhone" type="text" id="SHPhone" size="15">
+                                <input name="SHPhone" type="text" id="SHPhone" value="<%=shrdh %>" size="15">
                             </div>
                         </div>
                         <div class="row">
@@ -104,7 +104,7 @@
                                 到达地
                             </div>
                             <div class="col-70">
-                                <select id="End1" name="End1" style="width:300px" onchange="show(this.value,'End2');"> 
+                                <select id="End1" name="End1" style="width:300px"  onchange="show(this.value,'End2');"> 
                                     <option>请选择</option>
                                     <%
                                     foreach (var p in shengList)
@@ -221,6 +221,7 @@
                 router: false
             }
         });
+
         //物流筛选地区
         function LCID()
         {
@@ -244,14 +245,23 @@
             GetHtml("/Command/GetAddressNextList.aspx", { id: id }, function (data) {
                 let list = JSON.parse(data);
                 $("#" + elename).empty();
-                $("#" + elename).append("<option>请选择</option>");
+                $("#" + elename).append("<option>-请选择-</option>");
                 for (let i = 0; i < list.length; i++) {
-                    $("#" + elename).append("<option value='" + list[i].id + "'>" + list[i].Name + "</option>");
+                    //var values = $("#logisticsID").val();
+                    //var valuestoo = values.split(",")[2][3][1];
+                    //alert(valuestoo);
+                    //if (list[i].id == valuestoo)
+                    //{
+                    //    $("#" + elename).append("<option value='" + list[i].id + "' selected>" + list[i].Name + "</option>");
+                    //}
+                    //else
+                    //{
+                        $("#" + elename).append("<option value='" + list[i].id + "'>" + list[i].Name + "</option>");
+                    //}
                 }
             });
         }
     </script>
-
 </body>
 
 </html>

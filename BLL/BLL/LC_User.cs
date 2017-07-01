@@ -18,8 +18,8 @@ namespace BLL.BLL
         /// <returns></returns>
         public static Tuple<bool, string> Add(Model.Model.LC_User lC_User)
         {
-            if (lC_User.UserName.StrIsNull())
-                return new Tuple<bool, string>(false, "昵称不能为空!");
+            //if (lC_User.UserName.StrIsNull())
+            //    return new Tuple<bool, string>(false, "昵称不能为空!");
             return DAL.DAL.LC_User.Add(lC_User);
         }
     }

@@ -33,6 +33,16 @@ namespace DAL.DAL
                 return new Tuple<bool, string, List<Model.Model.LC_User>>(true, string.Empty, ids.GetVOList<Model.Model.LC_User>());
             return new Tuple<bool, string, List<Model.Model.LC_User>>(true, "没有任何数据!", new List<Model.Model.LC_User>());
         }
+        public static Tuple<bool, string, List<Model.Model.LC_User>> GetLCFHADDList(int CityID)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "CityID=" + CityID + " and ZType=1 and LogisticsName is not null");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string, List<Model.Model.LC_User>>(false, ids.errormsg, null);
+            if (ids.ReadIsOk())
+                return new Tuple<bool, string, List<Model.Model.LC_User>>(true, string.Empty, ids.GetVOList<Model.Model.LC_User>());
+            return new Tuple<bool, string, List<Model.Model.LC_User>>(true, "没有任何数据!", new List<Model.Model.LC_User>());
+        }
         /// <summary>
         /// 获取申请人列表
         /// </summary>

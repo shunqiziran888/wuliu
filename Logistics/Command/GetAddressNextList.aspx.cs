@@ -9,6 +9,8 @@ namespace Logistics.Command
 {
     public partial class GetAddressNextList : PageLoginBase
     {
+
+        public GetAddressNextList() : base(false) { }
         protected void Page_Load(object sender, EventArgs e)
         {
             //获取地区列表
