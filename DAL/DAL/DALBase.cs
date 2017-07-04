@@ -127,7 +127,24 @@ namespace DAL.DAL
                     return new Tuple<bool, Model.Model.w_address_basic_data>(false, null);
                 }
             }
+        /// <summary>
+        /// 根据收货电话筛选地区
+        /// </summary>
+        /// <param name="Phone"></param>
+        /// <returns></returns>
+        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetPhoneAdressList(string Phone)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "SHPhone=@SHPhone", new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@SHPhone",Phone)
+            }, "DdTime desc", 1);
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);
+            if (ids.ReadIsOk())
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Customer>());
+            return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, "没有任何数据!", new List<Model.Model.LC_Customer>());
 
-            
+        }
+
     }
 }

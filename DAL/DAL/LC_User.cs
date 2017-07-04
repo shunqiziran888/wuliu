@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Model.Model;
 using CustomExtensions;
+using SuperDataBase.InterFace;
+
 namespace DAL.DAL
 {
     /// <summary>
@@ -33,15 +35,21 @@ namespace DAL.DAL
                 return new Tuple<bool, string, List<Model.Model.LC_User>>(true, string.Empty, ids.GetVOList<Model.Model.LC_User>());
             return new Tuple<bool, string, List<Model.Model.LC_User>>(true, "没有任何数据!", new List<Model.Model.LC_User>());
         }
-        public static Tuple<bool, string, List<Model.Model.LC_User>> GetLCFHADDList(int CityID)
+        public static Tuple<bool, string, List<Dictionary<string, I_ModelBase>>> GetLCFHADDList(int CityID,string logID)
         {
-            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "CityID=" + CityID + " and ZType=1 and LogisticsName is not null");
+            //两表查询
+            Type[] tlist = new Type[] {
+                typeof(Model.Model.LC_User),
+                typeof(Model.Model.LC_Line)
+            };
+            sql = makesql.MakeSelectArrSql(tlist, "{0}.UID={1}.UID and {0}.UID='4b3c4458db2d77c6'");
+            //sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "CityID=" + CityID + " and ZType=1 and LogisticsName is not null");
             ids = db.Read(sql);
             if (!ids.flag)
-                return new Tuple<bool, string, List<Model.Model.LC_User>>(false, ids.errormsg, null);
+                return new Tuple<bool, string, List<Dictionary<string, I_ModelBase>>>(false, ids.errormsg, null);
             if (ids.ReadIsOk())
-                return new Tuple<bool, string, List<Model.Model.LC_User>>(true, string.Empty, ids.GetVOList<Model.Model.LC_User>());
-            return new Tuple<bool, string, List<Model.Model.LC_User>>(true, "没有任何数据!", new List<Model.Model.LC_User>());
+                return new Tuple<bool, string, List<Dictionary<string, I_ModelBase>>>(true, string.Empty, ids.GetVOList(tlist));
+            return new Tuple<bool, string, List<Dictionary<string, I_ModelBase>>>(true, "没有任何数据", null);
         }
         /// <summary>
         /// 获取申请人列表

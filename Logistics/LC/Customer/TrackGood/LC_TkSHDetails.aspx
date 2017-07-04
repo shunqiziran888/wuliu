@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LC_TkDetails.aspx.cs" Inherits="Logistics.LC.Customer.TrackGood.LC_TkDetails" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LC_TkSHDetails.aspx.cs" Inherits="Logistics.LC.Customer.TrackGood.LC_TkSHDetails" %>
 <%@ Import Namespace="CustomExtensions" %>
 <%@ Import Namespace="GlobalBLL" %>
 <!DOCTYPE html>
@@ -107,11 +107,11 @@
                                                     </i>
                                                     <i class="zbsh-xd1 row">
                                                          <p class="zbsh-shr col-50">发货人： <span><%=v.Consignor %></span></p> 
-                                                        <p class="zbsh-shr col-50">收货人： <span><%=v.Consignee %></span></p> 
+                                                        <%--<p class="zbsh-shr col-50">收货人： <span><%=v.Consignee %></span></p>--%> 
                                                     </i>
                                                      <i class="zbsh-xd1 row">
                                                          <p class="zbsh-mdd col-50">发货人电话： <span><%=v.FHPhone %></span></p>
-                                                          <p class="zbsh-mdd col-50">收货人电话： <span><%=v.SHPhone %></span></p>
+                                                          <%--<p class="zbsh-mdd col-50">收货人电话： <span><%=v.SHPhone %></span></p>--%>
                                                     </i>
                                                     <i class="zbsh-xd1 row">
                                                       <p class="zbsh-fhr col-50">货名： <span><%=v.GoodName %></span></p>
@@ -167,4 +167,3 @@
 </body>
 
 </html>
-

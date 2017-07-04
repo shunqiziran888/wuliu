@@ -12,13 +12,14 @@ namespace Logistics.LC.Customer
 {
     public partial class CT_DeliverAdd :PageLoginBase
     {
-        public List<Model.Model.LC_User> list = new List<Model.Model.LC_User>();
+        public List<Dictionary<string,SuperDataBase.InterFace.I_ModelBase>> list = new List<Dictionary<string, I_ModelBase>>();
         public List<Model.Model.w_address_basic_data> shengList = new List<Model.Model.w_address_basic_data>();
         public List<Model.Model.LC_Line> list2 = new List<Model.Model.LC_Line>();
         public string shr;
         public string shrdh;
         public string mbd;
         public string uffs;
+        public string wlid;
         protected void Page_Load(object sender, EventArgs e)
         {
             //获取地区省列表
@@ -27,6 +28,7 @@ namespace Logistics.LC.Customer
             shrdh = GetValue("shrdh");
             mbd = GetValue("mbd");
             uffs = GetValue("uffs");
+            wlid = GetValue("wlid");
             try
             {
                 if (IsPostBack)
@@ -47,7 +49,7 @@ namespace Logistics.LC.Customer
                         logisticsID = GetValue("logisticsID").StringToArray().GetIndexValue(0),//物流
                         SHPhone = GetValue("SHPhone"),//收货人电话
                         Destination = GetValue<int>("End"),//目的地
-                        Initially = GetValue("logisticsID").StringToArray().GetIndexValue(1).ConvertData<int>(),//出发地
+                        Initially = GetValue("logisticsID").StringToArray().GetIndexValue(3).ConvertData<int>(),//出发地
                         GoodName = GetValue("GoodName"),//货物名称
                         Number = GetValue<int>("Number"),//件数
                         GReceivables = GetValue<decimal>("GReceivables"),//代收款
@@ -71,13 +73,15 @@ namespace Logistics.LC.Customer
                 }
                 var myuservo1 = GetMyLoginUserVO();
                 int CityID = myuservo1.CityID;
+                string logID = GetValue("logisticsID").StringToArray().GetIndexValue(0);
                 //物流
-                var vo1 = DAL.DAL.LC_User.GetLCList();
+                var vo1 = DAL.DAL.LC_User.GetLCFHADDList(CityID, logID);
                 if (!vo1.Item1)
                 {
                     //有错误
                     Debug.Print(vo1.Item2);
                     return;
+
                 }
                 list = vo1.Item3;
             }

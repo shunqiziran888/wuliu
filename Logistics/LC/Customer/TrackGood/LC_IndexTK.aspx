@@ -110,14 +110,13 @@
                                                 <i>货单号：<%=v.GoodNo %></i>
                                             </li>
                                             <li class="xia">
-                                                <i>收货人：<%=v.Consignee %></i>
                                                 <i>名称：<%=v.GoodName %></i>
                                                 <i>件数：<%=v.Number %></i>
                                                 <i>状态：<%=v.State.Value.ConvertData<OrderStateEnum>().EnumToName()%></i>
                                             </li>
                                         </ul>
                                         <div class="col-20">
-                                            <a href="/LC/Customer/TrackGood/LC_TkDetails.aspx?OID=<%=v.OrderID %>" class="button button-fill button-success">详情</a>
+                                            <a href="/LC/Customer/TrackGood/LC_TkSHDetails.aspx?OID=<%=v.OrderID %>" class="button button-fill button-success">详情</a>
                                         </div>
                                     </li>
                                     <%} %>
@@ -146,7 +145,7 @@
                                             </li>
                                         </ul>
                                         <div class="col-20">
-                                            <a href="/LC/Customer/TrackGood/LC_TkDetails.aspx?OID=<%=v.OrderID %>" class="button button-fill button-success">详情</a>
+                                            <a href="/LC/Customer/TrackGood/LC_TkFHDetails.aspx?OID=<%=v.OrderID %>" class="button button-fill button-success">详情</a>
                                         </div>
                                     </li>
                                       <%} %>

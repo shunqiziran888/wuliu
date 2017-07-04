@@ -121,6 +121,7 @@
   <ItemGroup>
     <Content Include="Command\GetAddressNextList.aspx" />
     <Content Include="Command\GetLineListFromLogisticsId.aspx" />
+    <Content Include="Command\GetSHPhoneAdressList.aspx" />
     <Content Include="GetQR.aspx" />
     <Content Include="LC\Business\DschargeGood\IndexDhg.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_Handle.aspx" />
@@ -148,7 +149,8 @@
     <Content Include="LC\Customer\SignGood\LC_Success.aspx" />
     <Content Include="LC\Customer\SignGood\LC_Transfer.aspx" />
     <Content Include="LC\Customer\TrackGood\LC_IndexTK.aspx" />
-    <Content Include="LC\Customer\TrackGood\LC_TkDetails.aspx" />
+    <Content Include="LC\Customer\TrackGood\LC_TkFHDetails.aspx" />
+    <Content Include="LC\Customer\TrackGood\LC_TkSHDetails.aspx" />
     <Content Include="LC\Index\LC_Index.aspx" />
     <Content Include="LC\Index\LC_IndexGL.aspx" />
     <Content Include="LC\Index\LC_IndexKH.aspx" />
@@ -291,6 +293,13 @@
     </Compile>
     <Compile Include="Command\GetLineListFromLogisticsId.aspx.designer.cs">
       <DependentUpon>GetLineListFromLogisticsId.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Command\GetSHPhoneAdressList.aspx.cs">
+      <DependentUpon>GetSHPhoneAdressList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Command\GetSHPhoneAdressList.aspx.designer.cs">
+      <DependentUpon>GetSHPhoneAdressList.aspx</DependentUpon>
     </Compile>
     <Compile Include="GetQR.aspx.cs">
       <DependentUpon>GetQR.aspx</DependentUpon>
@@ -484,12 +493,19 @@
     <Compile Include="LC\Customer\TrackGood\LC_IndexTK.aspx.designer.cs">
       <DependentUpon>LC_IndexTK.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LC\Customer\TrackGood\LC_TkDetails.aspx.cs">
-      <DependentUpon>LC_TkDetails.aspx</DependentUpon>
+    <Compile Include="LC\Customer\TrackGood\LC_TkFHDetails.aspx.cs">
+      <DependentUpon>LC_TkFHDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LC\Customer\TrackGood\LC_TkDetails.aspx.designer.cs">
-      <DependentUpon>LC_TkDetails.aspx</DependentUpon>
+    <Compile Include="LC\Customer\TrackGood\LC_TkFHDetails.aspx.designer.cs">
+      <DependentUpon>LC_TkFHDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Customer\TrackGood\LC_TkSHDetails.aspx.cs">
+      <DependentUpon>LC_TkSHDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Customer\TrackGood\LC_TkSHDetails.aspx.designer.cs">
+      <DependentUpon>LC_TkSHDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="LC\Index\LC_Index.aspx.cs">
       <DependentUpon>LC_Index.aspx</DependentUpon>

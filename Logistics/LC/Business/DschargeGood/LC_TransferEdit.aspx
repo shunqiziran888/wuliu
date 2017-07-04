@@ -124,7 +124,7 @@
                                 <p>中转物流
                                     <select id="logisticsID" name="logisticsID">
                                      <%foreach (var v in list) { %>
-                                    <option value="<%=v.UID %>"><%=v.LogisticsName %></option>
+                                    <option value="<%=v.UID %>"><%=v.LogisticsName %>(<%=DAL.DAL.DALBase.GetAddressFromID(v.ProvincesID.Value)?.Item2?.Name %>---<%=DAL.DAL.DALBase.GetAddressFromID(v.CityID.Value)?.Item2?.Name %>---<%=DAL.DAL.DALBase.GetAddressFromID(v.AreaID.Value)?.Item2?.Name %>)</option>
                                     <%} %>
                                     </select>
                                 </p>

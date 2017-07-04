@@ -50,7 +50,7 @@
                                         
                                      %>
                   <li class="dingdan-li">
-                    <a href="/LC/Customer/DeliverGood/CT_DeliverAdd.aspx?shr=<%=v.Consignee %>&shrdh=<%=v.SHPhone %>&mbd=<%=v.Destination %>&uffs=<%=v.freightMode %>" class="row">
+                    <a href="/LC/Customer/DeliverGood/CT_DeliverAdd.aspx?shr=<%=v.Consignee %>&shrdh=<%=v.SHPhone %>&mbd=<%=v.Destination %>&uffs=<%=v.freightMode %>&wlid=<%=v.logisticsID %>" class="row">
                       <div class="col-90 dingdan-left">
                         <div class="dingdan-top">
                           <div class="dingdan-top1">
