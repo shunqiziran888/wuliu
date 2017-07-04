@@ -42,6 +42,10 @@ namespace Model.Model
         /// </summary>
         private string _UID;
         /// <summary>
+        /// 线路首字母
+        /// </summary>
+        private string _Lineletter;
+        /// <summary>
         /// 
         /// </summary>
         public int? ID
@@ -104,6 +108,14 @@ namespace Model.Model
         {
             set { _UID = value;}
             get { return _UID; }
+        }
+        /// <summary>
+        /// 线路首字母
+        /// </summary>
+        public string Lineletter
+        {
+            set { _Lineletter = value;}
+            get { return _Lineletter; }
         }
     }
 }

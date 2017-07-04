@@ -20,7 +20,7 @@ namespace Logistics.LC.Business.GoodsReceipt
             decimal yf = Convert.ToDecimal(GetValue("yf"));
             int finish = GetValue<int>("finish");//目的地
             DateTime ConsigneeTimes = DateTime.Now;
-            Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() {State =2 ,ConsigneeTime= ConsigneeTimes,Freight=yf ,begins=myuservo.AreaID,finish=finish} ,OrderID);
+            Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() {State =2 ,ConsigneeTime= ConsigneeTimes,Freight=yf ,begins=myuservo.AreaID,finish=finish} ,OrderID,true);
             if (!vo.Item1)
             {
                 //有错误

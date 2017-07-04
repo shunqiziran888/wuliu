@@ -86,42 +86,66 @@
                             <div id="tab1" class="tab active">
                                 <div class="content-block">
                                     <ul class="zbsh-tab1">
-                                          <%if (list.Count > 0)
-        { %>
-                                         <%
-                                             foreach (var v in list)
-                                             {
+                                        <%if (list.Count > 0)
+                                        { %>
+                                        <%
+                                            foreach (var v in list)
+                                            {
 
-                                     %>
+                                        %>
                                         <li class="zbsh-li">
                                             <a href="#" class="row">
                                                 <div class="col-100">
                                                     <i class="zbsh-xd1 row">
-                                  <p class="zbsh-shr col-50">收货人： <span><%=v.Consignee %></span></p>
-                                  <p class="zbsh-hh col-50">货号： <span><%=v.GoodNo %></span></p>
-                                </i>
+                                                        <p class="zbsh-shr col-50">收货人： <span><%=v.Consignee %></span></p>
+                                                        <p class="zbsh-hh col-50">货号： <span><%=v.GoodNo %></span></p>
+                                                    </i>
                                                     <i class="zbsh-xd1 row">
-                                  <p class="zbsh-mdd col-50">目标地： <span><%=DAL.DAL.DALBase.GetAddressFromID(v.Destination.Value)?.Item2?.Name%></span></p>
-                                  <p class="zbsh-hm col-50">货名： <span><%=v.GoodName %></span></p>
-                                </i>
+                                                        <p class="zbsh-mdd col-50">目标地： <span><%=DAL.DAL.DALBase.GetAddressFromID(v.Destination.Value)?.Item2?.Name%></span></p>
+                                                        <p class="zbsh-hm col-50">货名： <span><%=v.GoodName %></span></p>
+                                                    </i>
                                                     <i class="zbsh-xd1 row">
-                                  <p class="zbsh-fhr col-50">发货人： <span><%=v.Consignor %></span></p>
-                                  <p class="zbsh-hh col-50">件数： <span><%=v.Number %></span></p>
-                                </i>
+                                                        <p class="zbsh-fhr col-50">发货人： <span><%=v.Consignor %></span></p>
+                                                        <p class="zbsh-hh col-50">件数： <span><%=v.Number %></span></p>
+                                                    </i>
                                                     <i class="zbsh-xd1 row">
-                                  <p class="zbsh-yf col-50">运费： <input type="text" name="Freight"  id="Freight<%=v.OrderID %>" placeholder="￥0.00"></p>
-                                  <p class="zbsh-zffs col-50">付费方式： <span><%=v.freightMode.ConvertData<YFFSEnum>().EnumToName() %></span></p>
-                                </i>
-                                                     <i class="zbsh-xd1 row">
-                                  <p class="zbsh-yf col-50">目的地： <select id="End<%=v.OrderID %>" name="End" style="width:300px;">
-                                      <option>请选择</option>
-                                      <%foreach (var v1 in list2)
-                                          {%>
-                                          <option value="<%=v1.End %>"><%=DAL.DAL.DALBase.GetAddressFromID(v1.End.Value)?.Item2?.Name%></option>
-                                      <%} %>
-                                                                 </select></p>
-                                </i>
-                                                    <input type="hidden" id="OrderID" name="OrderID" value="<%=v.OrderID %>"/>
+                                                        <p class="zbsh-yf col-50">运费：
+                                                            <input type="text" name="Freight" id="Freight<%=v.OrderID %>" placeholder="￥0.00"></p>
+                                                        <p class="zbsh-zffs col-50">付费方式： <span><%=v.freightMode.ConvertData<YFFSEnum>().EnumToName() %></span></p>
+                                                    </i>
+
+                                                    <%
+
+                                                           var isshow = list2.Where(x => x.End.Value == v.Destination).Count()>0;
+                                                        %>
+
+                                                    <i class="zbsh-xd1 row" <%= !isshow? string.Empty : "style=\"display:none\""%>>
+                                                        <p class="zbsh-yf col-50">
+                                                            目的地：
+                                                             <select id="End<%=v.OrderID %>" name="End" style="width: 300px;">
+                                                                 <option>请选择</option>
+                                                                 <%
+                                                                     foreach (var v1 in list2)
+                                                                     {
+                                                                         if (v.Destination.Value == v1.End.Value)
+                                                                         {
+                                                                 %>
+                                                                 <option selected value="<%=v1.End %>"><%=DAL.DAL.DALBase.GetAddressFromID(v1.End.Value)?.Item2?.Name%></option>
+                                                                 <%
+                                                                     }
+                                                                     else
+                                                                     {
+                                                                 %>
+                                                                 <option value="<%=v1.End %>"><%=DAL.DAL.DALBase.GetAddressFromID(v1.End.Value)?.Item2?.Name%></option>
+                                                                 <%
+                                                                     }
+                                                                 %>
+
+                                                                 <%} %>
+                                                             </select>
+                                                        </p>
+                                                    </i>
+                                                    <input type="hidden" id="OrderID" name="OrderID" value="<%=v.OrderID %>" />
                                                 </div>
                                                 <!-- <div class="col-10">
                                 <span class="iconfont icon-gengduo"></span>
@@ -134,11 +158,11 @@
                                             </div>
                                         </li>
                                         <%} %>
-                                           <%}
-        else
-        {%>
-    <div style="text-align: center; line-height: 200px; overflow:hidden;">无任何数据</div>
-    <%} %>
+                                        <%}
+                                        else
+                                        {%>
+                                        <div style="text-align: center; line-height: 200px; overflow: hidden;">无任何数据</div>
+                                        <%} %>
                                     </ul>
                                 </div>
                             </div>
