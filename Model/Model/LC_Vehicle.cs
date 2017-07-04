@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 namespace Model.Model
 {
     /// <summary>
@@ -8,79 +8,66 @@ namespace Model.Model
     public partial class LC_Vehicle : ModelBase
     {
         public LC_Vehicle()
-        { }
+        {}
         /// <summary>
         /// 
         /// </summary>
         private int? _ID;
+        /// <summary>
+        /// 
+        /// </summary>
         private string _VehicleNo;
+        /// <summary>
+        /// 
+        /// </summary>
         private string _Driver;
+        /// <summary>
+        /// 
+        /// </summary>
         private DateTime? _CreateTime;
+        /// <summary>
+        /// 
+        /// </summary>
         private string _UID;
-
+        /// <summary>
+        /// 
+        /// </summary>
         public int? ID
         {
-            get
-            {
-                return _ID;
-            }
-
-            set
-            {
-                _ID = value;
-            }
+            set { _ID = value;}
+            get { return _ID; }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public string VehicleNo
         {
-            get
-            {
-                return _VehicleNo;
-            }
-
-            set
-            {
-                _VehicleNo = value;
-            }
+            set { _VehicleNo = value;}
+            get { return _VehicleNo; }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public string Driver
         {
-            get
-            {
-                return _Driver;
-            }
-
-            set
-            {
-                _Driver = value;
-            }
+            set { _Driver = value;}
+            get { return _Driver; }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime? CreateTime
         {
-            get
-            {
-                return _CreateTime;
-            }
-
-            set
-            {
-                _CreateTime = value;
-            }
+            set { _CreateTime = value;}
+            get { return _CreateTime; }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public string UID
         {
-            get
-            {
-                return _UID;
-            }
-
-            set
-            {
-                _UID = value;
-            }
+            set { _UID = value;}
+            get { return _UID; }
         }
     }
 }

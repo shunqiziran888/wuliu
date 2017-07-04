@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Model.Model;
 using SuperDataBase;
+using CustomExtensions;
 namespace DAL.DAL
 {
     /// <summary>
@@ -93,10 +94,35 @@ namespace DAL.DAL
         /// </summary>
         /// <param name="LC_Customer"></param>
         /// <param name="OrderID"></param>
+        /// <param name="updateGoodNum">是否更新货号</param>
         /// <returns></returns>
-        public static Tuple<bool, string> Update(Model.Model.LC_Customer LC_Customer,string OrderID)
+        public static Tuple<bool, string> Update(Model.Model.LC_Customer LC_Customer,string OrderID,bool updateGoodNum=false)
         {
-            sql = makesql.MakeUpdateSQL(LC_Customer, "OrderID='"+OrderID+"'");
+            if(updateGoodNum)
+            {
+                //获取此订单数据
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "OrderID=@OrderID", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@OrderID",OrderID)
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return new Tuple<bool, string>(false, ids.errormsg);
+                if (!ids.ReadIsOk())
+                    return new Tuple<bool, string>(false, "没有找到任何订单数据！");
+                Model.Model.LC_Customer lcc = ids.GetVOList<Model.Model.LC_Customer>()[0];
+                lcc.finish = LC_Customer.finish;
+                lcc.begins = LC_Customer.begins;
+                if (lcc.GoodNo.StrIsNull())
+                {
+                    var vo = GetGoodNo(ref lcc);
+                    if (vo.Item1)
+                        LC_Customer.GoodNo = vo.Item2;
+                }
+            }
+
+            sql = makesql.MakeUpdateSQL(LC_Customer, "OrderID=@OrderID",new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@OrderID",OrderID)
+            });
             ids = db.Exec(sql);
             if (!ids.flag)
                 return new Tuple<bool, string>(false, ids.errormsg);

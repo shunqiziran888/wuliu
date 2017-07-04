@@ -40,7 +40,7 @@ namespace Logistics.LC.Customer
                     
                     var lcc = new Model.Model.LC_Customer()
                     {
-                        OrderID = Tools.NewGuid.GuidTo16String(),//订单ID
+                        OrderID = Tools.NewGuid.GuidToLongID().ToString(),//订单ID
                         Consignor = UserName,//发货人
                         ConsignorID = Tools.NewGuid.GuidTo16String(),//发货人ID
                         FHPhone = Phone,//发货人电话
@@ -53,7 +53,7 @@ namespace Logistics.LC.Customer
                         GoodName = GetValue("GoodName"),//货物名称
                         Number = GetValue<int>("Number"),//件数
                         GReceivables = GetValue<decimal>("GReceivables"),//代收款
-                        GoodNo = Tools.NewGuid.GuidTo16String(),//货号
+                        //GoodNo = Tools.NewGuid.GuidTo16String(),//货号
                         freightMode = GetValue<int>("freightMode"),//付款方式
                         CarryGood = GetValue<int>("CarryGood"),//提货方式
                         ReceiptGood = GetValue<int>("ReceiptGood"),//收货方式

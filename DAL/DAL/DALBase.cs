@@ -146,5 +146,50 @@ namespace DAL.DAL
 
         }
 
+
+        /// <summary>
+        /// 生成货号
+        /// </summary>
+        /// <param name="lc"></param>
+        /// <returns></returns>
+        public static Tuple<bool, string> GetGoodNo(ref Model.Model.LC_Customer lc)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Line), "[End]=@End", new SqlParameter[] {
+                    new SqlParameter("@End",lc.finish)
+                });
+            ids = db.Read(sql);
+            if (!ids.flag)
+            {
+                Tools.SaveLog.AddLog(ids.errormsg, "获取路线错误");
+            }
+            if (!ids.ReadIsOk())
+                return new Tuple<bool, string>(false, "没有任何数据!");
+
+            Model.Model.LC_Line lcl = ids.GetVOList<Model.Model.LC_Line>()[0];
+
+            DateTime starttime = DateTime.Now.ToString("yyyy-MM-dd 00:00:00").ConvertData<DateTime>();
+            DateTime endtime = DateTime.Now.ToString("yyyy-MM-dd 23:59:59").ConvertData<DateTime>();
+
+            //获取当前线路当日总单数
+            sql = makesql.MakeCount(nameof(Model.Model.LC_Customer), "finish=@finish and DdTime between @starttime and @endtime", new SqlParameter[] {
+                    new SqlParameter("@finish",lcl.End),
+                    new SqlParameter("@starttime",starttime),
+                    new SqlParameter("@endtime",endtime)
+                });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string>(false, ids.errormsg);
+
+            long nowOrderNumber = ids.Count();
+
+            StringBuilder goodbuffer = new StringBuilder();
+            goodbuffer.Append(lcl.Lineletter);
+            goodbuffer.Append(DateTime.Now.Day.ToString().PadLeft(2, '0'));
+            goodbuffer.Append("-");
+            goodbuffer.Append(nowOrderNumber);
+            goodbuffer.Append("-");
+            goodbuffer.Append(lc.Number);
+            return new Tuple<bool, string>(true, goodbuffer.ToString());
+        }
     }
 }

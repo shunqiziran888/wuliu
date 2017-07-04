@@ -22,7 +22,7 @@ namespace Logistics.LC.Line
                 if (IsPostBack)
                 {
                     var myuservo = GetMyLoginUserVO();
-                    Tuple<bool, string> vo = BLL.BLL.LC_Line.Add(new Model.Model.LC_Line()
+                    Model.Model.LC_Line lcl = new Model.Model.LC_Line()
                     {
                         LineID = Tools.NewGuid.GuidTo16String(),
                         Start = myuservo.AreaID,
@@ -30,8 +30,28 @@ namespace Logistics.LC.Line
                         Phone = GetValue("Phone"),
                         UserID = myuservo.id.ConvertData<int>(),
                         DateTime = DateTime.Now,
-                        UID = myuservo.uid
-                    });
+                        UID = myuservo.uid,
+                        Lineletter = GetValue("Lineletter")
+                    };
+                    if(lcl.Phone.StrIsNull())
+                    {
+                        Alert("手机号不能为空!");
+                        return;
+                    }
+
+                    if(lcl.End==0)
+                    {
+                        Alert("线路终点必须选择!");
+                        return;
+                    }
+                    if(lcl.Lineletter.StrIsNull())
+                    {
+                        Alert("货物号首字母必须选择!");
+                        return;
+                    }
+
+                    Tuple<bool, string> vo = BLL.BLL.LC_Line.Add(lcl);
+                    
                     if (vo.Item1)
                     {
                         AlertJump("添加成功", "/LC/Manage/Line/LC_Line.aspx");
