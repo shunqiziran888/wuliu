@@ -11,7 +11,6 @@
     <link rel="shortcut icon" href="/favicon.ico">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
     <link rel="stylesheet" href="/Style/css/sui/sm.min.css">
     <link rel="stylesheet" href="/Style/css/sui/sm-extend.min.css">
     <link href="/Style/css/iconlink.css" rel="stylesheet">

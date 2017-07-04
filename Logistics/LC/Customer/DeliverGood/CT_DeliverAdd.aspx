@@ -84,9 +84,6 @@
                                 物流
                             </div>
                             <div class="col-40">
-                                <input type="hidden" id="wlid" name="wlid" value="<%=wlid %>"/>
-                               
-                                    
                                 <select id="logisticsID" name="logisticsID" onchange="AutoAddress(this)">
                                     <option>请选择物流</option>
                                     <%foreach (var p in list) {
@@ -104,7 +101,7 @@
                                 收货人电话
                             </div>
                             <div class="col-70">
-                                <input name="SHPhone" type="text" id="SHPhone" oninput="phonechange(this);" onpropertychange="phonechange(this);"  value="<%=shrdh %>" size="15">
+                                <input name=" " type="text" id="SHPhone" oninput="phonechange(this);" onpropertychange="phonechange(this);"  value="<%=shrdh %>" size="15">
                             </div>
                         </div>
                         <div class="row">
@@ -112,7 +109,7 @@
                                 到达地
                             </div>
                             <div class="col-70">
-                                <div hidden="hidden">
+                                <div style="display:none" id="DivAdress">
                                 <select id="End1" name="End1" style="width:300px"  onchange="show(this.value,'End2');"> 
                                     <option>请选择</option>
                                     <%
@@ -128,7 +125,7 @@
                                 </select>城市&nbsp &nbsp &nbsp 
                                     </div>
                                  <select id="End" name="End" style="width:300px" > 
-                                </select>区县&nbsp &nbsp &nbsp
+                                </select>区县&nbsp &nbsp &nbsp<a href="#" onclick="whole()" id="gd">更多</a>
                             </div>
                         </div>
                         <div class="row">
@@ -232,15 +229,6 @@
             }
         });
 
-        $(function () {
-            var wlid = document.getElementById("wlid").value;
-            if (wlid != null)
-            {
-                $("#").empty();
-                $("#logisticsID").append("<option value='" + wlid + "' selected>" + wlid + "</option>");
-            }
-           
-        });
         //物流筛选地区
         //function LCID()
         //{
@@ -264,24 +252,27 @@
         {
             isAuto = true;
             try {
-                debugger;
                 var v = $(element).val().split(',');
                 let name = v[4];
                 let id = v[5];
-                $("#End").empty();
-                $("#End").append("<option value='" + id + "' selected>" + name + "</option>");
-                /*
-                let arr = [];
-
-                arr.push({ selectid: v[1],defid:1,key:"End1"});
-                arr.push({ selectid: v[2], defid: v[1], key: "End2" });
-                arr.push({ selectid: v[3], defid: v[2], key: "End" });
-                isAuto = 3;
-                for (let i = 0; i < arr.length; i++) {
-                    let m = arr[i];
-                    autoshow(m.selectid, m.defid, m.key);
+                if (id != null) {
+                    $("#End").empty();
+                    if (name != undefined || id != undefined) {
+                        $("#End").append("<option value='" + id + "' selected>" + name + "</option>");
+                    }
+                    else {
+                        $("#End").append("<option></option>");
+                    }
                 }
-                */
+                //let arr = [];
+                //arr.push({ selectid: v[1], defid: 1, key: "End1" });
+                //arr.push({ selectid: v[2], defid: v[1], key: "End2" });
+                //arr.push({ selectid: v[3], defid: v[2], key: "End" });
+                //isAuto = 3;
+                //for (let i = 0; i < arr.length; i++) {
+                //    let m = arr[i];
+                //    autoshow(m.selectid, m.defid, m.key);
+                //} 
             }
             catch(e)
             {}
@@ -334,7 +325,12 @@
                 }
             });
         }
-        
+        function whole()
+        {
+            $("#End").empty();
+            document.getElementById("DivAdress").style.display = "block";
+            document.getElementById("gd").style.display = "none";
+        }
     </script>
 </body>
 
