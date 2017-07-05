@@ -34,8 +34,9 @@ namespace DAL.DAL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="cH"></param>
+        /// <param name="End">Ä¿µÄµØ</param>
         /// <returns></returns>
-        public static Tuple<bool, string> UpdateMC(long id, int cH,string UID)
+        public static Tuple<bool, string> UpdateMC(long id, int cH,string UID,int End)
         {
             var box = db.CreateTranSandbox<Tuple<bool,string>>((db) =>
             {
@@ -48,8 +49,9 @@ namespace DAL.DAL
                 {
                     State = 4,
                     logisticsID = UID
-                }, "Destination=finish and VehicleID=@VehicleID and State=3", new System.Data.SqlClient.SqlParameter[] {
-                    new System.Data.SqlClient.SqlParameter("@VehicleID",cH)
+                }, "Destination=finish and VehicleID=@VehicleID and State=3 and finish=@finish", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@VehicleID",cH),
+                    new System.Data.SqlClient.SqlParameter("@finish",End)
                 });
                 ids = db.Exec(sql);
                 if (!ids.flag)
@@ -61,8 +63,9 @@ namespace DAL.DAL
                 {
                     State = 7,
                     logisticsID = UID
-                }, "Destination<>finish and VehicleID=@VehicleID and State=3", new System.Data.SqlClient.SqlParameter[] {
-                    new System.Data.SqlClient.SqlParameter("@VehicleID",cH)
+                }, "Destination<>finish and VehicleID=@VehicleID and State=3 and finish=@finish", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@VehicleID",cH),
+                    new System.Data.SqlClient.SqlParameter("@finish",End)
                 });
                 ids = db.Exec(sql);
                 if (!ids.flag)
@@ -279,11 +282,12 @@ namespace DAL.DAL
         /// </summary>
         /// <param name="CH"></param>
         /// <returns></returns>
-        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetGDList(int CH)
+        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetGDList(int CH,int MDD)
         {
-            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "VehicleID=@VehicleID and State=@State", new System.Data.SqlClient.SqlParameter[] {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "VehicleID=@VehicleID and State=@State and finish=@finish", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@VehicleID",CH),
-                new System.Data.SqlClient.SqlParameter("@State","3")
+                new System.Data.SqlClient.SqlParameter("@State","3"),
+                new System.Data.SqlClient.SqlParameter("@finish",MDD)
             });
             ids = db.Read(sql);
             if (!ids.flag)
