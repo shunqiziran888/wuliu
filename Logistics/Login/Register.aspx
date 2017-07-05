@@ -178,7 +178,7 @@ $(window).load(function() {
 				$("#password").val('');
 				$("#ptext").val('');
 			}
-			if(this.id=="ptext_PwdTwo" || this.id=="password_PwdTwo"){
+			if(this.id=="ptext_PwdTwo" || this.id=="password_PwdTwo")
 				$("#password_PwdTwo").val('');
 				$("#ptext_PwdTwo").val('');
 			}
