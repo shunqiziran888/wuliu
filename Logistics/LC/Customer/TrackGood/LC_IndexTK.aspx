@@ -15,6 +15,7 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="/Style/css/sui/sm.min.css">
     <link rel="stylesheet" href="/Style/css/sui/sm-extend.min.css">
     <link href="/Style/css/iconlink.css" rel="stylesheet">
@@ -96,6 +97,10 @@
                         <a href="#tab1" class="tab-link active button"><span>接收货物</span></a>
                         <a href="#tab2" class="tab-link button"><span>发出货物</span></a>
                     </div>
+                    <div class="search-input">
+                  <label class="icon icon-search" for="search"></label>
+                  <input type="search" id='search' placeholder='输入区域或者电话号码可以快速检索'/>
+                </div>
                     <div class="content-block">
                         <div class="tabs">
                             <div id="tab1" class="tab active">
