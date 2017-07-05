@@ -79,7 +79,7 @@ namespace Logistics.LC.Customer
                 int CityID = myuservo1.CityID;
                 string logID = GetValue("logisticsID").StringToArray().GetIndexValue(0);
                 //物流
-                var vo1 = DAL.DAL.LC_User.GetLCFHADDList(CityID, logID);
+                var vo1 = DAL.DAL.LC_User.GetLCFHADDList(CityID, logID, myuservo1);
                 if (!vo1.Item1)
                 {
                     //有错误

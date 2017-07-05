@@ -20,8 +20,9 @@ namespace Logistics.Login
             {
                 try
                 {
-                    //开始注册
-                    Tuple<bool, string> vo = BLL.BLL.LC_User.Add(new Model.Model.LC_User()
+                    var loginvo = GetMyLoginUserVO();
+
+                    var uservo = new Model.Model.LC_User()
                     {
                         LogisticsName = GetValue("LogisticsName"),//公司名称
                         UserName = GetValue("UserName"),//用户昵称
@@ -37,7 +38,10 @@ namespace Logistics.Login
                         AreaID = GetValue<int>("End"),//区县
                         State = GetValue<int>("State"),//状态
                         LCID = GetValue("LCID")//上级物流ID
-                    });
+                    };
+                    string LogisticsUid = GetValue("LogisticsUid");
+                    //开始注册
+                    Tuple<bool, string> vo = BLL.BLL.LC_User.Add(uservo, loginvo, LogisticsUid);
 
                     if (vo.Item1)
                     {

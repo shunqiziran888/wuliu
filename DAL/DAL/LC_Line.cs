@@ -99,11 +99,12 @@ namespace DAL.DAL
         }
 
         //添加新路线
-        public static Tuple<bool,string> Add(Model.Model.LC_Line LC_Line)
+        public static Tuple<bool,string> Add(Model.Model.LC_Line LC_Line, GlobalBLL.UserLoginVO uservo)
         {
             //查看是否存在
-            sql = makesql.MakeCount(nameof(Model.Model.LC_Line), "[End]=@End",new System.Data.SqlClient.SqlParameter[] {
-                new System.Data.SqlClient.SqlParameter("@End",LC_Line.End)
+            sql = makesql.MakeCount(nameof(Model.Model.LC_Line), "[End]=@End and uid=@uid",new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@End",LC_Line.End),
+                new System.Data.SqlClient.SqlParameter("@uid",uservo.uid)
             });
             ids = db.Read(sql);
             if (!ids.flag)

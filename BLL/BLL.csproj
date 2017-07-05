@@ -60,6 +60,7 @@
     <Compile Include="BLL\LC_Position.cs" />
     <Compile Include="BLL\LC_Region.cs" />
     <Compile Include="BLL\LC_User.cs" />
+    <Compile Include="BLL\LC_UserBindLogisticsList.cs" />
     <Compile Include="BLL\LC_Vehicle.cs" />
     <Compile Include="BLL\w_address_basic_data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,6 +69,10 @@
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{c613a7b7-5cb4-47fe-8487-929a94231336}</Project>
       <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GlobalBLL\GlobalBLL.csproj">
+      <Project>{8391097a-dcf2-425e-b09f-0c07dfdcc74c}</Project>
+      <Name>GlobalBLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{ad983845-5fd1-4470-8117-8f016277b941}</Project>

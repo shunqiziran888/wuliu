@@ -168,7 +168,6 @@
     <Content Include="LC_Pick.aspx" />
     <Content Include="Login\Login.aspx" />
     <Content Include="Login\Register.aspx" />
-    <Content Include="Login\RegisterSon.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -625,13 +624,6 @@
     </Compile>
     <Compile Include="Login\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Login\RegisterSon.aspx.cs">
-      <DependentUpon>RegisterSon.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Login\RegisterSon.aspx.designer.cs">
-      <DependentUpon>RegisterSon.aspx</DependentUpon>
     </Compile>
     <Compile Include="PageBase.cs">
       <SubType>ASPXCodeBehind</SubType>

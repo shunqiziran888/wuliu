@@ -86,13 +86,20 @@
                             <div class="col-40">
                                 <select id="logisticsID" name="logisticsID" onchange="AutoAddress(this)">
                                     <option>请选择物流</option>
-                                    <%foreach (var p in list) {
-                                            var v = p.GetDicVO<Model.Model.LC_User>();
-                                            var line = p.GetDicVO<Model.Model.LC_Line>();
-                                            var name = DAL.DAL.DALBase.GetAddressFromID(line.End.ConvertData<int>()).Item2.Name;
-                                            %>
+                                    <%
+                                        if (list.Count > 0)
+                                        {
+                                            foreach (var p in list)
+                                            {
+                                                var v = p.GetDicVO<Model.Model.LC_User>();
+                                                var line = p.GetDicVO<Model.Model.LC_Line>();
+                                                var name = DAL.DAL.DALBase.GetAddressFromID(line.End.ConvertData<int>()).Item2.Name;
+                                    %>
                                     <option value="<%=v.UID %>,<%=v.ProvincesID %>,<%=v.CityID %>,<%=v.AreaID %>,<%=name %>,<%=line.End %>"><%=v.LogisticsName %>(<%=DAL.DAL.DALBase.GetAddressFromID(v.ProvincesID.Value)?.Item2?.Name %>---<%=DAL.DAL.DALBase.GetAddressFromID(v.CityID.Value)?.Item2?.Name %>---<%=DAL.DAL.DALBase.GetAddressFromID(v.AreaID.Value)?.Item2?.Name %>)</option>
-                                    <%} %>
+                                    <%
+                                            }
+                                        }
+                                    %>
                                 </select>
                             </div>
                         </div>

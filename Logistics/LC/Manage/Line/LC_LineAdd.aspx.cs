@@ -50,7 +50,7 @@ namespace Logistics.LC.Line
                         return;
                     }
 
-                    Tuple<bool, string> vo = BLL.BLL.LC_Line.Add(lcl);
+                    Tuple<bool, string> vo = BLL.BLL.LC_Line.Add(lcl, myuservo);
                     
                     if (vo.Item1)
                     {

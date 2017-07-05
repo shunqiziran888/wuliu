@@ -54,6 +54,7 @@
     <Compile Include="Model\LC_Position.cs" />
     <Compile Include="Model\LC_Region.cs" />
     <Compile Include="Model\LC_User.cs" />
+    <Compile Include="Model\LC_UserBindLogisticsList.cs" />
     <Compile Include="Model\LC_Vehicle.cs" />
     <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Model\w_address_basic_data.cs" />
