@@ -85,25 +85,10 @@ $(window).load(function() {
             <input name="Password" class="txt-input txt-password ciphertext" type="text" id="Password" size="15" placeholder="请输入密码" style="display: inline;">
           <input id="ptext" class="txt-input txt-password plaintext" type="text" placeholder="请输入密码" style="display: none;" name="ptext">
           <b class="tp-btn btn-off"></b> </div>
-          <div class="item item-username">
-              <select id="End1" name="End1" style="width:300px" onchange="shows(this.value,'End2');"> 
-                                    <option>请选择</option>
-                                    <%
-                                        foreach (var p in shengList)
-                                        {
-                                     %>
-                                <option value="<%=p.id %>"><%=p.Name %></option>
-                                    
-                                <%
-                                    } %>
-                                </select>省份&nbsp &nbsp &nbsp 
-                                 <select id="End2" name="End2" style="width:300px" onchange="shows(this.value,'End');"> 
-                                </select>城市&nbsp &nbsp &nbsp 
-                                 <select id="End" name="End" style="width:300px" > 
-                                </select>区县&nbsp &nbsp &nbsp
-          </div>
+
           <input type="hidden" id="ZType" name="ZType" value="3"/>
           <input type="hidden" id="State" name="State" value="1"/>
+          <input type="hidden" id="LogisticsUid" name="LogisticsUid" value="<%=GetValue("LogisticsUid")%>"/>
         <div class="ui-btn-wrap"> <a class="ui-btn-lg ui-btn-primary" href="#" onclick="loginwl()">用户注册</a> </div>
           <%
                   break;

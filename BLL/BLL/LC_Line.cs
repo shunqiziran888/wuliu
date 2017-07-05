@@ -11,9 +11,9 @@ namespace BLL.BLL
     {
         public LC_Line()
         {}
-        public static Tuple<bool,string> Add(Model.Model.LC_Line LC_Line)
+        public static Tuple<bool,string> Add(Model.Model.LC_Line LC_Line, GlobalBLL.UserLoginVO uservo)
         {
-            return DAL.DAL.LC_Line.Add(LC_Line);
+            return DAL.DAL.LC_Line.Add(LC_Line,uservo);
         }
     }
 }

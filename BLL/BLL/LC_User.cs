@@ -16,11 +16,11 @@ namespace BLL.BLL
         /// </summary>
         /// <param name="lC_User"></param>
         /// <returns></returns>
-        public static Tuple<bool, string> Add(Model.Model.LC_User lC_User)
+        public static Tuple<bool, string> Add(Model.Model.LC_User lC_User,GlobalBLL.UserLoginVO loginvo, string LogisticsUid="")
         {
             //if (lC_User.UserName.StrIsNull())
             //    return new Tuple<bool, string>(false, "êÇ³Æ²»ÄÜÎª¿Õ!");
-            return DAL.DAL.LC_User.Add(lC_User);
+            return DAL.DAL.LC_User.Add(lC_User, loginvo, LogisticsUid);
         }
     }
 }
