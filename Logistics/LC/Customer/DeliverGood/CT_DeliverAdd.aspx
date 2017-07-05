@@ -294,7 +294,7 @@
                 var v = $(element).val().split(',');
 
                 let uid = v[0];
-                let id = v[5];
+                let mbd = "<%=GetValue("mbd")%>";
                 GetHtml("/Command/GetLogisticsLineListFromUid.aspx", { uid: uid }, function (data) {
                     let vo = JSON.parse(data);
                     if (vo.Item1)
@@ -306,7 +306,7 @@
                             for (let i = 0; i < list.length; i++)
                             {
                                 let v = list[i];
-                                if (v.End == id)
+                                if (v.End == mbd)
                                 {
                                     $("#End").append("<option value='" + v.End + "' selected>" + v.EndName + "</option>");
                                 }
