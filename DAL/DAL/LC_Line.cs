@@ -101,6 +101,16 @@ namespace DAL.DAL
         //添加新路线
         public static Tuple<bool,string> Add(Model.Model.LC_Line LC_Line)
         {
+            //查看是否存在
+            sql = makesql.MakeCount(nameof(Model.Model.LC_Line), "[End]=@End",new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@End",LC_Line.End)
+            });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string>(false, ids.errormsg);
+            if (ids.Count() > 0)
+                return new Tuple<bool, string>(false, "您已经添加过此路线,无需重复添加!");
+
             sql = makesql.MakeInsertSQL(LC_Line);
             ids = db.Exec(sql);
             if(!ids.flag)
