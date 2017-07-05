@@ -4,6 +4,7 @@ using SuperDataBase;
 using CustomExtensions;
 using SuperDataBase.InterFace;
 using System.Linq;
+using Model.Model;
 
 namespace DAL.DAL
 {
@@ -15,6 +16,20 @@ namespace DAL.DAL
     {
         public LC_Line()
         {}
+
+        public static Tuple<bool, string, List<Model.Model.LC_Line>> GetLineListFromUid(string uid)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Line), "uid=@uid", new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@uid",uid)
+            });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string, List<Model.Model.LC_Line>>(false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return new Tuple<bool, string, List<Model.Model.LC_Line>>(true, "没有任何数据!", new List<Model.Model.LC_Line>());
+            return new Tuple<bool, string, List<Model.Model.LC_Line>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Line>());
+        }
+
         /// <summary>
         /// 获取单路线数据
         /// </summary>

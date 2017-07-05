@@ -292,26 +292,44 @@
             isAuto = true;
             try {
                 var v = $(element).val().split(',');
-                let name = v[4];
+
+                let uid = v[0];
                 let id = v[5];
-                if (id != null) {
-                    $("#End").empty();
-                    if (name != undefined || id != undefined) {
-                        $("#End").append("<option value='" + id + "' selected>" + name + "</option>");
+                GetHtml("/Command/GetLogisticsLineListFromUid.aspx", { uid: uid }, function (data) {
+                    let vo = JSON.parse(data);
+                    if (vo.Item1)
+                    {
+                        let list = vo.Item3;
+                        if (list.length > 0)
+                        {
+                            $("#End").empty();
+                            for (let i = 0; i < list.length; i++)
+                            {
+                                let v = list[i];
+                                if (v.End == id)
+                                {
+                                    $("#End").append("<option value='" + v.End + "' selected>" + v.EndName + "</option>");
+                                }
+                                else {
+                                    $("#End").append("<option value='" + v.End + "'>" + v.EndName + "</option>");
+                                }
+                            }
+                        }
                     }
-                    else {
-                        $("#End").append("<option></option>");
-                    }
-                }
-                //let arr = [];
-                //arr.push({ selectid: v[1], defid: 1, key: "End1" });
-                //arr.push({ selectid: v[2], defid: v[1], key: "End2" });
-                //arr.push({ selectid: v[3], defid: v[2], key: "End" });
-                //isAuto = 3;
-                //for (let i = 0; i < arr.length; i++) {
-                //    let m = arr[i];
-                //    autoshow(m.selectid, m.defid, m.key);
-                //} 
+                });
+
+
+                //let name = v[4];
+                //let id = v[5];
+                //if (id != null) {
+                //    $("#End").empty();
+                //    if (name != undefined || id != undefined) {
+                //        $("#End").append("<option value='" + id + "' selected>" + name + "</option>");
+                //    }
+                //    else {
+                //        $("#End").append("<option></option>");
+                //    }
+                //}
             }
             catch(e)
             {}

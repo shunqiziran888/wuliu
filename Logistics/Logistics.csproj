@@ -121,6 +121,7 @@
   <ItemGroup>
     <Content Include="Command\GetAddressNextList.aspx" />
     <Content Include="Command\GetLineListFromLogisticsId.aspx" />
+    <Content Include="Command\GetLogisticsLineListFromUid.aspx" />
     <Content Include="Command\GetSHPhoneAdressList.aspx" />
     <Content Include="GetQR.aspx" />
     <Content Include="LC\Business\DschargeGood\IndexDhg.aspx" />
@@ -292,6 +293,13 @@
     </Compile>
     <Compile Include="Command\GetLineListFromLogisticsId.aspx.designer.cs">
       <DependentUpon>GetLineListFromLogisticsId.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Command\GetLogisticsLineListFromUid.aspx.cs">
+      <DependentUpon>GetLogisticsLineListFromUid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Command\GetLogisticsLineListFromUid.aspx.designer.cs">
+      <DependentUpon>GetLogisticsLineListFromUid.aspx</DependentUpon>
     </Compile>
     <Compile Include="Command\GetSHPhoneAdressList.aspx.cs">
       <DependentUpon>GetSHPhoneAdressList.aspx</DependentUpon>

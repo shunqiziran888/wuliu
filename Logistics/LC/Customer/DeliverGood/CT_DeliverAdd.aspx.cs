@@ -87,11 +87,28 @@ namespace Logistics.LC.Customer
                     return;
 
                 }
-                list = vo1.Item3;
+                list = vo1.Item3.Distinct(new DistinctObj()).ToList();
             }
             catch (Exception)
             {
                 Alert("添加失败请重试");
+            }
+        }
+
+        class DistinctObj : IEqualityComparer<Dictionary<string, SuperDataBase.InterFace.I_ModelBase>>
+        {
+            public bool Equals(Dictionary<string, I_ModelBase> x, Dictionary<string, I_ModelBase> y)
+            {
+                var x_vo = x.GetDicVO<Model.Model.LC_Line>();
+                var y_vo = x.GetDicVO<Model.Model.LC_Line>();
+                if (x_vo.Start == y_vo.Start)
+                    return true;
+                return false;
+            }
+
+            public int GetHashCode(Dictionary<string, I_ModelBase> obj)
+            {
+                return 0;
             }
         }
     }
