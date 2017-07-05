@@ -14,3 +14,14 @@
         error: error
     });
 }
+
+/**
+* 判断字符串是否为空
+*/
+function StrIsNull(str)
+{
+    if (str=="" || str==null || str==undefined) {
+        return true;
+    }
+    return false;
+}

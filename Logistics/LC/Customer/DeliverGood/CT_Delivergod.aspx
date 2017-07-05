@@ -36,7 +36,7 @@
               <div class="searchbar">
                 <div class="search-input">
                   <label class="icon icon-search" for="search"></label>
-                  <input type="search" id='search' placeholder='输入区域或者电话号码可以快速检索'/>
+                  <input type="text" id='search' placeholder='输入电话号码可以快速检索' oninput="phonechange(this);" onpropertychange="phonechange(this);"/>
                 </div>
               </div>
               <ul class="dingdan-ul wyfh-ul">
@@ -49,7 +49,7 @@
                                         
                                      %>
                   <li class="dingdan-li">
-                    <a href="/LC/Customer/DeliverGood/CT_DeliverAdd.aspx?shr=<%=v.Consignee %>&shrdh=<%=v.SHPhone %>&mbd=<%=v.Destination %>&uffs=<%=v.freightMode %>&wlid=<%=v.logisticsID %>" class="row">
+                    <a href="/LC/Customer/DeliverGood/CT_DeliverAdd.aspx?shr=<%=v.Consignee %>&shrdh=<%=v.SHPhone %>&mbd=<%=v.Destination %>&uffs=<%=v.freightMode %>&wlid=<%=v.logisticsID %>&CarryGood=<%=v.CarryGood %>&ReceiptGood=<%=v.ReceiptGood %>" class="row">
                       <div class="col-90 dingdan-left">
                         <div class="dingdan-top">
                           <div class="dingdan-top1">
@@ -82,3 +82,13 @@
     <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js"></script>
   </body>
 </html>
+<script type="text/javascript">
+    function phonechange(element)
+    {
+        var phone = $(element).val();
+        if (phone.length == 11)
+        {
+            alert(phone);
+        }
+    }
+</script>

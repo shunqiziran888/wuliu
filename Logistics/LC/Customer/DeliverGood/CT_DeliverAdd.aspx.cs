@@ -20,6 +20,8 @@ namespace Logistics.LC.Customer
         public string mbd;
         public string uffs;
         public string wlid;
+        public int CarryGood;
+        public int ReceiptGood;
         protected void Page_Load(object sender, EventArgs e)
         {
             //获取地区省列表
@@ -29,6 +31,8 @@ namespace Logistics.LC.Customer
             mbd = GetValue("mbd");
             uffs = GetValue("uffs");
             wlid = GetValue("wlid");
+            CarryGood = GetValue<int>("CarryGood");
+            ReceiptGood = GetValue<int>("ReceiptGood");
             try
             {
                 if (IsPostBack)

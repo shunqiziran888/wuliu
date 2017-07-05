@@ -97,10 +97,12 @@
                         <a href="#tab1" class="tab-link active button"><span>接收货物</span></a>
                         <a href="#tab2" class="tab-link button"><span>发出货物</span></a>
                     </div>
-                    <div class="search-input">
+                 <div class="searchbar">
+                <div class="search-input">
                   <label class="icon icon-search" for="search"></label>
                   <input type="search" id='search' placeholder='输入区域或者电话号码可以快速检索'/>
                 </div>
+              </div>
                     <div class="content-block">
                         <div class="tabs">
                             <div id="tab1" class="tab active">

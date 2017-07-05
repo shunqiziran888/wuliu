@@ -227,6 +227,38 @@
             $.config = {
                 router: false
             }
+
+            //默认选择物流
+            let wlid = "<%=GetValue("wlid")%>";
+            if (!StrIsNull(wlid)) {
+                //获取所有物流列表
+                let list = $("#logisticsID option");
+                if (list != null) {
+                    for(let i=0;i<list.length;i++)
+                    {
+                        let v = list[i];
+                        let vStr = $(v).val();
+                        let arr = vStr.split(',');
+                        if (arr!=null) {
+                            if(arr.length>0)
+                            {
+                                if(arr[0]==wlid)
+                                {
+                                    $(v).attr("selected", true);
+                                    AutoAddress($("#logisticsID"));
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            let yffs = "<%=uffs%>";
+            let cg="<%=CarryGood%>";
+            let RG="<%=ReceiptGood%>";
+            $("input[name='freightMode'][value='" + yffs + "']").get(0).checked = true;
+            $("input[name='CarryGood'][value='" + cg + "']").get(0).checked = true;
+            $("input[name='ReceiptGood'][value='" + RG + "']").get(0).checked = true;
         });
 
         //物流筛选地区
@@ -277,42 +309,42 @@
             catch(e)
             {}
         }
+        //赋值地区
+        //function autoshow(selectid, defid, elename) {
+        //    GetHtml("/Command/GetAddressNextList.aspx", { id: defid }, function (data) {
+        //        let list = JSON.parse(data);
+        //        $("#" + elename).empty();
+        //        $("#" + elename).append("<option>-请选择-</option>");
+        //        for (let i = 0; i < list.length; i++) {
+        //            if (list[i].id == selectid) {
+        //                $("#" + elename).append("<option value='" + list[i].id + "' selected>" + list[i].Name + "</option>");
+        //            }
+        //            else {
+        //                $("#" + elename).append("<option value='" + list[i].id + "'>" + list[i].Name + "</option>");
+        //            }
+        //        }
+        //        isAuto--;
+        //    });
+        //}
 
-        function autoshow(selectid, defid, elename) {
-            GetHtml("/Command/GetAddressNextList.aspx", { id: defid }, function (data) {
-                let list = JSON.parse(data);
-                $("#" + elename).empty();
-                $("#" + elename).append("<option>-请选择-</option>");
-                for (let i = 0; i < list.length; i++) {
-                    if (list[i].id == selectid) {
-                        $("#" + elename).append("<option value='" + list[i].id + "' selected>" + list[i].Name + "</option>");
-                    }
-                    else {
-                        $("#" + elename).append("<option value='" + list[i].id + "'>" + list[i].Name + "</option>");
-                    }
-                }
-                isAuto--;
-            });
-        }
+        //电话筛地区
+        //function phonechange(ele) {
+        //    let phone = $(ele).val();
+        //    if (phone.length == 11) {
+        //        GetHtml("/Command/GetSHPhoneAdressList.aspx", { phone: phone }, function (data) {
+        //            debugger;
+        //            let lists = JSON.parse(data);
+        //            if (lists.Item1) {
+        //                var list = lists.Item3;
+        //                for (let i = 0; i < list.length; i++) {
+        //                    alert(list[0].Destination);
+        //                }
+        //            }
 
-
-        function phonechange(ele) {
-            let phone = $(ele).val();
-            if (phone.length == 11) {
-                GetHtml("/Command/GetSHPhoneAdressList.aspx", { phone: phone }, function (data) {
-                    debugger;
-                    let lists = JSON.parse(data);
-                    if (lists.Item1) {
-                        var list = lists.Item3;
-                        for (let i = 0; i < list.length; i++) {
-                            alert(list[0].Destination);
-                        }
-                    }
-
-                });
-            }
-        }
-
+        //        });
+        //    }
+        //}
+        //地区联动
         function show(id, elename) {
             if (isAuto != 0)
                 return;
@@ -325,8 +357,10 @@
                 }
             });
         }
+        //更多地区
         function whole()
         {
+            isAuto = false;
             $("#End").empty();
             document.getElementById("DivAdress").style.display = "block";
             document.getElementById("gd").style.display = "none";
