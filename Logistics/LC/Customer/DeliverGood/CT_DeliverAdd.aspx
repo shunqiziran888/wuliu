@@ -108,7 +108,7 @@
                                 收货人电话
                             </div>
                             <div class="col-70">
-                                <input name=" " type="text" id="SHPhone" oninput="phonechange(this);" onpropertychange="phonechange(this);"  value="<%=shrdh %>" size="15">
+                                <input name="SHPhone" type="text" id="SHPhone" oninput="phonechange(this);" onpropertychange="phonechange(this);"  value="<%=shrdh %>" size="15">
                             </div>
                         </div>
                         <div class="row">
