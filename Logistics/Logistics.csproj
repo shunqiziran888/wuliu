@@ -160,6 +160,7 @@
     <Content Include="LC\Manage\Accredit\LC_Accredit.aspx" />
     <Content Include="LC\Manage\Accredit\LC_AccreditNo.aspx" />
     <Content Include="LC\Manage\Accredit\LC_AccreditYes.aspx" />
+    <Content Include="LC\Manage\Line\LC_CooperationRoute.aspx" />
     <Content Include="LC\Manage\Line\LC_Line.aspx" />
     <Content Include="LC\Manage\Line\LC_LineAdd.aspx" />
     <Content Include="LC\Manage\Line\LC_LineDetails.aspx" />
@@ -569,6 +570,13 @@
     </Compile>
     <Compile Include="LC\Manage\Accredit\LC_AccreditYes.aspx.designer.cs">
       <DependentUpon>LC_AccreditYes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Manage\Line\LC_CooperationRoute.aspx.cs">
+      <DependentUpon>LC_CooperationRoute.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Manage\Line\LC_CooperationRoute.aspx.designer.cs">
+      <DependentUpon>LC_CooperationRoute.aspx</DependentUpon>
     </Compile>
     <Compile Include="LC\Manage\Line\LC_Line.aspx.cs">
       <DependentUpon>LC_Line.aspx</DependentUpon>
