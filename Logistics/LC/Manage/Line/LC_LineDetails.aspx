@@ -77,7 +77,6 @@
                                         
                                      %>
                         <li><span>出发地:</span><span><%=v.StartCityName %>----------<%=v.EndCityName %></span></li>
-                        <li><span>负责人:</span><span><%=v.UserName%></span></li>
                         <li><span>联系方式:</span><span><%=v.Phone %></span></li>
                         <li><span>开通时间:</span><span><%=v.DateTime %></span></li>
                           <%} %>

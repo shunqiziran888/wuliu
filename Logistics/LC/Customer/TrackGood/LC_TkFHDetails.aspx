@@ -112,6 +112,7 @@
                                                      <i class="zbsh-xd1 row">
                                                          <%--<p class="zbsh-mdd col-50">发货人电话： <span><%=v.FHPhone %></span></p>--%>
                                                           <p class="zbsh-mdd col-50">收货人电话： <span><%=v.SHPhone %></span></p>
+                                                         <p class="zbsh-mdd col-50">中转地： <span><%=v.finish %></span></p>
                                                     </i>
                                                     <i class="zbsh-xd1 row">
                                                       <p class="zbsh-fhr col-50">货名： <span><%=v.GoodName %></span></p>

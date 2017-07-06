@@ -28,7 +28,6 @@ namespace Logistics.LC.Line
                         Start = myuservo.AreaID,
                         End = GetValue<int>("End"),
                         Phone = GetValue("Phone"),
-                        UserID = myuservo.id.ConvertData<int>(),
                         DateTime = DateTime.Now,
                         UID = myuservo.uid,
                         Lineletter = GetValue("Lineletter")
