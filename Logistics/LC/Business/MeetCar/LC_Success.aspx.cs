@@ -20,11 +20,17 @@ namespace Logistics.LC.Business.MeetCar
                 Alert("车号不能为空!");
                 return;
             }
+            int End = GetValue<int>("End");
+            if(End<=0)
+            {
+                Alert("目的地不能为空!");
+                return;
+            }
             var myuservo = GetMyLoginUserVO();
             if (myuservo.accountType == GlobalBLL.AccountTypeEnum.物流账号 || myuservo.accountType==GlobalBLL.AccountTypeEnum.平台账号)
             {
               
-                Tuple<bool, string> vo = DAL.DAL.LC_Customer.UpdateMC(myuservo.id, CH,myuservo.uid);
+                Tuple<bool, string> vo = DAL.DAL.LC_Customer.UpdateMC(myuservo.id, CH,myuservo.uid, End);
                 if (!vo.Item1)
                 {
                     //有错误

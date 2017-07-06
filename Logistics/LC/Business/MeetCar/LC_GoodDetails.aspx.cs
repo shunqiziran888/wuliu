@@ -17,10 +17,10 @@ namespace Logistics.LC.Business.MeetCar
         public int MDD;
         protected void Page_Load(object sender, EventArgs e)
         {
-            int CH = GetValue<int>("CH");
-            CFD = GetValue<int>("CFD");
-            MDD = GetValue<int>("MDD");
-            var vo = DAL.DAL.LC_Customer.GetGDList(CH);
+            int CH = GetValue<int>("CH"); //车号
+            CFD = GetValue<int>("CFD"); //出发地
+            MDD = GetValue<int>("MDD"); //目的地
+            var vo = DAL.DAL.LC_Customer.GetGDList(CH,MDD);
             if (!vo.Item1)
             {
                 //有错误
