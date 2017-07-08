@@ -123,7 +123,7 @@
                                             </li>
                                         </ul>
                                         <div class="col-20">
-                                            <a href="/LC/Customer/TrackGood/LC_TkSHDetails.aspx?OID=<%=v.OrderID %>" class="button button-fill button-success">详情</a>
+                                            <a href="/LC/Customer/TrackGood/LC_TkSHDetails.aspx?OID=<%=v.OrderID %>&GReceivables=<%=v.GReceivables %>&Freight=<%=v.Freight %>&OtherExpenses=<%=v.OtherExpenses %>&Number=<%=v.Number %>" class="button button-fill button-success">详情</a>
                                         </div>
                                     </li>
                                     <%} %>
@@ -152,7 +152,7 @@
                                             </li>
                                         </ul>
                                         <div class="col-20">
-                                            <a href="/LC/Customer/TrackGood/LC_TkFHDetails.aspx?OID=<%=v.OrderID %>" class="button button-fill button-success">详情</a>
+                                            <a href="/LC/Customer/TrackGood/LC_TkFHDetails.aspx?OID=<%=v.OrderID %>&GReceivables=<%=v.GReceivables %>&Freight=<%=v.Freight %>&OtherExpenses=<%=v.OtherExpenses %>&Number=<%=v.Number %>" class="button button-fill button-success">详情</a>
                                         </div>
                                     </li>
                                       <%} %>

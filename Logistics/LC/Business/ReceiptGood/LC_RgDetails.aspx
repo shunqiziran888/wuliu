@@ -118,20 +118,22 @@
                             <p class="col-50">电话： <span><%=v.SHPhone %></span></p>
                         </li>
                         <li>
-                            实收件数：<input type="text" placeholder="150">
+                            实收件数：<input type="text" placeholder="150" id="SSNumber" name="SSNumber">
                         </li>
                         <li>
-                            运费金额：<input type="text" placeholder="30000">
+                            运费金额：<input type="text" placeholder="30000" id="Freight" name="Freight">
                         </li>
                         <li>
-                            中转费用：<input type="text" placeholder="5000">
+                            中转费用：<input type="text" placeholder="5000" id="zzCost" name="zzCost">
                         </li>
+                           <%if(v.CarryGood==2) { %>
                         <li>
-                            送货费用：<input type="text" placeholder="20000">
+                            送货费用：<input type="text" placeholder="20000" id="ShzzCost" name="ShzzCost">
                         </li>
-
+                          <%}%>
                         <li>
-                            <a href="/LC/Business/ReceiptGood/LC_Success.aspx?OrderID=<%=v.OrderID %>" class="open-about">收货</a>
+                            <%--<a href="/LC/Business/ReceiptGood/LC_Success.aspx?OrderID=<%=v.OrderID %>" class="open-about">收货</a>--%>
+                            <a href="#" onclick="Submits('<%=v.OrderID %>')">收货</a>
                         </li>
                          <%} %>
                     </ul>
@@ -157,7 +159,16 @@
             $.closeModal('.popup-about');
         });
     </script>
-
+    <script type="text/javascript">
+        function Submits(OID)
+        {
+            var ssnumber = $("#SSNumber").val();//实收件数
+            var Freight = $("#Freight").val();//运费
+            var zzCost = $("#zzCost").val();//中转费用
+            var ShzzCost = $("#ShzzCost").val();//送货费用
+            window.location.href = "/LC/Business/ReceiptGood/LC_Success.aspx?OIDDetaila=" + OID + "&ssnumber=" + ssnumber + "&FreightDetail=" + Freight + "&zzCost=" + zzCost + "&ShzzCost="+ShzzCost;
+        }
+    </script>
 </body>
 
 </html>

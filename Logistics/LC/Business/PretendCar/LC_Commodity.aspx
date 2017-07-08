@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LC_Commodity.aspx.cs" Inherits="Logistics.LC.Business.PretendCar.LC_Commodity" %>
-
+<%@ Import Namespace="CustomExtensions" %>
+<%@ import Namespace="GlobalBLL" %>
 <!DOCTYPE html>
 
 <html>
@@ -135,7 +136,6 @@
             <div class="content" style="background:#ededed;">
                 <div class="page-index">
                     <ul class="xiangqing xlmingcheng">
-                        <span class="zhuangtai">已装车</span>
                         <span class="shoufadi"><%=StartCityName %>-----<%=EndCityName %></span>
                     </ul>
                     <ul class="xiangqing">
@@ -157,62 +157,15 @@
                             <span class="col-10" style="height:15px; width:15px;"><input type="checkbox" name="checkCommd" value="<%=v.OrderID %>"/></span>
                             <span class="col-20"><%=v.Consignee %></span>
                             <span class="col-20"><%=v.GoodName %></span>
-                            <span class="col-20 col-12"><%=v.Number %></span>
+                            <span class="col-20 col-12"><%=v.Number  %></span>
                             <span class="col-20 col-15"><%=v.Freight %></span>
                             <span class="col-20 col-15"><%=v.GoodNo %></span>
+                            <input type="hidden"  id="fffs" value="<%=v.freightMode %>"/>
                         </li>
                         <%} %>
-                     <%--   <li class="row td-body">
-                            <span class="col-20">刘晓林</span>
-                            <span class="col-20">不锈钢</span>
-                            <span class="col-20 col-12">10</span>
-                            <span class="col-20 col-15">90</span>
-                            <span class="col-20 col-33">B170105175-10</span>
-                        </li>
                         <li class="row td-body">
-                            <span class="col-20">刘晓林</span>
-                            <span class="col-20">不锈钢</span>
-                            <span class="col-20 col-12">10</span>
-                            <span class="col-20 col-15">90</span>
-                            <span class="col-20 col-33">B170105175-10</span>
+                            <span>合计：<%=list.Count %>单，<%=list.Sum(x=>x.Number)%>件，<%=list.Sum(x=>x.Freight) %>元运费，其他费用：<%=list.Sum(x=>x.OtherExpenses) %>，代收款：<%=list.Sum(x=>x.GReceivables) %></span>
                         </li>
-                        <li class="row td-body">
-                            <span class="col-20">刘晓林</span>
-                            <span class="col-20">不锈钢</span>
-                            <span class="col-20 col-12">10</span>
-                            <span class="col-20 col-15">90</span>
-                            <span class="col-20 col-33">B170105175-10</span>
-                        </li>
-                        <li class="row td-body">
-                            <span class="col-20">刘晓林</span>
-                            <span class="col-20">不锈钢</span>
-                            <span class="col-20 col-12">10</span>
-                            <span class="col-20 col-15">90</span>
-                            <span class="col-20 col-33">B170105175-10</span>
-                        </li>
-                        <li class="row td-body">
-                            <span class="col-20">刘晓林</span>
-                            <span class="col-20">不锈钢</span>
-                            <span class="col-20 col-12">10</span>
-                            <span class="col-20 col-15">90</span>
-                            <span class="col-20 col-33">B170105175-10</span>
-                        </li>
-                        <li class="row td-body">
-                            <span class="col-20">刘晓林</span>
-                            <span class="col-20">不锈钢</span>
-                            <span class="col-20 col-12">10</span>
-                            <span class="col-20 col-15">90</span>
-                            <span class="col-20 col-33">B170105175-10</span>
-                        </li>
-                        <li class="row td-body">
-                            <span class="col-20">刘晓林</span>
-                            <span class="col-20">不锈钢</span>
-                            <span class="col-20 col-12">10</span>
-                            <span class="col-20 col-15">90</span>
-                            <span class="col-20 col-33">B170105175-10</span>
-                        </li>--%>
-
-
                     </ul>
                     <input type="button" onclick="Test()" value="下一步"/>
                 </div>
@@ -221,7 +174,10 @@
     </div>
     <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js"></script>
     <script type="text/javascript">
-    $(function() { $.init(); $.config = { router: false } });
+        $(function ()
+        {
+            $.init(); $.config = { router: false }
+        });
     </script>
 </body>
 
@@ -254,5 +210,5 @@
             sessionStorage.setItem("OID", s);         
             window.location.href = "/LC/Business/PretendCar/LC_Vehicle.aspx";
         }
-    } 
+    }
 </script>
