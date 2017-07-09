@@ -196,9 +196,6 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-20">
-                                <input type="text" placeholder="111">
-                            </div>
                         </div>
                         <div class="row khfh-input">
                             <div class="col-30 ">

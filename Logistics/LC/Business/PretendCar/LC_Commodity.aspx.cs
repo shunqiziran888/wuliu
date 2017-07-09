@@ -25,6 +25,8 @@ namespace Logistics.LC.Business.PretendCar
             end =GetValue<int>("Destination");
             StartCityName = GetValue("StartCityName");
             EndCityName = GetValue("EndCityName");
+
+
             var vo = DAL.DAL.LC_Customer.GetCmdList(UID,sta,end);
             if (!vo.Item1)
             {

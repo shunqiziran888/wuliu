@@ -39,7 +39,8 @@ namespace Logistics.Login
                         State = GetValue<int>("State"),//状态
                         LCID = GetValue("LCID")//上级物流ID
                     };
-                    string LogisticsUid = GetValue("LogisticsUid");
+                    //string LogisticsUid = GetValue("LogisticsUid");
+                    string LogisticsUid = "6cfe97409cd87419";
                     //开始注册
                     Tuple<bool, string> vo = BLL.BLL.LC_User.Add(uservo, loginvo, LogisticsUid);
 

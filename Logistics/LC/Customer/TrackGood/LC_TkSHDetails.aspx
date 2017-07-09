@@ -101,38 +101,50 @@
                                                 <div class="col-100">
                                                     <i class="zbsh-xd1 row">
                                                         <p class="zbsh-hh col-50">货号： <span><%=v.GoodNo %></span></p>
-                                                        <p class="zbsh-shr col-50" style="padding:0 .6rem;">
-                                                       <%-- <a href="sjhuowuqianshou.html" class="button button-fill button-success" style="color: #fff;">可申请提货</a>--%>
-                                                        </p>
                                                     </i>
                                                     <i class="zbsh-xd1 row">
                                                          <p class="zbsh-shr col-50">发货人： <span><%=v.Consignor %></span></p> 
-                                                        <%--<p class="zbsh-shr col-50">收货人： <span><%=v.Consignee %></span></p>--%> 
+                                                        <p class="zbsh-mdd col-50">发货人电话： <span><%=v.FHPhone %></span></p>
                                                     </i>
                                                      <i class="zbsh-xd1 row">
-                                                         <p class="zbsh-mdd col-50">发货人电话： <span><%=v.FHPhone %></span></p>
-                                                          <%--<p class="zbsh-mdd col-50">收货人电话： <span><%=v.SHPhone %></span></p>--%>
+                                                           <%if(v.finish==null)
+                                                               { %>
+                                                         <p class="zbsh-mdd col-50">中转地： <span>未中转</span></p>
+                                                          <%}
+                                                        else
+                                                        {%>
+                                                            <p class="zbsh-mdd col-50">中转地： <span><%=DAL.DAL.DALBase.GetAddressFromID(v.finish.Value)?.Item2?.Name %></span></p>
+                                                    <%} %>
+                                                          <p class="zbsh-mdd col-50">到达地： <span><%=DAL.DAL.DALBase.GetAddressFromID(v.Destination.Value)?.Item2?.Name %></span></p>
                                                     </i>
                                                     <i class="zbsh-xd1 row">
                                                       <p class="zbsh-fhr col-50">货名： <span><%=v.GoodName %></span></p>
                                                       <p class="zbsh-hh col-50">件数： <span><%=v.Number %></span></p>
                                                     </i>
                                                     <i class="zbsh-xd1 row">
-                                                      <p class="zbsh-yf col-50">运费提付： <span>10</span></p>
-                                                      <p class="zbsh-yf col-50">其他费用： <span>10</span></p>
-                                                      
+                                                     <%if (v.freightMode == 1)
+                                                         {%>
+                                                     <p class="zbsh-yf col-50">运费提付： <span><%=v.Freight %></span></p>
+                                                        <%}%>
+                                                        <%if (v.freightMode == 2)
+                                                         {%>
+                                                     <p class="zbsh-yf col-50">运费现付： <span><%=v.Freight %></span></p>
+                                                        <%}%>
+                                                        <%if (v.freightMode == 3)
+                                                         {%>
+                                                     <p class="zbsh-yf col-50">运费扣付： <span><%=v.Freight %></span></p>
+                                                        <%}%>
+                                                      <p class="zbsh-yf col-50">其他费用： <span><%=v.OtherExpenses %></span></p>
                                                     </i>
                                                     <i class="zbsh-xd1 row">
                                                       <p class="zbsh-yf col-50">代收款： <span><%=v.GReceivables %></span></p>
-                                                      <p class="zbsh-yf col-50">合计： <span>10</span></p>
-                                                      
+                                                      <p class="zbsh-yf col-50">合计： <span><%=Total %></span></p>
                                                     </i>
                                                     <p class="p1">状态：<%=v.State.Value.ConvertData<OrderStateEnum>().EnumToName() %></p>
                                                     <p class="p2">订单生成 <%=v.DdTime %></p>
                                                     <p class="p2">物流收货 <%=v.ConsigneeTime %></p>
                                                     <p class="p2">物流装车 <%=v.TruckTime %></p>
                                                     <p class="p2">到达目的地 <%=v.MeetCarTime %></p>
-                                                </div>
                                         </li>
                                         <%} %>
                                     </ul>

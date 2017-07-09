@@ -36,7 +36,14 @@
                     <span class="iconfont icon-checksquare"></span>
                   </div>
                   <div class="col-70">
-                    <p>运单号为 <span><%=OrderID%>的货物已经成功收货</span></p>
+                     <%if(OrderID==null) { %>
+                      <p>运单号为 <span><%=OIDDetaila%>的货物已经成功收货</span></p>
+                        <%}
+                        else
+                        {%>
+                            <p>运单号为 <span><%=OrderID%>的货物已经成功收货</span></p>
+                    <%} %>
+                    
                   </div>
                 </div>
                 <a href="/LC/Business/ReceiptGood/LC_GoodsReceipt.aspx">我知道了</a>

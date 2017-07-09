@@ -26,7 +26,11 @@
         line-height: 50px;
         padding: 0 1rem;
     }
-    
+     .dingdan-ul  .dingdan-li .dingdan-left{
+         white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+     }
     .top-btn {
         padding: .5rem 2rem;
     }
@@ -78,7 +82,7 @@
                                     <span class="iconfont icon-handoright"></span>
                                 </div>
                                 <div class="col-80 dingdan-left">
-                                    <%=v.StartCityName%>---------------------------------
+                                    <%=v.StartCityName%>-----
                                      <%=v.EndCityName%>
                                 </div>
                                 <div class="col-10 dingdan-right">

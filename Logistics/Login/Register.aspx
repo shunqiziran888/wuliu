@@ -168,96 +168,93 @@ $(window).load(function() {
 			$(".ciphertext_PwdTwo").siblings(".input-close").show();
 		}
 	}
-
 	//清除input内容
-    $('.input-close').click(function(e){
-		$(e.target).parent().find(":input").val("");
-		$(e.target).hide();
-		$($(e.target).parent().find(":input")).each(function(i){
-			if(this.id=="ptext" || this.id=="password"){
-				$("#password").val('');
-				$("#ptext").val('');
-			}
-			if(this.id=="ptext_PwdTwo" || this.id=="password_PwdTwo")
-				$("#password_PwdTwo").val('');
-				$("#ptext_PwdTwo").val('');
-			}
-         });
-    });
-
-	//设置password字段的值
-	$('.txt-password').bind('input',function(){
-		$('#password').val($(this).val());
-	});
-	$('.txt-password_PwdTwo').bind('input',function(){
-		$('#password_PwdTwo').val($(this).val());
-	});
-
-	//显隐密码切换
-	function displayPwd(){
-    	$(".tp-btn").toggle(
-          function(){
-            $(this).addClass("btn-on");
-			var textInput = $(this).siblings(".plaintext");
-    		var pwdInput = $(this).siblings(".ciphertext");
-			pwdInput.hide();
-			textInput.val(pwdInput.val()).show().focusEnd();
-          },
-          function(){
-		  	$(this).removeClass("btn-on");
-		  	var textInput = $(this).siblings(".plaintext");
-    		var pwdInput = $(this).siblings(".ciphertext");
-            textInput.hide();
-			pwdInput.val(textInput.val()).show().focusEnd();
-          }
-    	);
-	}
-	//显隐密码切换
-	function displayPwd_PwdTwo(){
-    	$(".tp-btn_PwdTwo").toggle(
-          function(){
-            $(this).addClass("btn-on_PwdTwo");
-			var textInput = $(this).siblings(".plaintext_PwdTwo");
-    		var pwdInput = $(this).siblings(".ciphertext_PwdTwo");
-			pwdInput.hide();
-			textInput.val(pwdInput.val()).show().focusEnd();
-          },
-          function(){
-		  	$(this).removeClass("btn-on_PwdTwo");
-		  	var textInput = $(this).siblings(".plaintext_PwdTwo");
-    		var pwdInput = $(this).siblings(".ciphertext_PwdTwo");
-            textInput.hide();
-			pwdInput.val(textInput.val()).show().focusEnd();
-          }
-    	);
-	}
-
-	//监控用户输入
-	$(":input").bind('input propertychange', function() {
-		if($(this).val()!=""){
-			$(this).siblings(".input-close").show();
-		}else{
-			$(this).siblings(".input-close").hide();
-		}
-	});
-
-
-	function shows(id, elename) {
-	    GetHtml("/Command/GetAddressNextList.aspx", { id: id }, function (data) {
-	        let list = JSON.parse(data);
-	        $("#" + elename).empty();
-	        $("#" + elename).append("<option>请选择</option>");
-	        for (let i = 0; i < list.length; i++) {
-	            $("#" + elename).append("<option value='" + list[i].id + "'>" + list[i].Name + "</option>");
+	$('.input-close').click(function (e) {
+	    $(e.target).parent().find(":input").val("");
+	    $(e.target).hide();
+	    $($(e.target).parent().find(":input")).each(function (i) {
+	        if (this.id == "ptext" || this.id == "password") {
+	            $("#password").val('');
+	            $("#ptext").val('');
+	        }
+	        if (this.id == "ptext_PwdTwo" || this.id == "password_PwdTwo") {
+	            $("#password_PwdTwo").val('');
+	            $("#ptext_PwdTwo").val('');
 	        }
 	    });
-	}
+	    //设置password字段的值
+	    $('.txt-password').bind('input', function () {
+	        $('#password').val($(this).val());
+	    });
+	    $('.txt-password_PwdTwo').bind('input', function () {
+	        $('#password_PwdTwo').val($(this).val());
+	    });
+	});
+	    //显隐密码切换
+	    function displayPwd(){
+	        $(".tp-btn").toggle(
+              function(){
+                  $(this).addClass("btn-on");
+                  var textInput = $(this).siblings(".plaintext");
+                  var pwdInput = $(this).siblings(".ciphertext");
+                  pwdInput.hide();
+                  textInput.val(pwdInput.val()).show().focusEnd();
+              },
+              function(){
+                  $(this).removeClass("btn-on");
+                  var textInput = $(this).siblings(".plaintext");
+                  var pwdInput = $(this).siblings(".ciphertext");
+                  textInput.hide();
+                  pwdInput.val(textInput.val()).show().focusEnd();
+              }
+            );
+	    }
 
-	function loginwl() {
-	    document.getElementById("form1").submit();
-	  <%--  var UID = "<%=GetValue("UID")%>";
-	document.getElementById("LCID").value = ""+UID+"";--%>
-	}
+	    //显隐密码切换
+	    function displayPwd_PwdTwo(){
+	        $(".tp-btn_PwdTwo").toggle(
+              function(){
+                  $(this).addClass("btn-on_PwdTwo");
+                  var textInput = $(this).siblings(".plaintext_PwdTwo");
+                  var pwdInput = $(this).siblings(".ciphertext_PwdTwo");
+                  pwdInput.hide();
+                  textInput.val(pwdInput.val()).show().focusEnd();
+              },
+              function(){
+                  $(this).removeClass("btn-on_PwdTwo");
+                  var textInput = $(this).siblings(".plaintext_PwdTwo");
+                  var pwdInput = $(this).siblings(".ciphertext_PwdTwo");
+                  textInput.hide();
+                  pwdInput.val(textInput.val()).show().focusEnd();
+              }
+            );
+	    }
+
+	    //监控用户输入
+	    $(":input").bind('input propertychange', function() {
+	        if($(this).val()!=""){
+	            $(this).siblings(".input-close").show();
+	        }else{
+	            $(this).siblings(".input-close").hide();
+	        }
+	    });
+
+
+	    function shows(id, elename) {
+	        GetHtml("/Command/GetAddressNextList.aspx", { id: id }, function (data) {
+	            let list = JSON.parse(data);
+	            $("#" + elename).empty();
+	            $("#" + elename).append("<option>请选择</option>");
+	            for (let i = 0; i < list.length; i++) {
+	                $("#" + elename).append("<option value='" + list[i].id + "'>" + list[i].Name + "</option>");
+	            }
+	        });
+	    }
+
+	    function loginwl()
+	    {
+	        document.getElementById("form1").submit();
+	    }
 </script>
 </body>
 </html>

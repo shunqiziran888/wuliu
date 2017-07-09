@@ -48,7 +48,8 @@ namespace DAL.DAL
                 sql = makesql.MakeUpdateSQL(new Model.Model.LC_Customer()
                 {
                     State = 4,
-                    logisticsID = UID
+                    logisticsID = UID,
+                    MeetCarTime = DateTime.Now
                 }, "Destination=finish and VehicleID=@VehicleID and State=3 and finish=@finish", new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@VehicleID",cH),
                     new System.Data.SqlClient.SqlParameter("@finish",End)
