@@ -25,3 +25,24 @@ function StrIsNull(str)
     }
     return false;
 }
+/**
+* 链接跳转
+* @param {any} url
+*/
+function Href(url) {
+    window.location.href = url;
+}
+
+/**
+ * 获取当前链接 不包含参数
+ */
+function GetNowHrefNoParam()
+{
+    return window.location.origin + window.location.pathname;
+}
+
+function GET(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null) return unescape(r[2]); return null; //返回参数值
+}

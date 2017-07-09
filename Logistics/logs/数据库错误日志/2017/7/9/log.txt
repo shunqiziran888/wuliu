@@ -1,0 +1,2 @@
+错误:select top 1 [ID],[UID],[UserName],[PositionID],[Phone],[CreateTime],[ZNumber],[Password],[ZType],[State],[LogisticsName],[ProvincesID],[CityID],[AreaID],[LCID] from LC_User where ZNumber=11 and Password=123内容在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接)|2017-07-09 09:38:43.202|Login|F:\work\Net\物流系统\DAL\DAL\LC_User.cs|176
+必须声明标量变量 "@Password"。|2017-07-09 10:03:09.021|||0

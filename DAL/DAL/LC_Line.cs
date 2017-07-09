@@ -31,6 +31,117 @@ namespace DAL.DAL
         }
 
         /// <summary>
+        /// 合作物流
+        /// </summary>
+        /// <param name="zNumber"></param>
+        /// <param name="pwd"></param>
+        /// <param name="bindUid"></param>
+        /// <param name="Lineletter">我的物流运号首字母</param>
+        /// <param name="bindLineletter">对方物流运号首字母</param>
+        /// <returns></returns>
+        public static Tuple<bool, string> BindHZ(string zNumber, string pwd, string bindUid,string myLineletter,string bindLineletter)
+        {
+            var box = db.CreateTranSandbox((db) =>
+            {
+                //查看您的账号是否存在
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "zNumber=@zNumber and Password=@Password", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@zNumber",zNumber),
+                    new System.Data.SqlClient.SqlParameter("@Password",pwd)
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return new Tuple<bool, string>(false, ids.errormsg);
+                if (!ids.ReadIsOk())
+                    return new Tuple<bool, string>(false, "没有找到您的账号!");
+                Model.Model.LC_User my_lcu = ids.GetVOList<Model.Model.LC_User>()[0];
+                if (my_lcu.ZType.ConvertData<GlobalBLL.AccountTypeEnum>() != GlobalBLL.AccountTypeEnum.物流账号)
+                    return new Tuple<bool, string>(false, "您的账号权限不正确,无法进行操作!");
+
+                //获取绑定方账号信息
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "uid=@uid", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@uid",bindUid)
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return new Tuple<bool, string>(false, ids.errormsg);
+                if (!ids.ReadIsOk())
+                    return new Tuple<bool, string>(false, "没有找到要绑定方的合作物流数据!");
+                Model.Model.LC_User bind_lcu = ids.GetVOList<Model.Model.LC_User>()[0];
+                if (bind_lcu.ZType.ConvertData<GlobalBLL.AccountTypeEnum>() != GlobalBLL.AccountTypeEnum.物流账号)
+                    return new Tuple<bool, string>(false, "账号类型不能为空!");
+
+                #region 开始我方开始绑定
+
+                //查看我是否绑定过
+                sql = makesql.MakeCount(nameof(Model.Model.LC_Line), "uid=@uid and BindLogisticsUid=@BindLogisticsUid", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@BindLogisticsUid",bind_lcu.UID),
+                    new System.Data.SqlClient.SqlParameter("@uid",my_lcu.UID)
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return new Tuple<bool, string>(false, ids.errormsg);
+                if (ids.Count() == 0)
+                {
+                    //绑定我方
+                    Model.Model.LC_Line my_ll = new Model.Model.LC_Line()
+                    {
+                        BindLogisticsUid = bind_lcu.UID,
+                        DateTime = DateTime.Now,
+                        End = bind_lcu.AreaID,
+                        LineID = Tools.NewGuid.GuidTo16String(),
+                        Phone = bind_lcu.Phone,
+                        UID = my_lcu.UID,
+                        Start = my_lcu.AreaID,
+                        Lineletter = myLineletter
+                    };
+                    //准备添加
+                    sql = makesql.MakeInsertSQL(my_ll);
+                    ids = db.Exec(sql);
+                    if (!ids.flag)
+                        return new Tuple<bool, string>(false, ids.errormsg);
+                    if (!ids.ExecOk())
+                        return new Tuple<bool, string>(false, "添加绑定失败!");
+                }
+                #endregion
+
+                #region 对方开始绑定
+                //查看对方数据是否存在我的物流绑定
+                sql = makesql.MakeCount(nameof(Model.Model.LC_Line), "uid=@BindLogisticsUid and BindLogisticsUid=@uid", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@BindLogisticsUid",bind_lcu.UID),
+                    new System.Data.SqlClient.SqlParameter("@uid",my_lcu.UID)
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return new Tuple<bool, string>(false, ids.errormsg);
+                if (ids.Count() == 0)
+                {
+                    //添加数据绑定
+                    Model.Model.LC_Line bind_ll = new Model.Model.LC_Line()
+                    {
+                        BindLogisticsUid = my_lcu.UID,
+                        DateTime = DateTime.Now,
+                        End = my_lcu.AreaID,
+                        LineID = Tools.NewGuid.GuidTo16String(),
+                        Phone = my_lcu.Phone,
+                        UID = bind_lcu.UID,
+                        Start = bind_lcu.AreaID,
+                        Lineletter = bindLineletter
+                    };
+                    sql = makesql.MakeInsertSQL(bind_ll);
+                    ids = db.Exec(sql);
+                    if (!ids.flag)
+                        return new Tuple<bool, string>(false, ids.errormsg);
+                    if (!ids.ExecOk())
+                        return new Tuple<bool, string>(false, "添加绑定失败!");
+                }
+                #endregion
+                db.Commit();
+                return new Tuple<bool, string>(true, string.Empty);
+            });
+            return box;
+        }
+
+        /// <summary>
         /// 获取单路线数据
         /// </summary>
         /// <param name="id"></param>

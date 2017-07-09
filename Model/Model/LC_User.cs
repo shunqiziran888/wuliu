@@ -10,11 +10,11 @@ namespace Model.Model
         public LC_User()
         {}
         /// <summary>
-        /// 表ID
+        /// 
         /// </summary>
         private int? _ID;
         /// <summary>
-        /// 物流ID
+        /// 用户ID
         /// </summary>
         private string _UID;
         /// <summary>
@@ -50,7 +50,7 @@ namespace Model.Model
         /// </summary>
         private int? _State;
         /// <summary>
-        /// 物流名称
+        /// 
         /// </summary>
         private string _LogisticsName;
         /// <summary>
@@ -66,11 +66,11 @@ namespace Model.Model
         /// </summary>
         private int? _AreaID;
         /// <summary>
-        /// 父级物流ID
+        /// 
         /// </summary>
         private string _LCID;
         /// <summary>
-        /// 表ID
+        /// 
         /// </summary>
         public int? ID
         {
