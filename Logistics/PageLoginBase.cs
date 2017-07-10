@@ -73,5 +73,15 @@ namespace Logistics
         {
             Response.Redirect(tz);
         }
+
+        /// <summary>
+        /// 生成一个二维码地址
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        internal string MakeQRUrl(string url)
+        {
+            return $"/GetQR.aspx?url={HttpUtility.UrlEncode(url)}&logo=http://wl.mikiboss.com/Style/img/success.png";
+        }
     }
 }

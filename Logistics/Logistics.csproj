@@ -708,7 +708,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>13839</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://192.168.0.200/Logistics</IISUrl>
+          <IISUrl>http://127.0.0.1:23445/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

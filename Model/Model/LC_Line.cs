@@ -46,6 +46,10 @@ namespace Model.Model
         /// </summary>
         private string _Lineletter;
         /// <summary>
+        /// 绑定的物流ID
+        /// </summary>
+        private string _BindLogisticsUid;
+        /// <summary>
         /// 
         /// </summary>
         public int? ID
@@ -116,6 +120,14 @@ namespace Model.Model
         {
             set { _Lineletter = value;}
             get { return _Lineletter; }
+        }
+        /// <summary>
+        /// 绑定的物流ID
+        /// </summary>
+        public string BindLogisticsUid
+        {
+            set { _BindLogisticsUid = value;}
+            get { return _BindLogisticsUid; }
         }
     }
 }

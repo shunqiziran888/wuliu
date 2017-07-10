@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LC_LineAdd.aspx.cs" Inherits="Logistics.LC.Line.LC_LineAdd" %>
-
+<%@ Import   Namespace="CustomExtensions" %>
 <!DOCTYPE html>
 
 <html>
@@ -90,33 +90,10 @@
                         <a href="newxianlu.html"><span class="iconfont icon-jiahao"></span> 新增线路</a>
                     </div> -->
                        <ul class="xiangqing">
-                        <li><span>终点站:</span>省
-                            <select id="End1" name="End1" onchange="show(this.value,'End2');">
-                                <option>请选择</option>
-                                <%
-                                    foreach (var p in shengList)
-                                    {
-                                     %>
-                                <option value="<%=p.id %>"><%=p.Name %></option>
-                                <%
-                                    } %>
-                            </select> 
-                            </li>
-                            <li>
-                            市<select id="End2" name="End2" onchange="show(this.value,'End');">
-                                <option>请选择</option>
-                             </select> 
-                            </li>
-                            <li>
-                            区 <select id="End" name="End">
-                                <option>请选择</option>
-                              </select> 
-                        </li>
-                           <li><span>联系电话:</span><span class="tinput"><input type="text" name="Phone" id="Phone" placeholder="联系电话">
-                           </span></li>
                            <li><span>物流运号首字母:</span><span class="tinput">
                                <select id="Lineletter" name="Lineletter">
-                                   <option value="">请选择</option>
+                                   <option value="<%=GetValue("xl") %>"><%=GetValue("xl").StrIsNull() ? "请选择":GetValue("xl") %></option>
+
                                    <option value="A">A</option>
                                    <option value="B">B</option>
                                    <option value="C">C</option>
@@ -145,8 +122,13 @@
                                    <option value="Z">Z</option>
                                </select>
                            </span></li>
+                           <li style="height:auto; justify-content:initial;<%=url.StrIsNotNull() ? string.Empty : "display:none;" %> ">
+                               <span>扫描邀请二维码:</span>
+                               <img src="<%=url %>""></img>
+                           </li>
                         <li style="padding: 0 1.5rem;">
-                            <input type="submit" name="" value="新增加" class="button button-fill button-success" '>
+                            <input style="display:none;" type="submit" name="" value="新增加" class="button button-fill button-success" '>
+                            <input type="button" id="makerwm" name="" value="生成邀请码" class="button button-fill button-success" '>
                         </li>
                     </ul>
 
@@ -158,15 +140,26 @@
 </body>
 
 </html>
-<script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js"></script>
+<script type="text/javascript" src="/Style/scripts/all.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(function () {
         $('#selectBtn').on('click', function () {
             $.areaSelect();
         })
 
-    })
+        $("#makerwm").click(function () {
+            //跳转链接
+            let v = $("#Lineletter").val();
+            if (StrIsNull(v))
+            {
+                alert("运号首字母必须选择!");
+                return;
+            }
+
+            Href(GetNowHrefNoParam() + "?xl=" + v);
+        });
+    });
 
     function show(id, elename) {
         GetHtml("/Command/GetAddressNextList.aspx", { id: id }, function (data) {

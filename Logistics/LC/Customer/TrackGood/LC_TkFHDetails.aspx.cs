@@ -17,9 +17,9 @@ namespace Logistics.LC.Customer.TrackGood
         public decimal Freight;  //运费
         public decimal OtherExpenses;  //其他费用
         public int Number;  //件数
-        public decimal TotalTF;//提付合计
-        public decimal TotalXF;//现付合计
-        public decimal TotalKF;//扣付合计
+        public decimal TotalTF=0;//提付合计
+        public decimal TotalXF = 0;//现付合计
+        public decimal TotalKF = 0;//扣付合计
         protected void Page_Load(object sender, EventArgs e)
         {
             string OID = GetValue("OID");//订单ID
