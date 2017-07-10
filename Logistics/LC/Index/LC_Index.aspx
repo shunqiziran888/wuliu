@@ -29,7 +29,7 @@
             <!-- 你的html代码 -->
             <div class="content" style="background:#ededed;">
                 <div>
-                    <div><img src="/GetQR.aspx?url=<%=HttpUtility.UrlEncode($"http://192.168.0.200/Login/Register.aspx?ZType=1&LogisticsUid={UID}") %>&logo=http://wl.mikiboss.com/Style/img/success.png"/></div>
+                    <div><img src="/GetQR.aspx?url=<%=HttpUtility.UrlEncode($"http://wl.mikiboss.com/Login/Register.aspx?ZType=1&LogisticsUid={UID}") %>&logo=http://wl.mikiboss.com/Style/img/success.png"/></div>
                     <p style="font-size:15px">扫描二维码注册账户</p>
                 </div>
                 <div class="page-index">

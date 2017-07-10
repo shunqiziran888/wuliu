@@ -1,0 +1,1 @@
+[内容]:时间: 1157ms Sql:select [Name],[TopAddressID],[id],[Population],[IsHot],[MainCity] from w_address_basic_data where TopAddressID=1 [方法名]:Read [代码文件路径]:D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\SuperDataBase\DBCommand\MsSql_DataBaseCommand.cs [代码行号]:350 [Time]:2017-07-10 09:03:39.644
