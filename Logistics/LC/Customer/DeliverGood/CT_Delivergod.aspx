@@ -36,7 +36,7 @@
               <div class="searchbar">
                 <div class="search-input">
                   <label class="icon icon-search" for="search"></label>
-                  <input type="text" id='search' placeholder='输入电话号码可以快速检索' oninput="phonechange(this);" onpropertychange="phonechange(this);"/>
+                  <input type="text" id='search' placeholder='输入收货电话号码可以快速检索' oninput="phonechange(this);" onpropertychange="phonechange(this);"/>
                 </div>
               </div>
               <ul class="dingdan-ul wyfh-ul">
@@ -85,10 +85,10 @@
 <script type="text/javascript">
     function phonechange(element)
     {
-        var phone = $(element).val();
-        if (phone.length == 11)
+        var SHPhone = $(element).val();
+        if (SHPhone.length == 4)
         {
-            alert(phone);
+            window.location.href="/LC/Customer/DeliverGood/CT_Delivergod.aspx?SHPhone=" + SHPhone;
         }
     }
 </script>

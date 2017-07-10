@@ -17,7 +17,8 @@ namespace Logistics.LC.Customer
         {
             var myuservo = GetMyLoginUserVO();
             string Phone = myuservo.phones;
-            var vo = DAL.DAL.LC_Customer.GetDGList(Phone);
+            string SHPhone = GetValue("SHPhone");
+            var vo = DAL.DAL.LC_Customer.GetDGList(Phone,SHPhone);
             if (!vo.Item1)
             {
                 //有错误

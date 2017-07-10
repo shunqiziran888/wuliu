@@ -94,13 +94,14 @@
                 <div class="page-index">
                     <!--<p class="button button-fill">客户申请提货消息</p>-->
                     <div class="buttons-tab">
-                        <a href="#tab1" class="tab-link active button"><span>接收货物</span></a>
-                        <a href="#tab2" class="tab-link button"><span>发出货物</span></a>
+                        <a href="#tab1" class="tab-link active button" onclick="hiddenFH()"><span>接收货物</span></a>
+                        <a href="#tab2" class="tab-link button" onclick="hiddenSH()"><span>发出货物</span></a>
                     </div>
                  <div class="searchbar">
                 <div class="search-input">
                   <label class="icon icon-search" for="search"></label>
-                  <input type="search" id='search' placeholder='输入区域或者电话号码可以快速检索'/>
+                     <input type="text" id='FHPhone' placeholder='输入发货人电话号码可以快速检索' oninput="FHphonechange(this);" onpropertychange="FHphonechange(this);"/>
+                     <input type="text" id='SHPhone' placeholder='输入收货人电话号码可以快速检索' oninput="SHphonechange(this);" onpropertychange="SHphonechange(this);"/>
                 </div>
               </div>
                     <div class="content-block">
@@ -174,8 +175,18 @@
     $(function() { $.init(); $.config = { router: false } });
     </script>
      <script type="text/javascript">
-         function fachu(id)
-         {
+         $(function () {
+             document.getElementById("SHPhone").style.display = "none";
+             document.getElementById("FHPhone").style.display = "block";
+
+             if (!StrIsNull("<%=GetValue("sw2")%>"))
+             {
+                 $("a[href^='#tab2']").eq(0).click();
+             }
+
+
+         });
+         function fachu(id) {
              id = parseInt(id);
              if (isNaN(id)) {
                  id = 0;
@@ -183,8 +194,27 @@
              var value = id;
              window.location.href = "/LC/Customer/TrackGood/LC_IndexTK.aspx?vau=" + value;
          }
+         function hiddenFH() {
+             document.getElementById("SHPhone").style.display = "none";
+             document.getElementById("FHPhone").style.display = "block";
+         }
+         function hiddenSH() {
+             document.getElementById("FHPhone").style.display = "none";
+             document.getElementById("SHPhone").style.display = "block";
+         }
+         function FHphonechange(element) {
+             var FHPhone = $(element).val();
+             if (FHPhone.length == 4) {
+                 window.location.href = "/LC/Customer/TrackGood/LC_IndexTK.aspx?FHPhone=" + FHPhone;
+             }
+         }
+         function SHphonechange(element) {
+             var SHPhone = $(element).val();
+             if (SHPhone.length == 4) {
+                 window.location.href = "/LC/Customer/TrackGood/LC_IndexTK.aspx?SHPhone=" + SHPhone + "&sw2=1";
+             }
+         }
      </script>
 </body>
-
 </html>
 

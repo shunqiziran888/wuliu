@@ -143,6 +143,7 @@
     <Content Include="LC\Customer\DeliverGood\CT_DeliverAdd.aspx" />
     <Content Include="LC\Customer\DeliverGood\CT_Delivergod.aspx" />
     <Content Include="LC\Customer\DeliverGood\CT_Success.aspx" />
+    <Content Include="LC\Customer\Other\CT_Order\Details_CT_Order.aspx" />
     <Content Include="LC\Customer\Other\CT_Order\Index_CT_Order.aspx" />
     <Content Include="LC\Customer\Other\CT_Personal\LC_CT_Personal.aspx" />
     <Content Include="LC\Customer\SignGood\LC_IndexSG.aspx" />
@@ -451,6 +452,13 @@
     </Compile>
     <Compile Include="LC\Customer\DeliverGood\CT_Success.aspx.designer.cs">
       <DependentUpon>CT_Success.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Customer\Other\CT_Order\Details_CT_Order.aspx.cs">
+      <DependentUpon>Details_CT_Order.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Customer\Other\CT_Order\Details_CT_Order.aspx.designer.cs">
+      <DependentUpon>Details_CT_Order.aspx</DependentUpon>
     </Compile>
     <Compile Include="LC\Customer\Other\CT_Order\Index_CT_Order.aspx.cs">
       <DependentUpon>Index_CT_Order.aspx</DependentUpon>

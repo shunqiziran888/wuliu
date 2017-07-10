@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index_CT_Order.aspx.cs" Inherits="Logistics.LC.Customer.Other.CT_Order.Index_CT_Order" %>
-
+<%@ Import Namespace="CustomExtensions" %>
+<%@ Import Namespace="GlobalBLL" %>
 <!DOCTYPE html>
 
 <html>
@@ -45,26 +46,31 @@
               <div class="searchbar">
                 <div class="search-input">
                   <label class="icon icon-search" for="search"></label>
-                  <input type="search" id='search' placeholder='搜索订单'/>
+                   <input type="text" id='search' placeholder='输入单号可以快速检索' oninput="phonechange(this);" onpropertychange="phonechange(this);"/>
                 </div>
               </div>
               <ul class="dingdan-ul">
+                  <%foreach (var v in list)
+                      {%>
                   <li class="dingdan-li">
-                    <a href="#" class="row">
+                    <a href="/LC/Customer/Other/CT_Order/Details_CT_Order.aspx?OID=<%=v.OrderID %>&GReceivables=<%=v.GReceivables %>&Freight=<%=v.Freight %>&OtherExpenses=<%=v.OtherExpenses %>&Number=<%=v.Number %>" class="row">
                       <div class="col-90 dingdan-left">
                         <div class="dingdan-top">
                           <div class="dingdan-top1">
-                            发货人： <span>陈煜彬</span>
+                            订单号： <span><%=v.OrderID %></span>
+                          </div>
+                            <div class="dingdan-top2">
+                             发货人： <span><%=v.Consignor %></span>
                           </div>
                           <div class="dingdan-top2">
-                            货号： <span>E3311039DK</span>
+                            货号： <span><%=v.GoodNo %></span>
                           </div>
                         </div>
                         <div class="dingdan-middle">
-                          货名： <span>三十吨新鲜樱桃</span>
+                          货名： <span><%=v.GoodName %></span>
                         </div>
                         <div class="dingdan-bottom">
-                          状态： <span>已到达滨州分公司</span>
+                          状态： <span><%=v.State.Value.ConvertData<OrderStateEnum>().EnumToName() %></span>
                         </div>
                       </div>
                       <div class="col-10 dingdan-right">
@@ -72,125 +78,9 @@
                       </div>
                     </a>
                   </li>
-                  <li class="dingdan-li">
-                    <a href="#" class="row">
-                      <div class="col-90 dingdan-left">
-                        <div class="dingdan-top">
-                          <div class="dingdan-top1">
-                            发货人： <span>陈煜彬</span>
-                          </div>
-                          <div class="dingdan-top2">
-                            货号： <span>E3311039DK</span>
-                          </div>
-                        </div>
-                        <div class="dingdan-middle">
-                          货名： <span>三十吨新鲜樱桃</span>
-                        </div>
-                        <div class="dingdan-bottom">
-                          状态： <span>已到达滨州分公司</span>
-                        </div>
-                      </div>
-                      <div class="col-10 dingdan-right">
-                        <span class="iconfont icon-gengduo"></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li class="dingdan-li">
-                    <a href="#" class="row">
-                      <div class="col-90 dingdan-left">
-                        <div class="dingdan-top">
-                          <div class="dingdan-top1">
-                            发货人： <span>陈煜彬</span>
-                          </div>
-                          <div class="dingdan-top2">
-                            货号： <span>E3311039DK</span>
-                          </div>
-                        </div>
-                        <div class="dingdan-middle">
-                          货名： <span>三十吨新鲜樱桃</span>
-                        </div>
-                        <div class="dingdan-bottom">
-                          状态： <span>已到达滨州分公司</span>
-                        </div>
-                      </div>
-                      <div class="col-10 dingdan-right">
-                        <span class="iconfont icon-gengduo"></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li class="dingdan-li">
-                    <a href="#" class="row">
-                      <div class="col-90 dingdan-left">
-                        <div class="dingdan-top">
-                          <div class="dingdan-top1">
-                            发货人： <span>陈煜彬</span>
-                          </div>
-                          <div class="dingdan-top2">
-                            货号： <span>E3311039DK</span>
-                          </div>
-                        </div>
-                        <div class="dingdan-middle">
-                          货名： <span>三十吨新鲜樱桃</span>
-                        </div>
-                        <div class="dingdan-bottom">
-                          状态： <span>已到达滨州分公司</span>
-                        </div>
-                      </div>
-                      <div class="col-10 dingdan-right">
-                        <span class="iconfont icon-gengduo"></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li class="dingdan-li">
-                    <a href="#" class="row">
-                      <div class="col-90 dingdan-left">
-                        <div class="dingdan-top">
-                          <div class="dingdan-top1">
-                            发货人： <span>陈煜彬</span>
-                          </div>
-                          <div class="dingdan-top2">
-                            货号： <span>E3311039DK</span>
-                          </div>
-                        </div>
-                        <div class="dingdan-middle">
-                          货名： <span>三十吨新鲜樱桃</span>
-                        </div>
-                        <div class="dingdan-bottom">
-                          状态： <span>已到达滨州分公司</span>
-                        </div>
-                      </div>
-                      <div class="col-10 dingdan-right">
-                        <span class="iconfont icon-gengduo"></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li class="dingdan-li">
-                    <a href="#" class="row">
-                      <div class="col-90 dingdan-left">
-                        <div class="dingdan-top">
-                          <div class="dingdan-top1">
-                            发货人： <span>陈煜彬</span>
-                          </div>
-                          <div class="dingdan-top2">
-                            货号： <span>E3311039DK</span>
-                          </div>
-                        </div>
-                        <div class="dingdan-middle">
-                          货名： <span>三十吨新鲜樱桃</span>
-                        </div>
-                        <div class="dingdan-bottom">
-                          状态： <span>已到达滨州分公司</span>
-                        </div>
-                      </div>
-                      <div class="col-10 dingdan-right">
-                        <span class="iconfont icon-gengduo"></span>
-                      </div>
-                    </a>
-                  </li>
+                  <%} %>
               </ul>
             </div>
-              
-            
           </div>
         </div>
     </div>
@@ -206,3 +96,13 @@
 
   </body>
 </html>
+<script type="text/javascript">
+    function phonechange(element)
+    {
+        var OrderNo = $(element).val();
+        if (OrderNo.length == 19)
+        {
+            window.location.href = "/LC/Customer/Other/CT_Order/Index_CT_Order.aspx?OrderNo=" + OrderNo;
+        }
+    }
+</script>

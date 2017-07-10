@@ -45,7 +45,7 @@
               <div class="searchbar">
                 <div class="search-input">
                   <label class="icon icon-search" for="search"></label>
-                  <input type="search" id='search' placeholder='搜索订单'/>
+                  <input type="text" id='search' placeholder='输入单号可以快速检索' oninput="phonechange(this);" onpropertychange="phonechange(this);"/>
                 </div>
               </div>
               <ul class="shangjia-ul">
@@ -117,6 +117,15 @@
         $.config = {router: false}
     });
 </script>
-
   </body>
 </html>
+<script type="text/javascript">
+    function phonechange(element)
+    {
+        var OrderNo = $(element).val();
+        if (OrderNo.length == 19)
+        {
+            window.location.href = "/LC/Customer/Other/CT_Order/Index_CT_Order.aspx?OrderNo=" + OrderNo;
+        }
+    }
+</script>

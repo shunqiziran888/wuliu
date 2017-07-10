@@ -20,7 +20,9 @@ namespace Logistics.LC.Customer.TrackGood
         {
             var myuservo = GetMyLoginUserVO();
             string Phone = myuservo.phones;
-            var vo = DAL.DAL.LC_Customer.GetDGSHList(Phone);
+            string FHPhone = GetValue("FHPhone");
+            string SHPhone = GetValue("SHPhone");
+            var vo = DAL.DAL.LC_Customer.GetDGSHList(Phone,FHPhone);
             if (!vo.Item1)
             {
                 //有错误
@@ -29,7 +31,7 @@ namespace Logistics.LC.Customer.TrackGood
             }
             list2 = vo.Item3;
 
-            var vo1 = DAL.DAL.LC_Customer.GetDGList(Phone);
+            var vo1 = DAL.DAL.LC_Customer.GetDGList(Phone,SHPhone);
             if (!vo1.Item1)
             {
                 //有错误

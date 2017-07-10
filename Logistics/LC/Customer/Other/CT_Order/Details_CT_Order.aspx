@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LC_TkFHDetails.aspx.cs" Inherits="Logistics.LC.Customer.TrackGood.LC_TkDetails" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Details_CT_Order.aspx.cs" Inherits="Logistics.LC.Customer.Other.CT_Order.Details_CT_Order" %>
 <%@ Import Namespace="CustomExtensions" %>
 <%@ Import Namespace="GlobalBLL" %>
 <!DOCTYPE html>
@@ -80,7 +80,7 @@
         <div class="page page-current">
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
-                <a class="icon icon-left pull-left" href="/LC/Customer/TrackGood/LC_IndexTK.aspx?sw2=1"></a>
+                <a class="icon icon-left pull-left" href="/LC/Customer/Other/CT_Order/Index_CT_Order.aspx"></a>
                 <h1 class="title">货单详情</h1>
             </header>
 
@@ -192,4 +192,3 @@
 </body>
 
 </html>
-

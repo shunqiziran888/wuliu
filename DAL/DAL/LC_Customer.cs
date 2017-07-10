@@ -190,7 +190,7 @@ namespace DAL.DAL
         /// </summary>
         /// <param name="Phone"></param>
         /// <returns></returns>
-        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetDGList(string Phone)
+        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetDGList(string Phone,string SHPhone)
         {
             //两表查询
             //Type[] tlist = new Type[] {
@@ -198,8 +198,16 @@ namespace DAL.DAL
             //    typeof(Model.Model.LC_Customer)
             //};
             //sql = makesql.MakeSelectArrSql(tlist, "{0}.Phone={1}.FHPhone and {0}.ZType=3");
-            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "FHPhone='"+Phone+"'");
-            ids = db.Read(sql);
+            if (SHPhone != null)
+            {
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "FHPhone='" + Phone + "' and SHPhone='" + SHPhone + "'");
+                ids = db.Read(sql);
+            }
+            else if (SHPhone == null)
+            {
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "FHPhone='" + Phone + "'");
+                ids = db.Read(sql);
+            }
             if (!ids.flag)
                 return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);
             if (ids.ReadIsOk())
@@ -211,7 +219,7 @@ namespace DAL.DAL
         /// </summary>
         /// <param name="Phone"></param>
         /// <returns></returns>
-        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetDGSHList(string Phone)
+        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetDGSHList(string Phone,string FHPhone)
         {
             //两表查询
             //Type[] tlist = new Type[] {
@@ -219,8 +227,16 @@ namespace DAL.DAL
             //    typeof(Model.Model.LC_Customer)
             //};
             //sql = makesql.MakeSelectArrSql(tlist, "{0}.Phone={1}.FHPhone and {0}.ZType=3");
-            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "SHPhone='" + Phone + "'");
-            ids = db.Read(sql);
+            if(FHPhone!=null)
+            {
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "SHPhone='" + Phone + "' and FHPhone='" + FHPhone + "'");
+                ids = db.Read(sql);
+            }
+           else if(FHPhone==null)
+            {
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "SHPhone='" + Phone + "'");
+                ids = db.Read(sql);
+            }
             if (!ids.flag)
                 return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);
             if (ids.ReadIsOk())
@@ -319,6 +335,24 @@ namespace DAL.DAL
         {
             sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "State=7 and logisticsID='" + UID+"'");
             ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);
+            if (ids.ReadIsOk())
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Customer>());
+            return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, "没有任何数据!", new List<Model.Model.LC_Customer>());
+        }
+        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetOrderList(string FSPhone,string OrderNo)
+        {
+            if(OrderNo!=null)
+            {
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "(FHPhone='" + FSPhone + "' Or SHPhone='" + FSPhone + "') and OrderID='" + OrderNo + "'");
+                ids = db.Read(sql);
+            }
+           else if(OrderNo==null)
+            {
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "FHPhone='" + FSPhone + "' Or SHPhone='" + FSPhone + "'");
+                ids = db.Read(sql);
+            }
             if (!ids.flag)
                 return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);
             if (ids.ReadIsOk())
