@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using CustomExtensions;
+using System.Configuration;
+
 namespace Logistics.LC.Manage.Line
 {
     public partial class LC_CooperationRoute : PageLoginBase
@@ -55,8 +57,7 @@ namespace Logistics.LC.Manage.Line
                 }
                 else
                 {
-                    AlertJump("绑定成功!", "/Login/Login.aspx");
-
+                    AlertJump("绑定成功!", $"{ConfigurationManager.AppSettings.Get("HOST")}/Login/Login.aspx");
                 }
             }
 

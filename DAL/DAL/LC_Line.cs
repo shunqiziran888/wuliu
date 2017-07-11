@@ -104,6 +104,12 @@ namespace DAL.DAL
                 }
                 #endregion
 
+
+                //判断是否为相同的账号
+                if (bindUid.Equals(my_lcu.UID))
+                    return new Tuple<bool,string>(false, "不能绑定给自己!");
+
+
                 #region 对方开始绑定
                 //查看对方数据是否存在我的物流绑定
                 sql = makesql.MakeCount(nameof(Model.Model.LC_Line), "uid=@BindLogisticsUid and BindLogisticsUid=@uid", new System.Data.SqlClient.SqlParameter[] {
