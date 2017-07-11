@@ -134,7 +134,7 @@ $(window).load(function() {
           <input type="hidden" id="ZType" name="ZType" value="4"/>
           <input type="hidden" id="State" name="State" value="0"/>
           <input type="hidden" id="LCID" name="LCID" value="<%=GetValue("UID")%>"/>
-        <div class="ui-btn-wrap"> <a class="ui-btn-lg ui-btn-primary" href="#" onclick="loginwl()">用户注册</a> </div>
+        <div class="ui-btn-wrap"> <a class="ui-btn-lg ui-btn-primary" href="#" id="updatebtn" onclick="loginwl()">用户注册</a> </div>
 
           <%
                   break;
@@ -251,10 +251,20 @@ $(window).load(function() {
 	        });
 	    }
 
-	    function loginwl()
-	    {
+	    function loginwl() {
+	        var Phone = $("#Phone").val();
+	        var Password = $("#Password").val();
+	        GetHtml("/Login/Register.aspx", { Phone: Phone, Password: Password }, function (data) {
+	        });
 	        document.getElementById("form1").submit();
 	    }
+	        //$("#updatebtn").click(function () {
+	        //    var LogisticsName = $("#LogisticsName").val();
+	        //    var Password = $("#Password").val();
+	        //    alert(LogisticsName+" and "+Password);
+	        //    let url = GetNowHrefNoParam() + "?ZNumber=" + LogisticsName + "&Pwd=" + Password;
+	        //    Href(url);
+	        //});
 </script>
 </body>
 </html>

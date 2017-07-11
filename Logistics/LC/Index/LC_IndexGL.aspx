@@ -72,7 +72,7 @@
                     </a>
                   </li>
                   <li class="shangjia-li3">
-                    <a href="yygaikuang.html"  class="row">
+                    <a href="#" onclick="No()"  class="row">
                       <!-- <div class="col-30 shangjia-left">
                         <span class="iconfont icon-huoche"></span>
                       </div> -->
@@ -85,7 +85,7 @@
                     </a>
                   </li>
                   <li class="shangjia-li4">
-                    <a href="cwgaikuang.html"  class="row">
+                     <a href="#" onclick="No()"  class="row">
                       <!-- <div class="col-30 shangjia-left">
                         <span class="iconfont icon-balancescale"></span>
                       </div> -->
@@ -98,7 +98,7 @@
                     </a>
                   </li>
                   <li class="shangjia-li5">
-                    <a href="fgsyygaikuang.html"  class="row">
+                    <a href="#" onclick="No()"  class="row">
                       <!-- <div class="col-30 shangjia-left">
                         <span class="iconfont icon-cny"></span>
                       </div> -->
@@ -111,7 +111,7 @@
                     </a>
                   </li>
                   <li class="shangjia-li6">
-                    <a href="kehugaikuang.html"  class="row">
+                    <a href="#" onclick="No()"  class="row">
                       <!-- <div class="col-30 shangjia-left">
                         <span class="iconfont icon-fax"></span>
                       </div> -->
@@ -133,11 +133,15 @@
     
     <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js"></script>
 
-<script>
+<script type="text/javascript">
     $(function() {
         $.init();
         $.config = {router: false}
     });
+    function No()
+    {
+        alert("功能暂未开放！");
+    }
 </script>
 
   </body>

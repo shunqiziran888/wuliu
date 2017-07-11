@@ -1,9 +1,13 @@
-﻿using System;
+﻿using SuperDataBase.InterFace;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using SuperDataBase;
+using System.Diagnostics;
+using CustomExtensions;
 
 namespace Logistics.Login
 {
@@ -21,11 +25,11 @@ namespace Logistics.Login
                     string pwd = GetValue("Password");
 
                     Tuple<bool, string, Model.Model.LC_User> vo = DAL.DAL.LC_User.Login(name, pwd);
-                    if (!vo.Item1)
-                    {
-                        AlertJump(vo.Item2, "/Login/Login.aspx");
-                        return;
-                    }
+                if (!vo.Item1)
+                {
+                    ReturnPager("手机号或密码错误！");
+                    return;
+                }
                     SetSession("islogin", "true");
                     SetSession("account", vo.Item3.ZNumber);
                     SetSession("accountType", vo.Item3.ZType);

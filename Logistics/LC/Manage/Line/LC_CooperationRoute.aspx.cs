@@ -47,7 +47,7 @@ namespace Logistics.LC.Manage.Line
                     Alert("密码不能为空!");
                     return;
                 }
-
+                //Tools.PinYinConverter.GetFirst();
                 Tuple<bool,string> vo = BLL.BLL.LC_Line.BindHZ(ZNumber,pwd,bindUid, myLineletter, bindLineletter);
                 if(!vo.Item1)
                 {
@@ -55,7 +55,7 @@ namespace Logistics.LC.Manage.Line
                 }
                 else
                 {
-                    AlertJump("绑定成功!", "/Login/Login.aspx");
+                    AlertJump("绑定成功!", "LC/Manage/Line/LC_Line.aspx");
 
                 }
             }

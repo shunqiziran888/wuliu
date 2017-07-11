@@ -102,7 +102,7 @@
                         </li>
                         <li class=" row">
                             <p class="col-50">发货人： <span><%=v.Consignor %></span></p>
-                            <p class="col-50">货物来源： <span>客户自发</span></p>
+                            <p class="col-50">货物来源： <span><%=v.ReceiptGood.ConvertData<THFSEnum>().EnumToName() %></span></p>
                         </li>
 
                         <li class=" row">

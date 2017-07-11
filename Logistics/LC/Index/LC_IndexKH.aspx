@@ -27,15 +27,15 @@
           </header>
           
           <nav class="bar bar-tab">
-              <a class="tab-item external active" href="/LC/Index/LC_IndexKH.aspx">
+              <a class="tab-item external active" id="sy" href="/LC/Index/LC_IndexKH.aspx">
                   <span class="icon iconfont icon-shouye"></span>
                   <span class="tab-label">首页</span>
               </a>
-              <a class="tab-item external" href="/LC/Customer/Other/CT_Order/Index_CT_Order.aspx">
+              <a class="tab-item external" id="dd" href="/LC/Customer/Other/CT_Order/Index_CT_Order.aspx">
                   <span class="icon iconfont icon-tty"></span>
                   <span class="tab-label">订单</span>
               </a>
-              <a class="tab-item external" href="/LC/Customer/Other/CT_Personal/LC_CT_Personal.aspx">
+              <a class="tab-item external" id="wd" href="/LC/Customer/Other/CT_Personal/LC_CT_Personal.aspx">
                   <span class="icon iconfont icon-user"></span>
                   <span class="tab-label">我的</span>
               </a>

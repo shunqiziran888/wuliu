@@ -30,7 +30,11 @@
             <div class="content" style="background:#ededed;">
                 <div>
                     <div><img src="/GetQR.aspx?url=<%=HttpUtility.UrlEncode($"http://wl.mikiboss.com/Login/Register.aspx?ZType=1&LogisticsUid={UID}") %>&logo=http://wl.mikiboss.com/Style/img/success.png"/></div>
-                    <p style="font-size:15px">扫描二维码注册账户</p>
+                    <p style="font-size:15px">扫描二维码注册物流公司帐号</p>
+                </div>
+                 <div>
+                    <div style="margin-left:300px;margin-top:-225px;"><img src="/GetQR.aspx?url=<%=HttpUtility.UrlEncode($"http://wl.mikiboss.com/Login/Register.aspx?ZType=3&LogisticsUid={UID}") %>&logo=http://wl.mikiboss.com/Style/img/success.png"/></div>
+                    <p style="font-size:15px;margin-left:300px;">扫描二维码注册物流员工帐号</p>
                 </div>
                 <div class="page-index">
                     <ul class="main">
@@ -55,7 +59,7 @@
                             </a>
                         </li>
                         <li class="main-li3">
-                            <a href="zbcaiwu.html" class="row">
+                            <a href="#" onclick="No()" class="row">
                                 <div class="col-30">
                                     <span class="iconfont icon-calculator"></span>
                                 </div>
@@ -72,13 +76,17 @@
 
     <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js"></script>
 
-    <script>
+    <script type="text/javascript">
         $(function() {
             $.init();
             $.config = {
                 router: false
             }
         });
+        function No()
+        {
+            alert("功能暂未开放！");
+        }
     </script>
 
 </body>

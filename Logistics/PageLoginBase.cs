@@ -63,17 +63,30 @@ namespace Logistics
         {
            Response.Write($"<script>alert('{msg}');</script>");
         }
-        //提示，跳转
+        /// <summary>
+        /// 提示，跳转
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="href"></param>
         internal void AlertJump(string msg,string href)
         {
             Response.Write($"<script>alert('{msg}');window.location.href ='" +href+"'</script>");
         }
-        //跳转
+        /// <summary>
+        /// 跳转
+        /// </summary>
+        /// <param name="tz"></param>
         internal void Jump(string tz)
         {
             Response.Redirect(tz);
         }
-
+        /// <summary>
+        /// 返回上一页
+        /// </summary>
+        internal void ReturnPager(string Text)
+        {
+            Response.Write($"<script type='text/javascript'>alert('{Text}');history.go(-1);</script>");
+        }
         /// <summary>
         /// 生成一个二维码地址
         /// </summary>

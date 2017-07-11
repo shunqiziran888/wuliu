@@ -138,7 +138,18 @@
                                                     </i>
                                                     <i class="zbsh-xd1 row">
                                                       <p class="zbsh-yf col-50">代收款： <span><%=v.GReceivables %></span></p>
-                                                      <p class="zbsh-yf col-50">合计： <span><%=Total %></span></p>
+                                                        <%if (v.freightMode == 1)
+                                                         {%>
+                                                      <p class="zbsh-yf col-50">合计： <span><%=TotalTF %></span></p>
+                                                        <%}%>
+                                                        <%if (v.freightMode == 2)
+                                                         {%>
+                                                      <p class="zbsh-yf col-50">合计： <span><%=TotalXF %></span></p>
+                                                        <%}%>
+                                                        <%if (v.freightMode == 3)
+                                                         {%>
+                                                     <p class="zbsh-yf col-50">合计： <span><%=TotalKF %></span></p>
+                                                        <%}%>
                                                     </i>
                                                     <p class="p1">状态：<%=v.State.Value.ConvertData<OrderStateEnum>().EnumToName() %></p>
                                                     <p class="p2">订单生成 <%=v.DdTime %></p>

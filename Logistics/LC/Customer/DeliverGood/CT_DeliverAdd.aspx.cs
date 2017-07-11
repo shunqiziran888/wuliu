@@ -68,11 +68,11 @@ namespace Logistics.LC.Customer
                     Tuple<bool, string> vo = BLL.BLL.LC_Customer.Add(lcc);
                     if (vo.Item1)
                     {
-                        Jump("/LC/Customer/DeliverGood/CT_Success.aspx?OID=" + lcc.OrderID);
+                        Jump("/LC/Customer/DeliverGood/CT_Success.aspx?OID=" + lcc.OrderID); 
                     }
                     else
                     {
-                        Alert(vo.Item2);
+                        ReturnPager("所有内容均不能为空！");
                     }
                 }
                 var myuservo1 = GetMyLoginUserVO();

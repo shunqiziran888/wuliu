@@ -1,0 +1,5 @@
+参数化查询 '(@zNumber nvarchar(4000),@Password nvarchar(4000))select [ID],[U' 需要参数 '@zNumber'，但未提供该参数。|2017-07-11 15:52:47.467|||0
+参数化查询 '(@zNumber nvarchar(4000),@Password nvarchar(4000))select [ID],[U' 需要参数 '@zNumber'，但未提供该参数。|2017-07-11 16:26:56.336|||0
+参数化查询 '(@zNumber nvarchar(4000),@Password nvarchar(4000))select [ID],[U' 需要参数 '@zNumber'，但未提供该参数。|2017-07-11 16:33:36.633|||0
+参数化查询 '(@zNumber nvarchar(4000),@Password nvarchar(4000))select [ID],[U' 需要参数 '@zNumber'，但未提供该参数。|2017-07-11 16:53:42.444|||0
+参数化查询 '(@zNumber nvarchar(4000),@Password nvarchar(4000))select [ID],[U' 需要参数 '@zNumber'，但未提供该参数。|2017-07-11 16:56:31.914|||0

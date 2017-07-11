@@ -39,22 +39,32 @@ namespace Logistics.Login
                         State = GetValue<int>("State"),//状态
                         LCID = GetValue("LCID")//上级物流ID
                     };
-                    //string LogisticsUid = GetValue("LogisticsUid");
-                    string LogisticsUid = "6cfe97409cd87419";
+                    string LogisticsUid = GetValue("LogisticsUid");//物流ID
+                    string ZNumber = GetValue("Phone");//帐号
+                    string Pwd = GetValue("Password");//密码
+                    int Citys = GetValue<int>("End2");//城市
+                    string Zm=Tools.PinYinConverter.GetFirst(DAL.DAL.DALBase.GetAddressFromID(Citys).Item2.Name);//首字母
+                    string Zmvalue= Zm.Substring(0, 1);
+                    //string LogisticsUid = "6cfe97409cd87419";
                     //开始注册
                     Tuple<bool, string> vo = BLL.BLL.LC_User.Add(uservo, loginvo, LogisticsUid);
-
-                    if (vo.Item1)
-                    {
-                        AlertJump("注册成功...返回登录", "/Login/Login.aspx");
-                    }
-                    else
+                    if (!vo.Item1)
                     {
                         Alert(vo.Item2);
                     }
-                }catch(Exception)
+                    else
+                    {
+                        Tuple<bool, string> vo1 = BLL.BLL.LC_Line.BindHZ(ZNumber, Pwd, LogisticsUid, Zmvalue, Zmvalue);
+                        if (!vo1.Item1)
+                        {
+                            Alert(vo1.Item2);
+                        }
+                        AlertJump("注册成功...返回登录", "/Login/Login.aspx");
+                    }
+                }
+                catch(Exception)
                 {
-                    AlertJump("注册账号时失败,请重试!", "/Login/Register.aspx");
+                    ReturnPager("注册失败,请重试!");
                 }
             }
         }
