@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using CustomExtensions;
+using System.Configuration;
 namespace Logistics.LC.Manage.Line
 {
     public partial class LC_CooperationRoute : PageLoginBase
