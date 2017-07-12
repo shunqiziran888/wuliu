@@ -70,6 +70,7 @@ $(window).load(function() {
           </div>
           <input type="hidden" id="ZType" name="ZType" value="1"/>
           <input type="hidden" id="State" name="State" value="1"/>
+          <input type="hidden" id="LogisticsUid" name="LogisticsUid" value="<%=GetValue("LogisticsUid")%>"/>
         <div class="ui-btn-wrap"> <a class="ui-btn-lg ui-btn-primary" href="#" onclick="loginwl()">用户注册</a> </div>
       <%
                   break;
