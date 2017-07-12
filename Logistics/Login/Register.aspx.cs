@@ -73,6 +73,7 @@ namespace Logistics.Login
                         if (!vo.Item1)
                         {
                             Alert(vo.Item2);
+                            return;
                         }
                         else
                         {
@@ -83,8 +84,10 @@ namespace Logistics.Login
                             if (!vo1.Item1)
                             {
                                 Alert(vo1.Item2);
+                                return;
                             }
                             AlertJump("注册成功...返回登录", "/Login/Login.aspx");
+                            return;
                         }
                     }
                     else if(FalseValue!="10")
@@ -93,10 +96,12 @@ namespace Logistics.Login
                         if (!vo.Item1)
                         {
                             Alert(vo.Item2);
+                            return;
                         }
                         else
                         {
                             AlertJump("注册成功...返回登录", "/Login/Login.aspx");
+                            return;
                         }
                     }
                 }

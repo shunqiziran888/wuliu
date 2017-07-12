@@ -269,6 +269,7 @@
                     if (obj.Item1 == true) {
                         alert("绑定成功!");
                         $.closeModal(".popup-addwl");
+                        window.location.reload();
                     }
                     else {
                         alert(obj.Item2);

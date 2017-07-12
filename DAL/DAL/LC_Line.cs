@@ -110,6 +110,9 @@ namespace DAL.DAL
                     return new Tuple<bool,string>(false, "不能绑定给自己!");
 
 
+                if (bind_lcu.AreaID == my_lcu.AreaID)
+                    return new Tuple<bool, string>(false, "不能绑定相同地区的物流!");
+
                 #region 对方开始绑定
                 //查看对方数据是否存在我的物流绑定
                 sql = makesql.MakeCount(nameof(Model.Model.LC_Line), "uid=@BindLogisticsUid and BindLogisticsUid=@uid", new System.Data.SqlClient.SqlParameter[] {

@@ -136,7 +136,7 @@ namespace DAL.DAL
                             return new Tuple<bool, string>(false, ids.errormsg);
                     }
                 }
-                if(loginvo.uid.StrIsNull()) //如果没有登陆则创建一个账号
+                //if(loginvo.uid.StrIsNull()) //如果没有登陆则创建一个账号
                 {
                     //判断账号是否存在
                     sql = makesql.MakeCount(nameof(Model.Model.LC_User), "ZNumber=@ZNumber", new System.Data.SqlClient.SqlParameter[] {
@@ -145,16 +145,15 @@ namespace DAL.DAL
                     ids = db.Read(sql);
                     if (!ids.flag)
                         return new Tuple<bool, string>(false, ids.errormsg);
-                    if (ids.Count() > 0)
+                    if (ids.Count() == 0)
                     {
-                        return new Tuple<bool, string>(false, "当前帐号已存在!");
+                        sql = makesql.MakeInsertSQL(lC_User);
+                        ids = db.Exec(sql);
+                        if (!ids.flag)
+                            return new Tuple<bool, string>(false, ids.errormsg);
+                        if (!ids.ExecOk())
+                            return new Tuple<bool, string>(false, "注册账号时失败,请重试!");
                     }
-                    sql = makesql.MakeInsertSQL(lC_User);
-                    ids = db.Exec(sql);
-                    if (!ids.flag)
-                        return new Tuple<bool, string>(false, ids.errormsg);
-                    if (!ids.ExecOk())
-                        return new Tuple<bool, string>(false, "注册账号时失败,请重试!");
                 }
 
                 db.Commit();
