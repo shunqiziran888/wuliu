@@ -123,6 +123,7 @@
     <Content Include="Command\GetLineListFromLogisticsId.aspx" />
     <Content Include="Command\GetLogisticsLineListFromUid.aspx" />
     <Content Include="Command\GetSHPhoneAdressList.aspx" />
+    <Content Include="Command\RegisterUserBinding.aspx" />
     <Content Include="GetQR.aspx" />
     <Content Include="LC\Business\DschargeGood\IndexDhg.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_Handle.aspx" />
@@ -309,6 +310,13 @@
     </Compile>
     <Compile Include="Command\GetSHPhoneAdressList.aspx.designer.cs">
       <DependentUpon>GetSHPhoneAdressList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Command\RegisterUserBinding.aspx.cs">
+      <DependentUpon>RegisterUserBinding.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Command\RegisterUserBinding.aspx.designer.cs">
+      <DependentUpon>RegisterUserBinding.aspx</DependentUpon>
     </Compile>
     <Compile Include="GetQR.aspx.cs">
       <DependentUpon>GetQR.aspx</DependentUpon>

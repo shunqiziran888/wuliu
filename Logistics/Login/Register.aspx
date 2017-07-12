@@ -71,26 +71,29 @@ $(window).load(function() {
           <input type="hidden" id="ZType" name="ZType" value="1"/>
           <input type="hidden" id="State" name="State" value="1"/>
           <input type="hidden" id="LogisticsUid" name="LogisticsUid" value="<%=GetValue("LogisticsUid")%>"/>
-        <div class="ui-btn-wrap"> <a class="ui-btn-lg ui-btn-primary" href="#" onclick="loginwl()">用户注册</a> </div>
+         <input type="hidden" id="FalseValue" name="FalseValue" value="10"/>
+        <div class="ui-btn-wrap"> <a class="ui-btn-lg ui-btn-primary" href="#" onclick="loginwl()">物流注册</a> </div>
       <%
                   break;
               case AccountTypeEnum.普通用户账号:
                   %>
              <div class="item item-username">
-             <input name="UserName" class="txt-input txt-username" type="text" id="UserName" placeholder="用户昵称">
+             <input name="UserName" class="txt-input txt-username" type="text" id="UserName" placeholder="用户昵称" style="display:none">
           <b class="input-close" style="display: none;"></b> </div>
           <div class="item item-username">
-             <input name="Phone" class="txt-input txt-username" type="text" id="Phone" placeholder="手机号">
+             <input name="Phone" class="txt-input txt-username" type="text" id="Phone" placeholder="请输入手机号注册或绑定物流" oninput="phonechange(this);" onpropertychange="phonechange(this);">
           <b class="input-close" style="display: none;"></b> </div>
         <div class="item item-password">
-            <input name="Password" class="txt-input txt-password ciphertext" type="text" id="Password" size="15" placeholder="请输入密码" style="display: inline;">
+            <input name="Password" class="txt-input txt-password ciphertext" type="text" id="Password" size="15" placeholder="请输入密码" style="display: none;" >
           <input id="ptext" class="txt-input txt-password plaintext" type="text" placeholder="请输入密码" style="display: none;" name="ptext">
           <b class="tp-btn btn-off"></b> </div>
 
           <input type="hidden" id="ZType" name="ZType" value="3"/>
           <input type="hidden" id="State" name="State" value="1"/>
+          <input type="hidden" id="yonghu" name="yonghu" value="yhbd"/>
           <input type="hidden" id="LogisticsUid" name="LogisticsUid" value="<%=GetValue("LogisticsUid")%>"/>
-        <div class="ui-btn-wrap"> <a class="ui-btn-lg ui-btn-primary" href="#" onclick="loginwl()">用户注册</a> </div>
+          <input type="hidden"  id="UIDS" name="UIDS" value="heheda"/>
+        <div class="ui-btn-wrap"> <button class="ui-btn-lg ui-btn-primary" disabled="disabled"  id="yhvalue" type="button" onclick="loginwl()">用户注册</button> </div>
           <%
                   break;
               case AccountTypeEnum.物流公司员工账号:
@@ -134,8 +137,8 @@ $(window).load(function() {
           </div>
           <input type="hidden" id="ZType" name="ZType" value="4"/>
           <input type="hidden" id="State" name="State" value="0"/>
-          <input type="hidden" id="LCID" name="LCID" value="<%=GetValue("UID")%>"/>
-        <div class="ui-btn-wrap"> <a class="ui-btn-lg ui-btn-primary" href="#" id="updatebtn" onclick="loginwl()">用户注册</a> </div>
+          <input type="hidden" id="LogisticsUid" name="LogisticsUid" value="<%=GetValue("LogisticsUid")%>"/>
+        <div class="ui-btn-wrap"> <a class="ui-btn-lg ui-btn-primary" href="#" id="updatebtn" onclick="loginwl()">员工注册</a> </div>
 
           <%
                   break;
@@ -154,7 +157,7 @@ $(window).load(function() {
 		autoHeight_login();
 		dispValidateCode();
 		displayClearBtn();
-		setTimeout(displayClearBtn, 200 ); //延迟显示,应对浏览器记住密码
+		setTimeout(displayClearBtn, 200); //延迟显示,应对浏览器记住密码
 	});
 
 	//是否显示清除按钮
@@ -265,7 +268,33 @@ $(window).load(function() {
 	        //    alert(LogisticsName+" and "+Password);
 	        //    let url = GetNowHrefNoParam() + "?ZNumber=" + LogisticsName + "&Pwd=" + Password;
 	        //    Href(url);
-	        //});
+        //});
+	    function phonechange(element) {
+	        var Phone = $(element).val();
+	        if (Phone.length == 11) {
+	            GetHtml("/Command/RegisterUserBinding.aspx", { Phone: Phone }, function (data) {
+	                debugger;
+	                let vo = JSON.parse(data);
+	                if (vo.Item1) {
+	                    let list = vo.Item3;
+	                    if(list.length>0)
+	                    {
+	                        document.getElementById("yhvalue").text = "确认绑定";
+	                        var UIDS = list[0].UID;
+	                        document.getElementById("UIDS").value = "" + UIDS + "";
+	                    }
+	                    else
+	                    {
+	                        document.getElementById("UserName").style.display = "block";
+	                        document.getElementById("Password").style.display = "block";
+	                        document.getElementById("yonghu").text = "yhzc";
+	                        document.getElementById("yhvalue").text = "用户注册";
+	                    }
+	                    $("#yhvalue").removeAttr("disabled");
+	                }
+	            });
+	        }
+	    }
 </script>
 </body>
 </html>

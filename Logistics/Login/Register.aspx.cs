@@ -16,7 +16,8 @@ namespace Logistics.Login
         {
             //获取地区省列表
             shengList = DAL.DAL.DALBase.GetNextAddressListFromId(1);
-            if (IsPostBack)
+            //if (Request.RequestType.Equals("post", StringComparison.OrdinalIgnoreCase))
+            if(IsPostBack)
             {
                 try
                 {
@@ -39,27 +40,64 @@ namespace Logistics.Login
                         State = GetValue<int>("State"),//状态
                         LCID = GetValue("LCID")//上级物流ID
                     };
-                    string LogisticsUid = GetValue("LogisticsUid");//物流ID
+                    //string LogisticsUid = GetValue("LogisticsUid");//物流ID
+                    string FalseValue = GetValue("FalseValue");//判断绑定
                     string ZNumber = GetValue("Phone");//帐号
                     string Pwd = GetValue("Password");//密码
-                    int Citys = GetValue<int>("End2");//城市
-                    string Zm=Tools.PinYinConverter.GetFirst(DAL.DAL.DALBase.GetAddressFromID(Citys).Item2.Name);//首字母
-                    string Zmvalue= Zm.Substring(0, 1);
-                    //string LogisticsUid = "6cfe97409cd87419";
-                    //开始注册
-                    Tuple<bool, string> vo = BLL.BLL.LC_User.Add(uservo, loginvo, LogisticsUid);
-                    if (!vo.Item1)
+                    string LogisticsUid = "6cfe97409cd87419";
+                    string yonghu = GetValue("yonghu");
+                    string UIDS = GetValue("UIDS");
+                    if (yonghu== "yhbd" && Pwd=="")
                     {
-                        Alert(vo.Item2);
-                    }
-                    else
-                    {
-                        Tuple<bool, string> vo1 = BLL.BLL.LC_Line.BindHZ(ZNumber, Pwd, LogisticsUid, Zmvalue, Zmvalue);
-                        if (!vo1.Item1)
+                        Tuple<bool, string> vo = BLL.BLL.LC_UserBindLogisticsList.UserAdd(new Model.Model.LC_UserBindLogisticsList()
                         {
-                            Alert(vo1.Item2);
+                            Uid = GetValue("UIDS"),
+                            LogisticsUid = LogisticsUid,
+                            CreateTime = DateTime.Now
+                        });
+                        if (vo.Item1)
+                        {
+                            AlertJump("绑定成功", "/Login/Login.aspx");
+                            return;
                         }
-                        AlertJump("注册成功...返回登录", "/Login/Login.aspx");
+                        else
+                        {
+                            Alert(vo.Item2);
+                            return;
+                        }
+                    }
+                    //开始注册
+                    if (FalseValue=="10" )
+                    {
+                        Tuple<bool, string> vo = BLL.BLL.LC_User.Add(uservo, loginvo, LogisticsUid);
+                        if (!vo.Item1)
+                        {
+                            Alert(vo.Item2);
+                        }
+                        else
+                        {
+                            int Citys = GetValue<int>("End2");//城市
+                            string Zm = Tools.PinYinConverter.GetFirst(DAL.DAL.DALBase.GetAddressFromID(Citys)?.Item2?.Name);//首字母
+                            string Zmvalue = Zm.Substring(0, 1);
+                            Tuple<bool, string> vo1 = BLL.BLL.LC_Line.BindHZ(ZNumber, Pwd, LogisticsUid, Zmvalue, Zmvalue);
+                            if (!vo1.Item1)
+                            {
+                                Alert(vo1.Item2);
+                            }
+                            AlertJump("注册成功...返回登录", "/Login/Login.aspx");
+                        }
+                    }
+                    else if(FalseValue!="10")
+                    {
+                        Tuple<bool, string> vo = BLL.BLL.LC_User.Add(uservo, loginvo, LogisticsUid);
+                        if (!vo.Item1)
+                        {
+                            Alert(vo.Item2);
+                        }
+                        else
+                        {
+                            AlertJump("注册成功...返回登录", "/Login/Login.aspx");
+                        }
                     }
                 }
                 catch(Exception)

@@ -1,0 +1,7 @@
+参数化查询 '(@ZNumber nvarchar(4000))select count(id) from LC_User where ZNu' 需要参数 '@ZNumber'，但未提供该参数。|2017-07-12 17:48:47.199|||0
+参数化查询 '(@uid nvarchar(4000))select count(id) from LC_UserBindLogisticsL' 需要参数 '@uid'，但未提供该参数。|2017-07-12 17:50:25.832|||0
+参数化查询 '(@ZNumber nvarchar(4000))select count(id) from LC_User where ZNu' 需要参数 '@ZNumber'，但未提供该参数。|2017-07-12 17:50:30.149|||0
+参数化查询 '(@uid nvarchar(4000))select count(id) from LC_UserBindLogisticsL' 需要参数 '@uid'，但未提供该参数。|2017-07-12 17:51:41.745|||0
+参数化查询 '(@ZNumber nvarchar(4000))select count(id) from LC_User where ZNu' 需要参数 '@ZNumber'，但未提供该参数。|2017-07-12 17:52:54.615|||0
+错误:insert into LC_UserBindLogisticsList ([Uid],[LogisticsUid],[CreateTime]) values(ca6fc248cbcedd10,88289970bfc84fde,2017-07-12 17:59:41)Select @@Identity内容未将对象引用设置到对象的实例。|2017-07-12 17:59:42.003|UserAdd|F:\Users\Administrator\Source\Repos\物流系统\DAL\DAL\LC_UserBindLogisticsList.cs|20
+错误:select [Name],[TopAddressID],[id],[Population],[IsHot],[MainCity] from w_address_basic_data where TopAddressID=1内容句柄无效。 (异常来自 HRESULT:0x80070006 (E_HANDLE))|2017-07-12 18:00:53.763|GetNextAddressListFromId|F:\Users\Administrator\Source\Repos\物流系统\DAL\DAL\DALBase.cs|104

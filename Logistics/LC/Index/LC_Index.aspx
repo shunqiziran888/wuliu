@@ -33,8 +33,12 @@
                     <p style="font-size:15px">扫描二维码注册物流公司帐号</p>
                 </div>
                  <div>
-                    <div style="margin-left:300px;margin-top:-225px;"><img src="/GetQR.aspx?url=<%=HttpUtility.UrlEncode($"http://wl.mikiboss.com/Login/Register.aspx?ZType=3&LogisticsUid={UID}") %>&logo=http://wl.mikiboss.com/Style/img/success.png"/></div>
+                    <div style="margin-left:300px;margin-top:-225px;"><img src="/GetQR.aspx?url=<%=HttpUtility.UrlEncode($"http://wl.mikiboss.com/Login/Register.aspx?ZType=4&LogisticsUid={UID}") %>&logo=http://wl.mikiboss.com/Style/img/success.png"/></div>
                     <p style="font-size:15px;margin-left:300px;">扫描二维码注册物流员工帐号</p>
+                </div>
+                 <div>
+                    <div style="margin-left:550px;margin-top:-225px;"><img src="/GetQR.aspx?url=<%=HttpUtility.UrlEncode($"http://wl.mikiboss.com/Login/Register.aspx?ZType=3&LogisticsUid={UID}") %>&logo=http://wl.mikiboss.com/Style/img/success.png"/></div>
+                    <p style="font-size:15px;margin-left:550px;">扫描二维码注册物流用户帐号</p>
                 </div>
                 <div class="page-index">
                     <ul class="main">

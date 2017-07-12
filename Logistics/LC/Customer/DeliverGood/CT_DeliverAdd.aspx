@@ -102,6 +102,9 @@
                                     %>
                                 </select>
                             </div>
+                            <div class="col-30 ">
+                                <a href="#" style="background: #9ccc65;padding: 5px 10px;color: #fff;border-radius: 4px;">添加物流</a>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-30 ">

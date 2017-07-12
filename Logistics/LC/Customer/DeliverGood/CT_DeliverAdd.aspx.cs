@@ -88,6 +88,7 @@ namespace Logistics.LC.Customer
 
                 }
                 list = vo1.Item3.Distinct(new DistinctObj()).ToList();
+                //var f = vo1.Item3.GroupBy(x => x.GetDicVO<Model.Model.LC_Line>().UID);
             }
             catch (Exception)
             {
@@ -100,8 +101,8 @@ namespace Logistics.LC.Customer
             public bool Equals(Dictionary<string, I_ModelBase> x, Dictionary<string, I_ModelBase> y)
             {
                 var x_vo = x.GetDicVO<Model.Model.LC_Line>();
-                var y_vo = x.GetDicVO<Model.Model.LC_Line>();
-                if (x_vo.Start == y_vo.Start)
+                var y_vo = y.GetDicVO<Model.Model.LC_Line>();
+                if (x_vo.UID == y_vo.UID)
                     return true;
                 return false;
             }

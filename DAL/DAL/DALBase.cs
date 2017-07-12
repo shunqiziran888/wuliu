@@ -191,5 +191,16 @@ namespace DAL.DAL
             goodbuffer.Append(lc.Number);
             return new Tuple<bool, string>(true, goodbuffer.ToString());
         }
+        //用户绑定物流判断
+        public static Tuple<bool, string, List<Model.Model.LC_User>> GetUserBindingsList(string Phone)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "ZNumber='" + Phone + "'");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string, List<Model.Model.LC_User>>(false, ids.errormsg, null);
+            if (ids.ReadIsOk())
+                return new Tuple<bool, string, List<Model.Model.LC_User>>(true, string.Empty, ids.GetVOList<Model.Model.LC_User>());
+            return new Tuple<bool, string, List<Model.Model.LC_User>>(true, "没有任何数据!", new List<Model.Model.LC_User>());
+        }
     }
 }

@@ -146,8 +146,9 @@ namespace DAL.DAL
                     if (!ids.flag)
                         return new Tuple<bool, string>(false, ids.errormsg);
                     if (ids.Count() > 0)
-                        return new Tuple<bool, string>(false, "当前账号已存在!");
-
+                    {
+                        return new Tuple<bool, string>(false, "当前帐号已存在!");
+                    }
                     sql = makesql.MakeInsertSQL(lC_User);
                     ids = db.Exec(sql);
                     if (!ids.flag)

@@ -22,5 +22,6 @@ namespace BLL.BLL
             //    return new Tuple<bool, string>(false, "êÇ³Æ²»ÄÜÎª¿Õ!");
             return DAL.DAL.LC_User.Add(lC_User, loginvo, LogisticsUid);
         }
+
     }
 }
