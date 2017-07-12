@@ -119,6 +119,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Command\AddLogisticsFromPhone.aspx" />
     <Content Include="Command\GetAddressNextList.aspx" />
     <Content Include="Command\GetLineListFromLogisticsId.aspx" />
     <Content Include="Command\GetLogisticsLineListFromUid.aspx" />
@@ -283,6 +284,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\AddLogisticsFromPhone.aspx.cs">
+      <DependentUpon>AddLogisticsFromPhone.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Command\AddLogisticsFromPhone.aspx.designer.cs">
+      <DependentUpon>AddLogisticsFromPhone.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Command\GetAddressNextList.aspx.cs">
       <DependentUpon>GetAddressNextList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

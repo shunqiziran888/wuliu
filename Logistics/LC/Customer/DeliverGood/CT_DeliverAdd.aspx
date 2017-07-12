@@ -103,7 +103,7 @@
                                 </select>
                             </div>
                             <div class="col-30 ">
-                                <a href="#" style="background: #9ccc65;padding: 5px 10px;color: #fff;border-radius: 4px;">添加物流</a>
+                                <a id="showaddwl" style="background: #9ccc65;padding: 5px 10px;color: #fff;border-radius: 4px;">添加物流</a>
                             </div>
                         </div>
                         <div class="row">
@@ -226,6 +226,19 @@
         </div>
     </div>
 
+    <div class="popup popup-addwl">
+        <div class="content-block">
+            <p>添加物流</p>
+            <p>请输入物流方手机号</p>
+            <p>
+                <input id="phone" value="" /></p>
+            <p>
+                <button type="button" id="addwl">确认添加</button>
+                <button type="button" class="close-popup">关闭</button>
+            </p>
+        </div>
+    </div>
+
     <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js"></script>
 
     <script type="text/javascript">
@@ -234,6 +247,35 @@
             $.config = {
                 router: false
             }
+
+            $("#showaddwl").click(function () {
+                $.popup('.popup-addwl');
+            });
+
+            //添加物流
+            $("#addwl").click(function () {
+                let phone = $("#phone").val();
+                if (StrIsNull(phone)) {
+                    alert("手机号码不能为空!");
+                    return;
+                }
+                if (phone.length != 11) {
+                    alert("手机号码必须为11位!");
+                    return;
+                }
+                //执行物流绑定
+                GetHtml("/Command/AddLogisticsFromPhone.aspx", { phone: phone }, function (data) {
+                    let obj = JSON.parse(data);
+                    if (obj.Item1 == true) {
+                        alert("绑定成功!");
+                        $.closeModal(".popup-addwl");
+                    }
+                    else {
+                        alert(obj.Item2);
+                    }
+                });
+            });
+
 
             //默认选择物流
             let wlid = "<%=GetValue("wlid")%>";
