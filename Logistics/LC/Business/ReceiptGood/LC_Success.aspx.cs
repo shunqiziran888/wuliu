@@ -21,7 +21,9 @@ namespace Logistics.LC.Business.GoodsReceipt
             OIDDetaila = GetValue("OIDDetaila");//详情-OID
             decimal yf = Convert.ToDecimal(GetValue("yf"));//快速收货-运费
             int ShNumber = GetValue<int>("ssnumber");//详情-实收件数
-            decimal FreightDetail = GetValue<int>("FreightDetail");//详情-运费
+            decimal FreightDetail = GetValue<int>("FreightDetail");
+            decimal OtherExpenses = GetValue<int>("OtherExpenses");//详情-其他费用
+            int End = GetValue<int>("End");//目的地
             int finish = GetValue<int>("finish");//目的地
             DateTime ConsigneeTimes = DateTime.Now;
             if(ShNumber==0 || FreightDetail==0)
@@ -36,7 +38,7 @@ namespace Logistics.LC.Business.GoodsReceipt
             }
            else
             {
-                Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() { State = 2, ConsigneeTime = ConsigneeTimes, Freight = FreightDetail, begins = myuservo.AreaID, finish = finish,Number= ShNumber }, OIDDetaila, true);
+                Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() { State = 2, ConsigneeTime = ConsigneeTimes, Freight = FreightDetail, begins = myuservo.AreaID, finish = End,Number= ShNumber, OtherExpenses= OtherExpenses }, OIDDetaila, true);
                 if (!vo.Item1)
                 {
                     //有错误

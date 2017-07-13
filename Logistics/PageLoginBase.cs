@@ -96,5 +96,9 @@ namespace Logistics
         {
             return $"/GetQR.aspx?url={HttpUtility.UrlEncode(url)}&logo=http://wl.mikiboss.com/Style/img/success.png";
         }
+        internal void Round(decimal value,int N)
+        {
+            Math.Round(value, N);
+        }
     }
 }

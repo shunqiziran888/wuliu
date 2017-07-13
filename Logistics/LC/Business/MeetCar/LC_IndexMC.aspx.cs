@@ -9,6 +9,7 @@ using SuperDataBase;
 using System.Diagnostics;
 using CustomExtensions;
 using Model.Model;
+using System.Data;
 
 namespace Logistics.LC.Business.MeetCar
 {
@@ -16,19 +17,32 @@ namespace Logistics.LC.Business.MeetCar
     {
 
         public List<Model.Model.LC_Customer> list = new List<Model.Model.LC_Customer>();
+        public List<Tuple<int, decimal, int>> mydt_list = new List<Tuple<int, decimal, int>>();
         protected void Page_Load(object sender, EventArgs e)
         {
             var myuservo = GetMyLoginUserVO();
             string UID = myuservo.uid;
-            var vo = DAL.DAL.LC_Customer.GetMCList(UID,myuservo.AreaID);
+            var vo = DAL.DAL.LC_Customer.GetMCList(UID, myuservo.AreaID);
             if (!vo.Item1)
             {
                 //有错误
                 Debug.Print(vo.Item2);
                 return;
             }
-            list = vo.Item3.Distinct(new DistinctCustome()).ToList();
-        }
+
+                if (vo.Item4!=null)
+                {
+                    for (var i = 0; i < vo.Item4.Rows.Count; i++)
+                    {
+                        var row = vo.Item4.Rows[i];
+                        int VehicleID = row["VehicleID"].ConvertData<int>();
+                        decimal Freight = row["Freight"].ConvertData<decimal>();
+                        int finish = row["finish"].ConvertData<int>();
+                        mydt_list.Add(new Tuple<int, decimal, int>(VehicleID, Freight, finish));
+                    }
+                    list = vo.Item3.Distinct(new DistinctCustome()).ToList();
+                }
+            }
         //去重:车号
         public class DistinctCustome : IEqualityComparer<Model.Model.LC_Customer>
         {

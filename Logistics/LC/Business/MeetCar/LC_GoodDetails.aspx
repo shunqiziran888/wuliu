@@ -166,7 +166,7 @@
                             <span class="col-20"><%=v.Consignee %></span>
                             <span class="col-20"><%=v.GoodName %></span>
                             <span class="col-20 col-12"><%=v.Number %></span>
-                            <span class="col-20 col-15"><%=v.Freight %></span>
+                            <span class="col-20 col-15"><%=Math.Round(v.Freight.ConvertData<decimal>(),2) %></span>
                             <span class="col-20 col-33"><%=v.GoodNo %></span>
                         </li>
                         <%} %>

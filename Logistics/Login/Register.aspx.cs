@@ -44,7 +44,7 @@ namespace Logistics.Login
                     string FalseValue = GetValue("FalseValue");//判断绑定
                     string ZNumber = GetValue("Phone");//帐号
                     string Pwd = GetValue("Password");//密码
-                    //string LogisticsUid = "6cfe97409cd87419";
+                    //string LogisticsUid = "111111";
                     string yonghu = GetValue("yonghu");
                     string UIDS = GetValue("UIDS");
                     if (yonghu== "yhbd" && Pwd=="")

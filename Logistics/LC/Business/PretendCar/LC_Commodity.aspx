@@ -158,13 +158,13 @@
                             <span class="col-20"><%=v.Consignee %></span>
                             <span class="col-20"><%=v.GoodName %></span>
                             <span class="col-20 col-12"><%=v.Number  %></span>
-                            <span class="col-20 col-15"><%=v.Freight %></span>
+                            <span class="col-20 col-15"><%=Math.Round(v.Freight.ConvertData<decimal>(),2) %></span>
                             <span class="col-20 col-15"><%=v.GoodNo %></span>
                             <input type="hidden"  id="fffs" value="<%=v.freightMode %>"/>
                         </li>
                         <%} %>
                         <li class="row td-body">
-                            <span>合计：<%=list.Count %>单，<%=list.Sum(x=>x.Number)%>件，<%=list.Sum(x=>x.Freight) %>元运费，其他费用：<%=list.Sum(x=>x.OtherExpenses) %>，代收款：<%=list.Sum(x=>x.GReceivables) %></span>
+                            <span>合计：<%=list.Count %>单，<%=list.Sum(x=>x.Number)%>件，<%=list.Sum(x=>Math.Round(x.Freight.ConvertData<decimal>(),2)) %>元运费，其他费用：<%=list.Sum(x=>Math.Round(x.OtherExpenses.ConvertData<decimal>(),2)) %>，代收款：<%=list.Sum(x=>Math.Round(x.GReceivables.ConvertData<decimal>(),2)) %></span>
                         </li>
                     </ul>
                     <input type="button" onclick="Test()" value="下一步"/>

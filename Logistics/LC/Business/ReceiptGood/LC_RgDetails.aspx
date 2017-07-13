@@ -111,26 +111,59 @@
                         </li>
                         <li class=" row">
                             <p class="col-50">付费方式： <span><%=v.freightMode.ConvertData<YFFSEnum>().EnumToName() %></span></p>
-                            <p class="col-50">代收款： <span><%=v.GReceivables %></span></p>
+                            <p class="col-50">代收款： <span><%=Math.Round(v.GReceivables.ConvertData<decimal>(),2)%></span></p>
                         </li>
                         <li class=" row">
                             <p class="col-50">收货人： <span><%=v.Consignee %></span></p>
                             <p class="col-50">电话： <span><%=v.SHPhone %></span></p>
                         </li>
                         <li>
-                            实收件数：<input type="text" placeholder="150" id="SSNumber" name="SSNumber">
+                            实收件数：<input type="text" id="SSNumber" name="SSNumber">
                         </li>
                         <li>
-                            运费金额：<input type="text" placeholder="30000" id="Freight" name="Freight">
+                            运费金额：<input type="text" id="Freight" name="Freight">
                         </li>
+                         <%
+                            var isshow = list2.Where(x => x.End.Value == v.Destination).Count()>0;
+                        %>
+
+                    <i class="zbsh-xd1 row" <%= !isshow? string.Empty : "style=\"display:none\""%>>
+                        <p class="zbsh-yf col-50">
+                            中转地：
+                                <select id="End" name="End" style="width: 300px;">
+                                    <option>请选择</option>
+                                    <%
+                                        foreach (var v1 in list2)
+                                        {
+                                            if (v.Destination.Value == v1.End.Value)
+                                            {
+                                    %>
+                                    <option selected value="<%=v1.End %>"><%=DAL.DAL.DALBase.GetAddressFromID(v1.End.Value)?.Item2?.Name%></option>
+                                    <%
+                                        }
+                                        else
+                                        {
+                                    %>
+                                    <option value="<%=v1.End %>"><%=DAL.DAL.DALBase.GetAddressFromID(v1.End.Value)?.Item2?.Name%></option>
+                                    <%
+                                        }
+                                    %>
+
+                                    <%} %>
+                                      </select>
+                                                        </p>
+                                                    </i>
                         <li>
-                            中转费用：<input type="text" placeholder="5000" id="zzCost" name="zzCost">
+                            中转费用：<input type="text"  id="zzCost" name="zzCost">
                         </li>
                            <%if(v.CarryGood==2) { %>
                         <li>
-                            送货费用：<input type="text" placeholder="20000" id="ShzzCost" name="ShzzCost">
+                            送货费用：<input type="text"  id="ShzzCost" name="ShzzCost">
                         </li>
                           <%}%>
+                         <li>
+                            其他费用：<input type="text" id="OtherExpenses" name="OtherExpenses">
+                        </li>
                         <li>
                             <%--<a href="/LC/Business/ReceiptGood/LC_Success.aspx?OrderID=<%=v.OrderID %>" class="open-about">收货</a>--%>
                             <a href="#" onclick="Submits('<%=v.OrderID %>')">收货</a>
@@ -165,8 +198,10 @@
             var ssnumber = $("#SSNumber").val();//实收件数
             var Freight = $("#Freight").val();//运费
             var zzCost = $("#zzCost").val();//中转费用
+            var End = $("#End").val();//中转地
             var ShzzCost = $("#ShzzCost").val();//送货费用
-            window.location.href = "/LC/Business/ReceiptGood/LC_Success.aspx?OIDDetaila=" + OID + "&ssnumber=" + ssnumber + "&FreightDetail=" + Freight + "&zzCost=" + zzCost + "&ShzzCost="+ShzzCost;
+            var OtherExpenses = $("#OtherExpenses").val();//送货费用
+            window.location.href = "/LC/Business/ReceiptGood/LC_Success.aspx?OIDDetaila=" + OID + "&ssnumber=" + ssnumber + "&FreightDetail=" + Freight + "&zzCost=" + zzCost + "&ShzzCost=" + ShzzCost + "&OtherExpenses=" + OtherExpenses + "&End="+End;
         }
     </script>
 </body>

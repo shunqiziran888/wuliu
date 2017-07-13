@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LC_IndexMC.aspx.cs" Inherits="Logistics.LC.Business.MeetCar.LC_IndexMC" %>
 <%@ Import Namespace="CustomExtensions" %>
 <%@ import Namespace="GlobalBLL" %>
+<%@ Import Namespace="System.Linq" %>
 <!DOCTYPE html>
 
 <html>
@@ -81,14 +82,24 @@
                                       </span>
                                   </p>
                                   <p class="zbsh-hm col-50">
-                                  总运费： <span><%=v.Freight %></span>
+                                  总运费： <span><%
+                                                 var kList = mydt_list.Where((y) =>
+                                                 {
+                                                     var f = list.Where(x => y.Item1 == x.VehicleID.ConvertData<int>() && y.Item3 == x.finish);
+                                                     if (f.Count() > 0)
+                                                         return true;
+                                                     return false;
+                                                 }).ToList();
+                                                 if (kList.Count > 0)
+                                                     Response.Write(kList[0].Item2);
+                                                     %></span>
                                   </p>
                                 </i>
                                                     <i class="zbsh-xd1 row">
                                   <p class="zbsh-fhr col-50">
-                                  总货款： <span>57567</span></p>
+                                  总货款： <span><%=Math.Round(v.GReceivables.ConvertData<decimal>(),2) %></span></p>
                                   <p class="zbsh-hh col-50">
-                                  大车运费： <span><%=v.largeCar %></span>
+                                  大车运费： <span><%=Math.Round(v.largeCar.ConvertData<decimal>(),2) %></span>
                                   </p>
                                 </i>
                                                 </div>

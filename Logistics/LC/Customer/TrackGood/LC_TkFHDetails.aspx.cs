@@ -27,9 +27,12 @@ namespace Logistics.LC.Customer.TrackGood
             Freight = GetValue<decimal>("Freight");
             Number = GetValue<int>("Number");
             OtherExpenses = GetValue<decimal>("OtherExpenses");
-            TotalTF = GReceivables + Freight + OtherExpenses;//提付
-            TotalXF = GReceivables + OtherExpenses;// 现付
-            TotalKF = (GReceivables - Freight) + OtherExpenses;//扣付
+            decimal TotalTFold = GReceivables + Freight + OtherExpenses;//提付
+            TotalTF=Math.Round(TotalTFold, 2);
+            decimal TotalXFold = GReceivables + OtherExpenses;// 现付
+            TotalXF= Math.Round(TotalXFold, 2);
+            decimal TotalKFold = (GReceivables - Freight) + OtherExpenses;//扣付
+            TotalKF = Math.Round(TotalKFold, 2);
             var vo = DAL.DAL.LC_Customer.GetGRList(OID);
             if (!vo.Item1)
             {

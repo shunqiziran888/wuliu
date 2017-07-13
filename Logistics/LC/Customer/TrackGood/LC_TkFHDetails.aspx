@@ -124,20 +124,20 @@
                                                     <i class="zbsh-xd1 row">
                                                         <%if (v.freightMode == 1)
                                                          {%>
-                                                     <p class="zbsh-yf col-50">运费提付： <span><%=v.Freight %></span></p>
+                                                     <p class="zbsh-yf col-50">运费提付： <span><%=Math.Round(v.Freight.ConvertData<decimal>(),2)%></span></p>
                                                         <%}%>
                                                         <%if (v.freightMode == 2)
                                                          {%>
-                                                     <p class="zbsh-yf col-50">运费现付： <span><%=v.Freight %></span></p>
+                                                     <p class="zbsh-yf col-50">运费现付： <span><%=Math.Round(v.Freight.ConvertData<decimal>(),2) %></span></p>
                                                         <%}%>
                                                         <%if (v.freightMode == 3)
                                                          {%>
-                                                     <p class="zbsh-yf col-50">运费扣付： <span><%=v.Freight %></span></p>
+                                                     <p class="zbsh-yf col-50">运费扣付： <span><%=Math.Round(v.Freight.ConvertData<decimal>(),2) %></span></p>
                                                         <%}%>
-                                                      <p class="zbsh-yf col-50">其他费用： <span><%=v.OtherExpenses %></span></p>
+                                                      <p class="zbsh-yf col-50">其他费用： <span><%=Math.Round(v.OtherExpenses.ConvertData<decimal>(),2) %></span></p>
                                                     </i>
                                                     <i class="zbsh-xd1 row">
-                                                      <p class="zbsh-yf col-50">代收款： <span><%=v.GReceivables %></span></p>
+                                                      <p class="zbsh-yf col-50">代收款： <span><%=Math.Round((v.GReceivables).ConvertData<decimal>(),2) %></span></p>
                                                          <%if (v.freightMode == 1)
                                                          {%>
                                                       <p class="zbsh-yf col-50">合计： <span><%=TotalTF %></span></p>
@@ -186,7 +186,6 @@
         $(document).on('click', '.close-popup', function() {
             $.closeModal('.popup-about');
         });
-
     </script>
 
 </body>

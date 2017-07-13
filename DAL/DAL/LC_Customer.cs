@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Model.Model;
 using SuperDataBase;
 using CustomExtensions;
+using System.Data;
+
 namespace DAL.DAL
 {
     /// <summary>
@@ -173,17 +175,23 @@ namespace DAL.DAL
         /// <param name="UID"></param>
         /// <param name="AreaID">当前物流所在地区ID</param>
         /// <returns></returns>
-        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetMCList(string UID,int AreaID)
+        public static Tuple<bool, string, List<Model.Model.LC_Customer>, DataTable> GetMCList(string UID, int AreaID)
         {
-                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "State=3 and finish=@finish",new System.Data.SqlClient.SqlParameter[] {
+            sql = new SuperDataBase.Vo.SqlVO("select finish,SUM(Freight) as 'Freight',VehicleID from LC_Customer where State=3 group by finish,VehicleID;");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>, DataTable>(false, ids.errormsg, null, null);
+            var mydt = ids.dt;
+
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "State=3 and finish=@finish", new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@finish",AreaID)
                 });
-                ids = db.Read(sql);
-                if (!ids.flag)
-                    return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);
-                if (ids.ReadIsOk())
-                    return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Customer>());
-                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, "没有任何数据!", new List<Model.Model.LC_Customer>());
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>, DataTable>(false, ids.errormsg, null, null);
+            if (ids.ReadIsOk())
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>, DataTable>(true, string.Empty, ids.GetVOList<Model.Model.LC_Customer>(), mydt);
+            return new Tuple<bool, string, List<Model.Model.LC_Customer>, DataTable>(true, "没有任何数据!", new List<Model.Model.LC_Customer>(), null);
         }
         /// <summary>
         /// 发货历史列表

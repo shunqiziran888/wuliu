@@ -30,12 +30,12 @@ namespace GlobalBLL
     public enum OrderStateEnum
     {
         已发货=1,
-        已收货=2,
-        已装车=3,
-        已到货=4,
+        物流已收货 = 2,
+        已装车运输中 = 3,
+        已到收货地可提货 = 4,
         客户取货=5,
         订单完成=6,
-        已中转=7
+        货物已中转=7
     }
     public enum THFSEnum
     {

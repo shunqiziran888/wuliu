@@ -150,10 +150,10 @@
                         </div>
                         <div class="row">
                             <div class="col-40 l_zt">
-                                <p>其他费用：0 </p>
+                                <p>其他费用：<%=v.OtherExpenses %> </p>
                             </div>
                             <div class="col-60 l_zt">
-                                <p>代收款：3500</p>
+                                <p>代收款：<%=v.GReceivables %></p>
                             </div>
                         </div>
 

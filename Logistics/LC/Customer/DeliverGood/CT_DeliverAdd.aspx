@@ -14,7 +14,6 @@
     <link rel="shortcut icon" href="/favicon.ico">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
     <link rel="stylesheet" href="/Style/css/sui/sm.min.css">
     <link rel="stylesheet" href="/Style/css/sui/sm-extend.min.css">
     <link href="/Style/css/iconlink.css" rel="stylesheet">
@@ -85,7 +84,7 @@
                             </div>
                             <div class="col-40">
                                 <select id="logisticsID" name="logisticsID" onchange="AutoAddress(this)">
-                                    <option>请选择物流</option>
+                                    <option value="0">请选择物流</option>
                                     <%
                                         if (list.Count > 0)
                                         {

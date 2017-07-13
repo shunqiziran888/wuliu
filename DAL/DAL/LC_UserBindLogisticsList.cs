@@ -18,6 +18,16 @@ namespace DAL.DAL
         {}
         public static Tuple<bool, string> UserAdd(Model.Model.LC_UserBindLogisticsList LC_UserBindLogisticsList)
         {
+            sql = makesql.MakeCount(nameof(Model.Model.LC_User), "UID=@LogisticsUid and ZType=@ZType", new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@LogisticsUid",LC_UserBindLogisticsList.LogisticsUid),
+                new System.Data.SqlClient.SqlParameter("@ZType","1")
+            });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string>(false, ids.errormsg);
+            if (ids.Count() ==0)
+                return new Tuple<bool, string>(false, "此绑定的物流不存在!");
+
             sql = makesql.MakeCount(nameof(Model.Model.LC_UserBindLogisticsList), "Uid=@Uid and LogisticsUid=@LogisticsUid", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@Uid",LC_UserBindLogisticsList.Uid),
                 new System.Data.SqlClient.SqlParameter("@LogisticsUid",LC_UserBindLogisticsList.LogisticsUid)
@@ -26,7 +36,7 @@ namespace DAL.DAL
             if (!ids.flag)
                 return new Tuple<bool, string>(false, ids.errormsg);
             if (ids.Count() > 0)
-                return new Tuple<bool, string>(false, "您已经绑定过次物流了!");
+                return new Tuple<bool, string>(false, "您已经绑定过此物流了!");
 
             sql = makesql.MakeInsertSQL(LC_UserBindLogisticsList);
             ids = db.Exec(sql);

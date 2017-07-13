@@ -70,6 +70,10 @@ namespace Logistics.LC.Customer
                     {
                         Jump("/LC/Customer/DeliverGood/CT_Success.aspx?OID=" + lcc.OrderID); 
                     }
+                    else if(lcc.logisticsID=="0")
+                    {
+                        ReturnPager("请选择物流！");
+                    }
                     else
                     {
                         ReturnPager("所有内容均不能为空！");

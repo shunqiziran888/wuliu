@@ -55,12 +55,12 @@
                                         <div class="col-50">件数： <span><%=v.Number %></span></div>
                                     </div>
                                     <div class="row" style="padding: .2rem 0;">
-                                        <div class="col-40"> 货款： <span>3100</span></div>
+                                        <div class="col-40"> 代收款： <span><%=v.GReceivables %></span></div>
                                         <div class="col-50">运费： <span><%=v.Freight %></span></div>
                                     </div>
                                     <div class="row" style="padding: .2rem 0;">
                                         <div class="col-40"> 货物状态： <span><%=v.State.Value.ConvertData<OrderStateEnum>().EnumToName() %></span></div>
-                                        <div class="col-50">合计： <span>3400</span></div>
+                                        <div class="col-50">合计： <span><%=v.GReceivables+v.Freight %></span></div>
                                     </div>
                                 </div>
                                 <div class="col-10" style="padding: .2rem 0;">
