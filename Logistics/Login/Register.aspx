@@ -255,7 +255,8 @@ $(window).load(function() {
 	        });
 	    }
 
-	    function loginwl() {
+	    function loginwl()
+	    {
 	        var Phone = $("#Phone").val();
 	        var Password = $("#Password").val();
 	        GetHtml("/Login/Register.aspx", { Phone: Phone, Password: Password }, function (data) {
@@ -273,26 +274,30 @@ $(window).load(function() {
 	        var Phone = $(element).val();
 	        if (Phone.length == 11) {
 	            GetHtml("/Command/RegisterUserBinding.aspx", { Phone: Phone }, function (data) {
-	                debugger;
 	                let vo = JSON.parse(data);
 	                if (vo.Item1) {
 	                    let list = vo.Item3;
 	                    if(list.length>0)
 	                    {
-	                        document.getElementById("yhvalue").text = "确认绑定";
 	                        var UIDS = list[0].UID;
 	                        document.getElementById("UIDS").value = "" + UIDS + "";
+	                        document.getElementById("UserName").style.display = "none";
+	                        document.getElementById("Password").style.display = "none";
 	                    }
 	                    else
 	                    {
 	                        document.getElementById("UserName").style.display = "block";
 	                        document.getElementById("Password").style.display = "block";
 	                        document.getElementById("yonghu").text = "yhzc";
-	                        document.getElementById("yhvalue").text = "用户注册";
 	                    }
 	                    $("#yhvalue").removeAttr("disabled");
 	                }
 	            });
+	        }
+	        else if(Phone.length>11)
+	        {
+	            alert("手机号必须11位！");
+	            document.getElementById("Phone").value = "";
 	        }
 	    }
 </script>

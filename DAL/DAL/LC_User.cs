@@ -145,6 +145,10 @@ namespace DAL.DAL
                     ids = db.Read(sql);
                     if (!ids.flag)
                         return new Tuple<bool, string>(false, ids.errormsg);
+                    if(ids.Count()>0)
+                    {
+                        return new Tuple<bool, string>(false,"¥À’ ∫≈“—◊¢≤·£°");
+                    }
                     if (ids.Count() == 0)
                     {
                         sql = makesql.MakeInsertSQL(lC_User);
