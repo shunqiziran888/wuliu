@@ -56,7 +56,7 @@ namespace Logistics.LC.Manage.Line
                 }
                 else
                 {
-                    AlertJump("绑定成功!", "LC/Manage/Line/LC_Line.aspx");
+                    AlertJump("绑定成功!", "/LC/Manage/Line/LC_Line.aspx");
 
                 }
             }
