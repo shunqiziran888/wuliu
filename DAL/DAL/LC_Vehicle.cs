@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Model.Model;
+using CustomExtensions;
 
 namespace DAL.DAL
 {
@@ -41,6 +42,18 @@ namespace DAL.DAL
             if (!ids.ExecOk())
                 return new Tuple<bool, string>(false, "添加失败请重试!");
             return new Tuple<bool, string>(true, string.Empty);
+        }
+
+        public static Dictionary<int, Model.Model.LC_Vehicle> GetAllCar()
+        {
+            Dictionary<int, Model.Model.LC_Vehicle> vlist = new Dictionary<int, Model.Model.LC_Vehicle>();
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Vehicle));
+            ids = db.Read(sql);
+            foreach (var x in ids.GetVOList<Model.Model.LC_Vehicle>())
+            {
+                vlist.Add(x.ID.ConvertData<int>(), x);
+            }
+            return vlist;
         }
     }
 }

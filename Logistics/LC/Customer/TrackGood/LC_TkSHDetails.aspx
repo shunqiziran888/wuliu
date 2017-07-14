@@ -101,6 +101,18 @@
                                                 <div class="col-100">
                                                     <i class="zbsh-xd1 row">
                                                         <p class="zbsh-hh col-50">货号： <span><%=v.GoodNo %></span></p>
+                                                          <%if (v.State == 4)
+                                                         {%>
+                                                        <p class="zbsh-shr col-50" style="padding: 0 .6rem;">
+                                                            <a href="/LC/Customer/SignGood/LC_SgDetails.aspx?OID=<%=v.OrderID %>" class="button button-fill button-success" style="color: #fff;"><%=v.State.Value.ConvertData<OrderStateEnum>().EnumToName()%></a>
+                                                        </p>
+                                                        <%}
+                                                        else if(v.State!=4)
+                                                        {%>
+                                                             <p class="zbsh-shr col-50" style="padding: 0 .6rem;">
+                                                            <a class="button button-fill button-success" style="color: #fff;"><%=v.State.Value.ConvertData<OrderStateEnum>().EnumToName()%></a>
+                                                                </p>
+                                                    <%} %>
                                                     </i>
                                                     <i class="zbsh-xd1 row">
                                                          <p class="zbsh-shr col-50">发货人： <span><%=v.Consignor %></span></p> 

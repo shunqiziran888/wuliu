@@ -12,6 +12,7 @@ namespace DAL.DAL
     public class DALBase
     {
         private static Dictionary<int, Model.Model.w_address_basic_data> addressDic = null;
+        private static Dictionary<int, Model.Model.LC_Vehicle> aCarDic = null;
         private static object _lockobj = new object();
         /// <summary>
         /// 数据库操作类
@@ -127,6 +128,27 @@ namespace DAL.DAL
                     return new Tuple<bool, Model.Model.w_address_basic_data>(false, null);
                 }
             }
+        /// <summary>
+        /// 获取车牌号
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Tuple<bool, Model.Model.LC_Vehicle> GetCarFromID(int id)
+        {
+            lock (_lockobj)
+            {
+                Model.Model.LC_Vehicle lcr = null;
+
+                if (aCarDic == null)
+                    aCarDic = LC_Vehicle.GetAllCar();
+
+                if (aCarDic.TryGetValue(id, out lcr))
+                {
+                    return new Tuple<bool, Model.Model.LC_Vehicle>(true, lcr);
+                }
+                return new Tuple<bool, Model.Model.LC_Vehicle>(false, null);
+            }
+        }
         /// <summary>
         /// 根据收货电话筛选地区
         /// </summary>

@@ -71,7 +71,7 @@
                                                     <i class="zbsh-xd1 row">
                                   <p class="zbsh-shr col-50">
                                   出发地： <span><%=DAL.DAL.DALBase.GetAddressFromID(v.Initially.Value)?.Item2?.Name %></span></p>
-                                  <p class="zbsh-hh col-50">车号： <span><%=v.VehicleID %></span>
+                                  <p class="zbsh-hh col-50">车号： <span><%=DAL.DAL.DALBase.GetCarFromID(v.VehicleID.Value)?.Item2?.VehicleNo%></span>
                                   </p>
                                 </i>
                                                     <i class="zbsh-xd1 row">

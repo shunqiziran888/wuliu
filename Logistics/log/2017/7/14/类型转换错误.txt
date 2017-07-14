@@ -1,0 +1,2 @@
+[内容]:值对于 Decimal 太大或太小。 [方法名]:ChangeType [代码文件路径]:D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\Tools\ConvertHelper.cs [代码行号]:37 [Time]:2017-07-14 15:08:33.274
+[内容]:值对于 Decimal 太大或太小。 [方法名]:ChangeType [代码文件路径]:D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\Tools\ConvertHelper.cs [代码行号]:37 [Time]:2017-07-14 15:09:10.660
