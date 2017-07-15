@@ -60,7 +60,14 @@
                                     </div>
                                     <div class="row" style="padding: .2rem 0;">
                                         <div class="col-40"> 货物状态： <span><%=v.State.Value.ConvertData<OrderStateEnum>().EnumToName() %></span></div>
-                                        <div class="col-50">合计： <span><%=v.GReceivables+v.Freight %></span></div>
+                                        <%if (v.OtherExpenses != null)
+                                            {%>
+                                             <div class="col-50">合计： <span><%=v.GReceivables+v.Freight+v.OtherExpenses %></span></div>
+                                        <%} %>
+                                        <%if (v.OtherExpenses == null)
+                                                { %>
+                                        <div class="col-50">合计： <span><%=v.GReceivables + v.Freight%></span></div>
+                                        <%} %>
                                     </div>
                                 </div>
                                 <div class="col-10" style="padding: .2rem 0;">
@@ -70,7 +77,7 @@
                                 </div>
                             </a>
                             <div class="hwqs-bottom" style="  margin: 0.2rem;">
-                                <a href="/LC/Customer/SignGood/LC_SgDetails.aspx?OID=<%=v.OrderID %>" class="hwqs-bottom1">处理订单</a>
+                                <a href="/LC/Customer/SignGood/LC_SgDetails.aspx?OID=<%=v.OrderID %>&GReceivables=<%=v.GReceivables %>&Freight=<%=v.Freight %>&OtherExpenses=<%=v.OtherExpenses %>&Number=<%=v.Number %>" class="hwqs-bottom1">处理订单</a>
                             </div>
                         </li>
                         <%} %>

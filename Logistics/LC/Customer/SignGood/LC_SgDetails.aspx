@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LC_SgDetails.aspx.cs" Inherits="Logistics.LC.Customer.SignGood.LC_TgDetails" %>
 <%@ import Namespace="GlobalBLL" %>
+<%@ Import Namespace="CustomExtensions" %>
 <!DOCTYPE html>
 
 <html>
@@ -145,7 +146,18 @@
                                 <p>件数：<%=v.Number %> </p>
                             </div>
                             <div class="col-60 l_zt">
-                                <p>运费：<%=v.Freight %></p>
+                                <%if (v.freightMode == 1)
+                                        {%>
+                                <p>运费提付：<%=Math.Round(v.Freight.ConvertData<decimal>(), 2)%></p>
+                                <%} %>
+                                <%if (v.freightMode == 2)
+                                        {%>
+                                <p>运费现付：<%=Math.Round(v.Freight.ConvertData<decimal>(), 2)%></p>
+                                <%} %>
+                                <%if (v.freightMode == 3)
+                                        {%>
+                                <p>运费扣付：<%=Math.Round(v.Freight.ConvertData<decimal>(), 2)%></p>
+                                <%} %>
                             </div>
                         </div>
                         <div class="row">
@@ -153,7 +165,7 @@
                                 <p>其他费用：<%=v.OtherExpenses %> </p>
                             </div>
                             <div class="col-60 l_zt">
-                                <p>代收款：<%=v.GReceivables %></p>
+                                <p>代收款：<%=Math.Round(v.GReceivables.ConvertData<decimal>(),2) %></p>
                             </div>
                         </div>
 
@@ -163,7 +175,18 @@
 
                             </div>
                             <div class="col-60 " style="float:right;">
-                                <p>应收合计：3500</p>
+                                   <%if (v.freightMode == 1)
+                                       {%>
+                                <p>应收合计：<%=TotalTF %></p>
+                                <%} %>
+                                 <%if (v.freightMode == 2)
+                                       {%>
+                                <p>应收合计：<%=TotalXF %></p>
+                                <%} %>
+                                 <%if (v.freightMode == 3)
+                                       {%>
+                                <p>应收合计：<%=TotalKF %></p>
+                                <%} %>
                             </div>
                         </div>
 
