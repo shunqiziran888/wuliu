@@ -104,7 +104,7 @@
                                                           <%if (v.State == 4)
                                                          {%>
                                                         <p class="zbsh-shr col-50" style="padding: 0 .6rem;">
-                                                            <a href="/LC/Customer/SignGood/LC_SgDetails.aspx?OID=<%=v.OrderID %>" class="button button-fill button-success" style="color: #fff;"><%=v.State.Value.ConvertData<OrderStateEnum>().EnumToName()%></a>
+                                                            <a href="/LC/Customer/SignGood/LC_SgDetails.aspx?OID=<%=v.OrderID %>&GReceivables=<%=v.GReceivables %>&Freight=<%=v.Freight %>&OtherExpenses=<%=v.OtherExpenses %>&Number=<%=v.Number %>" class="button button-fill button-success" style="color: #fff;"><%=v.State.Value.ConvertData<OrderStateEnum>().EnumToName()%></a>
                                                         </p>
                                                         <%}
                                                         else if(v.State!=4)

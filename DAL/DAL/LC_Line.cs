@@ -255,5 +255,21 @@ namespace DAL.DAL
                 return new Tuple<bool, string>(false, "添加失败请重试!");
             return new Tuple<bool, string>(true, string.Empty);
         }
+        /// <summary>
+        /// 中转-中转地下拉
+        /// </summary>
+        /// <param name="UID"></param>
+        /// <returns></returns>
+        public static Tuple<bool, string, List<Model.Model.LC_Line>> GetLCEndList(string UID)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Line), "UID='" + UID + "'");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string, List<Model.Model.LC_Line>>(false, ids.errormsg, null);
+            if (ids.ReadIsOk())
+                return new Tuple<bool, string, List<Model.Model.LC_Line>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Line>());
+            return new Tuple<bool, string, List<Model.Model.LC_Line>>(true, "没有任何数据!", new List<Model.Model.LC_Line>());
+
+        }
     }
 }

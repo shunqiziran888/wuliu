@@ -116,7 +116,7 @@
                                             </li>
                                         </ul>
                                         <div class="col-20">
-                                            <a href="/LC/Business/DschargeGood/LC_TransferEdit.aspx?OID=<%=v.OrderID %>" class="button button-fill button-success">中转</a>
+                                            <a href="/LC/Business/DschargeGood/LC_TransferEdit.aspx?OID=<%=v.OrderID %>&Destination=<%=v.Destination %>" class="button button-fill button-success">中转</a>
                                         </div>
                                     </li>
                                     <%} %>

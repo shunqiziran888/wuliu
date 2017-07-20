@@ -44,7 +44,7 @@
 
                                      %>
                         <li class="hwqs-li">
-                            <a href="/LC/Customer/SignGood/LC_SgDetails.aspx?OID=<%=v.OrderID %>" class="row">
+                            <a href="/LC/Customer/SignGood/LC_SgDetails.aspx?OID=<%=v.OrderID %>&GReceivables=<%=v.GReceivables %>&Freight=<%=v.Freight %>&OtherExpenses=<%=v.OtherExpenses %>&Number=<%=v.Number %>" class="row">
                                 <div class="col-90">
                                     <div class="row" style="padding: .2rem 0;">
                                         <div class="col-40"> 发货人： <span><%=v.Consignor %></span></div>

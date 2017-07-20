@@ -36,7 +36,7 @@ namespace DAL.DAL
                 return new Tuple<bool, string, List<Model.Model.LC_User>>(true, string.Empty, ids.GetVOList<Model.Model.LC_User>());
             return new Tuple<bool, string, List<Model.Model.LC_User>>(true, "没有任何数据!", new List<Model.Model.LC_User>());
         }
-        public static Tuple<bool, string, List<Dictionary<string, I_ModelBase>>> GetLCFHADDList(int CityID,string logID,GlobalBLL.UserLoginVO myuservo)
+        public static Tuple<bool, string, List<Dictionary<string, I_ModelBase>>> GetLCFHADDList(GlobalBLL.UserLoginVO myuservo)
         {
 
             //获取我绑定的物流列表
@@ -57,7 +57,6 @@ namespace DAL.DAL
                 typeof(Model.Model.LC_Line)
             };
             sql = makesql.MakeSelectArrSql(tlist, "{0}.UID={1}.UID and {0}.UID in ("+ ubll_list.Select(x=>"'"+x.LogisticsUid+"'").ToList().ListToString()+ ")");
-            //sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "CityID=" + CityID + " and ZType=1 and LogisticsName is not null");
             ids = db.Read(sql);
             if (!ids.flag)
                 return new Tuple<bool, string, List<Dictionary<string, I_ModelBase>>>(false, ids.errormsg, null);

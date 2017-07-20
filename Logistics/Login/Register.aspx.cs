@@ -40,11 +40,11 @@ namespace Logistics.Login
                         State = GetValue<int>("State"),//状态
                         LCID = GetValue("LCID")//上级物流ID
                     };
-                    string LogisticsUid = GetValue("LogisticsUid");//物流ID
+                    //string LogisticsUid = GetValue("LogisticsUid");//物流ID
                     string FalseValue = GetValue("FalseValue");//判断绑定
                     string ZNumber = GetValue("Phone");//帐号
                     string Pwd = GetValue("Password");//密码
-                    //string LogisticsUid = "111111";
+                    string LogisticsUid = "6cfe97409cd87419";
                     string yonghu = GetValue("yonghu");
                     string UIDS = GetValue("UIDS");
                     if (yonghu== "yhbd" && Pwd=="")

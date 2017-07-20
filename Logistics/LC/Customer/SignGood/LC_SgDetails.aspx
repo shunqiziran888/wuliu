@@ -212,17 +212,8 @@
                         <p style="    margin-top: 1rem;    padding:0 2.5rem;"><a href="#" class="button button-big shenqingzhongzhuan" style="background:#ffa726;border:none;color:#fff;">不去原返</a></p>
                     </div>
                     <%} %>
-
-
-
                 </div>
-
-
             </div>
-
-
-
-
         </div>
     </div>
 
