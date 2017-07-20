@@ -259,9 +259,17 @@ $(window).load(function() {
 	    {
 	        var Phone = $("#Phone").val();
 	        var Password = $("#Password").val();
+	        var Passwords = $('#Password').css('display');
 	        GetHtml("/Login/Register.aspx", { Phone: Phone, Password: Password }, function (data) {
 	        });
-	        document.getElementById("form1").submit();
+	        if (Password == "" && Passwords == 'block')
+	        {
+	            alert("请填写密码！");
+	        }
+	        else
+	        {
+	            document.getElementById("form1").submit();
+	        }
 	    }
 	        //$("#updatebtn").click(function () {
 	        //    var LogisticsName = $("#LogisticsName").val();

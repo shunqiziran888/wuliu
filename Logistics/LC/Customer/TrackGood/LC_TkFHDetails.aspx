@@ -101,6 +101,9 @@
                                                 <div class="col-100">
                                                     <i class="zbsh-xd1 row">
                                                         <p class="zbsh-hh col-50">货号： <span><%=v.GoodNo %></span></p>
+                                                        <p class="zbsh-shr col-50" style="padding: 0 .6rem;">
+                                                            <a class="button button-fill button-success" style="color: #fff;"><%=v.State.Value.ConvertData<OrderStateEnum>().EnumToName()%></a>
+                                                        </p>
                                                     </i>
                                                      <i class="zbsh-xd1 row">
                                                           <p class="zbsh-shr col-50">收货人： <span><%=v.Consignee %></span></p> 
