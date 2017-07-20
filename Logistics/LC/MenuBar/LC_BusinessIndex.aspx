@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LC_Index.aspx.cs" Inherits="Logistics.LC_Index.LC_Index" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LC_BusinessIndex.aspx.cs" Inherits="Logistics.LC.MenuBar.LC_BusinessIndex" %>
 
 <!DOCTYPE html>
 
@@ -48,19 +48,19 @@
             </header>
 
             <nav class="bar bar-tab">
-                <a class="tab-item external active" href="index.html">
+                <a class="tab-item external active" href="/LC/MenuBar/LC_BusinessIndex.aspx">
                   <span class="icon iconfont icon-filetexto"></span>
                   <span class="tab-label">物流业务</span>
               </a>
-                <a class="tab-item external" href="../count/index.html">
+                <a class="tab-item external" href="/LC/MenuBar/OperationCountIndex.aspx">
                   <span class="icon iconfont icon-fcstubiao19"></span>
                   <span class="tab-label">运营统计</span>
               </a>
-                <a class="tab-item external" href="../manage/index.html">
+                <a class="tab-item external" href="/LC/MenuBar/LC_Manage.aspx">
                   <span class="icon iconfont icon-guanli"></span>
                   <span class="tab-label">物流管理</span>
               </a>
-                <a class="tab-item external" href="../user/index.html">
+                <a class="tab-item external" href="/LC/MenuBar/Personal.aspx">
                   <span class="icon iconfont icon-user-circle"></span>
                   <span class="tab-label">我的</span>
               </a>
@@ -75,13 +75,13 @@
               </div> -->
                     <ul class="zbshangjia-ul">
                         <li class="shangjia-li1">
-                            <a href="shouhuo.html" class="row">
+                            <a href="/LC/Business/ReceiptGood/LC_GoodsReceipt.aspx" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-localshipping"></span>
                                 </div>
                                 <div class="col-50 shangjia-center">
                                     收货
-                                    <span class="prompt_msg" >150</span>
+                                    <span class="prompt_msg" ><%=list.Count%></span>
                                 </div>
                                 <div class="col-20 shangjia-right">
                                     <span class="iconfont icon-gengduo"></span>
@@ -89,7 +89,7 @@
                             </a>
                         </li>
                         <li class="shangjia-li2">
-                            <a href="zhuangche.html" class="row">
+                            <a href="/LC/Business/PretendCar/LC_IndexPC.aspx" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-traffic"></span>
                                 </div>
@@ -102,7 +102,7 @@
                             </a>
                         </li>
                         <li class="shangjia-li3">
-                            <a href="jieche.html" class="row">
+                            <a href="/LC/Business/MeetCar/LC_IndexMC.aspx" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-beenhere"></span>
                                 </div>
@@ -115,7 +115,7 @@
                             </a>
                         </li>
                         <li class="shangjia-li4">
-                            <a href="fanghuo.html" class="row">
+                            <a href="/LC/Business/DschargeGood/IndexDhg.aspx" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-supervisoraccount"></span>
                                 </div>
@@ -128,7 +128,7 @@
                             </a>
                         </li>
                         <li class="shangjia-li5">
-                            <a href="rijiezhang.html" class="row">
+                            <a href="#" onclick="No()" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-building"></span>
                                 </div>
@@ -141,7 +141,7 @@
                             </a>
                         </li>
                         <li class="shangjia-li6">
-                            <a href="shouqiankuan.html" class="row">
+                             <a href="#" onclick="No()" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-money"></span>
                                 </div>
@@ -155,7 +155,7 @@
                         </li>
 
                         <li class="shangjia-li7">
-                            <a href="yichangchuli.html" class="row">
+                             <a href="#" onclick="No()" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-usertimes1"></span>
                                 </div>
@@ -168,7 +168,7 @@
                             </a>
                         </li>
                         <li class="shangjia-li8">
-                            <a href="daikuanguanli.html" class="row">
+                             <a href="#" onclick="No()" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-jpy"></span>
                                 </div>
@@ -188,7 +188,7 @@
         </div>
     </div>
 
-   <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js"></script>
+  <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js" charset='utf-8'></script>
 
     <script>
         $(function () {
@@ -200,3 +200,9 @@
 </body>
 
 </html>
+<script type="text/javascript">
+    function No()
+    {
+        alert("功能暂未开放！");
+    }
+</script>

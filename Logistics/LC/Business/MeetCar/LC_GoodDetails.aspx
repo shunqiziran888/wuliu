@@ -10,126 +10,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>物流管理系统</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
     <link rel="stylesheet" href="/Style/css/sui/sm.min.css">
     <link rel="stylesheet" href="/Style/css/sui/sm-extend.min.css">
     <link href="/Style/css/iconlink.css" rel="stylesheet">
     <link rel="stylesheet" href="/Style/css/style.css">
-    <style type="text/css" media="screen">
-        .wyfh-ul .dingdan-li .dingdan-right {
-            margin-top: 0rem;
-        }
-        
-        .dingdan-ul .dingdan-li {
-            height: 50px;
-            line-height: 50px;
-            padding: 0 1rem;
-        }
-        
-        .top-btn {
-            padding: .5rem 2rem;
-        }
-        
-        .top-btn a {
-            height: 2.5rem;
-            line-height: 2.5rem;
-        }
-        
-        .top-btn a span {
-            font-size: .7rem;
-            margin-right: .2rem;
-        }
-        
-        .xiangqing {
-            margin: .5rem;
-            background: #fff;
-            border-radius: 10px;
-            padding: .5rem;
-            border: 1px solid #bbb;
-        }
-        
-        .xiangqing .row {
-            margin-left: 0;
-            border-bottom: 1px solid #d0d0d0;
-        }
-        
-        .xiangqing .row:last-child {
-            border: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        
-        .xiangqing .row .col-20 {
-            margin-left: 0;
-            width: 20%;
-            text-align: center;
-        }
-        
-        .p-tongji {
-            font-size: .7rem;
-            text-align: center;
-            margin-bottom: .3rem;
-        }
-        
-        .xiangqing li {
-            font-size: .8rem;
-            margin-bottom: .25rem;
-            padding-bottom: .25rem;
-        }
-        
-        .xiangqing .td-body {
-            border-bottom: 1px solid #bbb;
-        }
-        
-        .xiangqing .td-header span {
-            font-size: .6rem;
-        }
-        
-        .xiangqing .td-body span {
-            font-size: .5rem;
-        }
-        
-        .col-12 {
-            width: 12%!important;
-        }
-        
-        .col-15 {
-            width: 15%!important;
-        }
-        
-        .col-33 {
-            width: 33%!important;
-        }
-        
-        .xlmingcheng {
-            font-size: .7rem;
-            text-align: center;
-            position: relative;
-        }
-        
-        .xlmingcheng .zhuangtai {
-            position: absolute;
-            left: 1rem;
-            top: .6rem;
-        }
-        
-        .xlmingcheng .shoufadi {
-            font-size: .8rem;
-        }
-        
-        .jieche_btn {
-            text-align: center;
-            display: block;
-            margin-top: 1rem;
-        }
-        
-        .jieche_btn i {
-            padding: .5rem 2.5rem;
-            background: #2dbd4a;
-            color: #fff;
-            border-radius: 4px;
-            font-size: 16px;
+    <style>
+        input[type=checkbox]{
+            -webkit-appearance:checkbox;
+            height: .8rem;
         }
     </style>
 </head>
@@ -139,46 +31,70 @@
         <div class="page page-current">
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
-                <a class="icon icon-left pull-left external" href="/LC/Business/MeetCar/LC_IndexMC.aspx"></a>
-                <h1 class="title">物流管理系统</h1>
+                <a href="/LC/Business/MeetCar/LC_IndexMC.aspx" class="icon iconfont icon-zuo pull-left"></a>
+                <!-- <p class="add_wuliu">
+                    <a class="add_icon icon iconfont icon-eventnote pull-right" href="history_log.html"></a>
+                    <i class="add_txt">历史记录</i>
+                </p> -->
+                <a href="/LC/Business/MeetCar/LC_Success.aspx" class="icon pull-right dis_inline" style="background:#009621;color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">下一步</a>
+                <h1 class="title">接车</h1>
             </header>
-            <div class="content" style="background:#ededed;">
-                <div class="page-index">
-                    <ul class="xiangqing xlmingcheng">
-                        <span class="zhuangtai">已装车</span>
-                        <span class="shoufadi"><%=DAL.DAL.DALBase.GetAddressFromID(CFD)?.Item2?.Name %>---<%=DAL.DAL.DALBase.GetAddressFromID(MDD)?.Item2?.Name %></span>
-                    </ul>
-                    <ul class="xiangqing">
 
-                        <li class="row td-header">
-                            <span class="col-20">收货人</span>
-                            <span class="col-20">货名</span>
-                            <span class="col-20 col-12">件数</span>
-                            <span class="col-20 col-15">运费</span>
-                            <span class="col-20 col-33">货号</span>
-                        </li>
-                         <%
-                                    foreach(var v in list)
-                                    {
-                                        
-                                     %>
-                        <li class="row td-body">
-                            <span class="col-20"><%=v.Consignee %></span>
-                            <span class="col-20"><%=v.GoodName %></span>
-                            <span class="col-20 col-12"><%=v.Number %></span>
-                            <span class="col-20 col-15"><%=Math.Round(v.Freight.ConvertData<decimal>(),2) %></span>
-                            <span class="col-20 col-33"><%=v.GoodNo %></span>
-                        </li>
-                        <%} %>
-                    </ul>
-                    <a href="/LC/Business/MeetCar/LC_Success.aspx?CH=<%=list.GetIndexValue(0).VehicleID%>&Start=<%=list.GetIndexValue(0).Initially %>&End=<%=list.GetIndexValue(0).Destination %>" class="jieche_btn"><i>确认接车</i></a>
+
+            <div class="content" style="background:#f2f2f2;">
+                <div class="page-index">
+                    <!-- <div class="searchbar">
+                        <div class="search-input">
+                            <label class="icon icon-search" for="search"></label>
+                            <input type="search" id='search' placeholder='搜索订单' />
+                        </div>
+                    </div> -->
+                    <div class="white mart_20" style="padding:1rem;line-height:1.5rem;">
+                        <p class="fz_16">装车： <span>23单</span><span style="margin-left:1rem;">计289件</span></p>
+                        <p class="dis_flex fz_14 jus_bet fc_ash"><i class="col_30">运费： <span>2523元</span></i><i class="col_30">运费： <span>2523元</span></i><i class="col_30">运费： <span>2523元</span></i></p>
+                        <p class="dis_flex fz_14 jus_bet fc_ash"><i class="col_30">运费： <span>2523元</span></i><i class="col_30">运费： <span>2523元</span></i><i class="col_30">运费： <span>2523元</span></i></p>
+                    </div>
+                    <form>
+                        <label class="dis_flex jus_bet ali_center mart_10 white" style="padding:.5rem">
+                            <div>
+                                <div style="line-height:1.5rem;">
+                                <p class="fz_14">收货人： <i>小强003</i></p>
+                                <p class="fz_14">货名件数： <i>啤酒 <span class="fc_red">x15件</span></i></p>
+                                <p class="fz_14"><i>运费：<span>2099</span></i><i>代收款：<span>291</span></i></p>
+                                <p class="fz_14"><i>货号：<span>PExx101010</span></i><i class="fz_12" style="margin-left:1rem;">2016年-12月-23日 09：21</i></p>
+                            </div>
+                            </div>
+                            
+                        </label>
+                        <label class="dis_flex jus_bet ali_center mart_10 white" style="padding:.5rem">
+                            <div>
+                                <div style="line-height:1.5rem;">
+                                <p class="fz_14">收货人： <i>小强003</i></p>
+                                <p class="fz_14">货名件数： <i>啤酒 <span class="fc_red">x15件</span></i></p>
+                                <p class="fz_14"><i>运费：<span>2099</span></i><i>代收款：<span>291</span></i></p>
+                                <p class="fz_14"><i>货号：<span>PExx101010</span></i><i class="fz_12" style="margin-left:1rem;">2016年-12月-23日 09：21</i></p>
+                            </div>
+                            </div>
+                            
+                        </label>
+                        
+                    </form>
                 </div>
+
+
             </div>
         </div>
     </div>
-     <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js">
-    $(function() { $.init(); $.config = { router: false } });
+
+    <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js" charset='utf-8'></script>
+    <%--<script type="text/javascript" src="js/main.js" charset='utf-8'></script>--%>
+    <script>
+        $(function () {
+            $.init();
+            $.config = { router: false }
+        });
     </script>
+
 </body>
 
 </html>

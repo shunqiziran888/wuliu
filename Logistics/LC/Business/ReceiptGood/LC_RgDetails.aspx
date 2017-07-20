@@ -8,8 +8,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>物流商家版</title>
+    <title>物流管理系统</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
@@ -17,62 +18,22 @@
     <link rel="stylesheet" href="/Style/css/sui/sm-extend.min.css">
     <link href="/Style/css/iconlink.css" rel="stylesheet">
     <link rel="stylesheet" href="/Style/css/style.css">
-    <style type="text/css" media="screen">
-        . {
-            display: flex;
-            justify-content: space-between;
+    <style>
+        .zbsh-zffs .huo_name {
+            position: relative;
         }
-        
-        .row .col-50 {
-            margin-left: 0;
+
+        .zbsh-zffs .huo_num {
+            position: absolute;
+            top: -10px;
+            right: -35px;
+            font-size: 16px;
+            color: #f00;
         }
-        
-        .qrsh-ul li {
-            font-size: .5rem;
-        }
-        
-        .qrsh-ul li input {
-            height: 1.1rem;
-        }
-        
-        .qrsh-ul li:last-child a {
-            padding: .3rem 1.25rem;
-        }
-        
-        .popup .content-block {
-            margin: 50% auto;
-            width: 200px;
-            border: 1px solid #bbb;
-            border-radius: 6px;
-            padding: 1rem .5rem;
-        }
-        
-        .popup .content-block .tishi-main {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: .5rem;
-        }
-        
-        .popup .content-block .tishi-main span.iconfont {
-            font-size: 1.5rem;
-            color: #8bc34a;
-        }
-        
-        .popup .content-block .tishi-main .xiangxi {
-            font-size: .7rem;
-        }
-        
-        .popup .content-block .quedingbtn {
-            padding: 0 1rem;
-        }
-        
-        .button-success.button-fill {
-            line-height: 1.5rem;
-            height: 1.5rem;
-        }
-        
-        .qrsh-ul li:last-child a:last-child {
-            margin-left: 0;
+
+        .huo_fnagshi {
+            margin-left: 80px;
+            color: #009621;
         }
     </style>
 </head>
@@ -82,55 +43,56 @@
         <div class="page page-current">
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
-                <a class="icon icon-left pull-left" href="/LC/Business/ReceiptGood/LC_GoodsReceipt.aspx"></a>
+                <a href="/LC/Business/ReceiptGood/LC_GoodsReceipt.aspx" class="icon iconfont icon-zuo pull-left"></a>
+                <!-- <p class="add_wuliu">
+                    <a class="add_icon icon iconfont icon-eventnote pull-right" href="index.html"></a>
+                    <i class="add_txt">历史记录</i>
+                </p> -->
                 <h1 class="title">收货</h1>
             </header>
 
 
-            <div class="content" style="background:#ededed;">
+            <div class="content" style="background:#f2f2f2;">
                 <div class="page-index">
-                    <ul class="qrsh-ul">
-                         <%
+                    <div class="searchbar">
+                        <div class="search-input">
+                            <label class="icon icon-search" for="search"></label>
+                            <input type="search" id='search' placeholder='搜索订单' />
+                        </div>
+                    </div>
+                    <ul class="zbsh-tab1">
+                        <%
                                     foreach(var v in list)
                                     {
                                         
                                      %>
-                        <p>货号： <span><%=v.GoodNo %></span></p>
+                        <li class="zbsh-li">
+                            <a href="#">
+                                <div class="col-100">
+                                    <i class="zbsh-xd2">
+                                  <p class="zbsh-zffs">货物名： <span class="huo_name ft_color_ash"><%=v.GoodName %> <i class="huo_num">x<%=v.Number %></i></span>
+                                    <span class="huo_fnagshi">(<%=v.freightMode.ConvertData<YFFSEnum>().EnumToName() %>)</span></p>
+                                    </i>
+                                    <i class="zbsh-xd1">
+                                  <p class="zbsh-shr">发货人： <span class="ft_color_ash"><%=v.Consignor %></span></p>
+                                  <p class="zbsh-hh ft_color_ash">电话： <span><%=v.FHPhone %></span></p>
+                                </i>
+                                    <i class="zbsh-xd1">
+                                  <p class="zbsh-mdd">收货人： <span class="ft_color_ash"><%=v.Consignee %></span></p>
+                                  <p class="zbsh-hm ft_color_ash">电话： <span><%=v.SHPhone %></span></p>
+                                </i>
 
-                        <li>
-                            目的地： <span><%=DAL.DAL.DALBase.GetAddressFromID(v.Destination.Value)?.Item2?.Name%></span>
-                        </li>
-                        <li class=" row">
-                            <p class="col-50">发货人： <span><%=v.Consignor %></span></p>
-                            <p class="col-50">货物来源： <span><%=v.ReceiptGood.ConvertData<THFSEnum>().EnumToName() %></span></p>
-                        </li>
-
-                        <li class=" row">
-                            <p class="col-50">货名： <span><%=v.GoodName %></span></p>
-                            <p class="col-50">件数： <span><%=v.Number %></span></p>
-                        </li>
-                        <li class=" row">
-                            <p class="col-50">付费方式： <span><%=v.freightMode.ConvertData<YFFSEnum>().EnumToName() %></span></p>
-                            <p class="col-50">代收款： <span><%=Math.Round(v.GReceivables.ConvertData<decimal>(),2)%></span></p>
-                        </li>
-                        <li class=" row">
-                            <p class="col-50">收货人： <span><%=v.Consignee %></span></p>
-                            <p class="col-50">电话： <span><%=v.SHPhone %></span></p>
-                        </li>
-                        <li>
-                            实收件数：<input type="text" id="SSNumber" name="SSNumber">
-                        </li>
-                        <li>
-                            运费金额：<input type="text" id="Freight" name="Freight">
-                        </li>
-                         <%
-                            var isshow = list2.Where(x => x.End.Value == v.Destination).Count()>0;
-                        %>
-
-                    <i class="zbsh-xd1 row" <%= !isshow? string.Empty : "style=\"display:none\""%>>
-                        <p class="zbsh-yf col-50">
-                            中转地：
-                                <select id="End" name="End" style="width: 300px;">
+                                    <i class="zbsh-xd2">
+                                  <p class="zbsh-yf">运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费： <input type="text" id="Freight" name="Freight"></p>
+                                </i>
+                                <i class="zbsh-xd2">
+                                  <p class="zbsh-yf">其它费用： <input type="text" name="" value="" placeholder="￥0.00"></p>
+                                </i>
+                                <i class="zbsh-xd2">
+                                  <p class="zbsh-yf">实收件数： <input type="text" id="SSNumber" name="SSNumber"></p>
+                                </i>
+                                 <i class="zbsh-xd2">
+                                  <p class="zbsh-yf">中&nbsp;&nbsp;转&nbsp;&nbsp;地： <select id="Ends" name="Ends" style="width: 300px;">
                                     <option>请选择</option>
                                     <%
                                         foreach (var v1 in list2)
@@ -150,46 +112,33 @@
                                     %>
 
                                     <%} %>
-                                      </select>
-                                                        </p>
-                                                    </i>
-                        <li>
-                            中转费用：<input type="text"  id="zzCost" name="zzCost">
+                                      </select></p>
+                                </i>
+                                    <i class="zbsh-xd2">
+                                  <p class="zbsh-zffs">目的地： <span class="ft_color_ash"><%=DAL.DAL.DALBase.GetAddressFromID(v.Destination.Value)?.Item2?.Name%></span></p>
+                                </i>
+                                </div>
+
+                            </a>
+                            <div class="xiangdan-btn">
+                               <a href="#" onclick="Submits('<%=v.OrderID %>')">确定收货</a>
+                            </div>
                         </li>
-                           <%if(v.CarryGood==2) { %>
-                        <li>
-                            送货费用：<input type="text"  id="ShzzCost" name="ShzzCost">
-                        </li>
-                          <%}%>
-                         <li>
-                            其他费用：<input type="text" id="OtherExpenses" name="OtherExpenses">
-                        </li>
-                        <li>
-                            <%--<a href="/LC/Business/ReceiptGood/LC_Success.aspx?OrderID=<%=v.OrderID %>" class="open-about">收货</a>--%>
-                            <a href="#" onclick="Submits('<%=v.OrderID %>')">收货</a>
-                        </li>
-                         <%} %>
+                        <%} %>
                     </ul>
                 </div>
+
+
             </div>
         </div>
     </div>
 
-     <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js"></script>
+    <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js" charset='utf-8'></script>
 
     <script>
-        $(function() {
+        $(function () {
             $.init();
-            $.config = {
-                router: false
-            }
-        });
-        $(document).on('click', '.open-about', function() {
-            $.popup('.popup-about');
-        });
-
-        $(document).on('click', '.close-popup', function() {
-            $.closeModal('.popup-about');
+            $.config = { router: false }
         });
     </script>
     <script type="text/javascript">
@@ -198,10 +147,10 @@
             var ssnumber = $("#SSNumber").val();//实收件数
             var Freight = $("#Freight").val();//运费
             var zzCost = $("#zzCost").val();//中转费用
-            var End = $("#End").val();//中转地
+            var Ends = $("#Ends").val();//中转地
             var ShzzCost = $("#ShzzCost").val();//送货费用
             var OtherExpenses = $("#OtherExpenses").val();//送货费用
-            window.location.href = "/LC/Business/ReceiptGood/LC_Success.aspx?OIDDetaila=" + OID + "&ssnumber=" + ssnumber + "&FreightDetail=" + Freight + "&zzCost=" + zzCost + "&ShzzCost=" + ShzzCost + "&OtherExpenses=" + OtherExpenses + "&End="+End;
+            window.location.href = "/LC/Business/ReceiptGood/LC_Success.aspx?OIDDetaila=" + OID + "&ssnumber=" + ssnumber + "&FreightDetail=" + Freight + "&zzCost=" + zzCost + "&ShzzCost=" + ShzzCost + "&OtherExpenses=" + OtherExpenses + "&Ends=" + Ends;
         }
     </script>
 </body>
