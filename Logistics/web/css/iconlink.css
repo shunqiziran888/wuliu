@@ -1,0 +1,45 @@
+@import url('http://at.alicdn.com/t/font_3t49vd9vlbs2a9k9.css');
+i.numcolor1 {
+    color: #ff5722;
+}
+
+
+/*::-webkit-scrollbar {
+    width: 3px;
+    height: 16px;
+    background: #bbb;
+}
+
+::-webkit-scrollbar-track-piece {
+    background: #bbb;
+    -webkit-border-radius: 3px;
+}
+*/
+
+
+/* 设置滚动条的样式 */
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+
+/* 滚动槽 */
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+
+/* 滚动条滑块 */
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(30, 39, 30, 0.1);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255, 0, 0, 0.2);
+}

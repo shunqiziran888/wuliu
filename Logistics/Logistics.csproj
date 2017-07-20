@@ -88,6 +88,9 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SuperCommand">
+      <HintPath>..\..\..\LiveVideoWeb\LiveVideoWeb\bin\SuperCommand.dll</HintPath>
+    </Reference>
     <Reference Include="SuperDataBase">
       <HintPath>D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\运营商API平台\bin\SuperDataBase.dll</HintPath>
     </Reference>
@@ -218,6 +221,50 @@
     <Content Include="Style\img\success.png" />
     <Content Include="Style\img\success_bg.png" />
     <Content Include="Style\img\Thumbs.db" />
+    <Content Include="web\all.js" />
+    <Content Include="web\business\choose_bus.html" />
+    <Content Include="web\business\fanghuo.html" />
+    <Content Include="web\business\history_log.html" />
+    <Content Include="web\business\index.html" />
+    <Content Include="web\business\jieche.html" />
+    <Content Include="web\business\jieche_qingdan.html" />
+    <Content Include="web\business\jieche_success.html" />
+    <Content Include="web\business\js\main.js" />
+    <Content Include="web\business\shouhuo.html" />
+    <Content Include="web\business\shouhuo_set.html" />
+    <Content Include="web\business\xuanhuo.html" />
+    <Content Include="web\business\zhuangche.html" />
+    <Content Include="web\business\zhuangche_success.html" />
+    <Content Include="web\count\index.html" />
+    <Content Include="web\css\iconfont.css" />
+    <Content Include="web\css\iconlink.css" />
+    <Content Include="web\css\sjstyle.css" />
+    <Content Include="web\css\style.css" />
+    <Content Include="web\css\sui\sm-extend.css" />
+    <Content Include="web\css\sui\sm-extend.min.css" />
+    <Content Include="web\css\sui\sm.css" />
+    <Content Include="web\css\sui\sm.min.css" />
+    <Content Include="web\css\zbstyle.css" />
+    <Content Include="web\font\iconfont.svg" />
+    <Content Include="web\img\1.png" />
+    <Content Include="web\img\184良食记山楂酒.jpg" />
+    <Content Include="web\img\4.png" />
+    <Content Include="web\img\erweima.png" />
+    <Content Include="web\img\fanxian.png" />
+    <Content Include="web\img\img_search.png" />
+    <Content Include="web\img\jizan-img.png" />
+    <Content Include="web\img\touxiang1.jpeg" />
+    <Content Include="web\img\touxiang2.jpeg" />
+    <Content Include="web\img\user-img.jpg" />
+    <Content Include="web\js\sm-city-picker.js" />
+    <Content Include="web\js\sm-city-picker.min.js" />
+    <Content Include="web\js\sm-extend.js" />
+    <Content Include="web\js\sm-extend.min.js" />
+    <Content Include="web\js\sm.js" />
+    <Content Include="web\js\sm.min.js" />
+    <Content Include="web\js\zepto.min.js" />
+    <Content Include="web\manage\index.html" />
+    <Content Include="web\user\index.html" />
     <None Include="Properties\PublishProfiles\WuLiu.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -225,6 +272,12 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="web\.DS_Store" />
+    <Content Include="web\font\iconfont.eot" />
+    <Content Include="web\font\iconfont.ttf" />
+    <Content Include="web\font\iconfont.woff" />
+    <Content Include="web\img\Thumbs.db" />
+    <Content Include="web\user\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -684,6 +737,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Style\icon\" />
+    <Folder Include="web\icon\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
