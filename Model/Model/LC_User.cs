@@ -46,11 +46,11 @@ namespace Model.Model
         /// </summary>
         private int? _ZType;
         /// <summary>
-        /// 状态
+        /// 状态（0审核中，1正常，2冻结，3封号）
         /// </summary>
         private int? _State;
         /// <summary>
-        /// 
+        /// 物流名称
         /// </summary>
         private string _LogisticsName;
         /// <summary>
@@ -69,6 +69,34 @@ namespace Model.Model
         /// 
         /// </summary>
         private string _LCID;
+        /// <summary>
+        /// 微信昵称
+        /// </summary>
+        private string _WX_NickName;
+        /// <summary>
+        /// 账号OPENID
+        /// </summary>
+        private string _WX_OpenID;
+        /// <summary>
+        /// 头像
+        /// </summary>
+        private string _WX_HeadPic;
+        /// <summary>
+        /// 性别 1男 0女
+        /// </summary>
+        private int? _WX_Sex;
+        /// <summary>
+        /// 省
+        /// </summary>
+        private string _WX_Province;
+        /// <summary>
+        /// 市
+        /// </summary>
+        private string _WX_City;
+        /// <summary>
+        /// 区
+        /// </summary>
+        private string _WX_Country;
         /// <summary>
         /// 
         /// </summary>
@@ -142,7 +170,7 @@ namespace Model.Model
             get { return _ZType; }
         }
         /// <summary>
-        /// 状态
+        /// 状态（0审核中，1正常，2冻结，3封号）
         /// </summary>
         public int? State
         {
@@ -150,7 +178,7 @@ namespace Model.Model
             get { return _State; }
         }
         /// <summary>
-        /// 
+        /// 物流名称
         /// </summary>
         public string LogisticsName
         {
@@ -188,6 +216,62 @@ namespace Model.Model
         {
             set { _LCID = value;}
             get { return _LCID; }
+        }
+        /// <summary>
+        /// 微信昵称
+        /// </summary>
+        public string WX_NickName
+        {
+            set { _WX_NickName = value;}
+            get { return _WX_NickName; }
+        }
+        /// <summary>
+        /// 账号OPENID
+        /// </summary>
+        public string WX_OpenID
+        {
+            set { _WX_OpenID = value;}
+            get { return _WX_OpenID; }
+        }
+        /// <summary>
+        /// 头像
+        /// </summary>
+        public string WX_HeadPic
+        {
+            set { _WX_HeadPic = value;}
+            get { return _WX_HeadPic; }
+        }
+        /// <summary>
+        /// 性别 1男 0女
+        /// </summary>
+        public int? WX_Sex
+        {
+            set { _WX_Sex = value;}
+            get { return _WX_Sex; }
+        }
+        /// <summary>
+        /// 省
+        /// </summary>
+        public string WX_Province
+        {
+            set { _WX_Province = value;}
+            get { return _WX_Province; }
+        }
+        /// <summary>
+        /// 市
+        /// </summary>
+        public string WX_City
+        {
+            set { _WX_City = value;}
+            get { return _WX_City; }
+        }
+        /// <summary>
+        /// 区
+        /// </summary>
+        public string WX_Country
+        {
+            set { _WX_Country = value;}
+            get { return _WX_Country; }
         }
     }
 }

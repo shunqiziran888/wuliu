@@ -1,9 +1,12 @@
-﻿using SuperCommand.Attribute;
+﻿using CustomExtensions;
+using GlobalBLL;
+using SuperCommand.Attribute;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using Tools;
 
 namespace Logistics
 {
@@ -73,6 +76,30 @@ namespace Logistics
         /// 输出文本
         /// </summary>
         /// <param name="msg"></param>
+        /// <returns></returns>
+        public static string OutPutShow(string msg)
+        {
+            MessageState ms = new MessageState()
+            {
+                data = msg
+            };
+            ms.SetMsgState("成功");
+            ms.state = MessageEnum.Success.ConvertData<int>();
+            return MakeJson.ObjectToJson(new
+            {
+                ms.state,
+                ms.key,
+                ms.data
+            }, "yyyy-MM-dd HH:mm:ss");
+        }
 
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <returns></returns>
+        public string GetData()
+        {
+            return this.data?.ToString() ?? string.Empty;
+        }
     }
 }

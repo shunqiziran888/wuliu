@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.3.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.3.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Logistics</RootNamespace>
     <AssemblyName>Logistics</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -47,46 +47,39 @@
     <Reference Include="CustomExtensions">
       <HintPath>D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\运营商API平台\bin\CustomExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.4.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.4.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.4.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.AI.Web, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.4.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.4.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.4.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SuperCommand">
       <HintPath>..\..\..\LiveVideoWeb\LiveVideoWeb\bin\SuperCommand.dll</HintPath>
@@ -95,14 +88,14 @@
       <HintPath>D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\运营商API平台\bin\SuperDataBase.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.3.1\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -111,11 +104,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="ThoughtWorks.QRCode, Version=1.0.4778.30637, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ThoughtWorks.QRCode.1.1.0\lib\ThoughtWorks.QRCode.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Tools">
       <HintPath>D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\运营商API平台\bin\Tools.dll</HintPath>
@@ -175,11 +166,13 @@
     <Content Include="LC\Manage\Vehicle\LC_VehicleDetails.aspx" />
     <Content Include="LC_Pick.aspx" />
     <Content Include="Login\Login.aspx" />
+    <Content Include="Login\login.html" />
     <Content Include="Login\Register.aspx" />
-    <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="scripts\ai.0.22.9-build00167.js" />
+    <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Style\.DS_Store" />
     <Content Include="Style\.vscode\launch.json" />
     <Content Include="Style\.vscode\tasks.json" />
@@ -221,63 +214,21 @@
     <Content Include="Style\img\success.png" />
     <Content Include="Style\img\success_bg.png" />
     <Content Include="Style\img\Thumbs.db" />
-    <Content Include="web\all.js" />
-    <Content Include="web\business\choose_bus.html" />
-    <Content Include="web\business\fanghuo.html" />
-    <Content Include="web\business\history_log.html" />
-    <Content Include="web\business\index.html" />
-    <Content Include="web\business\jieche.html" />
-    <Content Include="web\business\jieche_qingdan.html" />
-    <Content Include="web\business\jieche_success.html" />
-    <Content Include="web\business\js\main.js" />
-    <Content Include="web\business\shouhuo.html" />
-    <Content Include="web\business\shouhuo_set.html" />
-    <Content Include="web\business\xuanhuo.html" />
-    <Content Include="web\business\zhuangche.html" />
-    <Content Include="web\business\zhuangche_success.html" />
-    <Content Include="web\count\index.html" />
-    <Content Include="web\css\iconfont.css" />
-    <Content Include="web\css\iconlink.css" />
-    <Content Include="web\css\sjstyle.css" />
-    <Content Include="web\css\style.css" />
-    <Content Include="web\css\sui\sm-extend.css" />
-    <Content Include="web\css\sui\sm-extend.min.css" />
-    <Content Include="web\css\sui\sm.css" />
-    <Content Include="web\css\sui\sm.min.css" />
-    <Content Include="web\css\zbstyle.css" />
-    <Content Include="web\font\iconfont.svg" />
-    <Content Include="web\img\1.png" />
-    <Content Include="web\img\184良食记山楂酒.jpg" />
-    <Content Include="web\img\4.png" />
-    <Content Include="web\img\erweima.png" />
-    <Content Include="web\img\fanxian.png" />
-    <Content Include="web\img\img_search.png" />
-    <Content Include="web\img\jizan-img.png" />
-    <Content Include="web\img\touxiang1.jpeg" />
-    <Content Include="web\img\touxiang2.jpeg" />
-    <Content Include="web\img\user-img.jpg" />
-    <Content Include="web\js\sm-city-picker.js" />
-    <Content Include="web\js\sm-city-picker.min.js" />
-    <Content Include="web\js\sm-extend.js" />
-    <Content Include="web\js\sm-extend.min.js" />
-    <Content Include="web\js\sm.js" />
-    <Content Include="web\js\sm.min.js" />
-    <Content Include="web\js\zepto.min.js" />
-    <Content Include="web\manage\index.html" />
-    <Content Include="web\user\index.html" />
-    <None Include="Properties\PublishProfiles\WuLiu.pubxml" />
+    <Content Include="Style\scripts\config.js" />
+    <Content Include="Style\scripts\main.js" />
+    <Content Include="Style\scripts\tools\newbase.js" />
+    <Content Include="Style\scripts\tools\template.js" />
+    <Content Include="Style\scripts\tools\tools.js" />
+    <Content Include="Style\scripts\tools\wx.js" />
+    <Content Include="api.ashx" />
+    <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="web\.DS_Store" />
-    <Content Include="web\font\iconfont.eot" />
-    <Content Include="web\font\iconfont.ttf" />
-    <Content Include="web\font\iconfont.woff" />
-    <Content Include="web\img\Thumbs.db" />
-    <Content Include="web\user\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -337,6 +288,16 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="api.ashx.cs">
+      <DependentUpon>api.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ApiCommand\CMD_GetAddressNextList.cs" />
+    <Compile Include="ApiCommand\CMD_GetMyLoginData.cs" />
+    <Compile Include="ApiCommand\CMD_GetToRegUser.cs" />
+    <Compile Include="ApiCommand\CMD_JSSignature.cs" />
+    <Compile Include="ApiCommand\CMD_OAuth.cs" />
+    <Compile Include="WebCommandBase.cs" />
+    <Compile Include="WebCommandVOBase.cs" />
     <Compile Include="Command\AddLogisticsFromPhone.aspx.cs">
       <DependentUpon>AddLogisticsFromPhone.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -718,6 +679,7 @@
     <Compile Include="Login\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MessageState.cs" />
     <Compile Include="PageBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -732,12 +694,12 @@
     <Compile Include="test.aspx.designer.cs">
       <DependentUpon>test.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebCommandRun.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Style\icon\" />
-    <Folder Include="web\icon\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
@@ -793,10 +755,10 @@
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
-      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+      <ErrorText>此项目引用这台计算机上缺少的 NuGet 程序包。使用 NuGet 程序包还原可下载这些程序包。有关详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.3.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.3.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

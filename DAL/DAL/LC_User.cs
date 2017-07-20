@@ -4,6 +4,7 @@ using Model.Model;
 using CustomExtensions;
 using SuperDataBase.InterFace;
 using System.Linq;
+using GlobalBLL;
 
 namespace DAL.DAL
 {
@@ -36,6 +37,98 @@ namespace DAL.DAL
                 return new Tuple<bool, string, List<Model.Model.LC_User>>(true, string.Empty, ids.GetVOList<Model.Model.LC_User>());
             return new Tuple<bool, string, List<Model.Model.LC_User>>(true, "没有任何数据!", new List<Model.Model.LC_User>());
         }
+        /// <summary>
+        /// 验证是否需要注册
+        /// </summary>
+        /// <param name="myuservo"></param>
+        /// <returns></returns>
+        public static (bool, string, object) GetToRegUser(UserLoginVO myuservo)
+        {
+            var vo = GetUserVoFromId(myuservo.id);
+            if (!vo.Item1)
+                return (false, vo.Item2,null);
+            if (vo.Item3.ZNumber.StrIsNull())
+            {
+                switch (myuservo.accountType)
+                {
+                    case AccountTypeEnum.普通用户账号:
+                    case AccountTypeEnum.物流公司员工账号:
+                    case AccountTypeEnum.物流账号:
+                        break;
+                    default:
+                        return (false, "账号类型不符无法进行注册操作!", null);
+                }
+                return (true, string.Empty, new
+                {
+                    IsReg = false,
+                    vo.Item3.ZType,
+                    vo.Item3.PositionID,
+                });
+            }
+            else
+            {
+                return (true, "不需要注册!", new
+                {
+                    IsReg = true, //已注册
+                    vo.Item3.ZType,
+                    vo.Item3.PositionID,
+                });
+            }
+        }
+
+        /// <summary>
+        /// 添加或者更新用户数据
+        /// </summary>
+        /// <param name="suser"></param>
+        /// <returns></returns>
+        public static (bool, string, Model.Model.LC_User suser) AddOrUpdateUserVO(Model.Model.LC_User suser)
+        {
+            var box = db.CreateTranSandbox<(bool, string, Model.Model.LC_User suser)>((db) =>
+            {
+                //获取用户是否存在
+                sql = makesql.MakeCount(nameof(Model.Model.LC_User), "WX_OpenID=@WX_OpenID", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@WX_OpenID",suser.WX_OpenID)
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg,null);
+                if (ids.Count() > 0) //更新数据
+                {
+                    //更新用户数据
+                    suser.ZType = null;
+                    sql = makesql.MakeUpdateSQL(suser, "WX_OpenID=@WX_OpenID");
+                }
+                else
+                {
+                    suser.CreateTime = DateTime.Now;
+                    suser.UID = Tools.NewGuid.GuidTo16String();
+                    if (suser.ZType <= 0)
+                        return (false, "账号类型不正确!",null);
+                    sql = makesql.MakeInsertSQL(suser);
+                }
+                ids = db.Exec(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg,null);
+                if (!ids.ExecOk())
+                    return (false, "更新或添加用户失败!",null);
+
+                //获取最后的数据
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "WX_OpenID=@WX_OpenID", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@WX_OpenID",suser.WX_OpenID)
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg,null);
+                if (!ids.ReadIsOk())
+                    return (false, "刚注册完的数据消失了???",null);
+                Model.Model.LC_User new_suser = ids.GetVOList<Model.Model.LC_User>()[0];
+
+                db.Commit();
+                return (true, string.Empty, new_suser);
+            });
+            return box;
+        }
+
         public static Tuple<bool, string, List<Dictionary<string, I_ModelBase>>> GetLCFHADDList(GlobalBLL.UserLoginVO myuservo)
         {
 
@@ -65,6 +158,20 @@ namespace DAL.DAL
             return new Tuple<bool, string, List<Dictionary<string, I_ModelBase>>>(true, "没有任何数据", null);
         }
         /// <summary>
+        /// 获取用户数据
+        /// </summary>
+        /// <param name="my_openid"></param>
+        /// <returns></returns>
+        public static (bool, string, Model.Model.LC_User) GetUserDataFromOpenID(string my_openid)
+        {
+            var box = db.CreateDBSandbox((db) =>
+            {
+                return GetUserVOFromOpenID(my_openid, db);
+            });
+            return box;
+        }
+
+        /// <summary>
         /// 获取申请人列表
         /// </summary>
         /// <returns></returns>
@@ -88,6 +195,8 @@ namespace DAL.DAL
                 return new Tuple<bool, string, List<Model.Model.LC_User>>(true, string.Empty, ids.GetVOList<Model.Model.LC_User>());
             return new Tuple<bool, string, List<Model.Model.LC_User>>(true, "没有任何数据!", new List<Model.Model.LC_User>());
         }
+
+
         /// <summary>
         /// 
         /// </summary>
