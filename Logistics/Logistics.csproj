@@ -173,6 +173,10 @@
     <Content Include="LC\Manage\Vehicle\LC_Vehicle.aspx" />
     <Content Include="LC\Manage\Vehicle\LC_VehicleAdd.aspx" />
     <Content Include="LC\Manage\Vehicle\LC_VehicleDetails.aspx" />
+    <Content Include="LC\MenuBar\LC_BusinessIndex.aspx" />
+    <Content Include="LC\MenuBar\LC_Manage.aspx" />
+    <Content Include="LC\MenuBar\OperationCountIndex.aspx" />
+    <Content Include="LC\MenuBar\Personal.aspx" />
     <Content Include="LC_Pick.aspx" />
     <Content Include="Login\Login.aspx" />
     <Content Include="Login\Register.aspx" />
@@ -194,33 +198,7 @@
     <Content Include="Style\css\style8.css" />
     <Content Include="Style\css\styles.css" />
     <Content Include="Style\css\success.css" />
-    <Content Include="Style\font\iconfont.eot" />
-    <Content Include="Style\font\iconfont.ttf" />
-    <Content Include="Style\font\iconfont.woff" />
-    <Content Include="Style\img\code.jpg" />
-    <Content Include="Style\img\home_icon.png" />
-    <Content Include="Style\img\icon2b.png" />
-    <Content Include="Style\img\lock_icon_copy.png" />
-    <Content Include="Style\img\login_bg.png" />
-    <Content Include="Style\img\login_pwd.png" />
-    <Content Include="Style\img\login_qq.png" />
-    <Content Include="Style\img\login_user.png" />
-    <Content Include="Style\img\login_wb.png" />
-    <Content Include="Style\img\msg.png" />
-    <Content Include="Style\img\new_金馆长.jpg" />
-    <Content Include="Style\img\plugmenu1.png" />
-    <Content Include="Style\img\plugmenu2.png" />
-    <Content Include="Style\img\plugmenu3.png" />
-    <Content Include="Style\img\plugmenu4.png" />
-    <Content Include="Style\img\plugmenu5.png" />
-    <Content Include="Style\img\plugmenu6.png" />
-    <Content Include="Style\img\plugmenu8.png" />
-    <Content Include="Style\img\pwd.png" />
-    <Content Include="Style\img\reg_bg.png" />
-    <Content Include="Style\img\send.png" />
-    <Content Include="Style\img\success.png" />
-    <Content Include="Style\img\success_bg.png" />
-    <Content Include="Style\img\Thumbs.db" />
+    <Content Include="Style\font\iconfont.svg" />
     <Content Include="web\all.js" />
     <Content Include="web\business\choose_bus.html" />
     <Content Include="web\business\fanghuo.html" />
@@ -246,16 +224,6 @@
     <Content Include="web\css\sui\sm.min.css" />
     <Content Include="web\css\zbstyle.css" />
     <Content Include="web\font\iconfont.svg" />
-    <Content Include="web\img\1.png" />
-    <Content Include="web\img\184良食记山楂酒.jpg" />
-    <Content Include="web\img\4.png" />
-    <Content Include="web\img\erweima.png" />
-    <Content Include="web\img\fanxian.png" />
-    <Content Include="web\img\img_search.png" />
-    <Content Include="web\img\jizan-img.png" />
-    <Content Include="web\img\touxiang1.jpeg" />
-    <Content Include="web\img\touxiang2.jpeg" />
-    <Content Include="web\img\user-img.jpg" />
     <Content Include="web\js\sm-city-picker.js" />
     <Content Include="web\js\sm-city-picker.min.js" />
     <Content Include="web\js\sm-extend.js" />
@@ -266,6 +234,9 @@
     <Content Include="web\manage\index.html" />
     <Content Include="web\user\index.html" />
     <None Include="Properties\PublishProfiles\WuLiu.pubxml" />
+    <Content Include="Style\font\iconfont.eot" />
+    <Content Include="Style\font\iconfont.ttf" />
+    <Content Include="Style\font\iconfont.woff" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -276,7 +247,6 @@
     <Content Include="web\font\iconfont.eot" />
     <Content Include="web\font\iconfont.ttf" />
     <Content Include="web\font\iconfont.woff" />
-    <Content Include="web\img\Thumbs.db" />
     <Content Include="web\user\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
@@ -290,22 +260,6 @@
     <Content Include="Style\css\sui\sm.css" />
     <Content Include="Style\css\sui\sm.min.css" />
     <Content Include="Style\css\zbstyle.css" />
-    <Content Include="Style\font\iconfont.svg" />
-    <Content Include="Style\img\1.png" />
-    <Content Include="Style\img\184良食记山楂酒.jpg" />
-    <Content Include="Style\img\4.png" />
-    <Content Include="Style\img\erweima.png" />
-    <Content Include="Style\img\fanxian.png" />
-    <Content Include="Style\img\img_search.png" />
-    <Content Include="Style\img\jizan-img.png" />
-    <Content Include="Style\img\tick.png" />
-    <Content Include="Style\img\touxiang1.jpeg" />
-    <Content Include="Style\img\touxiang2.jpeg" />
-    <Content Include="Style\img\user-img.jpg" />
-    <Content Include="Style\img\user_icon_copy.png" />
-    <Content Include="Style\img\user_name.png" />
-    <Content Include="Style\img\u_s1.png" />
-    <Content Include="Style\img\u_s2.png" />
     <Content Include="Style\scripts\address.js" />
     <Content Include="Style\scripts\ai.0.22.9-build00167.js" />
     <Content Include="Style\scripts\ai.0.22.9-build00167.min.js" />
@@ -697,6 +651,34 @@
     <Compile Include="LC\Manage\Vehicle\LC_VehicleDetails.aspx.designer.cs">
       <DependentUpon>LC_VehicleDetails.aspx</DependentUpon>
     </Compile>
+    <Compile Include="LC\MenuBar\LC_BusinessIndex.aspx.cs">
+      <DependentUpon>LC_BusinessIndex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\MenuBar\LC_BusinessIndex.aspx.designer.cs">
+      <DependentUpon>LC_BusinessIndex.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\MenuBar\LC_Manage.aspx.cs">
+      <DependentUpon>LC_Manage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\MenuBar\LC_Manage.aspx.designer.cs">
+      <DependentUpon>LC_Manage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\MenuBar\OperationCountIndex.aspx.cs">
+      <DependentUpon>OperationCountIndex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\MenuBar\OperationCountIndex.aspx.designer.cs">
+      <DependentUpon>OperationCountIndex.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\MenuBar\Personal.aspx.cs">
+      <DependentUpon>Personal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\MenuBar\Personal.aspx.designer.cs">
+      <DependentUpon>Personal.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LC_Pick.aspx.cs">
       <DependentUpon>LC_Pick.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -737,6 +719,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Style\icon\" />
+    <Folder Include="Style\img\" />
     <Folder Include="web\icon\" />
   </ItemGroup>
   <ItemGroup>

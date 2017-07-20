@@ -15,6 +15,187 @@
     -right: 0px;
     margin-top: 0px;
 }
+.iconfont {
+    font-size: 1.2rem;
+}
+/* 常用背景色 */
+.white{
+    background: #fff;
+}
+.black{
+    background: #000;
+}
+.gray{
+    background:#ebebeb;
+}
+.yellow{
+    background: #ffd057;
+}
+/* 边框线 */
+.bor_bottom{
+    border-bottom: 1px solid #ebebeb;
+}
+.bor_top{
+    border-top: 1px solid #ebebeb;
+}
+.bor_none{
+    border: none;
+    
+}
+/* 字体颜色 */
+.ft_color_ash{
+    color: rgb(125, 125, 125);
+}
+.fc_ash{
+    color: rgb(125, 125, 125);
+}
+.fc_red{
+    color: #f00;
+}
+.fc_green{
+    color: #009621;
+}
+/* 容器宽度 */
+.col_100{
+    width: 100%;
+}
+.col_90{
+    width:90%;
+}
+.col_80{
+    width:80%;
+}
+.col_70{
+    width:70%;
+}
+.col_60{
+    width:60%;
+}
+.col_50{
+    width: 50%;
+}
+
+.col_40{
+    width: 40%;
+}
+.col_30{
+    width: 30%;
+}
+.col_25{
+    width: 25%;
+}
+.col_20{
+    width: 20%;
+}
+.col_10{
+    width: 10%;
+}
+/* 容器高度 */
+.row_44{
+    height: 2.2rem;
+}
+.li_row_44{
+    line-height: 2.2rem;
+}
+/* 字体大小 */
+.fz_18{
+font-size: 18px;
+}
+.fz_16{
+    font-size: 16px;
+}
+.fz_14{
+    font-size: 14px;
+}
+.fz_12{
+    font-size: 12px;
+}
+/* 对齐方式 */
+.txt_left{
+    text-align: left;
+}
+.txt_center{
+    text-align: center;
+}
+.txt_right{
+    text-align: right;
+}
+.jus_bet{
+    justify-content: space-between;
+}
+.jus_aro{
+    justify-content: space-around;
+}
+.ali_center{
+    align-items: center;
+}
+/* 显示方式 */
+.dis_none{
+    display: none;
+}
+.dis_flex{
+    display: flex;
+}
+.dis_block{
+    display: block;
+}
+.dis_inline{
+    display: inline;
+}
+.dis_in_block{
+    display: inline-block;
+}
+/* 内外边距 */
+.marb_10{
+    margin-bottom: .5rem;
+}
+.marb_20{
+    margin-bottom: 1rem;
+}
+.marb_30{
+    margin-bottom: 1.5rem
+}
+.mart_10{
+    margin-top: .5rem;
+}
+.mart_20{
+    margin-top: 1rem;
+}
+.mart_30{
+    margin-top: 1.5rem
+}
+
+
+.padb_10{
+    padding-bottom: .5rem;
+}
+.padb_20{
+    padding-bottom: 1rem;
+}
+.padb_30{
+    padding-bottom: 1.5rem
+}
+.padt_10{
+    padding-top: .5rem;
+}
+.padt_20{
+    padding-top: 1rem;
+}
+.padt_30{
+    padding-top: 1.5rem
+}
+/* 定位方式 */
+.pos_r{
+position: relative;
+ }
+.pos_a{
+    position: absolute;
+}
+.pos_f{
+    position: fixed;
+}
+
+
 ul{
     list-style: none;
     margin: 0;
@@ -36,13 +217,32 @@ a:focus{
     font-size: 18px;
     background: #f8f8f8;
         bottom: 0px;
+        font-weight: 400;
+}
+    .add_wuliu{
+        float: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 2.2rem;
+        color: #7d7d7d;
+    }
+.add_wuliu a.add_icon{
+    font-size: 1.2rem;
+    padding: 0;
+        color: #7d7d7d;
+}
+.add_wuliu .add_txt{
+    z-index: 20;
+    font-size: .5rem;
 }
 i{
     font-style: normal;
 }
 input{
-    border-radius: 8px;
-    /*-webkit-appearance: none;*/
+    /* border-radius: 8px; */
+    -webkit-appearance: none;
     background: #ffffff;
     border: 1px solid #bbbbbb;
     font-size: .6rem;
@@ -90,9 +290,7 @@ p{
 .row .col-offset-70 {
     margin-left: 34%;
 }
-.iconfont {
-    font-size: 1.2rem;
-}
+
 .page, .page-group {
     background: #ededed;
 }
@@ -501,24 +699,26 @@ p{
     text-align: center;
 }
 .zbshangjia-ul{
-    padding: .5rem 1rem;
+    padding: 1.2rem 0rem;
 }
 .zbshangjia-ul li{
-    height: 2rem;
-    line-height: 2rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
     background: #fff;
-    border: 1px solid #bbbbbb;
-    border-radius: 10px;
-    margin-bottom: .5rem;
+    /* border: 1px solid #bbbbbb;
+    border-radius: 10px; */
+    margin-bottom: .7rem;
 }
 .zbshangjia-ul li a{
     display: block;
 }
 .zbshangjia-ul li .shangjia-center{
-    font-size: .7rem;
-    color: #333333;    
+        font-size: .8rem;
+    color: #333333;
     text-align: center;
     padding-right: 1rem;
+    position: relative;
+    margin-left: 0;
 }
 .zbshangjia-ul li .shangjia-right{
     text-align: center;
@@ -527,28 +727,28 @@ p{
     text-align: right;
 }
 .zbshangjia-ul .shangjia-li1 .shangjia-left span{
-    color: #673ab7;
+    color: #41d9bd;
 }
 .zbshangjia-ul .shangjia-li2 .shangjia-left span{
-    color: #8bc34a;
+    color: #b160b3;
 }
 .zbshangjia-ul .shangjia-li3 .shangjia-left span{
-    color: #555555;
+    color: #009621;
 }
 .zbshangjia-ul .shangjia-li4 .shangjia-left span{
-    color: #8bc34a;
+    color: #a6a6a6;
 }
 .zbshangjia-ul .shangjia-li5 .shangjia-left span{
-    color: #259b24;
+    color: #f2b413;
 }
 .zbshangjia-ul .shangjia-li6 .shangjia-left span{
-    color: #ff5722;
+    color: #b160b3;
 }
 .zbshangjia-ul .shangjia-li7 .shangjia-left span{
-    color: #ff9800;
+    color: #c4594b;
 }
 .zbshangjia-ul .shangjia-li8 .shangjia-left span{
-    color: #607d8b;
+    color: #81a105;
 }
 .zbshangjia-ul li .shangjia-right span{
     color: rgb(96, 125, 139);
@@ -585,37 +785,41 @@ p{
 
 /* 收货页面 */
 .zbsh-tab1{
-    padding:.5rem .5rem;
+    padding:.7rem 0;
 }
 .zbsh-tab1 .zbsh-li{
     background: #fff;
-    border: 1px solid #bbbbbb;
-    border-radius: 10px;
+    /* border: 1px solid #bbbbbb;
+    border-radius: 10px; */
     padding:.5rem;
-    margin-bottom: .3rem;
+    margin-bottom: .7rem;
 }
 .zbsh-tab1 .zbsh-li a{
-    font-size: .6rem;
+    font-size: .7rem;
     display: block;
     margin-left: 0;
     color: #333333;
 }
-.zbsh-tab1 .zbsh-li a .col-90{
-    width: 94%;
+.zbsh-tab1 .zbsh-li a .col-100{
+    width: 100%;
     margin-left: 0%;
 }
-.zbsh-tab1 .zbsh-li a .col-90 i{
+.zbsh-tab1 .zbsh-li a .col-100>i{
     margin-bottom: .3rem;
     display: block;
+        padding-left: 10%;
 }
-.zbsh-tab1 .zbsh-li a .col-90 .zbsh-xd1{
+.zbsh-tab1 .zbsh-li a .col-100 .zbsh-xd1{
     margin-left: 0%;
+        display: flex;
+    justify-content: space-between;
+    padding: 0 10%;
 }
-.zbsh-tab1 .zbsh-li a .col-90 .zbsh-xd1 .col-50{
+.zbsh-tab1 .zbsh-li a .col-100 .zbsh-xd1 .col-50{
     width: 50%;
     margin-left: 0%;
 }
-.zbsh-tab1 .zbsh-li a .col-90 .zbsh-xd2 .zbsh-yf input{
+.zbsh-tab1 .zbsh-li a .col-100 .zbsh-xd2 .zbsh-yf input{
     width: 40%;
     padding-left: .3rem;
 }
@@ -633,10 +837,13 @@ p{
     display: inline-block;
     background: #9ccc65;
     color: #fff;
-    border: 1px solid #7cb342;
-    padding: .18rem .55rem;
+    padding: .3rem 1.2rem;
     font-size: .7rem;
-    border-radius: 8px;
+    border: 1px solid #bbbbbb;
+}
+.zbsh-tab1 .zbsh-li .xiangdan-btn a:last-child{
+
+    margin-left: 1rem;
 }
 .zbsh-tab2{
     padding: .5rem;

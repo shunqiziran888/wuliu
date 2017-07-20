@@ -47,7 +47,7 @@ namespace Logistics.Login
                     //物流总公司
                     if (actype == 1)
                     {
-                        Jump("/LC/Index/LC_Index.aspx");
+                        Jump("/LC/MenuBar/LC_BusinessIndex.aspx");
                     }
                     //物流公司员工
                     else if (actype == 4)
