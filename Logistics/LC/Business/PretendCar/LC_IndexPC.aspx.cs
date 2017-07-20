@@ -12,10 +12,12 @@ namespace Logistics.LC.Business.PretendCar
 {
     public partial class LC_IndexPC : PageLoginBase
     {
-        public List<Model.Model.LC_Line_Other> list = new List<Model.Model.LC_Line_Other>();
+        public List<Model.Model.LC_Line> list = new List<Model.Model.LC_Line>();
         protected void Page_Load(object sender, EventArgs e)
         {
-            var vo = DAL.DAL.LC_Line.GetLineList(-1,GetMyLoginUserVO().uid);
+            var myuservo = GetMyLoginUserVO();
+            string uid = myuservo.uid;
+            var vo = DAL.DAL.LC_Line.GetXLList(uid);
             if (!vo.Item1)
             {
                 //有错误

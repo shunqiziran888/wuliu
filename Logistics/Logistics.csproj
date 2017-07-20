@@ -199,6 +199,16 @@
     <Content Include="Style\css\styles.css" />
     <Content Include="Style\css\success.css" />
     <Content Include="Style\font\iconfont.svg" />
+    <Content Include="Style\img\1.png" />
+    <Content Include="Style\img\184良食记山楂酒.jpg" />
+    <Content Include="Style\img\4.png" />
+    <Content Include="Style\img\erweima.png" />
+    <Content Include="Style\img\fanxian.png" />
+    <Content Include="Style\img\img_search.png" />
+    <Content Include="Style\img\jizan-img.png" />
+    <Content Include="Style\img\touxiang1.jpeg" />
+    <Content Include="Style\img\touxiang2.jpeg" />
+    <Content Include="Style\img\user-img.jpg" />
     <Content Include="web\all.js" />
     <Content Include="web\business\choose_bus.html" />
     <Content Include="web\business\fanghuo.html" />
@@ -237,6 +247,7 @@
     <Content Include="Style\font\iconfont.eot" />
     <Content Include="Style\font\iconfont.ttf" />
     <Content Include="Style\font\iconfont.woff" />
+    <Content Include="Style\img\Thumbs.db" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -719,7 +730,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Style\icon\" />
-    <Folder Include="Style\img\" />
     <Folder Include="web\icon\" />
   </ItemGroup>
   <ItemGroup>
