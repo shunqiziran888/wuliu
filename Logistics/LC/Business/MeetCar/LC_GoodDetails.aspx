@@ -36,7 +36,7 @@
                     <a class="add_icon icon iconfont icon-eventnote pull-right" href="history_log.html"></a>
                     <i class="add_txt">历史记录</i>
                 </p> -->
-                <a href="/LC/Business/MeetCar/LC_Success.aspx" class="icon pull-right dis_inline" style="background:#009621;color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">下一步</a>
+                <a href="/LC/Business/MeetCar/LC_Success.aspx?CH=<%=list.GetIndexValue(0).VehicleID%>&Start=<%=list.GetIndexValue(0).Initially %>&End=<%=list.GetIndexValue(0).Destination %>" class="icon pull-right dis_inline" style="background:#009621;color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">下一步</a>
                 <h1 class="title">接车</h1>
             </header>
 
