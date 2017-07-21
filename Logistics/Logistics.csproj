@@ -209,6 +209,7 @@
     <Content Include="Style\img\touxiang1.jpeg" />
     <Content Include="Style\img\touxiang2.jpeg" />
     <Content Include="Style\img\user-img.jpg" />
+    <Content Include="Style\scripts\main.js" />
     <Content Include="web\all.js" />
     <Content Include="web\business\choose_bus.html" />
     <Content Include="web\business\fanghuo.html" />

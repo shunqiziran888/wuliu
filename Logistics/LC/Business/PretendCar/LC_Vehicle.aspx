@@ -47,31 +47,25 @@
                 <div class="page-index">
                     <p class="dis_flex ali_center white padt_10 padb_10 mart_10" style="line-height:1rem;"><span class="col_40 txt_center">运费</span><span  class="col_60"><input class="col_70" type="text" placeholder="只能输入数字"></span></p>
                     <ul class="bus_list">
+                        <%foreach (var v in list)
+                            { %>
                         <li class="dis_flex ali_center yellow mart_10 active" style="padding:1rem;">
                             <div class="col_90 txt_center">
-                                <strong class="marb_20" style="font-size:30px;font-weight:400;line-height:50px;">鲁M40101(9.6M)</strong>
-                                <p class="fz_14">王小丫  <span>15200000000</span></p>
-                                <p class="fz_12">添加日期：<span>2011-10-30 20：10</span></p>
+                                <strong class="marb_20" style="font-size:30px;font-weight:400;line-height:50px;"><%=v.VehicleNo %>(<%=v.Carshape %>)</strong>
+                                <p class="fz_14"><%=v.Driver %> <span><%=v.UID%></span></p>
+                                <p class="fz_12">添加日期：<span><%=v.CreateTime %></span></p>
                             </div>
                             <i class="iconfont fc_green dis_none">&#xe67b;</i>
                         </li>
-                        <li class="dis_flex ali_center yellow mart_10" style="padding:1rem;">
-                            <div class="col_90 txt_center">
-                                <strong class="marb_20" style="font-size:30px;font-weight:400;line-height:50px;">鲁M40101(9.6M)</strong>
-                                <p class="fz_14">王小丫  <span>15200000000</span></p>
-                                <p class="fz_12">添加日期：<span>2011-10-30 20：10</span></p>
-                            </div>
-                            <i class="iconfont fc_green dis_none">&#xe67b;</i>
-                        </li>
+                        <%} %>
                     </ul>
                 </div>
-
-
             </div>
         </div>
     </div>
 
     <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js" charset='utf-8'></script>
+    <script src="/Style/scripts/main.js"></script>
     <script>
         $(function () {
             $.init();

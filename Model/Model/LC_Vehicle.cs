@@ -14,21 +14,25 @@ namespace Model.Model
         /// </summary>
         private int? _ID;
         /// <summary>
-        /// 
+        /// 车辆表ID
         /// </summary>
         private string _VehicleNo;
         /// <summary>
-        /// 
+        /// 司机
         /// </summary>
         private string _Driver;
         /// <summary>
-        /// 
+        /// 创建时间
         /// </summary>
         private DateTime? _CreateTime;
         /// <summary>
-        /// 
+        /// 物流ID
         /// </summary>
         private string _UID;
+        /// <summary>
+        /// 车型
+        /// </summary>
+        private string _Carshape;
         /// <summary>
         /// 
         /// </summary>
@@ -68,6 +72,19 @@ namespace Model.Model
         {
             set { _UID = value;}
             get { return _UID; }
+        }
+
+        public string Carshape
+        {
+            get
+            {
+                return _Carshape;
+            }
+
+            set
+            {
+                _Carshape = value;
+            }
         }
     }
 }
