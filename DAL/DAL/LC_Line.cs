@@ -124,6 +124,33 @@ namespace DAL.DAL
             });
             return box;
         }
+        /// <summary>
+        /// 获取线路授权列表
+        /// </summary>
+        /// <param name="myuservo"></param>
+        /// <param name="page"></param>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        public static (bool, string, object) GetLineAuthorizationList(UserLoginVO myuservo, int page, int num)
+        {
+            fysql = makesql.MakeSelectFY(typeof(Model.Model.LC_Line), "UID=@UID and State=0", "id desc",page,num,"id",new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@UID",myuservo.uid)
+            });
+            ids = db.Read(fysql);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return (true, "没有任何数据!", new
+                {
+                    allcount = fysql.count,
+                    data = new object[] { }
+                });
+            return (true, string.Empty, new
+            {
+                allcount = fysql.count,
+                data = ids.GetVOList<Model.Model.LC_Line>()
+            });
+        }
 
         /// <summary>
         /// 合作物流

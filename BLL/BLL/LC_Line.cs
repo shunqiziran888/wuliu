@@ -42,6 +42,24 @@ namespace BLL.BLL
 
             return DAL.DAL.LC_Line.LineBinding(myuservo, lineletter, logistics);
         }
+        /// <summary>
+        /// 获取线路授权列表
+        /// </summary>
+        /// <param name="web"></param>
+        /// <returns></returns>
+        public static (bool, string, object) GetLineAuthorizationList(HttpContextBase web)
+        {
+            var myuservo = web.GetMyLoginUserVO();
+            if (myuservo.accountType != AccountTypeEnum.物流账号)
+                return (false, "您的权限不足无法访问此接口!",null);
+            int page = web.GetValue<int>("page");
+            int num = web.GetValue<int>("num");
+            if (page <= 0)
+                page = 1;
+            if (num <= 0)
+                num = 1000;
+            return DAL.DAL.LC_Line.GetLineAuthorizationList(myuservo,page,num);
+        }
 
         /// <summary>
         /// 
