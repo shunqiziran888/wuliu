@@ -754,6 +754,7 @@
     <Compile Include="WebCommandRun.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ApiCommand\GLCommand\" />
     <Folder Include="App_Data\" />
     <Folder Include="LC\Authorize\LineAuthorize\" />
     <Folder Include="Models\" />
