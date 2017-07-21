@@ -91,7 +91,7 @@ namespace DAL.DAL
         /// </summary>
         /// <param name="AreaID"></param>
         /// <returns></returns>
-        internal static string GetAllAddressToString(int AreaID)
+        public static string GetAllAddressToString(int AreaID)
         {
             string allname = string.Empty;
             Model.Model.w_address_basic_data wabd = null;
@@ -109,6 +109,29 @@ namespace DAL.DAL
             }
 
             return allname;
+        }
+        /// <summary>
+        /// 获取完整地址
+        /// </summary>
+        /// <param name="AreaID"></param>
+        /// <returns></returns>
+        public static Tuple<int?, int?, int?> GetAllAddress(int AreaID)
+        {
+            List<int?> _addresslist = new List<int?>();
+            Model.Model.w_address_basic_data wabd = null;
+            wabd = GetAddressFromID(AreaID)?.Item2;
+            _addresslist.Add(wabd.id);
+            if (wabd != null)
+            {
+                wabd = GetAddressFromID(wabd.TopAddressID.ConvertData<int>()).Item2;
+                _addresslist.Add(wabd?.id);
+                if (wabd != null)
+                {
+                    wabd = GetAddressFromID(wabd.TopAddressID.ConvertData<int>()).Item2;
+                    _addresslist.Add(wabd?.id);
+                }
+            }
+            return new Tuple<int?, int?, int?>(_addresslist[2], _addresslist[1], _addresslist[0]);
         }
 
         /// <summary>

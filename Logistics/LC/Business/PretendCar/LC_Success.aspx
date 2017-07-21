@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LC_Success.aspx.cs" Inherits="Logistics.LC.Business.PretendCar.LC_Success" %>
-
+<%@ Import Namespace="CustomExtensions" %>
+<%@ import Namespace="GlobalBLL" %>
+<%@ Import Namespace="System.Linq" %>
 <!DOCTYPE html>
 
 <html>
@@ -42,20 +44,21 @@
                 <h1 class="title">成功</h1>
             </header>
 
-
+            <%foreach (var v in list){ %>
             <div class="content" style="background:#f2f2f2;">
                 <div class="page-index">
                     <div class="txt_center white" style="padding:1rem;margin-top:1rem;">
                         <p> <i class="iconfont fc_green" style="font-size:55px;">&#xe67b;</i></p>
                         <p>装车成功</p>
-                        <p>运费： <span>￥1213</span></p>
-                        <strong  style="font-size:25px; font-weight:400;">鲁M40101(9.6M)</strong>
-                        <p class="fz_12 txt_right mart_20">添加日期： <span>2017-07-20 00：57</span></p>
+                        <p>运费： <span>￥<%=v.Freight %></span></p>
+                        <strong  style="font-size:25px; font-weight:400;"><%=DAL.DAL.DALBase.GetCarFromID(v.VehicleID.Value)?.Item2?.VehicleNo%>(<%=v.VehicleID %>M)</strong>
+                        <p class="fz_12 txt_right mart_20">添加日期： <span><%=v.TruckTime %></span></p>
                     </div>
                 </div>
 
 
             </div>
+            <%} %>
         </div>
     </div>
 
@@ -67,7 +70,7 @@
             $.config = { router: false }
         });
         setInterval(function(){
-            window.location.href="zhuangche.html"
+            window.location.href ="/LC/Business/PretendCar/LC_IndexPC.aspx"
         },2000)
     </script>
 

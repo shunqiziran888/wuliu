@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LC_IndexPC.aspx.cs" Inherits="Logistics.LC.Business.PretendCar.LC_IndexPC" %>
-
+<%@ Import Namespace="SuperDataBase" %>
 <!DOCTYPE html>
 
 <html>
@@ -91,24 +91,28 @@
                    
                     <ul>
                          <%
-                                    foreach(var v in list)
-                                    {
+                             foreach(var v in list)
+                             {
+                                 Model.Model.LC_Line line = v.GetDicVO<Model.Model.LC_Line>();
+                                 Model.Model.LC_User user = v.GetDicVO<Model.Model.LC_User>();
+                                 var addressvoStart = DAL.DAL.DALBase.GetAllAddress(line.Start.Value);
+                                 var addressvoEnd = DAL.DAL.DALBase.GetAllAddress(line.End.Value);
                                      %>
                         <li class="white mart_10">
-                            <a href="/LC/Business/PretendCar/LC_Commodity.aspx"  class="dis_flex jus_bet ali_center" style="padding:.5rem;">
+                            <a href="/LC/Business/PretendCar/LC_Commodity.aspx?Initially=<%=line.Start %>&Destination=<%=line.End %>"  class="dis_flex jus_bet ali_center" style="padding:.5rem;">
                                 <div>
                                     <div>
                                         <div class="dis_flex ali_center ">
                                             <p class="dis_flex" style="flex-direction: column;line-height:1.5rem;">
-                                                <strong class="fz_16">新疆</strong>
-                                                <i class="fz_16">乌鲁木齐市</i>
-                                                <i class="fz_16">哈萨克斯大北湾区</i>
+                                                <strong class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoStart.Item1.Value)?.Item2?.Name%></strong>
+                                                <i class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoStart.Item2.Value)?.Item2?.Name%></i>
+                                                <i class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoStart.Item3.Value)?.Item2?.Name%></i>
                                             </p>
                                             <i class="iconfont " style="font-size:30px;margin:0 .5rem">&#xe6d7;</i>
                                             <p class="dis_flex" style="flex-direction: column;line-height:1.5rem;">
-                                                <strong class="fz_16">新疆</strong>
-                                                <i class="fz_16">乌鲁木齐市</i>
-                                                <i class="fz_16">哈萨克斯大北湾区</i>
+                                                <strong class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoEnd.Item1.Value)?.Item2?.Name%></strong>
+                                                <i class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoEnd.Item2.Value)?.Item2?.Name%></i>
+                                                <i class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoEnd.Item3.Value)?.Item2?.Name%></i>
                                             </p>
                                         </div>
                                         <div style="line-height:1.5rem;margin-top:.5rem;">

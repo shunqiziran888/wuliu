@@ -271,6 +271,7 @@ namespace DAL.DAL
             return new Tuple<bool, string, List<Model.Model.LC_Line>>(true, "没有任何数据!", new List<Model.Model.LC_Line>());
         }
 
+
         public static Tuple<bool, string, List<Model.Model.LC_Line_Other>> GetLineList(int LID,string uid="")
         {
             if (LID > 0 | uid.StrIsNotNull())
@@ -364,7 +365,18 @@ namespace DAL.DAL
             if (ids.ReadIsOk())
                 return new Tuple<bool, string, List<Model.Model.LC_Line>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Line>());
             return new Tuple<bool, string, List<Model.Model.LC_Line>>(true, "没有任何数据!", new List<Model.Model.LC_Line>());
+        }
 
+        public static Tuple<bool,string,List<Dictionary<string, I_ModelBase>>> GetNewLineList(string UID)
+        {
+            var tlist = new Type[] {
+                typeof(Model.Model.LC_Line),
+                typeof(Model.Model.LC_User)
+            };
+            sql = makesql.MakeSelectArrSql(tlist,"{0}.UID={1}.UID and {0}.UID='"+UID+"'");
+            ids = db.Read(sql);
+            
+            return new Tuple<bool, string, List<Dictionary<string, I_ModelBase>>>(true, string.Empty, ids.GetVOList(tlist));
         }
     }
 }

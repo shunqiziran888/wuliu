@@ -36,7 +36,7 @@
                     <a class="add_icon icon iconfont icon-eventnote pull-right" href="history_log.html"></a>
                     <i class="add_txt">历史记录</i>
                 </p> -->
-                <a href="/LC/Business/MeetCar/LC_Success.aspx" class="icon pull-right dis_inline" style="background:#009621;color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">下一步</a>
+                <a href="/LC/Business/MeetCar/LC_Success.aspx?CH=<%=list.GetIndexValue(0).VehicleID%>&Start=<%=list.GetIndexValue(0).Initially %>&End=<%=list.GetIndexValue(0).Destination %>" class="icon pull-right dis_inline" style="background:#009621;color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">下一步</a>
                 <h1 class="title">接车</h1>
             </header>
 
@@ -55,39 +55,29 @@
                         <p class="dis_flex fz_14 jus_bet fc_ash"><i class="col_30">运费： <span>2523元</span></i><i class="col_30">运费： <span>2523元</span></i><i class="col_30">运费： <span>2523元</span></i></p>
                     </div>
                     <form>
+                        <%
+                            foreach (var v in list)
+                            {
+                                     %>
                         <label class="dis_flex jus_bet ali_center mart_10 white" style="padding:.5rem">
                             <div>
                                 <div style="line-height:1.5rem;">
-                                <p class="fz_14">收货人： <i>小强003</i></p>
-                                <p class="fz_14">货名件数： <i>啤酒 <span class="fc_red">x15件</span></i></p>
-                                <p class="fz_14"><i>运费：<span>2099</span></i><i>代收款：<span>291</span></i></p>
-                                <p class="fz_14"><i>货号：<span>PExx101010</span></i><i class="fz_12" style="margin-left:1rem;">2016年-12月-23日 09：21</i></p>
+                                <p class="fz_14">收货人： <i><%=v.Consignee %></i></p>
+                                <p class="fz_14">货名件数： <i><%=v.GoodName %> <span class="fc_red">x<%=v.Number %>件</span></i></p>
+                                <p class="fz_14"><i>运费：<span><%=v.Freight %></span></i><i>代收款：<span><%=v.GReceivables %></span></i></p>
+                                <p class="fz_14"><i>货号：<span><%=v.GoodNo %></span></i><i class="fz_12" style="margin-left:1rem;">暂时不显示（时间）</i></p>
                             </div>
                             </div>
-                            
                         </label>
-                        <label class="dis_flex jus_bet ali_center mart_10 white" style="padding:.5rem">
-                            <div>
-                                <div style="line-height:1.5rem;">
-                                <p class="fz_14">收货人： <i>小强003</i></p>
-                                <p class="fz_14">货名件数： <i>啤酒 <span class="fc_red">x15件</span></i></p>
-                                <p class="fz_14"><i>运费：<span>2099</span></i><i>代收款：<span>291</span></i></p>
-                                <p class="fz_14"><i>货号：<span>PExx101010</span></i><i class="fz_12" style="margin-left:1rem;">2016年-12月-23日 09：21</i></p>
-                            </div>
-                            </div>
-                            
-                        </label>
-                        
+                        <%} %>
                     </form>
                 </div>
-
-
             </div>
         </div>
     </div>
 
     <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js" charset='utf-8'></script>
-    <%--<script type="text/javascript" src="js/main.js" charset='utf-8'></script>--%>
+     <script src="/Style/scripts/main.js"></script>
     <script>
         $(function () {
             $.init();

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>物流管理系统</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- <link rel="shortcut icon" href="/favicon.ico"> -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="../css/sui/sm.min.css">
+    <link rel="stylesheet" href="../css/sui/sm-extend.min.css">
+    <link href="../css/iconlink.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .zbsh-zffs .huo_name {
+            position: relative;
+        }
+
+        .zbsh-zffs .huo_num {
+            position: absolute;
+            top: -10px;
+            right: -35px;
+            font-size: 16px;
+            color: #f00;
+        }
+
+        .huo_fnagshi {
+            margin-left: 80px;
+            color: #009621;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <!-- 你的html代码 -->
+            <header class="bar bar-nav">
+                <a href="index.html" class="icon iconfont icon-zuo pull-left"></a>
+               
+                <a href="save_add_line.html" class="icon pull-right dis_inline green" style="border-radius:4px;color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">保存</a>
+                <h1 class="title">添加线路</h1>
+            </header>
+
+
+            <div class="content" style="background:#f2f2f2;">
+                <div class="page-index">
+                    <div class="dis_flex" style="padding: 1rem;background: #fff;margin-top: .5rem;">
+                        <div class="col_30 txt_right fz_16" style="padding-right: 1rem;">
+                            到达地
+                        </div>
+                        <div class="col_70" style="padding-top: .15rem;">
+                            <p class="marb_10" style="font-size:13px;">省份</p>
+                            <p class="marb_10">
+                                <select>
+                                    <option value="山东">山东省</option>
+                                    <option value="海南省">海南省</option>
+                                </select>
+                            </p>
+                            <p class="marb_10" style="font-size:13px;">城市</p>
+                            <p class="marb_10">
+                                <select>
+                                    <option value="济南">济南</option>
+                                    <option value="滨州">滨州</option>
+                                </select>
+                            </p>
+                            <p class="marb_10" style="font-size:13px;">区/县</p>
+                            <p class="marb_10">
+                                <select>
+                                    <option value="历下区">历下区</option>    
+                                    <option value="天桥区">天桥区</option>    
+                                </select>
+                            </p>
+                            <p class="marb_10" style="font-size:13px;">运单号首字母</p>
+                             <p class="marb_10">
+                                 <select>
+                                    <option value="A">A</option>    
+                                    <option value="B">B</option>    
+                                 </select>
+                             </p>
+                        </div>
+                    </div>
+                    <div class="dis_flex white" style="margin-top:.5rem; padding:1rem;">
+                        <div class="col_30 txt_right fz_16" style="padding-right: 1rem;">
+                            <p class="marb_10">负责人</p>
+                            <p>联系电话</p>
+                        </div>
+                        <div class="col_70">
+                            <p class="marb_10"><input type="text" placeholder="负责人"></p>
+                            <p><input type="text" placeholder="请输入联系电话"></p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script type='text/javascript' src='../all.js' charset='utf-8'></script>
+
+    <script>
+        $(function () {
+            $.init();
+            $.config = { router: false }
+        });
+    </script>
+
+</body>
+
+</html>

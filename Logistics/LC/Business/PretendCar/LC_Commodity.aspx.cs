@@ -12,8 +12,6 @@ namespace Logistics.LC.Business.PretendCar
 {
     public partial class LC_Commodity : PageLoginBase
     {
-        public string StartCityName = null;
-        public string EndCityName = null;
         public int sta;
         public int end;
         public List<Model.Model.LC_Customer> list = new List<Model.Model.LC_Customer>();
@@ -23,10 +21,6 @@ namespace Logistics.LC.Business.PretendCar
             string UID = myuservo.uid;
             sta =GetValue<int>("Initially");
             end =GetValue<int>("Destination");
-            StartCityName = GetValue("StartCityName");
-            EndCityName = GetValue("EndCityName");
-
-
             var vo = DAL.DAL.LC_Customer.GetCmdList(UID,sta,end);
             if (!vo.Item1)
             {
