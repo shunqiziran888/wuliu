@@ -14,23 +14,19 @@ namespace Model.Model
         /// </summary>
         private int? _ID;
         /// <summary>
-        /// 
+        /// 线路ID
         /// </summary>
         private string _LineID;
         /// <summary>
-        /// 
+        /// 线路起始地
         /// </summary>
         private int? _Start;
         /// <summary>
-        /// 
+        /// 线路结束地
         /// </summary>
         private int? _End;
         /// <summary>
-        /// 
-        /// </summary>
-        private int? _UserID;
-        /// <summary>
-        /// 
+        /// 负责人联系电话
         /// </summary>
         private string _Phone;
         /// <summary>
@@ -38,7 +34,7 @@ namespace Model.Model
         /// </summary>
         private DateTime? _DateTime;
         /// <summary>
-        /// 
+        /// 物流公司UID
         /// </summary>
         private string _UID;
         /// <summary>
@@ -50,6 +46,14 @@ namespace Model.Model
         /// </summary>
         private string _BindLogisticsUid;
         /// <summary>
+        /// 负责人姓名
+        /// </summary>
+        private string _ResponsibleName;
+        /// <summary>
+        /// 0 未授权,1已授权
+        /// </summary>
+        private int? _State;
+        /// <summary>
         /// 
         /// </summary>
         public int? ID
@@ -58,7 +62,7 @@ namespace Model.Model
             get { return _ID; }
         }
         /// <summary>
-        /// 
+        /// 线路ID
         /// </summary>
         public string LineID
         {
@@ -66,7 +70,7 @@ namespace Model.Model
             get { return _LineID; }
         }
         /// <summary>
-        /// 
+        /// 线路起始地
         /// </summary>
         public int? Start
         {
@@ -74,7 +78,7 @@ namespace Model.Model
             get { return _Start; }
         }
         /// <summary>
-        /// 
+        /// 线路结束地
         /// </summary>
         public int? End
         {
@@ -82,15 +86,7 @@ namespace Model.Model
             get { return _End; }
         }
         /// <summary>
-        /// 
-        /// </summary>
-        public int? UserID
-        {
-            set { _UserID = value;}
-            get { return _UserID; }
-        }
-        /// <summary>
-        /// 
+        /// 负责人联系电话
         /// </summary>
         public string Phone
         {
@@ -106,7 +102,7 @@ namespace Model.Model
             get { return _DateTime; }
         }
         /// <summary>
-        /// 
+        /// 物流公司UID
         /// </summary>
         public string UID
         {
@@ -128,6 +124,22 @@ namespace Model.Model
         {
             set { _BindLogisticsUid = value;}
             get { return _BindLogisticsUid; }
+        }
+        /// <summary>
+        /// 负责人姓名
+        /// </summary>
+        public string ResponsibleName
+        {
+            set { _ResponsibleName = value;}
+            get { return _ResponsibleName; }
+        }
+        /// <summary>
+        /// 0 未授权,1已授权
+        /// </summary>
+        public int? State
+        {
+            set { _State = value;}
+            get { return _State; }
         }
     }
 }

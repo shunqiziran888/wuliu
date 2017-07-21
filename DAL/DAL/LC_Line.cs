@@ -5,6 +5,7 @@ using CustomExtensions;
 using SuperDataBase.InterFace;
 using System.Linq;
 using Model.Model;
+using GlobalBLL;
 
 namespace DAL.DAL
 {
@@ -28,6 +29,100 @@ namespace DAL.DAL
             if (!ids.ReadIsOk())
                 return new Tuple<bool, string, List<Model.Model.LC_Line>>(true, "没有任何数据!", new List<Model.Model.LC_Line>());
             return new Tuple<bool, string, List<Model.Model.LC_Line>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Line>());
+        }
+
+        /// <summary>
+        /// 线路绑定
+        /// </summary>
+        /// <param name="myuservo"></param>
+        /// <param name="lineletter">货号字母</param>
+        /// <param name="logistics">物流UID</param>
+        /// <returns></returns>
+        public static (bool, string) LineBinding(UserLoginVO myuservo, string lineletter, string logistics)
+        {
+            var box = db.CreateTranSandbox((db) =>
+            {
+                //获取物流账号是否存在
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "uid=@uid", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@uid",logistics)
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (!ids.ReadIsOk())
+                    return (false, "获取您要绑定的物流数据操作!");
+                Model.Model.LC_User df_user = ids.GetVOList<Model.Model.LC_User>()[0];
+                if (df_user.ZType.ConvertData<AccountTypeEnum>() != AccountTypeEnum.物流账号)
+                    return (false, "您要绑定的数据不是物流账号!");
+                //开始双方绑定
+
+                //查看我是否绑定过此物流
+                sql = makesql.MakeCount(nameof(Model.Model.LC_Line), "uid=@uid and BindLogisticsUid=@BindLogisticsUid", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@uid",myuservo.uid),
+                    new System.Data.SqlClient.SqlParameter("@BindLogisticsUid",logistics)
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (ids.Count() == 0)
+                {
+                    //绑定自己的
+                    Model.Model.LC_Line myline = new Model.Model.LC_Line()
+                    {
+                        DateTime = DateTime.Now,
+                        Start = myuservo.AreaID,
+                        End = df_user.AreaID,
+                        LineID = Tools.NewGuid.GuidTo16String(),
+                        Lineletter = lineletter,
+                        Phone = df_user.Phone,
+                        ResponsibleName = df_user.UserName,
+                        UID = myuservo.uid,
+                        BindLogisticsUid = logistics,
+                        State = 0
+                    };
+                    sql = makesql.MakeInsertSQL(myline);
+                    ids = db.Exec(sql);
+                    if (!ids.flag)
+                        return (false, ids.errormsg);
+                    if (!ids.ExecOk())
+                        return (false, "绑定对方物流数据失败!");
+                }
+
+                //查看对方是否绑定过我的物流
+                sql = makesql.MakeCount(nameof(Model.Model.LC_Line), "uid=@uid and BindLogisticsUid=@BindLogisticsUid", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@uid",logistics),
+                    new System.Data.SqlClient.SqlParameter("@BindLogisticsUid",myuservo.uid)
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (ids.Count() == 0)
+                {
+                    //绑定对方物流
+                    Model.Model.LC_Line dfline = new Model.Model.LC_Line()
+                    {
+                        Start = df_user.AreaID,
+                        End = myuservo.AreaID,
+                        Lineletter = string.Empty,
+                        Phone = myuservo.phones.ToString(),
+                        ResponsibleName = myuservo.username,
+                        UID = logistics,
+                        BindLogisticsUid = myuservo.uid,
+                        State = 0,
+                        DateTime = DateTime.Now,
+                        LineID = Tools.NewGuid.GuidTo16String(),
+                    };
+                    sql = makesql.MakeInsertSQL(dfline);
+                    ids = db.Exec(sql);
+                    if (!ids.flag)
+                        return (false, ids.errormsg);
+                    if (!ids.ExecOk())
+                        return (false, "绑定您的物流数据失败!");
+                }
+                db.Commit();
+                return (true, string.Empty);
+            });
+            return box;
         }
 
         /// <summary>
@@ -162,7 +257,7 @@ namespace DAL.DAL
             if (!vo.Item1)
                 return new Tuple<bool, string, Model.Model.LC_Line_Other>(vo.Item1, vo.Item2, null);
             lclo = vo.Item3[0];
-            lclo.UserName = GetUserVoFromId(lclo.UserID.ConvertData<int>())?.Item3?.UserName??string.Empty;
+            lclo.UserName = GetUserVoFromUID(lclo.UID).Item3?.UserName??string.Empty;
             return new Tuple<bool, string, Model.Model.LC_Line_Other>(true, string.Empty, lclo);
         }
         public static Tuple<bool, string, List<Model.Model.LC_Line>> GetXLList(string UID)

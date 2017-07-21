@@ -75,6 +75,284 @@ namespace DAL.DAL
                 });
             }
         }
+        /// <summary>
+        /// 物流公司账号绑定
+        /// </summary>
+        /// <param name="myuservo"></param>
+        /// <param name="nickName"></param>
+        /// <param name="phone"></param>
+        /// <param name="logistics">要绑定的物流总公司UID</param>
+        /// <param name="sheng"></param>
+        /// <param name="shi"></param>
+        /// <param name="qu"></param>
+        /// <param name="lineletter">货号字母</param>
+        /// <returns></returns>
+        public static (bool, string) LogisticsAccountBind(UserLoginVO myuservo, string nickName, long phone, string logistics, int sheng, int shi, int qu,string lineletter)
+        {
+            var box = db.CreateTranSandbox((db) =>
+            {
+
+                //查看电话号是否存在
+                sql = makesql.MakeCount(nameof(Model.Model.LC_User), "Phone=@Phone", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@Phone",phone)
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (ids.Count() > 0)
+                    return (false, "当前手机号已被使用!");
+
+                //开始绑定
+                Model.Model.LC_User user = new Model.Model.LC_User()
+                {
+                    UserName = nickName,
+                    ZNumber = phone.ToString(),
+                    LogisticsName = nickName,
+                    Phone = phone.ToString(),
+                    LCID = logistics,
+                    ProvincesID = sheng,
+                    CityID = shi,
+                    AreaID = qu
+                };
+                sql = makesql.MakeUpdateSQL(user, "uid=@uid", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@uid",myuservo.uid)
+                });
+                ids = db.Exec(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (!ids.ExecOk())
+                    return (false, "绑定失败请重试!");
+
+
+                //判断是否需要绑定线路
+                if (logistics.StrIsNotNull())
+                {
+                    //获取物流账号是否存在
+                    sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "uid=@uid", new System.Data.SqlClient.SqlParameter[] {
+                        new System.Data.SqlClient.SqlParameter("@uid",logistics)
+                    });
+                    ids = db.Read(sql);
+                    if (!ids.flag)
+                        return (false, ids.errormsg);
+                    if (!ids.ReadIsOk())
+                        return (false, "获取总公司账号错误无法进行操作!");
+                    Model.Model.LC_User df_user = ids.GetVOList<Model.Model.LC_User>()[0];
+                    if (df_user.ZType.ConvertData<GlobalBLL.AccountTypeEnum>() != AccountTypeEnum.物流账号)
+                        return (false, "权限错误,无法绑定到总公司!");
+                    //开始双方绑定
+
+                    //查看我是否绑定过此物流
+                    sql = makesql.MakeCount(nameof(Model.Model.LC_Line), "uid=@uid and BindLogisticsUid=@BindLogisticsUid", new System.Data.SqlClient.SqlParameter[] {
+                        new System.Data.SqlClient.SqlParameter("@uid",myuservo.uid),
+                        new System.Data.SqlClient.SqlParameter("@BindLogisticsUid",logistics)
+                    });
+                    ids = db.Read(sql);
+                    if (!ids.flag)
+                        return (false, ids.errormsg);
+                    if(ids.Count()==0)
+                    {
+                        //绑定自己的
+                        Model.Model.LC_Line myline = new Model.Model.LC_Line()
+                        {
+                            DateTime = DateTime.Now,
+                            Start = qu,
+                            End = df_user.AreaID,
+                            LineID = Tools.NewGuid.GuidTo16String(),
+                            Lineletter = lineletter,
+                            Phone = df_user.Phone,
+                            ResponsibleName = df_user.UserName,
+                            UID = myuservo.uid,
+                            BindLogisticsUid = logistics,
+                            State = 0
+                        };
+                        sql = makesql.MakeInsertSQL(myline);
+                        ids = db.Exec(sql);
+                        if (!ids.flag)
+                            return (false, ids.errormsg);
+                        if (!ids.ExecOk())
+                            return (false, "绑定对方物流数据失败!");
+                    }
+
+                    //查看对方是否绑定过我的物流
+                    sql = makesql.MakeCount(nameof(Model.Model.LC_Line), "uid=@uid and BindLogisticsUid=@BindLogisticsUid", new System.Data.SqlClient.SqlParameter[] {
+                        new System.Data.SqlClient.SqlParameter("@uid",logistics),
+                        new System.Data.SqlClient.SqlParameter("@BindLogisticsUid",myuservo.uid)
+                    });
+                    ids = db.Read(sql);
+                    if (!ids.flag)
+                        return (false, ids.errormsg);
+                    if(ids.Count()==0)
+                    {
+                        //绑定对方物流
+                        Model.Model.LC_Line dfline = new Model.Model.LC_Line()
+                        {
+                            Start = df_user.AreaID,
+                            End = qu,
+                            Lineletter = string.Empty,
+                            Phone = phone.ToString(),
+                            ResponsibleName = nickName,
+                            UID = logistics,
+                            BindLogisticsUid = myuservo.uid,
+                            State = 0,
+                            DateTime = DateTime.Now,
+                            LineID = Tools.NewGuid.GuidTo16String(),
+                        };
+                        sql = makesql.MakeInsertSQL(dfline);
+                        ids = db.Exec(sql);
+                        if (!ids.flag)
+                            return (false, ids.errormsg);
+                        if (!ids.ExecOk())
+                            return (false, "绑定您的物流数据失败!");
+                    }
+                }
+                db.Commit();
+                return (true, string.Empty);
+            });
+            return box;
+        }
+
+        /// <summary>
+        /// 员工账号绑定
+        /// </summary>
+        /// <param name="myuservo"></param>
+        /// <param name="nickName"></param>
+        /// <param name="phone"></param>
+        /// <param name="logistics">要绑定到的物流公司</param>
+        /// <returns></returns>
+        public static (bool, string) EmployeeAccountBind(UserLoginVO myuservo, string nickName, long phone,string logistics)
+        {
+            var box = db.CreateTranSandbox((db) =>
+            {
+                //检测此物流是否存在
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "uid=@logistics and ztype=@ztype", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@logistics",logistics),
+                    new System.Data.SqlClient.SqlParameter("@ztype",GlobalBLL.AccountTypeEnum.物流账号.EnumToInt())
+                },string.Empty,1);
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (!ids.ReadIsOk())
+                    return (false, "您要绑定的物流不存在!");
+                Model.Model.LC_User wl_user = ids.GetVOList<Model.Model.LC_User>()[0];
+
+                //查看电话号是否存在
+                sql = makesql.MakeCount(nameof(Model.Model.LC_User), "Phone=@Phone", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@Phone",phone)
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (ids.Count() > 0)
+                    return (false, "当前手机号已被使用!");
+
+                //开始绑定
+                Model.Model.LC_User user = new Model.Model.LC_User()
+                {
+                    UserName = nickName,
+                    ZNumber = phone.ToString(),
+                    ProvincesID = wl_user.ProvincesID,
+                    CityID = wl_user.CityID,
+                    AreaID = wl_user.AreaID
+                };
+                sql = makesql.MakeUpdateSQL(user, "uid=@uid", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@uid",myuservo.uid)
+                });
+                ids = db.Exec(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (!ids.ExecOk())
+                    return (false, "绑定失败请重试!");
+                db.Commit();
+                return (true, string.Empty);
+            });
+            return box;
+        }
+
+        /// <summary>
+        /// 普通账号绑定
+        /// </summary>
+        /// <param name="nickName"></param>
+        /// <param name="phone"></param>
+        /// <param name="logistics"></param>
+        /// <param name="sheng"></param>
+        /// <param name="shi"></param>
+        /// <param name="qu"></param>
+        /// <returns></returns>
+        public static (bool, string) OrdinaryAccountBind(UserLoginVO myuservo, string nickName, long phone, string logistics, int sheng, int shi, int qu)
+        {
+            var box = db.CreateTranSandbox((db) =>
+            {
+                //检测此物流是否存在
+                sql = makesql.MakeCount(nameof(Model.Model.LC_User), "uid=@logistics and ztype=@ztype", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@logistics",logistics),
+                    new System.Data.SqlClient.SqlParameter("@ztype",GlobalBLL.AccountTypeEnum.物流账号.EnumToInt())
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (ids.Count() == 0)
+                    return (false, "您要绑定的物流不存在!");
+                
+                //查看电话号是否存在
+                sql = makesql.MakeCount(nameof(Model.Model.LC_User), "Phone=@Phone", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@Phone",phone)
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (ids.Count() > 0)
+                    return (false, "当前手机号已被使用!");
+
+
+                //开始绑定
+                Model.Model.LC_User user = new Model.Model.LC_User()
+                {
+                    UserName = nickName,
+                    ZNumber = phone.ToString(),
+                    State = 1, //默认开通
+                    Phone = phone.ToString(),
+                    ProvincesID = sheng,
+                    CityID = shi,
+                    AreaID = qu,
+                };
+                sql = makesql.MakeUpdateSQL(user,"uid=@uid",new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@uid",myuservo.uid)
+                });
+                ids = db.Exec(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (!ids.ExecOk())
+                    return (false, "绑定失败请重试!");
+
+                //添加一个绑定记录
+                //查看是否已经绑定过当前物流UID
+                sql = makesql.MakeCount(nameof(Model.Model.LC_UserBindLogisticsList), "uid=@uid and LogisticsUid=@LogisticsUid", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@LogisticsUid",logistics),
+                    new System.Data.SqlClient.SqlParameter("@uid",myuservo.uid)
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (ids.Count() == 0)
+                {
+                    //添加一个物流绑定
+                    sql = makesql.MakeInsertSQL(new Model.Model.LC_UserBindLogisticsList()
+                    {
+                        CreateTime = DateTime.Now,
+                        LogisticsUid = logistics,
+                        Uid = myuservo.uid
+                    });
+                    ids = db.Exec(sql);
+                    if (!ids.flag)
+                        return (false, ids.errormsg);
+                    if (!ids.ExecOk())
+                        return (false, "添加绑定失败请重试!");
+                }
+                db.Commit();
+                return (true, string.Empty);
+            });
+            return box;
+        }
 
         /// <summary>
         /// 添加或者更新用户数据
@@ -86,16 +364,23 @@ namespace DAL.DAL
             var box = db.CreateTranSandbox<(bool, string, Model.Model.LC_User suser)>((db) =>
             {
                 //获取用户是否存在
-                sql = makesql.MakeCount(nameof(Model.Model.LC_User), "WX_OpenID=@WX_OpenID", new System.Data.SqlClient.SqlParameter[] {
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "WX_OpenID=@WX_OpenID", new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@WX_OpenID",suser.WX_OpenID)
                 });
                 ids = db.Read(sql);
                 if (!ids.flag)
                     return (false, ids.errormsg,null);
-                if (ids.Count() > 0) //更新数据
+                if (ids.ReadIsOk()) //更新数据
                 {
-                    //更新用户数据
-                    suser.ZType = null;
+                    var ls_usrvo = ids.GetVOList<Model.Model.LC_User>()[0];
+                    if (ls_usrvo.ZNumber.StrIsNotNull()) //如果彻底注册成功则不更新用户类型
+                    {
+                        //更新用户数据
+                        //判断是否已经彻底注册完毕
+                        suser.ZType = null;
+                        suser.PositionID = null;
+                    }
+                    
                     sql = makesql.MakeUpdateSQL(suser, "WX_OpenID=@WX_OpenID");
                 }
                 else

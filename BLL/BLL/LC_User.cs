@@ -20,10 +20,61 @@ namespace BLL.BLL
         /// <returns></returns>
         public static Tuple<bool, string> Add(Model.Model.LC_User lC_User,GlobalBLL.UserLoginVO loginvo, string LogisticsUid="")
         {
-            //if (lC_User.UserName.StrIsNull())
-            //    return new Tuple<bool, string>(false, "昵称不能为空!");
             return DAL.DAL.LC_User.Add(lC_User, loginvo, LogisticsUid);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="web"></param>
+        /// <returns></returns>
+        public static (bool, string) BindUser(HttpContextBase web)
+        {
+            var myuservo = web.GetMyLoginUserVO();
+            string Lineletter = web.GetValue("Lineletter"); //货号字母
+            string logistics = web.GetValue("logistics"); //物流公司ID
+            string NickName = web.GetValue("NickName"); //昵称
+            long phone = web.GetValue<long>("phone");//电话
+            int sheng = web.GetValue<int>("sheng");
+            int shi = web.GetValue<int>("shi");
+            int qu = web.GetValue<int>("qu");
+
+            if (NickName.StrIsNull())
+                return (false, "昵称不能为空!");
+            if (phone <= 0)
+                return (false, "联系方式不能为空!");
+
+            switch (myuservo.accountType)
+            {
+                case AccountTypeEnum.普通用户账号:
+                    //注册普通账号
+                    if (logistics.StrIsNull())
+                        return (false, "物流公司ID不能为空!");
+                    if (sheng <= 0)
+                        return (false, "省不能为空!");
+                    if (shi <= 0)
+                        return (false, "市不能为空!");
+                    if (qu <= 0)
+                        return (false, "区不能为空!");
+                    return DAL.DAL.LC_User.OrdinaryAccountBind(myuservo, NickName, phone, logistics, sheng, shi, qu);
+                case AccountTypeEnum.物流公司员工账号:
+                    return DAL.DAL.LC_User.EmployeeAccountBind(myuservo, NickName, phone, logistics);
+                case AccountTypeEnum.物流账号:
+                    if (sheng <= 0)
+                        return (false, "省不能为空!");
+                    if (shi <= 0)
+                        return (false, "市不能为空!");
+                    if (qu <= 0)
+                        return (false, "区不能为空!");
+                    //查看绑定的物流是不是自己
+                    if (myuservo.uid.Equals(logistics, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return (false, "不能绑定自己!");
+                    }
+                    return DAL.DAL.LC_User.LogisticsAccountBind(myuservo, NickName, phone, logistics, sheng, shi, qu, Lineletter);
+            }
+            return (false, "参数不正确!");
+        }
+
         /// <summary>
         /// 验证是否需要注册
         /// </summary>

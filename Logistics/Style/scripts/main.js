@@ -75,6 +75,20 @@ function InitShareUrl() {
 }
 
 var login = false;
+
+/**
+ * 关闭系统
+ * @param {function} callfun 
+ */
+function OutSystem(callfun) {
+    GetHTML("OutSystem", {}, function (data) {
+        if (CheckHTMLData(data, false)) {
+            if (callfun != null)
+                callfun();
+        }
+    });
+}
+
 /**
  * 检测是否已经登陆
  */
@@ -98,10 +112,9 @@ function checklogin(runpage) {
 
         obj.code = code;
         obj.aid = getAid();
-        obj.acctype = acctype; 
+        obj.acctype = acctype;
         obj.region = region;
         GetHTML("OAuth", obj, function (data, para, url) {
-
             let result = data.data;
             if (!CheckHTMLData(data, false)) {
                 $.wxlogin(true);
@@ -115,7 +128,6 @@ function checklogin(runpage) {
                 runpage();
             }
         });
-
     } else {
 
         //检测登录

@@ -2,7 +2,7 @@ using System;
 namespace Model.Model
 {
     /// <summary>
-    /// -
+    /// 车辆表
     /// </summary>
     [Serializable]
     public partial class LC_Vehicle : ModelBase
@@ -14,25 +14,25 @@ namespace Model.Model
         /// </summary>
         private int? _ID;
         /// <summary>
-        /// ������ID
+        /// 车号
         /// </summary>
         private string _VehicleNo;
         /// <summary>
-        /// ˾��
+        /// （注册人）司机名字
         /// </summary>
         private string _Driver;
         /// <summary>
-        /// ����ʱ��
+        /// 
         /// </summary>
         private DateTime? _CreateTime;
         /// <summary>
-        /// ����ID
+        /// 物流公司UID
         /// </summary>
         private string _UID;
         /// <summary>
-        /// ����
+        /// 车辆长度(车型）
         /// </summary>
-        private string _Carshape;
+        private float? _Carshape;
         /// <summary>
         /// 
         /// </summary>
@@ -42,7 +42,7 @@ namespace Model.Model
             get { return _ID; }
         }
         /// <summary>
-        /// 
+        /// 车号
         /// </summary>
         public string VehicleNo
         {
@@ -50,7 +50,7 @@ namespace Model.Model
             get { return _VehicleNo; }
         }
         /// <summary>
-        /// 
+        /// （注册人）司机名字
         /// </summary>
         public string Driver
         {
@@ -66,25 +66,20 @@ namespace Model.Model
             get { return _CreateTime; }
         }
         /// <summary>
-        /// 
+        /// 物流公司UID
         /// </summary>
         public string UID
         {
             set { _UID = value;}
             get { return _UID; }
         }
-
-        public string Carshape
+        /// <summary>
+        /// 车辆长度(车型）
+        /// </summary>
+        public float? Carshape
         {
-            get
-            {
-                return _Carshape;
-            }
-
-            set
-            {
-                _Carshape = value;
-            }
+            set { _Carshape = value;}
+            get { return _Carshape; }
         }
     }
 }

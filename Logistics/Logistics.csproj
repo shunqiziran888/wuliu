@@ -119,6 +119,7 @@
     <Content Include="Command\GetLogisticsLineListFromUid.aspx" />
     <Content Include="Command\GetSHPhoneAdressList.aspx" />
     <Content Include="Command\RegisterUserBinding.aspx" />
+    <Content Include="doc\doc.aspx" />
     <Content Include="GetQR.aspx" />
     <Content Include="LC\Authorize\StaffAuthorize\StaffAuthorizeIndex.aspx" />
     <Content Include="LC\Business\DschargeGood\IndexDhg.aspx" />
@@ -197,6 +198,7 @@
     <Content Include="manage\staff_warrant_success.html" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="scripts\webjs\login.js" />
     <Content Include="Style\.DS_Store" />
     <Content Include="Style\.vscode\launch.json" />
     <Content Include="Style\.vscode\tasks.json" />
@@ -222,41 +224,6 @@
     <Content Include="Style\img\touxiang1.jpeg" />
     <Content Include="Style\img\touxiang2.jpeg" />
     <Content Include="Style\img\user-img.jpg" />
-    <Content Include="Style\scripts\main.js" />
-    <Content Include="web\all.js" />
-    <Content Include="web\business\choose_bus.html" />
-    <Content Include="web\business\fanghuo.html" />
-    <Content Include="web\business\history_log.html" />
-    <Content Include="web\business\index.html" />
-    <Content Include="web\business\jieche.html" />
-    <Content Include="web\business\jieche_qingdan.html" />
-    <Content Include="web\business\jieche_success.html" />
-    <Content Include="web\business\js\main.js" />
-    <Content Include="web\business\shouhuo.html" />
-    <Content Include="web\business\shouhuo_set.html" />
-    <Content Include="web\business\xuanhuo.html" />
-    <Content Include="web\business\zhuangche.html" />
-    <Content Include="web\business\zhuangche_success.html" />
-    <Content Include="web\count\index.html" />
-    <Content Include="web\css\iconfont.css" />
-    <Content Include="web\css\iconlink.css" />
-    <Content Include="web\css\sjstyle.css" />
-    <Content Include="web\css\style.css" />
-    <Content Include="web\css\sui\sm-extend.css" />
-    <Content Include="web\css\sui\sm-extend.min.css" />
-    <Content Include="web\css\sui\sm.css" />
-    <Content Include="web\css\sui\sm.min.css" />
-    <Content Include="web\css\zbstyle.css" />
-    <Content Include="web\font\iconfont.svg" />
-    <Content Include="web\js\sm-city-picker.js" />
-    <Content Include="web\js\sm-city-picker.min.js" />
-    <Content Include="web\js\sm-extend.js" />
-    <Content Include="web\js\sm-extend.min.js" />
-    <Content Include="web\js\sm.js" />
-    <Content Include="web\js\sm.min.js" />
-    <Content Include="web\js\zepto.min.js" />
-    <Content Include="web\manage\index.html" />
-    <Content Include="web\user\index.html" />
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\WuLiu.pubxml" />
     <Content Include="Style\font\iconfont.eot" />
@@ -326,11 +293,22 @@
     <Compile Include="api.ashx.cs">
       <DependentUpon>api.ashx</DependentUpon>
     </Compile>
+    <Compile Include="ApiCommand\CMD_BindUser.cs" />
     <Compile Include="ApiCommand\CMD_GetAddressNextList.cs" />
     <Compile Include="ApiCommand\CMD_GetMyLoginData.cs" />
+    <Compile Include="ApiCommand\CMD_GetSysApiDoc.cs" />
     <Compile Include="ApiCommand\CMD_GetToRegUser.cs" />
     <Compile Include="ApiCommand\CMD_JSSignature.cs" />
+    <Compile Include="ApiCommand\CMD_LineBinding.cs" />
     <Compile Include="ApiCommand\CMD_OAuth.cs" />
+    <Compile Include="ApiCommand\CMD_OutSystem.cs" />
+    <Compile Include="doc\doc.aspx.cs">
+      <DependentUpon>doc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="doc\doc.aspx.designer.cs">
+      <DependentUpon>doc.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LC\Authorize\StaffAuthorize\StaffAuthorizeIndex.aspx.cs">
       <DependentUpon>StaffAuthorizeIndex.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -771,7 +749,6 @@
     <Folder Include="LC\Authorize\LineAuthorize\" />
     <Folder Include="Models\" />
     <Folder Include="Style\icon\" />
-    <Folder Include="web\icon\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
@@ -808,7 +785,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>13839</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

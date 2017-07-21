@@ -23,7 +23,6 @@ namespace Logistics.Command
                     x.LineID,
                     x.Phone,
                     x.Start,
-                    x.UserID,
                     x.UID,
                 };
             })).ToJson());
