@@ -49,7 +49,7 @@
                         <p> <i class="iconfont fc_green" style="font-size:55px;">&#xe67b;</i></p>
                         <p>接车成功</p>
                         <p>运费： <span>￥1213</span></p>
-                        <strong  style="font-size:25px; font-weight:400;">鲁M40101(9.6M)</strong>
+                        <strong  style="font-size:25px; font-weight:400;"><%=DAL.DAL.DALBase.GetCarFromID(CH)?.Item2?.VehicleNo%>(9.6M)</strong>
                         <p class="fz_12 txt_right mart_20">添加日期： <span>2017-07-20 00：57</span></p>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
             $.config = { router: false }
         });
         setInterval(function(){
-            window.location.href="jieche.html"
+            window.location.href ="/LC/Business/MeetCar/LC_IndexMC.aspx"
         },2000)
     </script>
 

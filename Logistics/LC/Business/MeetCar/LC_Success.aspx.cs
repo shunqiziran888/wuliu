@@ -12,9 +12,10 @@ namespace Logistics.LC.Business.MeetCar
 {
     public partial class LC_Success : PageLoginBase
     {
+        public int CH;
         protected void Page_Load(object sender, EventArgs e)
         {
-            int CH = GetValue<int>("CH");
+            CH = GetValue<int>("CH");
             if(CH<=0)
             {
                 Alert("车号不能为空!");
