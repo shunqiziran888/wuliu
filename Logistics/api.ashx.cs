@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.SessionState;
 using SuperCommand;
 using CustomExtensions;
+using Logistics.ApiCommand;
+using GlobalBLL;
 
 namespace Logistics
 {
@@ -18,10 +20,10 @@ namespace Logistics
         {
             context.Response.ContentType = "text/plain";
             //初始化
-            SuperCommand.HttpContextBase hcb = new SuperCommand.HttpContextBase(context);
+            GlobalBLL.HttpContextBase hcb = new GlobalBLL.HttpContextBase(context);
             //获取键值
-            if (CommandRun.GetInstance._command == null)
-                CommandRun.GetInstance._command = new SuperCommand.CommandRun<LogCommandVO>(this.GetType());
+            if (WebCommandRun.GetInstance._command == null)
+                WebCommandRun.GetInstance._command = new SuperCommand.CommandRun<WebCommandVOBase>(this.GetType());
 
             string cmd = hcb.GetValue("action"); //直接命令
 
@@ -30,7 +32,7 @@ namespace Logistics
             if (cmd.StrIsNotNull())
             {
                 //进行初始化
-                cmdstate = CommandRun.GetInstance._command.Run<MessageState>(new LogCommandVO()
+                cmdstate = WebCommandRun.GetInstance._command.Run<MessageState>(new WebCommandVOBase()
                 {
                     Cmd = cmd,
                     SubCmd = subcmd,
@@ -53,9 +55,17 @@ namespace Logistics
             string jsonpCallback = hcb.GetValue("jsonpcallback");
             string JumpUrl = hcb.GetValue("JumpUrl");
             string OutPutMsg = string.Empty;
+
+
             if (jsonpCallback.StrIsNull())
             {
                 Tools.SaveLog.AddLog("没有获取到:jsonpcallback 内容:" + msg, "jsonpCallback是空的");
+                context.Response.Headers.Add("content-type", "application:json;charset=utf8");
+                context.Response.Headers.Add("Access-Control-Allow-Origin", context?.Request?.Headers["Origin"] ?? "*");
+                context.Response.Headers.Add("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, PATCH");
+                context.Response.Headers.Add("Access-Control-Allow-Headers", "Session, X-Requested-With, accept, content-type");
+                context.Response.Headers.Add("Access-Control-Allow-Credentials", "true");
+
                 OutPutMsg = msg;
             }
             else
@@ -70,7 +80,7 @@ namespace Logistics
             {
                 context.Response.Write(OutPutMsg);
             }
-
+            Tools.SaveLog.AddLog(msg, "OutPutMsg");
         }
 
         public bool IsReusable

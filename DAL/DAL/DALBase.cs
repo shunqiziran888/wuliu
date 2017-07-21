@@ -191,6 +191,24 @@ namespace DAL.DAL
 
         }
 
+        /// <summary>
+        /// 根据OPENID获取用户数据
+        /// </summary>
+        /// <param name="openid"></param>
+        /// <returns></returns>
+        public static (bool,string,Model.Model.LC_User) GetUserVOFromOpenID(string openid,SuperDataBase.Model.DBSandbox db)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "wx_openid=@wx_openid", new SqlParameter[] {
+                new SqlParameter("@wx_openid",openid)
+            });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg,null);
+            if (!ids.ReadIsOk())
+                return (false, "没有找到任何数据!",null);
+            return (true, string.Empty, ids.GetVOList<Model.Model.LC_User>()[0]);
+        }
+
 
         /// <summary>
         /// 生成货号

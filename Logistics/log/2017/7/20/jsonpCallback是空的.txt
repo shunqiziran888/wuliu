@@ -1,0 +1,10 @@
+[内容]:没有获取到:jsonpcallback 内容:{"state":-2,"key":"","data":"参数Action错误!"} [方法名]:ProcessRequest [代码文件路径]:F:\work\Net\物流系统\Logistics\api.ashx.cs [代码行号]:62 [Time]:2017-07-20 10:53:50.661
+[内容]:没有获取到:jsonpcallback 内容:{"state":0,"key":"1","data":"键值1不存在"} [方法名]:ProcessRequest [代码文件路径]:F:\work\Net\物流系统\Logistics\api.ashx.cs [代码行号]:62 [Time]:2017-07-20 10:53:58.488
+[内容]:没有获取到:jsonpcallback 内容:{"state":0,"key":"test","data":"键值test不存在"} [方法名]:ProcessRequest [代码文件路径]:F:\work\Net\物流系统\Logistics\api.ashx.cs [代码行号]:62 [Time]:2017-07-20 11:04:28.422
+[内容]:没有获取到:jsonpcallback 内容:{"state":0,"key":"test","data":"键值test不存在"} [方法名]:ProcessRequest [代码文件路径]:F:\work\Net\物流系统\Logistics\api.ashx.cs [代码行号]:62 [Time]:2017-07-20 11:04:29.975
+[内容]:没有获取到:jsonpcallback 内容:{"state":0,"key":"Test","data":"键值Test不存在"} [方法名]:ProcessRequest [代码文件路径]:F:\work\Net\物流系统\Logistics\api.ashx.cs [代码行号]:62 [Time]:2017-07-20 11:04:47.765
+[内容]:没有获取到:jsonpcallback 内容:{"state":0,"key":"Test","data":"键值Test不存在"} [方法名]:ProcessRequest [代码文件路径]:F:\work\Net\物流系统\Logistics\api.ashx.cs [代码行号]:62 [Time]:2017-07-20 11:22:48.444
+[内容]:没有获取到:jsonpcallback 内容:{"state":0,"key":"Test","data":"您还没有登陆!"} [方法名]:ProcessRequest [代码文件路径]:F:\work\Net\物流系统\Logistics\api.ashx.cs [代码行号]:62 [Time]:2017-07-20 11:23:28.677
+[内容]:没有获取到:jsonpcallback 内容:{"state":0,"key":"Test","data":"键值Test不存在"} [方法名]:ProcessRequest [代码文件路径]:F:\work\Net\物流系统\Logistics\api.ashx.cs [代码行号]:62 [Time]:2017-07-20 12:10:18.340
+[内容]:没有获取到:jsonpcallback 内容:{"state":0,"key":"Test","data":"键值Test不存在"} [方法名]:ProcessRequest [代码文件路径]:F:\work\Net\物流系统\Logistics\api.ashx.cs [代码行号]:62 [Time]:2017-07-20 14:55:51.931
+[内容]:没有获取到:jsonpcallback 内容:{"state":0,"key":"Test","data":"键值Test不存在"} [方法名]:ProcessRequest [代码文件路径]:F:\work\Net\物流系统\Logistics\api.ashx.cs [代码行号]:62 [Time]:2017-07-20 15:35:13.970

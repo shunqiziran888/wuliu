@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录认证</title>
+    <link type="text/css" rel="stylesheet" href="/Style/css/basic.css" />
+    <script type="text/javascript" src="/Style/scripts/all.js"></script>
+    <script type="text/javascript" src="/scripts/webjs/login.js"></script>
+    <style>
+        ul{
+            list-style: none;
+    margin: 0;
+    padding: 0;
+    padding: 1rem;
+    background: #ececec;
+        }
+  </style>
+</head>
+
+<body id="content">
+    <h1>登录中...</h1>
+</body>
+<!-- 物流公司注册 -->
+<script type="text/html" id="wlzc">
+    <div>
+        <ul>
+            <li>公司昵称 <input type="text" value=""></li>
+            <li>手机号 <input type="text" value=""></li>
+            <li>省
+                <select id="sheng" onchange="show(this.value,'shi');">
+                    <option value="">请选择</option>
+                    {{each shenglist as v}}
+                     <option value="{{v.id}}">{{v.Name}}</option>
+                    {{/each}}
+                </select>
+            </li>
+            <li>市
+                <select id="shi" onchange="show(this.value,'qu');">
+                    <option value="">请选择</option>
+                </select>
+            </li>
+            <li>区
+                <select id="qu">
+                    <option value="">请选择</option>
+                </select>
+            </li>
+            <li> <button type="button">确认注册</button></li>
+        </ul>
+    </div>
+</script>
+
+<!-- 物流员工注册 -->
+<script type="text/html" id="ygzc">
+    <div>
+        <ul>
+            <li>昵称 <input type="text" value=""></li>
+            <li>手机号 <input type="text" value=""></li>
+            <li> <button type="button">确认注册</button></li>
+        </ul>
+    </div>
+</script>
+
+<!-- 普通会员注册 -->
+<script type="text/html" id="hyzc">
+    <div>
+        <ul>
+            <li>昵称 <input type="text" value=""></li>
+            <li>手机号 <input type="text" value=""></li>
+            <li>省
+                <select id="sheng">
+                    <option value="">请选择</option>
+                </select>
+            </li>
+            <li>市
+                <select id="shi">
+                    <option value="">请选择</option>
+                </select>
+            </li>
+            <li>区
+                <select id="qu">
+                    <option value="">请选择</option>
+                </select>
+            </li>
+            <li> <button type="button">确认注册</button></li>
+        </ul>
+    </div>
+</script>
+
+</html>
