@@ -48,6 +48,25 @@ namespace DAL.DAL
                 return new Tuple<bool, string, Model.Model.LC_User>(false, "没有任何数据!", null);
             return new Tuple<bool, string, Model.Model.LC_User>(true, string.Empty, ids.GetVOList<Model.Model.LC_User>()[0]);
         }
+
+        /// <summary>
+        /// 根据UID获取用户数据
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        internal static (bool, string, Model.Model.LC_User) GetUserVoFromUID(string uid)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "uid=@uid", new SqlParameter[] {
+                new SqlParameter("@id",uid)
+            }, string.Empty, 1);
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return (false, "没有任何数据!", null);
+            return (true, string.Empty, ids.GetVOList<Model.Model.LC_User>()[0]);
+        }
+
         /// <summary>
         /// 根据ID获取用户数据
         /// </summary>

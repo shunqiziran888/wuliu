@@ -68,6 +68,7 @@
     <Compile Include="DAL\LC_User.cs" />
     <Compile Include="DAL\LC_UserBindLogisticsList.cs" />
     <Compile Include="DAL\LC_Vehicle.cs" />
+    <Compile Include="DAL\LC_VehicleBinding.cs" />
     <Compile Include="DAL\w_address_basic_data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

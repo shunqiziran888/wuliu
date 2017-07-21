@@ -2,91 +2,252 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>登录认证</title>
-    <link type="text/css" rel="stylesheet" href="/Style/css/basic.css" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/Style/css/sui/sm.min.css">
+    <link rel="stylesheet" href="/Style/css/sui/sm-extend.min.css">
+    <link href="/Style/css/iconlink.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Style/css/style.css">
     <script type="text/javascript" src="/Style/scripts/all.js"></script>
     <script type="text/javascript" src="/scripts/webjs/login.js"></script>
     <style>
-        ul{
-            list-style: none;
-    margin: 0;
-    padding: 0;
-    padding: 1rem;
-    background: #ececec;
+        input[type=checkbox] {
+            -webkit-appearance: checkbox;
+            height: .8rem;
         }
-  </style>
+
+        .bus_list li.active i.iconfont {
+            display: block;
+        }
+    </style>
 </head>
 
-<body id="content">
-    <h1>登录中...</h1>
+<body>
+    <div class="page-group">
+        <div class="page page-current" id="content">
+            <!--内容-->
+        </div>
+    </div>
 </body>
 <!-- 物流公司注册 -->
 <script type="text/html" id="wlzc">
-    <div>
-        <ul>
-            <li>公司昵称 <input type="text" value=""></li>
-            <li>手机号 <input type="text" value=""></li>
-            <li>省
-                <select id="sheng" onchange="show(this.value,'shi');">
-                    <option value="">请选择</option>
-                    {{each shenglist as v}}
-                     <option value="{{v.id}}">{{v.Name}}</option>
-                    {{/each}}
-                </select>
-            </li>
-            <li>市
-                <select id="shi" onchange="show(this.value,'qu');">
-                    <option value="">请选择</option>
-                </select>
-            </li>
-            <li>区
-                <select id="qu">
-                    <option value="">请选择</option>
-                </select>
-            </li>
-            <li> <button type="button">确认注册</button></li>
-        </ul>
+
+    <header class="bar bar-nav">
+        <h1 class="title">物流公司注册</h1>
+    </header>
+
+    <div class="content" style="background:#f2f2f2;">
+        <div class="page-index">
+            <div class="col_100 white" style="padding:1rem 1rem;margin-top:1rem;">
+                <p class="dis_flex marb_20" style="margin-bottom:1rem;">公司昵称：<input id="NickName" class="col_60" type="text"></p>
+                <p class="dis_flex marb_20">&nbsp;&nbsp;&nbsp;手机号：<input class="col_60" id="Phone" type="text"></p>
+                <p class="dis_flex marb_20">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;省：
+                    <select class="col_60" id="sheng" onchange="show(this.value,'shi');">
+                        <option value="">请选择</option>
+                        {{each shenglist as v}}
+                        <option value="{{v.id}}">{{v.Name}}</option>
+                        {{/each}}
+                    </select>
+                </p>
+                <p class="dis_flex marb_20">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;市：
+                    <select id="shi" class="col_60" onchange="show(this.value,'qu');">
+                        <option value="">请选择</option>
+                    </select>
+                </p>
+                <p class="dis_flex marb_20">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：
+                    <select class="col_60" id="qu">
+                        <option value="">请选择</option>
+                    </select>
+                </p>
+                <p class="txt_center"><button id="regbtn" type="button" class="green fc_white" style="padding:.5rem 1.5rem; border:none;">确认提交</button></p>
+            </div>
+        </div>
+    </div>
+
+</script>
+
+<!-- 物流附属公司注册 -->
+<script type="text/html" id="fs_wlzc">
+
+    <header class="bar bar-nav">
+        <h1 class="title">物流附属公司注册</h1>
+    </header>
+
+    <div class="content" style="background:#f2f2f2;">
+        <div class="page-index">
+            <div class="col_100 white" style="padding:1rem 1rem;margin-top:1rem;">
+                <p class="dis_flex marb_20">&nbsp;&nbsp;&nbsp;运号字母：
+                    <select id="Lineletter" name="Lineletter">
+                            <option value="">请选择</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                            <option value="I">I</option>
+                            <option value="J">J</option>
+                            <option value="K">K</option>
+                            <option value="L">L</option>
+                            <option value="M">M</option>
+                            <option value="N">N</option>
+                            <option value="O">O</option>
+                            <option value="P">P</option>
+                            <option value="Q">Q</option>
+                            <option value="R">R</option>
+                            <option value="S">S</option>
+                            <option value="T">T</option>
+                            <option value="U">U</option>
+                            <option value="V">V</option>
+                            <option value="W">W</option>
+                            <option value="X">X</option>
+                            <option value="Y">Y</option>
+                            <option value="Z">Z</option>
+                        </select>
+                </p>
+                <p class="dis_flex marb_20" style="margin-bottom:1rem;">公司昵称：<input id="NickName" class="col_60" type="text"></p>
+                <p class="dis_flex marb_20">&nbsp;&nbsp;&nbsp;手机号：<input class="col_60" id="Phone" type="text"></p>
+                <p class="dis_flex marb_20">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;省：
+                    <select class="col_60" id="sheng" onchange="show(this.value,'shi');">
+                        <option value="">请选择</option>
+                        {{each shenglist as v}}
+                        <option value="{{v.id}}">{{v.Name}}</option>
+                        {{/each}}
+                    </select>
+                </p>
+                <p class="dis_flex marb_20">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;市：
+                    <select id="shi" class="col_60" onchange="show(this.value,'qu');">
+                        <option value="">请选择</option>
+                    </select>
+                </p>
+                <p class="dis_flex marb_20">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：
+                    <select class="col_60" id="qu">
+                        <option value="">请选择</option>
+                    </select>
+                </p>
+                <p class="txt_center"><button id="regbtn" type="button" class="green fc_white" style="padding:.5rem 1.5rem; border:none;">确认提交</button></p>
+            </div>
+        </div>
+    </div>
+</script>
+<!-- 物流附属公司线路绑定 -->
+<script type="text/html" id="linebind">
+
+    <header class="bar bar-nav">
+        <h1 class="title">物流附属公司线路绑定</h1>
+    </header>
+
+    <div class="content" style="background:#f2f2f2;">
+        <div class="page-index">
+            <div class="col_100 white" style="padding:1rem 1rem;margin-top:1rem;">
+                <p class="dis_flex marb_20">&nbsp;&nbsp;&nbsp;运号字母：
+                    <select id="Lineletter" name="Lineletter">
+                            <option value="">请选择</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                            <option value="I">I</option>
+                            <option value="J">J</option>
+                            <option value="K">K</option>
+                            <option value="L">L</option>
+                            <option value="M">M</option>
+                            <option value="N">N</option>
+                            <option value="O">O</option>
+                            <option value="P">P</option>
+                            <option value="Q">Q</option>
+                            <option value="R">R</option>
+                            <option value="S">S</option>
+                            <option value="T">T</option>
+                            <option value="U">U</option>
+                            <option value="V">V</option>
+                            <option value="W">W</option>
+                            <option value="X">X</option>
+                            <option value="Y">Y</option>
+                            <option value="Z">Z</option>
+                        </select>
+                </p>
+
+                <p class="txt_center"><button id="regbtn" type="button" class="green fc_white" style="padding:.5rem 1.5rem; border:none;">确认绑定</button></p>
+            </div>
+        </div>
     </div>
 </script>
 
 <!-- 物流员工注册 -->
 <script type="text/html" id="ygzc">
-    <div>
-        <ul>
-            <li>昵称 <input type="text" value=""></li>
-            <li>手机号 <input type="text" value=""></li>
-            <li> <button type="button">确认注册</button></li>
-        </ul>
+
+    <header class="bar bar-nav">
+        <h1 class="title">物流员工注册</h1>
+    </header>
+
+    <div class="content" style="background:#f2f2f2;">
+        <div class="page-index">
+            <div class="col_100 white" style="padding:1rem 1rem;margin-top:1rem;">
+                <p class="dis_flex marb_20" style="margin-bottom:1rem;">真实姓名：<input class="col_60" id="NickName" type="text"></p>
+                <p class="dis_flex marb_20">&nbsp;&nbsp;&nbsp;手机号：<input class="col_60" id="Phone" type="text"></p>
+                <p class="txt_center"><button id="regbtn" type="button" class="green fc_white" style="padding:.5rem 1.5rem; border:none;">确认提交</button></p>
+            </div>
+        </div>
     </div>
+
 </script>
 
 <!-- 普通会员注册 -->
 <script type="text/html" id="hyzc">
-    <div>
-        <ul>
-            <li>昵称 <input type="text" value=""></li>
-            <li>手机号 <input type="text" value=""></li>
-            <li>省
-                <select id="sheng">
-                    <option value="">请选择</option>
-                </select>
-            </li>
-            <li>市
-                <select id="shi">
-                    <option value="">请选择</option>
-                </select>
-            </li>
-            <li>区
-                <select id="qu">
-                    <option value="">请选择</option>
-                </select>
-            </li>
-            <li> <button type="button">确认注册</button></li>
-        </ul>
+
+    <header class="bar bar-nav">
+        <h1 class="title">会员注册</h1>
+    </header>
+
+    <div class="content" style="background:#f2f2f2;">
+        <div class="page-index">
+            <div class="col_100 white" style="padding:1rem 1rem;margin-top:1rem;">
+                <p class="dis_flex marb_20" style="margin-bottom:1rem;">昵称：<input class="col_60" type="text" id="NickName"></p>
+                <p class="dis_flex marb_20">&nbsp;&nbsp;&nbsp;手机号：<input class="col_60" type="text" id="Phone"></p>
+                <p class="dis_flex marb_20">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;省：
+                    <select class="col_60" id="sheng" onchange="show(this.value,'shi');">
+                        <option value="">请选择</option>
+                        {{each shenglist as v}}
+                        <option value="{{v.id}}">{{v.Name}}</option>
+                        {{/each}}
+                    </select>
+                </p>
+                <p class="dis_flex marb_20">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;市：
+                    <select id="shi" class="col_60" onchange="show(this.value,'qu');">
+                        <option value="">请选择</option>
+                    </select>
+                </p>
+                <p class="dis_flex marb_20">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：
+                    <select class="col_60" id="qu">
+                        <option value="">请选择</option>
+                    </select>
+                </p>
+                <p class="txt_center"><button id="regbtn" type="button" class="green fc_white" style="padding:.5rem 1.5rem; border:none;">确认提交</button></p>
+            </div>
+        </div>
     </div>
+
 </script>
 
 </html>

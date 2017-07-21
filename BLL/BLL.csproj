@@ -72,6 +72,7 @@
     <Compile Include="BLL\LC_User.cs" />
     <Compile Include="BLL\LC_UserBindLogisticsList.cs" />
     <Compile Include="BLL\LC_Vehicle.cs" />
+    <Compile Include="BLL\LC_VehicleBinding.cs" />
     <Compile Include="BLL\w_address_basic_data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

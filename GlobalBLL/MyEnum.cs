@@ -157,12 +157,7 @@ namespace GlobalBLL
         IsLogin,
     }
 
-    public enum YFFSEnum
-    {
-        提付 = 1,
-        现付 = 2,
-        扣付 = 3
-    }
+
 
     /// <summary>
     /// 订单状态
@@ -177,15 +172,31 @@ namespace GlobalBLL
         订单完成=6,
         货物已中转=7
     }
+
+    /// <summary>
+    /// 提货方式
+    /// </summary>
     public enum THFSEnum
     {
         客户自提=1,
         送货上门=2
     }
+    /// <summary>
+    /// 收货方式
+    /// </summary>
     public enum SHFSENum
     {
         我方去送 = 1,
         物流来提 = 2
+    }
+    /// <summary>
+    /// 运费方式
+    /// </summary>
+    public enum YFFSEnum
+    {
+        提付 = 1,
+        现付 = 2,
+        扣付 = 3
     }
     public enum Position
     {

@@ -49,7 +49,6 @@ namespace Logistics.LC.Customer
                         ConsignorID = Tools.NewGuid.GuidTo16String(),//发货人ID
                         FHPhone = Phone,//发货人电话
                         Consignee = GetValue("Consignee"),//收货人名称
-                        ConsigneeID = Tools.NewGuid.GuidTo16String(),//收货人ID
                         logisticsID = GetValue("logisticsID").StringToArray().GetIndexValue(0),//物流
                         SHPhone = GetValue("SHPhone"),//收货人电话
                         Destination = GetValue<int>("End"),//目的地

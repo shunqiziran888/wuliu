@@ -96,5 +96,32 @@ namespace Logistics.ApiCommand
             };
             return cs;
         }
+
+        /// <summary>
+        /// 设置登陆状态
+        /// </summary>
+        /// <param name="vo"></param>
+        public void SetLogin(Model.Model.LC_User vo)
+        {
+            web.SetSession(LoginEnum.IsLogin.EnumToName(), true);
+            web.SetSession(LoginEnum.id.EnumToName(), vo.ID);
+            web.SetSession(LoginEnum.uid.EnumToName(), vo.UID);
+            web.SetSession(LoginEnum.NickName.EnumToName(), vo.WX_NickName);
+            web.SetSession(LoginEnum.OpenID.EnumToName(), vo.WX_OpenID);
+            web.SetSession(LoginEnum.HeadPic.EnumToName(), vo.WX_HeadPic);
+            web.SetSession(LoginEnum.Sex.EnumToName(), vo.WX_Sex);
+            web.SetSession(LoginEnum.accountType.EnumToName(), vo.ZType);
+            web.SetSession(LoginEnum.account.EnumToName(), vo.ZNumber);
+            web.SetSession(LoginEnum.AreaID.EnumToName(), vo.AreaID);
+            web.SetSession(LoginEnum.City.EnumToName(), vo.WX_City);
+            web.SetSession(LoginEnum.CityID.EnumToName(), vo.CityID);
+            web.SetSession(LoginEnum.Country.EnumToName(), vo.WX_Country);
+            web.SetSession(LoginEnum.phones.EnumToName(), vo.Phone);
+            web.SetSession(LoginEnum.positionID.EnumToName(), vo.PositionID);
+            web.SetSession(LoginEnum.Province.EnumToName(), vo.ProvincesID);
+            web.SetSession(LoginEnum.ProvincesID.EnumToName(), vo.ProvincesID);
+            web.SetSession(LoginEnum.state.EnumToName(), vo.State);
+            web.SetSession(LoginEnum.username.EnumToName(), vo.UserName);
+        }
     }
 }

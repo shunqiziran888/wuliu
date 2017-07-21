@@ -66,7 +66,7 @@ namespace Model.Model
         /// </summary>
         private int? _AreaID;
         /// <summary>
-        /// 
+        /// 上级物流公司ID
         /// </summary>
         private string _LCID;
         /// <summary>
@@ -210,7 +210,7 @@ namespace Model.Model
             get { return _AreaID; }
         }
         /// <summary>
-        /// 
+        /// 上级物流公司ID
         /// </summary>
         public string LCID
         {
