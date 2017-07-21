@@ -82,7 +82,7 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SuperCommand">
-      <HintPath>..\..\..\LiveVideoWeb\LiveVideoWeb\bin\SuperCommand.dll</HintPath>
+      <HintPath>C:\Users\Administrator\Documents\WeChat Files\kxz128448145\Files\SuperCommand.dll</HintPath>
     </Reference>
     <Reference Include="SuperDataBase">
       <HintPath>D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\运营商API平台\bin\SuperDataBase.dll</HintPath>
@@ -120,6 +120,7 @@
     <Content Include="Command\GetSHPhoneAdressList.aspx" />
     <Content Include="Command\RegisterUserBinding.aspx" />
     <Content Include="GetQR.aspx" />
+    <Content Include="LC\Authorize\StaffAuthorize\StaffAuthorizeIndex.aspx" />
     <Content Include="LC\Business\DschargeGood\IndexDhg.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_Handle.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_Success.aspx" />
@@ -175,6 +176,25 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="manage\add_car.html" />
+    <Content Include="manage\add_line.html" />
+    <Content Include="manage\cancel_line_warrant.html" />
+    <Content Include="manage\cencel_staff_warrant.html" />
+    <Content Include="manage\index.html" />
+    <Content Include="manage\line_details.html" />
+    <Content Include="manage\line_share.html" />
+    <Content Include="manage\line_warrant.html" />
+    <Content Include="manage\line_warrant_details.html" />
+    <Content Include="manage\line_warrant_success.html" />
+    <Content Include="manage\manage_car.html" />
+    <Content Include="manage\manage_line.html" />
+    <Content Include="manage\manage_warrant.html" />
+    <Content Include="manage\save_add_car.html" />
+    <Content Include="manage\save_add_line.html" />
+    <Content Include="manage\staff_share.html" />
+    <Content Include="manage\staff_warrant.html" />
+    <Content Include="manage\staff_warrant_details.html" />
+    <Content Include="manage\staff_warrant_success.html" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Style\.DS_Store" />
@@ -237,6 +257,7 @@
     <Content Include="web\js\zepto.min.js" />
     <Content Include="web\manage\index.html" />
     <Content Include="web\user\index.html" />
+    <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\WuLiu.pubxml" />
     <Content Include="Style\font\iconfont.eot" />
     <Content Include="Style\font\iconfont.ttf" />
@@ -275,7 +296,6 @@
     <Content Include="Style\scripts\tools\tools.js" />
     <Content Include="Style\scripts\tools\wx.js" />
     <Content Include="api.ashx" />
-    <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -334,6 +354,13 @@
     <Compile Include="ApiCommand\CMD_GetToRegUser.cs" />
     <Compile Include="ApiCommand\CMD_JSSignature.cs" />
     <Compile Include="ApiCommand\CMD_OAuth.cs" />
+    <Compile Include="LC\Authorize\StaffAuthorize\StaffAuthorizeIndex.aspx.cs">
+      <DependentUpon>StaffAuthorizeIndex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Authorize\StaffAuthorize\StaffAuthorizeIndex.aspx.designer.cs">
+      <DependentUpon>StaffAuthorizeIndex.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebCommandBase.cs" />
     <Compile Include="WebCommandVOBase.cs" />
     <Compile Include="Command\AddLogisticsFromPhone.aspx.cs">
@@ -764,6 +791,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="LC\Authorize\LineAuthorize\" />
     <Folder Include="Models\" />
     <Folder Include="Style\icon\" />
     <Folder Include="web\icon\" />
@@ -803,7 +831,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>13839</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

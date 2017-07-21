@@ -92,29 +92,36 @@
                     </div> -->
                    
                     <ul>
-                        
+                        <%if (list.Count > 0)
+        { %>
+                                         <%
+                                             foreach (var v in list)
+                                             {
+                                                 var addressvoStart = DAL.DAL.DALBase.GetAllAddress(v.Initially.Value);
+                                                var addressvoEnd = DAL.DAL.DALBase.GetAllAddress(v.begins.Value);
+                                                    %>
                         <li class="white mart_10 padb_10">
                             <div  class="dis_flex jus_bet ali_center" style="padding:.5rem;">
                                 <div>
                                     <div>
                                         <div class="dis_flex ali_center ">
                                             <p class="dis_flex" style="flex-direction: column;line-height:1.5rem;">
-                                                <strong class="fz_16">新疆</strong>
-                                                <i class="fz_16">乌鲁木齐市</i>
-                                                <i class="fz_16">哈萨克斯大北湾区</i>
-                                                <i class="fz_14 fc_ash"><span>收货： <span>23单</span></span></i>
-                                                <i class="fz_14 fc_ash"><span>代收款： <span>1523元</span></span></i>
-                                                <i class="fz_14 fc_ash"><span>车运费： <span>1523元</span></span></i>
-                                                <i class="fz_14 fc_ash"><span>联系电话： <span>1312231222</span></span></i>
+                                                <strong class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoStart.Item1.Value)?.Item2?.Name%></strong>
+                                                <i class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoStart.Item2.Value)?.Item2?.Name%></i>
+                                                <i class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoStart.Item3.Value)?.Item2?.Name%></i>
+                                                <i class="fz_14 fc_ash"><span>收货： <span><%=list.Count %></span></span></i>
+                                                <i class="fz_14 fc_ash"><span>代收款： <span><%=v.GReceivables %></span></span></i>
+                                                <i class="fz_14 fc_ash"><span>车运费： <span><%=v.Freight %></span></span></i>
+                                                <i class="fz_14 fc_ash"><span>联系电话： <span><%=v.FHPhone%></span></span></i>
                                             </p>
                                             <i class="iconfont " style="font-size:30px;margin:0 .5rem">&#xe6d7;</i>
                                             <p class="dis_flex" style="flex-direction: column;line-height:1.5rem;">
-                                                <strong class="fz_16">新疆</strong>
-                                                <i class="fz_16">乌鲁木齐市</i>
-                                                <i class="fz_16">哈萨克斯大北湾区</i>
-                                                <i class="fz_14 fc_ash"><span>件数： <span>1222</span></span></i>
-                                                <i class="fz_14 fc_ash"><span>总运费： <span>2523元</span></span></i>
-                                                <i class="fz_14 fc_ash"><span>车号： <span>苏AD11223</span></span></i>
+                                                <strong class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoEnd.Item1.Value)?.Item2?.Name%></strong>
+                                                <i class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoEnd.Item2.Value)?.Item2?.Name%></i>
+                                                <i class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoEnd.Item3.Value)?.Item2?.Name%></i>
+                                                <i class="fz_14 fc_ash"><span>件数： <span><%=v.Number %></span></span></i>
+                                                <i class="fz_14 fc_ash"><span>总运费： <span>暂时不显示</span></span></i>
+                                                <i class="fz_14 fc_ash"><span>车号： <span><%=DAL.DAL.DALBase.GetCarFromID(v.VehicleID.Value)?.Item2?.VehicleNo%></span></span></i>
                                             </p>
                                         </div>
                                         
@@ -122,9 +129,15 @@
                                 </div>
                                
                             </div>
-                            <p class="dis_flex txt_center fz_16" style="justify-content:center;margin-bottom:.5rem;"><a class="dis_block" style="height:30px; line-height:30px; width:90px; background-color: #a3c478;color:#fff;" href="/LC/Business/MeetCar/LC_GoodDetails.aspx" class="">接车</a></p>
+                            <p class="dis_flex txt_center fz_16" style="justify-content:center;margin-bottom:.5rem;"><a class="dis_block" style="height:30px; line-height:30px; width:90px; background-color: #a3c478;color:#fff;" href="/LC/Business/MeetCar/LC_GoodDetails.aspx?CH=<%=v.VehicleID %>&CFD=<%=v.Initially %>&MDD=<%=v.Destination %>" class="">接车</a></p>
                             <p class="txt_center fz_12" style="padding-right:.5rem;">2016年-12月-23日 09：31</p>
                         </li>
+                        <%} %>
+                        <%}
+        else
+        {%>
+    <div style="text-align: center; line-height: 200px; overflow:hidden;">无任何数据</div>
+    <%} %>
                     </ul>
 
                 </div>
@@ -135,7 +148,7 @@
     </div>
 
     <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js" charset='utf-8'></script>
-    <%--<script type="text/javascript" src="js/main.js" charset='utf-8'></script>--%>
+    <script src="/Style/scripts/main.js"></script>
     <script>
         $(function () {
             $.init();

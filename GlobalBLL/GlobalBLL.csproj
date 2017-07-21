@@ -31,15 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CustomExtensions, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\运营商API平台\bin\CustomExtensions.dll</HintPath>
+    <Reference Include="CustomExtensions">
+      <HintPath>C:\Users\Administrator\Documents\WeChat Files\kxz128448145\Files\CustomExtensions.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="SuperCommand">
-      <HintPath>..\..\..\LiveVideoWeb\LiveVideoWeb\bin\SuperCommand.dll</HintPath>
+      <HintPath>C:\Users\Administrator\Documents\WeChat Files\kxz128448145\Files\SuperCommand.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,9 +52,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Tools, Version=2.1.0.4, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\运营商API平台\bin\Tools.dll</HintPath>
+    <Reference Include="Tools">
+      <HintPath>C:\Users\Administrator\Documents\WeChat Files\kxz128448145\Files\Tools.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

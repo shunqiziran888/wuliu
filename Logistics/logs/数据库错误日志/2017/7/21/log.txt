@@ -1,0 +1,1 @@
+错误:select [Name],[TopAddressID],[id],[Population],[IsHot],[MainCity] from w_address_basic_data where TopAddressID=1内容用户 'wxl' 登录失败。|2017-07-21 15:58:07.424|GetNextAddressListFromId|F:\Users\Administrator\Source\Repos\物流系统\DAL\DAL\DALBase.cs|128

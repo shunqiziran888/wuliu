@@ -40,9 +40,8 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="SuperCommand, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\LiveVideoWeb\LiveVideoWeb\bin\SuperCommand.dll</HintPath>
+    <Reference Include="SuperCommand">
+      <HintPath>C:\Users\Administrator\Documents\WeChat Files\kxz128448145\Files\SuperCommand.dll</HintPath>
     </Reference>
     <Reference Include="SuperDataBase">
       <HintPath>D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\运营商API平台\bin\SuperDataBase.dll</HintPath>
