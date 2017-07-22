@@ -7,72 +7,55 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>物流公司</title>
+    <title>物流管理系统</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- <link rel="shortcut icon" href="/favicon.ico"> -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="stylesheet" href="/Style/css/sui/sm.min.css">
+
+     <link rel="stylesheet" href="/Style/css/sui/sm.min.css">
     <link rel="stylesheet" href="/Style/css/sui/sm-extend.min.css">
     <link href="/Style/css/iconlink.css" rel="stylesheet">
     <link rel="stylesheet" href="/Style/css/style.css">
-    <style type="text/css" media="screen">
-        .row .col-80 {
-            width: 80%;
-            margin-left: 0%;
+    <style>
+        input[type=checkbox] {
+            -webkit-appearance: checkbox;
+            height: .8rem;
         }
-        
-        p.button.button-fill {
-            margin: 0 2rem .5rem;
-            height: 1.6rem;
-            line-height: 1.6rem;
-        }
-        
-        .wyfh-ul .dingdan-li .dingdan-right {
-            margin-top: 0rem;
-        }
-        
-        .dingdan-ul .dingdan-li {
-            padding: .5rem .2rem;
-            margin-left: 0px;
-        }
-        
-        .top-btn {
-            padding: .5rem 2rem;
-        }
-        
-        .top-btn a {
-            height: 2.5rem;
-            line-height: 2.5rem;
-        }
-        
-        .top-btn a span {
-            font-size: .7rem;
-            margin-right: .2rem;
-        }
-        
-        .wyfh-ul {
-            padding-top: .5rem;
-        }
-        
-        .dingdan-ul .dingdan-li .col-80 .shang {
-            display: flex;
-            justify-content: space-between;
-            font-size: .5rem;
-            margin-bottom: .5rem;
-        }
-        
-        .dingdan-ul .dingdan-li .col-80 .xia {
-            display: flex;
-            justify-content: space-between;
-            font-size: .5rem;
-        }
-        
-        .dingdan-ul .dingdan-li .col-20 {
-            margin-top: .3rem;
-        }
-        
-        .dingdan-ul .dingdan-li a {
+
+        .buttons-tab .button.active {
+            background: #0894ec;
+            border: 1px solid #0894ec;
             color: #fff;
+        }
+
+        .tab_nav {
+            display: flex;
+            justify-content: center;
+            background: #f2f2f2;
+            border: none;
+        }
+
+        .tab_nav .tab_nav_btn {
+            border: 1px solid #0894ec;
+            height: 30px;
+            line-height: 30px;
+            background: #fff;
+            color: #0894ec;
+            font-size: .7rem;
+            width: 173px;
+        }
+
+        .tab_nav .tab_nav_btn.nav1 {
+            border-right: none;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        .tab_nav .tab_nav_btn.nav2 {
+            border-left: none;
+            border-bottom-right-radius: 10px;
+            border-top-right-radius: 10px;
         }
     </style>
 </head>
@@ -82,94 +65,155 @@
         <div class="page page-current">
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
-                <a class="icon icon-left pull-left external" href="/LC/Index/LC_IndexYW.aspx"></a>
+                <a href="#" onclick="history.go(-1)" class="icon iconfont icon-zuo pull-left"></a>
+                <!-- <p class="add_wuliu">
+                    <a class="add_icon icon iconfont icon-eventnote pull-right" href="history_log.html"></a>
+                    <i class="add_txt">历史记录</i>
+                </p> -->
+                <!-- <a href="jieche_success.html" class="icon pull-right dis_inline" style="background:#009621;color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">下一步</a> -->
                 <h1 class="title">放货</h1>
             </header>
-            <div class="content" style="background:#fff;">
+
+
+            <div class="content" style="background:#f2f2f2;">
                 <div class="page-index">
-                    <!--<p class="button button-fill">客户申请提货消息</p>-->
-                    <div class="buttons-tab">
-                        <a href="#tab1" class="tab-link active button"><span>待转货单</span></a>
-                        <a href="#tab2" class="tab-link button"><span>待送货单</span></a>
+                    <div class="searchbar">
+                        <div class="search-input">
+                            <label class="icon icon-search" for="search"></label>
+                            <input type="search" id='search' placeholder='搜索订单' />
+                        </div>
+                    </div>
+                    <div class="buttons-tab ali_center tab_nav">
+                        <a href="#tab1" class="tab-link active button fz_14 tab_nav_btn nav1 external">客户提货信息</a>
+                        <a href="#tab2" class="tab-link button fz_14 tab_nav_btn nav2 external">未放货库存</a>
+
                     </div>
                     <div class="content-block">
                         <div class="tabs">
                             <div id="tab1" class="tab active">
-                                <ul class="dingdan-ul wyfh-ul">
-                                    <%if (listzz.Count > 0)
-        { %>
-                                     <%
-                                    foreach(var v in listzz)
-                                    {
-                                        
-                                     %>
-                                    <li class="dingdan-li row">
-                                        <ul class="col-80">
-                                            <li class="shang">
-                                                <i>日期：17年3月31日</i>
-                                                <i>货单号：<%=v.GoodNo %></i>
-                                            </li>
-                                            <li class="xia">
-                                                <i>收货人：<%=v.Consignee %></i>
-                                                <i>名称：<%=v.GoodName %></i>
-                                                <i>件数：<%=v.Number %></i>
-                                            </li>
-                                        </ul>
-                                        <div class="col-20">
-                                            <a href="/LC/Business/DschargeGood/LC_TransferEdit.aspx?OID=<%=v.OrderID %>&Destination=<%=v.Destination %>" class="button button-fill button-success">中转</a>
-                                        </div>
-                                    </li>
-                                    <%} %>
-                                     <%}
-        else
-        {%>
-    <div style="text-align: center; line-height: 200px; overflow:hidden;">无任何数据</div>
-    <%} %>
-                                </ul>
+                                <div class="content-block">
+                                    <form>
+
+                                        <label class="dis_flex ali_center mart_10 white" style="padding:.5rem">
+                            <div class="col_100">
+                                <div style="line-height:1.5rem;">
+                                <p class="fz_14 fc_black">收货人： <i>小强003</i></p>
+                                <p class="fz_14 fc_black">货名件数： <i>啤酒 <span class="fc_red">x15件</span><span class="fc_green" style="margin-left:10px;">(现付)</span></i></p>
+                                <p class="fz_14 dis_flex jus_bet fc_black"><i>运费：<span class="fc_ash">2099</span></i><i>代收款：<span class="fc_ash">291</span></i> <i>代收款：<span class="fc_ash">291</span></i></p>
+                                <p class="fz_14 dis_flex jus_bet fc_black"><i>货号：<span>PExx101010</span></i><i class="fz_12 fc_ash" style="margin-left:1rem;">2016年-12月-23日 09：21</i></p>
+                                <p class="dis_flex" style="justify-content:center;"><a style="line-height: 30px;background: #a3c478;color: #fff;width: 90px;text-align: center;border: 1px solid #a3c478;" href="zhongzhuan.html">中转</a></p>
+                            </div>
+                            </div>
+                            
+                        </label>
+                                        <label class="dis_flex ali_center mart_10 white" style="padding:.5rem">
+                            <div class="col_100">
+                                <div style="line-height:1.5rem;">
+                                <p class="fz_14 fc_black">收货人： <i>小强003</i></p>
+                                <p class="fz_14 fc_black">货名件数： <i>啤酒 <span class="fc_red">x15件</span><span class="fc_green" style="margin-left:10px;">(现付)</span></i></p>
+                                <p class="fz_14 dis_flex jus_bet fc_black"><i>运费：<span class="fc_ash">2099</span></i><i>代收款：<span class="fc_ash">291</span></i> <i>代收款：<span class="fc_ash">291</span></i></p>
+                                <p class="fz_14 dis_flex jus_bet fc_black"><i>货号：<span>PExx101010</span></i><i class="fz_12 fc_ash" style="margin-left:1rem;">2016年-12月-23日 09：21</i></p>
+                                <p class="dis_flex" style="justify-content:center;"><a style="line-height: 30px;background: #a3c478;color: #fff;width: 90px;text-align: center;border: 1px solid #a3c478;" href="songhuo.html">送货</a></p>
+                            </div>
+                            </div>
+                            
+                        </label>
+                                        <label class="dis_flex ali_center mart_10 white" style="padding:.5rem">
+                            <div class="col_100">
+                                <div style="line-height:1.5rem;">
+                                <p class="fz_14 fc_black">收货人： <i>小强003</i></p>
+                                <p class="fz_14 fc_black">货名件数： <i>啤酒 <span class="fc_red">x15件</span><span class="fc_green" style="margin-left:10px;">(现付)</span></i></p>
+                                <p class="fz_14 dis_flex jus_bet fc_black"><i>运费：<span class="fc_ash">2099</span></i><i>代收款：<span class="fc_ash">291</span></i> <i>代收款：<span class="fc_ash">291</span></i></p>
+                                <p class="fz_14 dis_flex jus_bet fc_black"><i>货号：<span>PExx101010</span></i><i class="fz_12 fc_ash" style="margin-left:1rem;">2016年-12月-23日 09：21</i></p>
+                                <p class="dis_flex" style="justify-content:center;"><a style="line-height: 30px;background: #a3c478;color: #fff;width: 90px;text-align: center;border: 1px solid #a3c478;" href="fanghuo_details.html">放货</a></p>
+                            </div>
+                            </div>
+                            
+                        </label>
+
+
+
+
+                                    </form>
+                                </div>
                             </div>
                             <div id="tab2" class="tab">
-                                <ul class="dingdan-ul wyfh-ul">
-                                     <%if (list.Count > 0)
-        { %>
-                                     <%
-                                    foreach(var v in list)
-                                    {
+                                <div class="content-block">
+                                    <div>
+                                        <p class="dis_flex fc_black line_he_40 ali_center">
+                                            <span class="col_30 txt_right">选择物流：</span>
+                                            <select class="col_60">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                            </select>
+                                        </p>
+                                        <p class="dis_flex fc_black line_he_40 ali_center">
+                                            <span class="col_30 txt_right">选择物流：</span>
+                                            <select class="col_60">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                            </select>
+                                        </p>
                                         
-                                     %>
-                                    <li class="dingdan-li row">
-                                        <ul class="col-80">
-                                            <li class="shang">
-                                                <i>日期：17年3月31日</i>
-                                                <i>货单号：<%=v.GoodNo %></i>
-                                            </li>
-                                            <li class="xia">
-                                                <i>收货人：<%=v.Consignee %></i>
-                                                <i>名称：<%=v.GoodName %></i>
-                                                <i>件数：<%=v.Number %></i>
-                                            </li>
-                                        </ul>
-                                        <div class="col-20">
-                                            <a href="/LC/Business/DschargeGood/LC_Success.aspx?OID=<%=v.OrderID %>" class="button button-fill button-success">放货</a>
-                                        </div>
-                                    </li>
-                                      <%} %>
-                                      <%}
-        else
-        {%>
-    <div style="text-align: center; line-height: 200px; overflow:hidden;">无任何数据</div>
-    <%} %>
-                                </ul>
+                                        <p class="dis_flex line_he_40 ali_center" style="justify-content:center;">
+                                            <a href="fanghuo_pandian.html" class="line_he_30 green txt_center fc_white fz_14" style="width:115px">盘点</a>
+                                            <span style="width:1rem;"></span>
+                                            <a href="#" class="line_he_30 green txt_center fc_white fz_14" style="width:115px">快速收货</a>
+                                        </p>
+                                    </div>
+                                    <div class="white mart_20" style="padding:1rem;line-height:1.5rem;">
+                                        <p class="fz_16">装车： <span>23单</span><span style="margin-left:1rem;">计289件</span></p>
+                                        <p class="dis_flex fz_14 jus_bet fc_ash"><i class="col_30">运费： <span>2523元</span></i><i class="col_30">运费： <span>2523元</span></i>
+                                            <i class="col_30">运费： <span>2523元</span></i>
+                                        </p>
+                                        <p class="dis_flex fz_14 jus_bet fc_ash"><i class="col_30">运费： <span>2523元</span></i><i class="col_30">运费： <span>2523元</span></i>
+                                            <i class="col_30">运费： <span>2523元</span></i>
+                                        </p>
+                                    </div>
+                                    <form>
+                                        <label class="dis_flex jus_bet ali_center mart_10 white" style="padding:.5rem">
+                            <input type="checkbox" class="col_10">
+                            <a href="choose_bus.html">
+                                <div style="line-height:1.5rem;">
+                                <p class="fz_14">收货人： <i>小强003</i></p>
+                                <p class="fz_14">货名件数： <i>啤酒 <span class="fc_red">x15件</span></i></p>
+                                <p class="fz_14"><i>运费：<span>2099</span></i><i>代收款：<span>291</span></i></p>
+                                <p class="fz_14"><i>货号：<span>PExx101010</span></i><i class="fz_12" style="margin-left:1rem;">2016年-12月-23日 09：21</i></p>
                             </div>
-
+                            </a>
+                            
+                        </label>
+                                        <label class="dis_flex jus_bet ali_center mart_10 white" style="padding:.5rem">
+                            <input type="checkbox" class="col_10">
+                            <a href="choose_bus.html">
+                                <div style="line-height:1.5rem;">
+                                <p class="fz_14">收货人： <i>小强003</i></p>
+                                <p class="fz_14">货名件数： <i>啤酒 <span class="fc_red">x15件</span></i></p>
+                                <p class="fz_14"><i>运费：<span>2099</span></i><i>代收款：<span>291</span></i></p>
+                                <p class="fz_14"><i>货号：<span>PExx101010</span></i><i class="fz_12" style="margin-left:1rem;">2016年-12月-23日 09：21</i></p>
+                            </div>
+                            </a>
+                            
+                        </label>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="/Style/scripts/all.js">
-    $(function() { $.init(); $.config = { router: false } });
+
+    <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
+    <script src="/Style/scripts/main.js"></script>
+    <script>
+        $(function () {
+            $.init();
+            $.config = { router: false }
+        });
     </script>
+
 </body>
 
 </html>

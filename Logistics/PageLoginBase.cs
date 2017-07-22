@@ -130,6 +130,13 @@ namespace Logistics
         /// <param name="tz"></param>
         internal void Jump(string tz)
         {
+            if (tz.IndexOf("?") != -1)
+            {
+                tz += "&" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
+            }
+            else {
+                tz += "?" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
+            }
             Response.Redirect(tz);
         }
         /// <summary>
