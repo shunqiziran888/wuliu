@@ -21,7 +21,8 @@ namespace Logistics.Command
                     x.End,
                     EndName = DAL.DAL.DALBase.GetAddressFromID(x.End.ConvertData<int>()).Item2?.Name ?? string.Empty,
                     x.LineID,
-                    x.Phone,
+                    x.DFPhone,
+                    x.MyPhone,
                     x.Start,
                     x.UID,
                 };

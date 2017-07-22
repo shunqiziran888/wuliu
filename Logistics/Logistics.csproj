@@ -331,6 +331,8 @@
     <Compile Include="ApiCommand\CMD_OutSystem.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_EmployeeEmpowerment.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_GetEmployeeEmpowermentList.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_GetLineData.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_GetPositionList.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_LineAuthorization.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_LineAuthorizationList.cs" />
     <Compile Include="doc\doc.aspx.cs">

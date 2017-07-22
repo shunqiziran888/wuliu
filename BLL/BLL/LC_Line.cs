@@ -17,6 +17,16 @@ namespace BLL.BLL
         {
             return DAL.DAL.LC_Line.Add(LC_Line,uservo);
         }
+
+        public static (bool, string, object) GetLineData(HttpContextBase web)
+        {
+            var myuservo = web.GetMyLoginUserVO();
+            long id = web.GetValue<long>("id");
+            if (id <= 0)
+                return (false, "ID参数错误!",null);
+            return DAL.DAL.LC_Line.GetLineData(myuservo, id);
+        }
+
         /// <summary>
         /// 线路授权
         /// </summary>
@@ -29,10 +39,16 @@ namespace BLL.BLL
                 return (false, "线路授权不能为空!");
             long id = web.GetValue<long>("id");
             int state = web.GetValue<int>("state"); //状态
+            string Lineletter = web.GetValue("Lineletter");
             if (id <= 0)
                 return (false, "线路授权ID不能为空!");
+            if(state==1)
+            {
+                if (Lineletter.StrIsNull())
+                    return (false, "运号字母不能为空!");
+            }
             
-            return DAL.DAL.LC_Line.LineAuthorization(myuservo, id, state);
+            return DAL.DAL.LC_Line.LineAuthorization(myuservo, id, state, Lineletter);
         }
 
         /// <summary>

@@ -55,7 +55,7 @@ namespace BLL.BLL
             if (page <= 0)
                 page = 1;
             if (num <= 0)
-                page = 1000;
+                num = 1000;
             return DAL.DAL.LC_User.GetEmployeeEmpowermentList(myuservo, page, num);
         }
 

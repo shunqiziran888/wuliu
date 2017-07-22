@@ -2,7 +2,7 @@ using System;
 namespace Model.Model
 {
     /// <summary>
-    /// -
+    /// 员工类型表
     /// </summary>
     [Serializable]
     public partial class LC_Position : ModelBase
@@ -22,9 +22,9 @@ namespace Model.Model
         /// </summary>
         private string _PositionName;
         /// <summary>
-        /// 权限
+        /// 图标
         /// </summary>
-        private int? _Jurisdiction;
+        private string _Icon;
         /// <summary>
         /// 
         /// </summary>
@@ -50,12 +50,12 @@ namespace Model.Model
             get { return _PositionName; }
         }
         /// <summary>
-        /// 权限
+        /// 图标
         /// </summary>
-        public int? Jurisdiction
+        public string Icon
         {
-            set { _Jurisdiction = value;}
-            get { return _Jurisdiction; }
+            set { _Icon = value;}
+            get { return _Icon; }
         }
     }
 }

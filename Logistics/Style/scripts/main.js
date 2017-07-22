@@ -13,7 +13,6 @@ function InitSystem() {
 
         //检测是否登陆
         checklogin(function () {
-
             //初始化微信
             $.initWx();
 
@@ -90,6 +89,21 @@ function OutSystem(callfun) {
 }
 
 /**
+ * 页面JS库+微信登录完毕
+ * @param {function} CallFun
+ */
+function PageInit(CallFun) {
+    $.LoginOkFun = CallFun;
+}
+/**
+ * 移除路由
+ */
+function RemoveLuyou()
+{
+    $("a").addClass("external");
+}
+
+/**
  * 检测是否已经登陆
  */
 function checklogin(runpage) {
@@ -123,8 +137,9 @@ function checklogin(runpage) {
                 login = true;
                 SetLocalData("openid", result.Open_ID);
                 SetSession("code", code);
-                if ($.LoginOkFun != null) {
+                if ($.LoginOkFun != null) { 
                     $.LoginOkFun();
+                    $("a").addClass("external");
                 }
                 runpage();
             }
@@ -140,6 +155,7 @@ function checklogin(runpage) {
                 SetSession("NickName", result.NickName);
                 if ($.LoginOkFun != null) {
                     $.LoginOkFun();
+                    $("a").addClass("external");
                 }
 
                 runpage();

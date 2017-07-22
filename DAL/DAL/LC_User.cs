@@ -49,7 +49,7 @@ namespace DAL.DAL
             //查看此账号是否为您的账号
             sql = makesql.MakeCount(nameof(Model.Model.LC_User), "id=@id and LCID=@LCID and ZType=@ZType", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@id",id),
-                new System.Data.SqlClient.SqlParameter("@LCID",myuservo.id),
+                new System.Data.SqlClient.SqlParameter("@LCID",myuservo.uid),
                 new System.Data.SqlClient.SqlParameter("@ZType",GlobalBLL.AccountTypeEnum.物流公司员工账号.EnumToInt())
             });
             ids = db.Read(sql);
@@ -81,7 +81,7 @@ namespace DAL.DAL
         public static (bool, string, object) GetEmployeeEmpowermentList(UserLoginVO myuservo, int page, int num)
         {
             fysql = makesql.MakeSelectFY(typeof(Model.Model.LC_User), "ZType=@ZType and LCID=@LCID", "id desc", page, num, "id", new System.Data.SqlClient.SqlParameter[] {
-                new System.Data.SqlClient.SqlParameter("@LCID",myuservo.id),
+                new System.Data.SqlClient.SqlParameter("@LCID",myuservo.uid),
                 new System.Data.SqlClient.SqlParameter("@ZType",GlobalBLL.AccountTypeEnum.物流公司员工账号.EnumToInt())
             });
             ids = db.Read(fysql);
@@ -177,7 +177,8 @@ namespace DAL.DAL
                     LCID = logistics,
                     ProvincesID = sheng,
                     CityID = shi,
-                    AreaID = qu
+                    AreaID = qu,
+                    State = logistics.StrIsNotNull() ? 0 : 1
                 };
                 sql = makesql.MakeUpdateSQL(user, "uid=@uid", new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@uid",myuservo.uid)
@@ -219,16 +220,19 @@ namespace DAL.DAL
                         //绑定自己的
                         Model.Model.LC_Line myline = new Model.Model.LC_Line()
                         {
-                            DateTime = DateTime.Now,
+                            CreateTime = DateTime.Now,
                             Start = qu,
                             End = df_user.AreaID,
                             LineID = Tools.NewGuid.GuidTo16String(),
                             Lineletter = lineletter,
-                            Phone = df_user.Phone,
-                            ResponsibleName = df_user.UserName,
+                            MyPhone =phone.ConvertData(),
+                            MyResponsibleName = nickName,
+                            DFPhone = df_user.Phone,
+                            DFResponsibleName = df_user.UserName,
                             UID = myuservo.uid,
                             BindLogisticsUid = logistics,
-                            State = 0
+                            State = 0,
+                            ApplicantUID = myuservo.uid
                         };
                         sql = makesql.MakeInsertSQL(myline);
                         ids = db.Exec(sql);
@@ -254,13 +258,16 @@ namespace DAL.DAL
                             Start = df_user.AreaID,
                             End = qu,
                             Lineletter = string.Empty,
-                            Phone = phone.ToString(),
-                            ResponsibleName = nickName,
+                            DFPhone = phone.ConvertData(),
+                            DFResponsibleName = nickName,
+                            MyPhone = df_user.Phone,
+                            MyResponsibleName = df_user.UserName,
                             UID = logistics,
                             BindLogisticsUid = myuservo.uid,
                             State = 0,
-                            DateTime = DateTime.Now,
+                            CreateTime = DateTime.Now,
                             LineID = Tools.NewGuid.GuidTo16String(),
+                            ApplicantUID = myuservo.uid
                         };
                         sql = makesql.MakeInsertSQL(dfline);
                         ids = db.Exec(sql);
@@ -315,9 +322,11 @@ namespace DAL.DAL
                 {
                     UserName = nickName,
                     ZNumber = phone.ToString(),
+                    Phone = phone.ToString(),
                     ProvincesID = wl_user.ProvincesID,
                     CityID = wl_user.CityID,
-                    AreaID = wl_user.AreaID
+                    AreaID = wl_user.AreaID,
+                    LCID = logistics
                 };
                 sql = makesql.MakeUpdateSQL(user, "uid=@uid", new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@uid",myuservo.uid)

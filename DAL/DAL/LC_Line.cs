@@ -31,12 +31,40 @@ namespace DAL.DAL
             return new Tuple<bool, string, List<Model.Model.LC_Line>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Line>());
         }
         /// <summary>
+        /// 获取线路数据
+        /// </summary>
+        /// <param name="myuservo"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static (bool, string, object) GetLineData(UserLoginVO myuservo, long id)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Line), "id=@id", new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@id",id)
+            });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg,null);
+            if (!ids.ReadIsOk())
+                return (false, "没有找到任何数据!", null);
+            var vo = ids.GetVOList<Model.Model.LC_Line>()[0];
+            return (true, string.Empty, new {
+                vo.DFPhone,
+                vo.DFResponsibleName,
+                vo.MyPhone,
+                vo.MyResponsibleName,
+                StartName =DAL.DALBase.GetAllAddressToString(vo.Start.ConvertData<int>()).Replace(" ",""),
+                EndName = DAL.DALBase.GetAllAddressToString(vo.End.ConvertData<int>()).Replace(" ", ""),
+                vo.OpenTime
+            });
+        }
+
+        /// <summary>
         /// 线路授权
         /// </summary>
         /// <param name="myuservo"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static (bool, string) LineAuthorization(UserLoginVO myuservo, long id,int state)
+        public static (bool, string) LineAuthorization(UserLoginVO myuservo, long id,int state,string Lineletter)
         {
             var box = db.CreateTranSandbox((db) =>
             {
@@ -50,16 +78,20 @@ namespace DAL.DAL
                 if (!ids.ReadIsOk())
                     return (false, "当前要操作的线路不存在!");
                 var my_line = ids.GetVOList<Model.Model.LC_Line>()[0];
+
                 //判断状态
                 if (my_line.State != 0)
                     return (false, "当前线路不是未授权状态,无法进行操作!");
                 if (!my_line.UID.Equals(myuservo.uid, StringComparison.OrdinalIgnoreCase))
                     return (false, "当前不是您的数据无法进行操作!");
+                if (my_line.UID.Equals(my_line.ApplicantUID))
+                    return (false, "您没有权限审核系统!");
 
                 //更新我方线路状态
                 sql = makesql.MakeUpdateSQL(new Model.Model.LC_Line()
                 {
-                    State = state
+                    State = state,
+                    Lineletter = Lineletter
                 }, "id=@id", new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@id",id)
                 });
@@ -72,7 +104,7 @@ namespace DAL.DAL
                 //更新对方线路状态
                 sql = makesql.MakeUpdateSQL(new Model.Model.LC_Line()
                 {
-
+                    State = state
                 }, "BindLogisticsUid=@BindLogisticsUid and UID=@UID", new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@BindLogisticsUid",myuservo.uid),
                     new System.Data.SqlClient.SqlParameter("@UID",my_line.BindLogisticsUid)
@@ -127,16 +159,19 @@ namespace DAL.DAL
                     //绑定自己的
                     Model.Model.LC_Line myline = new Model.Model.LC_Line()
                     {
-                        DateTime = DateTime.Now,
+                        CreateTime = DateTime.Now,
                         Start = myuservo.AreaID,
                         End = df_user.AreaID,
                         LineID = Tools.NewGuid.GuidTo16String(),
                         Lineletter = lineletter,
-                        Phone = df_user.Phone,
-                        ResponsibleName = df_user.UserName,
+                        MyPhone = myuservo.phones.ConvertData(),
+                        MyResponsibleName = myuservo.username,
+                        DFPhone = df_user.Phone,
+                        DFResponsibleName = df_user.UserName,
                         UID = myuservo.uid,
                         BindLogisticsUid = logistics,
-                        State = 0
+                        State = 0,
+                        ApplicantUID = myuservo.uid
                     };
                     sql = makesql.MakeInsertSQL(myline);
                     ids = db.Exec(sql);
@@ -162,13 +197,16 @@ namespace DAL.DAL
                         Start = df_user.AreaID,
                         End = myuservo.AreaID,
                         Lineletter = string.Empty,
-                        Phone = myuservo.phones.ToString(),
-                        ResponsibleName = myuservo.username,
+                        DFPhone = myuservo.phones.ConvertData(),
+                        DFResponsibleName = myuservo.username,
+                        MyPhone = df_user.Phone,
+                        MyResponsibleName = df_user.UserName,
                         UID = logistics,
                         BindLogisticsUid = myuservo.uid,
                         State = 0,
-                        DateTime = DateTime.Now,
+                         CreateTime = DateTime.Now,
                         LineID = Tools.NewGuid.GuidTo16String(),
+                        ApplicantUID = myuservo.uid
                     };
                     sql = makesql.MakeInsertSQL(dfline);
                     ids = db.Exec(sql);
@@ -191,7 +229,7 @@ namespace DAL.DAL
         /// <returns></returns>
         public static (bool, string, object) GetLineAuthorizationList(UserLoginVO myuservo, int page, int num)
         {
-            fysql = makesql.MakeSelectFY(typeof(Model.Model.LC_Line), "UID=@UID and State=0", "id desc",page,num,"id",new System.Data.SqlClient.SqlParameter[] {
+            fysql = makesql.MakeSelectFY(typeof(Model.Model.LC_Line), "UID=@UID and State=0 and UID!=ApplicantUID", "id desc",page,num,"id",new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@UID",myuservo.uid)
             });
             ids = db.Read(fysql);
@@ -203,10 +241,26 @@ namespace DAL.DAL
                     allcount = fysql.count,
                     data = new object[] { }
                 });
+
             return (true, string.Empty, new
             {
                 allcount = fysql.count,
-                data = ids.GetVOList<Model.Model.LC_Line>()
+                data = ids.GetVOList<Model.Model.LC_Line>().Select((x) =>
+                {
+                    return new
+                    {
+                        x.ID,
+                        CreateTime =  x.CreateTime.ConvertData<DateTime>().ToString("yyyy年MM月dd"),
+                        x.Lineletter,
+                        x.Start,
+                        x.End,
+                        StartName = DAL.DALBase.GetAllAddressToString(x.Start.ConvertData<int>()).Replace(" ", ""),
+                        EndName = DAL.DALBase.GetAllAddressToString(x.End.ConvertData<int>()).Replace(" ", ""),
+                        x.DFPhone,
+                        x.DFResponsibleName,
+                        x.State
+                    };
+                })
             });
         }
 
@@ -266,13 +320,17 @@ namespace DAL.DAL
                     Model.Model.LC_Line my_ll = new Model.Model.LC_Line()
                     {
                         BindLogisticsUid = bind_lcu.UID,
-                        DateTime = DateTime.Now,
+                        CreateTime = DateTime.Now,
                         End = bind_lcu.AreaID,
                         LineID = Tools.NewGuid.GuidTo16String(),
-                        Phone = bind_lcu.Phone,
+                        MyPhone = my_lcu.Phone.ConvertData(),
+                        MyResponsibleName = my_lcu.UserName,
+                        DFPhone = bind_lcu.Phone,
+                        DFResponsibleName = bind_lcu.UserName,
                         UID = my_lcu.UID,
                         Start = my_lcu.AreaID,
-                        Lineletter = myLineletter
+                        Lineletter = myLineletter,
+                        ApplicantUID = my_lcu.UID
                     };
                     //准备添加
                     sql = makesql.MakeInsertSQL(my_ll);
@@ -308,13 +366,17 @@ namespace DAL.DAL
                     Model.Model.LC_Line bind_ll = new Model.Model.LC_Line()
                     {
                         BindLogisticsUid = my_lcu.UID,
-                        DateTime = DateTime.Now,
+                        CreateTime = DateTime.Now,
                         End = my_lcu.AreaID,
                         LineID = Tools.NewGuid.GuidTo16String(),
-                        Phone = my_lcu.Phone,
+                        DFPhone = my_lcu.Phone.ConvertData(),
+                        DFResponsibleName = my_lcu.UserName,
+                        MyPhone = bind_lcu.Phone,
+                        MyResponsibleName = bind_lcu.UserName,
                         UID = bind_lcu.UID,
                         Start = bind_lcu.AreaID,
-                        Lineletter = bindLineletter
+                        Lineletter = bindLineletter,
+                        ApplicantUID = my_lcu.UID
                     };
                     sql = makesql.MakeInsertSQL(bind_ll);
                     ids = db.Exec(sql);
