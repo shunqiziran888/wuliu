@@ -43,7 +43,7 @@
                   <span class="icon iconfont icon-fcstubiao19"></span>
                   <span class="tab-label">运营统计</span>
               </a>
-                <a class="tab-item external active" href="/LC/MenuBar/LC_Manage.aspx">
+                <a class="tab-item external active" href="/manage/index.html">
                   <span class="icon iconfont icon-guanli"></span>
                   <span class="tab-label">物流管理</span>
               </a>

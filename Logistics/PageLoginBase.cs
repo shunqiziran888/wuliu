@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using CustomExtensions;
+using GlobalBLL;
+
 namespace Logistics
 {
     public class PageLoginBase : PageBase
@@ -28,26 +30,76 @@ namespace Logistics
             }
             base.OnLoad(e);
         }
+        ///// <summary>
+        ///// 获取登录人数据
+        ///// </summary>
+        //internal GlobalBLL.UserLoginVO GetMyLoginUserVO()
+        //{
+
+        //    return new GlobalBLL.UserLoginVO()
+        //    {
+        //        phones = GetSessionValue("phones"),
+        //        username = GetSessionValue("username"),
+        //        account = GetSessionValue("account"),
+        //        accountType = GetSessionValue("accountType").ConvertData<GlobalBLL.AccountTypeEnum>(),
+        //        id = GetSessionValue("id").ConvertData<long>(),
+        //        positionID = GetSessionValue("positionID").ConvertData<int>(),
+        //        state = GetSessionValue("state").ConvertData<int>(),
+        //        uid = GetSessionValue("uid"),
+        //        ProvincesID = GetSessionValue("ProvincesID").ConvertData<int>(),
+        //        AreaID = GetSessionValue("AreaID").ConvertData<int>(),
+        //        CityID = GetSessionValue("CityID").ConvertData<int>(),
+        //    };
+        //}
+
         /// <summary>
-        /// 获取登录人数据
+        /// 获取我的loginvo
         /// </summary>
-        internal GlobalBLL.UserLoginVO GetMyLoginUserVO()
+        public UserLoginVO GetMyLoginUserVO()
         {
-            return new GlobalBLL.UserLoginVO()
+            return new UserLoginVO()
             {
-                phones = GetSessionValue("phones"),
-                username = GetSessionValue("username"),
-                account = GetSessionValue("account"),
-                accountType = GetSessionValue("accountType").ConvertData<GlobalBLL.AccountTypeEnum>(),
-                id = GetSessionValue("id").ConvertData<long>(),
-                positionID = GetSessionValue("positionID").ConvertData<int>(),
-                state = GetSessionValue("state").ConvertData<int>(),
-                uid = GetSessionValue("uid"),
-                ProvincesID = GetSessionValue("ProvincesID").ConvertData<int>(),
-                AreaID = GetSessionValue("AreaID").ConvertData<int>(),
-                CityID = GetSessionValue("CityID").ConvertData<int>(),
+                id = GetLoginValue<long>(LoginEnum.id),
+                uid = GetLoginValue(LoginEnum.uid),
+                NickName = GetLoginValue(LoginEnum.NickName),
+                OpenID = GetLoginValue(LoginEnum.OpenID),
+                HeadPic = GetLoginValue(LoginEnum.HeadPic),
+                Sex = GetLoginValue<int>(LoginEnum.Sex),
+                IsLogin = GetLoginValue<bool>(LoginEnum.IsLogin),
+                accountType = GetLoginValue<AccountTypeEnum>(LoginEnum.accountType),
+                account = GetLoginValue(LoginEnum.account),
+                AreaID = GetLoginValue<int>(LoginEnum.AreaID),
+                City = GetLoginValue(LoginEnum.City),
+                CityID = GetLoginValue<int>(LoginEnum.CityID),
+                Country = GetLoginValue(LoginEnum.Country),
+                phones = GetLoginValue(LoginEnum.phones),
+                positionID = GetLoginValue<int>(LoginEnum.positionID),
+                Province = GetLoginValue(LoginEnum.Province),
+                ProvincesID = GetLoginValue<int>(LoginEnum.ProvincesID),
+                state = GetLoginValue<int>(LoginEnum.state),
+                username = GetLoginValue(LoginEnum.username)
             };
         }
+
+        /// <summary>
+        /// 获取登陆的数据
+        /// </summary>
+        /// <param name="loginEnum"></param>
+        /// <returns></returns>
+        private T GetLoginValue<T>(LoginEnum loginEnum)
+        {
+            return GetSessionValue(loginEnum.EnumToName()).ConvertData<T>();
+        }
+        /// <summary>
+        /// 获取登陆的数据
+        /// </summary>
+        /// <param name="loginEnum"></param>
+        /// <returns></returns>
+        private string GetLoginValue(LoginEnum loginEnum)
+        {
+            return GetSessionValue(loginEnum.EnumToName());
+        }
+
 
         private bool CheckLogin()
         {
@@ -101,7 +153,7 @@ namespace Logistics
         /// <returns></returns>
         internal string MakeQRUrl(string url)
         {
-            return $"/GetQR.aspx?url={HttpUtility.UrlEncode(url)}&logo=http://wl.mikiboss.com/Style/img/success.png";
+            return $"/GetQR.aspx?url={HttpUtility.UrlEncode(url)}&logo=/Style/img/success.png";
         }
         internal void Round(decimal value,int N)
         {
