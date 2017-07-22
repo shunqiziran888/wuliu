@@ -18,6 +18,24 @@ namespace BLL.BLL
             return DAL.DAL.LC_Line.Add(LC_Line,uservo);
         }
         /// <summary>
+        /// 线路授权
+        /// </summary>
+        /// <param name="web"></param>
+        /// <returns></returns>
+        public static (bool, string) LineAuthorization(HttpContextBase web)
+        {
+            var myuservo = web.GetMyLoginUserVO();
+            if (myuservo.accountType != AccountTypeEnum.物流账号)
+                return (false, "线路授权不能为空!");
+            long id = web.GetValue<long>("id");
+            int state = web.GetValue<int>("state"); //状态
+            if (id <= 0)
+                return (false, "线路授权ID不能为空!");
+            
+            return DAL.DAL.LC_Line.LineAuthorization(myuservo, id, state);
+        }
+
+        /// <summary>
         /// 绑定线路
         /// </summary>
         /// <param name="web"></param>

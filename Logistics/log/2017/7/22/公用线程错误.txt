@@ -16,3 +16,5 @@
 [内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\Users\Administrator\Source\Repos\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 11:35:34.281
 [内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\Users\Administrator\Source\Repos\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 11:41:38.665
 [内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\Users\Administrator\Source\Repos\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 11:41:38.666
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 11:59:58.334
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 11:59:58.336

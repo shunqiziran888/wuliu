@@ -6,7 +6,7 @@ $.apiUrl = "http://testwl.mikiboss.com/";
 //  $.apiUrl = "http://localhost:23445/";
 $.adUrl = $.apiUrl + "/api.ashx";
 $.IFramePath = "/Style/scripts/"; //IFRAME提交的根目录
-$.CloseWX = true; //是否关闭微信
+$.CloseWX = false; //是否关闭微信
 
 $(function () {
     $("a").addClass("external");
