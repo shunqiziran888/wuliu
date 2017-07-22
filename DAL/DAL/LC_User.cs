@@ -38,6 +38,71 @@ namespace DAL.DAL
             return new Tuple<bool, string, List<Model.Model.LC_User>>(true, "没有任何数据!", new List<Model.Model.LC_User>());
         }
         /// <summary>
+        /// 员工授权
+        /// </summary>
+        /// <param name="myuservo"></param>
+        /// <param name="id"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public static (bool, string) EmployeeEmpowerment(UserLoginVO myuservo, long id, UserStateEnum state)
+        {
+            //查看此账号是否为您的账号
+            sql = makesql.MakeCount(nameof(Model.Model.LC_User), "id=@id and LCID=@LCID and ZType=@ZType", new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@id",id),
+                new System.Data.SqlClient.SqlParameter("@LCID",myuservo.id),
+                new System.Data.SqlClient.SqlParameter("@ZType",GlobalBLL.AccountTypeEnum.物流公司员工账号.EnumToInt())
+            });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg);
+            if (ids.Count() == 0)
+                return (false, "当前数据错误,无法进行操作!");
+            sql = makesql.MakeUpdateSQL(new Model.Model.LC_User()
+            {
+                State = state.EnumToInt()
+            }, "id=@id", new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@id",id)
+            });
+            ids = db.Exec(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg);
+            if (!ids.ExecOk())
+                return (false, "操作失败!");
+            return (true, string.Empty);
+        }
+
+        /// <summary>
+        /// 获取员工授权列表
+        /// </summary>
+        /// <param name="myuservo"></param>
+        /// <param name="page"></param>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        public static (bool, string, object) GetEmployeeEmpowermentList(UserLoginVO myuservo, int page, int num)
+        {
+            fysql = makesql.MakeSelectFY(typeof(Model.Model.LC_User), "ZType=@ZType and LCID=@LCID", "id desc", page, num, "id", new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@LCID",myuservo.id),
+                new System.Data.SqlClient.SqlParameter("@ZType",GlobalBLL.AccountTypeEnum.物流公司员工账号.EnumToInt())
+            });
+            ids = db.Read(fysql);
+            if (!ids.flag)
+                return (false, ids.errormsg,null);
+            if (!ids.ReadIsOk())
+                return (true, "没有获取到任何数据!", new
+                {
+                    allcount =fysql.count,
+                    pagenum = 0,
+                    data = new object[] { }
+                });
+            return (true, string.Empty, new
+            {
+                allcount = fysql.count,
+                pagenum = fysql.GetTotalPage(num),
+                data = ids.GetVOList<Model.Model.LC_User>()
+            });
+        }
+
+        /// <summary>
         /// 验证是否需要注册
         /// </summary>
         /// <param name="myuservo"></param>

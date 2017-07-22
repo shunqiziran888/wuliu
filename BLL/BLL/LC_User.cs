@@ -23,6 +23,43 @@ namespace BLL.BLL
             return DAL.DAL.LC_User.Add(lC_User, loginvo, LogisticsUid);
         }
         /// <summary>
+        /// 员工授权
+        /// </summary>
+        /// <param name="web"></param>
+        /// <returns></returns>
+        public static (bool, string) EmployeeEmpowerment(HttpContextBase web)
+        {
+            var myuservo = web.GetMyLoginUserVO();
+            if (myuservo.accountType != AccountTypeEnum.物流账号)
+                return (false, "您的权限无法访问此接口!");
+
+            long id = web.GetValue<long>("id");
+            if (id <= 0)
+                return (false, "ID参数错误!");
+            UserStateEnum state = web.GetValue<UserStateEnum>("state");
+            return DAL.DAL.LC_User.EmployeeEmpowerment(myuservo,id,state);
+        }
+
+        /// <summary>
+        /// 获取数据列表
+        /// </summary>
+        /// <param name="web"></param>
+        /// <returns></returns>
+        public static (bool, string, object) GetEmployeeEmpowermentList(HttpContextBase web)
+        {
+            var myuservo = web.GetMyLoginUserVO();
+            if (myuservo.accountType != AccountTypeEnum.物流账号)
+                return (false, "您的全新不足无法访问此接口!", null);
+            int page = web.GetValue<int>("page");
+            int num = web.GetValue<int>("num");
+            if (page <= 0)
+                page = 1;
+            if (num <= 0)
+                page = 1000;
+            return DAL.DAL.LC_User.GetEmployeeEmpowermentList(myuservo, page, num);
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="web"></param>
