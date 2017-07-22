@@ -188,7 +188,7 @@
         </div>
     </div>
 
-   <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js"></script>
+   <script type="text/javascript" src="/Style/scripts/all.js"></script>
 
     <script>
         $(function () {

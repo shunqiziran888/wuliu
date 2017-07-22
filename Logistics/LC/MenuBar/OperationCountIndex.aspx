@@ -43,7 +43,7 @@
                   <span class="icon iconfont icon-fcstubiao19"></span>
                   <span class="tab-label">运营统计</span>
               </a>
-                <a class="tab-item external" href="/LC/MenuBar/LC_Manage.aspx">
+                <a class="tab-item external" href="/manage/index.html">
                   <span class="icon iconfont icon-guanli"></span>
                   <span class="tab-label">物流管理</span>
               </a>
@@ -108,7 +108,7 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js" charset='utf-8'></script>
+    <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
 
     <script>
         $(function () {

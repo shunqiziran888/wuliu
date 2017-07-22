@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>物流管理系统</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-            <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js"></script>
+            <script type="text/javascript" src="/Style/scripts/all.js"></script>
     <link rel="shortcut icon" href="/favicon.ico">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">

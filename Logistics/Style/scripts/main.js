@@ -115,6 +115,7 @@ function checklogin(runpage) {
         obj.acctype = acctype;
         obj.region = region;
         GetHTML("OAuth", obj, function (data, para, url) {
+            debugger;
             let result = data.data;
             if (!CheckHTMLData(data, false)) {
                 $.wxlogin(true);
@@ -132,7 +133,7 @@ function checklogin(runpage) {
 
         //检测登录
         GetHTML("GetMyLoginData", obj, function (data, para, url) {
-
+            debugger;
             var result = data.data;
             if (result.IsLogin == true) {
                 login = true;
