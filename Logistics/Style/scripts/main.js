@@ -204,11 +204,12 @@ function GetCheckSession(key) {
 var i = 0;
 
 $(function () {
-    if (i == 0) {
-        i++;
-        InitSystem();
+    if (!$.CloseWX) {
+        if (i == 0) {
+            i++;
+            InitSystem();
+        }
     }
-
 });
 
 
