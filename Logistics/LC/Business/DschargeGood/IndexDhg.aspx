@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="IndexDhg.aspx.cs" Inherits="Logistics.LC.Business.DschargeGood.IndexDhg" %>
-
+<%@ import Namespace="GlobalBLL" %>
+<%@ Import Namespace="CustomExtensions" %>
 <!DOCTYPE html>
 
 <html>
@@ -13,7 +14,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-     <link rel="stylesheet" href="/Style/css/sui/sm.min.css">
+    <link rel="stylesheet" href="/Style/css/sui/sm.min.css">
     <link rel="stylesheet" href="/Style/css/sui/sm-extend.min.css">
     <link href="/Style/css/iconlink.css" rel="stylesheet">
     <link rel="stylesheet" href="/Style/css/style.css">
@@ -84,58 +85,41 @@
                         </div>
                     </div>
                     <div class="buttons-tab ali_center tab_nav">
-                        <a href="#tab1" class="tab-link active button fz_14 tab_nav_btn nav1 external">客户提货信息</a>
-                        <a href="#tab2" class="tab-link button fz_14 tab_nav_btn nav2 external">未放货库存</a>
+                        <a href="#tab1" class="tab-link active button fz_14 tab_nav_btn nav1">客户提货信息</a>
+                        <a href="#tab2" class="tab-link button fz_14 tab_nav_btn nav2">未放货库存</a>
 
                     </div>
                     <div class="content-block">
                         <div class="tabs">
                             <div id="tab1" class="tab active">
+                                 <%if (list.Count > 0)
+        { %>
+                                     <%
+                                    foreach(var v in list)
+                                    {
+                                        
+                                     %>
                                 <div class="content-block">
                                     <form>
-
-                                        <label class="dis_flex ali_center mart_10 white" style="padding:.5rem">
-                            <div class="col_100">
-                                <div style="line-height:1.5rem;">
-                                <p class="fz_14 fc_black">收货人： <i>小强003</i></p>
-                                <p class="fz_14 fc_black">货名件数： <i>啤酒 <span class="fc_red">x15件</span><span class="fc_green" style="margin-left:10px;">(现付)</span></i></p>
-                                <p class="fz_14 dis_flex jus_bet fc_black"><i>运费：<span class="fc_ash">2099</span></i><i>代收款：<span class="fc_ash">291</span></i> <i>代收款：<span class="fc_ash">291</span></i></p>
-                                <p class="fz_14 dis_flex jus_bet fc_black"><i>货号：<span>PExx101010</span></i><i class="fz_12 fc_ash" style="margin-left:1rem;">2016年-12月-23日 09：21</i></p>
-                                <p class="dis_flex" style="justify-content:center;"><a style="line-height: 30px;background: #a3c478;color: #fff;width: 90px;text-align: center;border: 1px solid #a3c478;" href="zhongzhuan.html">中转</a></p>
-                            </div>
-                            </div>
-                            
-                        </label>
-                                        <label class="dis_flex ali_center mart_10 white" style="padding:.5rem">
-                            <div class="col_100">
-                                <div style="line-height:1.5rem;">
-                                <p class="fz_14 fc_black">收货人： <i>小强003</i></p>
-                                <p class="fz_14 fc_black">货名件数： <i>啤酒 <span class="fc_red">x15件</span><span class="fc_green" style="margin-left:10px;">(现付)</span></i></p>
-                                <p class="fz_14 dis_flex jus_bet fc_black"><i>运费：<span class="fc_ash">2099</span></i><i>代收款：<span class="fc_ash">291</span></i> <i>代收款：<span class="fc_ash">291</span></i></p>
-                                <p class="fz_14 dis_flex jus_bet fc_black"><i>货号：<span>PExx101010</span></i><i class="fz_12 fc_ash" style="margin-left:1rem;">2016年-12月-23日 09：21</i></p>
-                                <p class="dis_flex" style="justify-content:center;"><a style="line-height: 30px;background: #a3c478;color: #fff;width: 90px;text-align: center;border: 1px solid #a3c478;" href="songhuo.html">送货</a></p>
-                            </div>
-                            </div>
-                            
-                        </label>
-                                        <label class="dis_flex ali_center mart_10 white" style="padding:.5rem">
-                            <div class="col_100">
-                                <div style="line-height:1.5rem;">
-                                <p class="fz_14 fc_black">收货人： <i>小强003</i></p>
-                                <p class="fz_14 fc_black">货名件数： <i>啤酒 <span class="fc_red">x15件</span><span class="fc_green" style="margin-left:10px;">(现付)</span></i></p>
-                                <p class="fz_14 dis_flex jus_bet fc_black"><i>运费：<span class="fc_ash">2099</span></i><i>代收款：<span class="fc_ash">291</span></i> <i>代收款：<span class="fc_ash">291</span></i></p>
-                                <p class="fz_14 dis_flex jus_bet fc_black"><i>货号：<span>PExx101010</span></i><i class="fz_12 fc_ash" style="margin-left:1rem;">2016年-12月-23日 09：21</i></p>
-                                <p class="dis_flex" style="justify-content:center;"><a style="line-height: 30px;background: #a3c478;color: #fff;width: 90px;text-align: center;border: 1px solid #a3c478;" href="fanghuo_details.html">放货</a></p>
-                            </div>
-                            </div>
-                            
-                        </label>
-
-
-
-
+                                        <label class="dis_flex ali_center mart_10 white" style="padding: .5rem">
+                                            <div class="col_100">
+                                                <div style="line-height: 1.5rem;">
+                                                    <p class="fz_14 fc_black">收货人： <i><%=v.Consignee %></i></p>
+                                                    <p class="fz_14 fc_black">货名件数： <i><%=v.GoodName %> <span class="fc_red">x<%=v.Number %>件</span><span class="fc_green" style="margin-left: 10px;">(<%=v.freightMode.ConvertData<YFFSEnum>().EnumToName() %>)</span></i></p>
+                                                    <p class="fz_14 dis_flex jus_bet fc_black"><i>运费：<span class="fc_ash"><%=v.Freight %></span></i><i>代收款：<span class="fc_ash"><%=v.GReceivables %></span></i> <i>应收合计：<span class="fc_ash">暂时不显示（合计）</span></i></p>
+                                                    <p class="fz_14 dis_flex jus_bet fc_black"><i>货号：<span><%=v.GoodNo %></span></i><i class="fz_12 fc_ash" style="margin-left: 1rem;">暂时不显示（时间）</i></p>
+                                                    <p class="dis_flex" style="justify-content: center;"><a style="line-height: 30px; background: #a3c478; color: #fff; width: 90px; text-align: center; border: 1px solid #a3c478;" href="zhongzhuan.html">中转</a></p>
+                                                </div>
+                                            </div>
+                                        </label>
                                     </form>
                                 </div>
+                                <%} %>
+                                     <%}
+                                          else
+        {%>
+    <div style="text-align: center; line-height: 200px; overflow:hidden;">无任何数据</div>
+    <%} %>
                             </div>
                             <div id="tab2" class="tab">
                                 <div class="content-block">

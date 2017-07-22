@@ -15,9 +15,66 @@
     -right: 0px;
     margin-top: 0px;
 }
+a.btn{
+    height: 40px;
+    line-height: 40px;
+    padding: 0 1rem;    
+}
 .iconfont {
     font-size: 1.2rem;
 }
+i{
+    font-style: normal;
+}
+input{
+    /* border-radius: 8px; */
+    -webkit-appearance: none;
+    background: #ffffff;
+    border: 1px solid #bbbbbb;
+    font-size: .6rem;
+    width: 100%;
+    height: 1.4rem;
+    padding-left: .5rem;
+}
+select{
+    border-radius: 8px;
+    background: #ffffff;
+    border: 1px solid #bbbbbb;
+    font-size: .6rem;
+    width: 100%;
+    height: 1.4rem;
+    line-height: 1.4rem;
+    padding-left:10px; 
+}
+p{
+    margin: 0;
+}
+/* select 样式 */
+ select::-ms-expand {
+            display: none;
+        }
+
+select {
+    outline: none;
+    /*将默认的select选择框样式清除*/
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    /*在选择框的最右侧中间显示小箭头图片*/
+    background: url('../icon/select.png') no-repeat;
+
+    /***将sele.png替换为你的下拉箭头**/
+    background-size: 25px 25px;
+    background-position: right center;
+}
+
+/* tab菜单 */
+.buttons-tab:after {
+    content: '';
+    height: 0px;
+}
+
 /* 常用背景色 */
 .white{
     background: #fff;
@@ -31,6 +88,18 @@
 .yellow{
     background: #ffd057;
 }
+.green{
+    background-color: #a3c478;
+}
+.blue{
+    background-color: #5986de;
+}
+.red{
+    background-color: #ff0000;
+}
+.brown{
+    background-color: #c78f00;
+}
 /* 边框线 */
 .bor_bottom{
     border-bottom: 1px solid #ebebeb;
@@ -43,6 +112,9 @@
     
 }
 /* 字体颜色 */
+.fc_black{
+    color: #000;
+}
 .ft_color_ash{
     color: rgb(125, 125, 125);
 }
@@ -54,6 +126,9 @@
 }
 .fc_green{
     color: #009621;
+}
+.fc_white{
+    color:#ffffff;
 }
 /* 容器宽度 */
 .col_100{
@@ -78,6 +153,9 @@
 .col_40{
     width: 40%;
 }
+.col_35{
+    width: 35%;
+}
 .col_30{
     width: 30%;
 }
@@ -96,6 +174,23 @@
 }
 .li_row_44{
     line-height: 2.2rem;
+}
+/* 行高 */
+.line_he_44{
+    line-height: 2.2rem;
+    height: 2.2rem;
+}
+.line_he_40{
+    line-height: 2rem;
+    height: 2rem;
+}
+.line_he_30{
+    line-height: 1.5rem;
+    height: 1.5rem;
+}
+.line_he_20{
+    line-height: 1rem;
+    height: 1rem;
 }
 /* 字体大小 */
 .fz_18{
@@ -146,6 +241,7 @@ font-size: 18px;
     display: inline-block;
 }
 /* 内外边距 */
+/* 外边距 */
 .marb_10{
     margin-bottom: .5rem;
 }
@@ -164,8 +260,43 @@ font-size: 18px;
 .mart_30{
     margin-top: 1.5rem
 }
-
-
+.mar_10{
+    margin: .5rem;
+}
+.mar_20{
+    margin: 1rem;
+}
+.mar_30{
+    margin: 1.5rem
+}
+.martb_10{
+    margin: .5rem 0;
+}
+.martb_20{
+    margin: 1rem 0;
+}
+.martb_30{
+    margin: 1.5rem 0;
+}
+.marlr_10{
+    margin: 0 .5rem;
+}
+.marlr_20{
+    margin: 0 1rem;
+}
+.marlr_30{
+    margin: 0 1.5rem;
+}
+/* 内边距 */
+.pad_10{
+    padding: .5rem;
+}
+.pad_20{
+    padding: 1rem;
+}
+.pad_30{
+    padding: 1.5rem
+}
 .padb_10{
     padding-bottom: .5rem;
 }
@@ -237,30 +368,7 @@ a:focus{
     z-index: 20;
     font-size: .5rem;
 }
-i{
-    font-style: normal;
-}
-input{
-    /* border-radius: 8px; */
-    -webkit-appearance: none;
-    background: #ffffff;
-    border: 1px solid #bbbbbb;
-    font-size: .6rem;
-    width: 100%;
-    height: 1.4rem;
-    padding-left: .5rem;
-}
-select{
-    border-radius: 8px;
-    background: #ffffff;
-    border: 1px solid #bbbbbb;
-    font-size: .6rem;
-    width: 100%;
-    height: 1.4rem;
-}
-p{
-    margin: 0;
-}
+
 .bar .icon {
     font-size: 12px;
 }

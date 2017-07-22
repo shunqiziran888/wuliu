@@ -322,12 +322,12 @@ namespace DAL.DAL
             return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, "没有任何数据!", new List<Model.Model.LC_Customer>());
         }
         /// <summary>
-        /// 放货-待送货单列表
+        /// 放货-客户提货信息
         /// </summary>
         /// <returns></returns>
-        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetFHList(string UID)
+        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetFHandZZList(string UID)
         {
-            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "State=5 and logisticsID='" + UID+"'");
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "State=5 Or State=7 and logisticsID='" + UID+"'");
             ids = db.Read(sql);
             if (!ids.flag)
                 return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);
@@ -339,16 +339,16 @@ namespace DAL.DAL
         ///放货-待转货单列表
         /// </summary>
         /// <returns></returns>
-        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetZZList(string UID)
-        {
-            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "State=7 and logisticsID='" + UID+"'");
-            ids = db.Read(sql);
-            if (!ids.flag)
-                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);
-            if (ids.ReadIsOk())
-                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Customer>());
-            return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, "没有任何数据!", new List<Model.Model.LC_Customer>());
-        }
+        //public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetZZList(string UID)
+        //{
+        //    sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "State=7 and logisticsID='" + UID+"'");
+        //    ids = db.Read(sql);
+        //    if (!ids.flag)
+        //        return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);
+        //    if (ids.ReadIsOk())
+        //        return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Customer>());
+        //    return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, "没有任何数据!", new List<Model.Model.LC_Customer>());
+        //}
         public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetOrderList(string FSPhone,string OrderNo)
         {
             if(OrderNo!=null)

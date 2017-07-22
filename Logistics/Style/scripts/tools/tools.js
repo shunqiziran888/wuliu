@@ -477,6 +477,30 @@ function GetHTML(action, obj, fun, otherobj) {
     obj.action = action;
     $.loadAdData($.adUrl, getBaseUrlData(obj), fun, otherobj);
 }
+
+function GetHtml(linkUrl, para, success, error) {
+    $.ajax({
+        //提交数据的类型 POST GET
+        type: "POST",
+        //提交的网址
+        url: linkUrl,
+        //提交的数据
+        data: para,
+        //返回数据的格式
+        datatype: "text",//"xml", "html", "script", "json", "jsonp", "text".
+        //成功返回之后调用的函数             
+        success: success,
+        //调用出错执行的函数
+        error: error
+    });
+}
+
+/**
+* 判断字符串是否为空
+*/
+function StrIsNull(str) {
+    return StrIsNullOrEmpty(str);
+}
 /**
  * 创建支持滚动的分页请求
  * @param {string} Action 命令行
