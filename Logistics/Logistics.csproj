@@ -217,10 +217,34 @@
     <Content Include="Style\img\1.png" />
     <Content Include="Style\img\184良食记山楂酒.jpg" />
     <Content Include="Style\img\4.png" />
+    <Content Include="Style\img\code.jpg" />
     <Content Include="Style\img\erweima.png" />
     <Content Include="Style\img\fanxian.png" />
+    <Content Include="Style\img\home_icon.png" />
+    <Content Include="Style\img\icon2b.png" />
     <Content Include="Style\img\img_search.png" />
     <Content Include="Style\img\jizan-img.png" />
+    <Content Include="Style\img\lock_icon_copy.png" />
+    <Content Include="Style\img\login_bg.png" />
+    <Content Include="Style\img\login_pwd.png" />
+    <Content Include="Style\img\login_qq.png" />
+    <Content Include="Style\img\login_user.png" />
+    <Content Include="Style\img\login_wb.png" />
+    <Content Include="Style\img\msg.png" />
+    <Content Include="Style\img\new_金馆长.jpg" />
+    <Content Include="Style\img\plugmenu1.png" />
+    <Content Include="Style\img\plugmenu2.png" />
+    <Content Include="Style\img\plugmenu3.png" />
+    <Content Include="Style\img\plugmenu4.png" />
+    <Content Include="Style\img\plugmenu5.png" />
+    <Content Include="Style\img\plugmenu6.png" />
+    <Content Include="Style\img\plugmenu8.png" />
+    <Content Include="Style\img\pwd.png" />
+    <Content Include="Style\img\reg_bg.png" />
+    <Content Include="Style\img\send.png" />
+    <Content Include="Style\img\success.png" />
+    <Content Include="Style\img\success_bg.png" />
+    <Content Include="Style\img\tick.png" />
     <Content Include="Style\img\touxiang1.jpeg" />
     <Content Include="Style\img\touxiang2.jpeg" />
     <Content Include="Style\img\user-img.jpg" />
@@ -232,7 +256,10 @@
     <Content Include="Style\font\iconfont.eot" />
     <Content Include="Style\font\iconfont.ttf" />
     <Content Include="Style\font\iconfont.woff" />
-    <Content Include="Style\img\Thumbs.db" />
+    <Content Include="Style\img\user_icon_copy.png" />
+    <Content Include="Style\img\user_name.png" />
+    <Content Include="Style\img\u_s1.png" />
+    <Content Include="Style\img\u_s2.png" />
     <Content Include="Style\scripts\config.js" />
     <Content Include="Style\scripts\main.js" />
     <Content Include="Style\scripts\tools\newbase.js" />
@@ -302,6 +329,7 @@
     <Compile Include="ApiCommand\CMD_LineBinding.cs" />
     <Compile Include="ApiCommand\CMD_OAuth.cs" />
     <Compile Include="ApiCommand\CMD_OutSystem.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_LineAuthorizationList.cs" />
     <Compile Include="doc\doc.aspx.cs">
       <DependentUpon>doc.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
