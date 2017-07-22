@@ -75,7 +75,7 @@
               </div> -->
                     <ul class="zbshangjia-ul">
                         <li class="shangjia-li1">
-                            <a href="/LC/Business/ReceiptGood/LC_GoodsReceipt.aspx" class="row">
+                            <a href="/LC/Business/ReceiptGood/LC_GoodsReceipt.aspx" class="row external">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-localshipping"></span>
                                 </div>
@@ -115,7 +115,7 @@
                             </a>
                         </li>
                         <li class="shangjia-li4">
-                            <a href="/LC/Business/DschargeGood/IndexDhg.aspx" class="row">
+                            <a href="/LC/Business/DschargeGood/IndexDhg.aspx" class="row external">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-supervisoraccount"></span>
                                 </div>
@@ -188,7 +188,7 @@
         </div>
     </div>
 
-  <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js" charset='utf-8'></script>
+  <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
 
     <script>
         $(function () {

@@ -84,8 +84,8 @@
                         </div>
                     </div>
                     <div class="buttons-tab ali_center tab_nav">
-                        <a href="#tab1" class="tab-link active button fz_14 tab_nav_btn nav1">客户提货信息</a>
-                        <a href="#tab2" class="tab-link button fz_14 tab_nav_btn nav2">未放货库存</a>
+                        <a href="#tab1" class="tab-link active button fz_14 tab_nav_btn nav1 external">客户提货信息</a>
+                        <a href="#tab2" class="tab-link button fz_14 tab_nav_btn nav2 external">未放货库存</a>
 
                     </div>
                     <div class="content-block">
@@ -205,7 +205,7 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js" charset='utf-8'></script>
+    <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
     <script src="/Style/scripts/main.js"></script>
     <script>
         $(function () {

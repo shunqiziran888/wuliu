@@ -64,7 +64,7 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="http://wl.mikiboss.com/Style/scripts/all.js" charset='utf-8'></script>
+    <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
     <script src="/Style/scripts/main.js"></script>
     <script>
         $(function () {

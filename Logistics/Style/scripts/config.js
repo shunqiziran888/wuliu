@@ -7,3 +7,7 @@ $.apiUrl = "http://nwl.mikiboss.com/";
 $.adUrl = $.apiUrl + "/api.ashx";
 $.IFramePath = "/Style/scripts/"; //IFRAME提交的根目录
 $.CloseWX = false; //是否关闭微信
+
+$(function () {
+    $("a").addClass("external");
+});
