@@ -329,6 +329,9 @@
     <Compile Include="ApiCommand\CMD_LineBinding.cs" />
     <Compile Include="ApiCommand\CMD_OAuth.cs" />
     <Compile Include="ApiCommand\CMD_OutSystem.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_EmployeeEmpowerment.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_GetEmployeeEmpowermentList.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_LineAuthorization.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_LineAuthorizationList.cs" />
     <Compile Include="doc\doc.aspx.cs">
       <DependentUpon>doc.aspx</DependentUpon>

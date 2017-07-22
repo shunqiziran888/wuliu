@@ -30,6 +30,64 @@ namespace DAL.DAL
                 return new Tuple<bool, string, List<Model.Model.LC_Line>>(true, "没有任何数据!", new List<Model.Model.LC_Line>());
             return new Tuple<bool, string, List<Model.Model.LC_Line>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Line>());
         }
+        /// <summary>
+        /// 线路授权
+        /// </summary>
+        /// <param name="myuservo"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static (bool, string) LineAuthorization(UserLoginVO myuservo, long id,int state)
+        {
+            var box = db.CreateTranSandbox((db) =>
+            {
+                //获取数据 
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Line), "id=@id", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@id",id)
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (!ids.ReadIsOk())
+                    return (false, "当前要操作的线路不存在!");
+                var my_line = ids.GetVOList<Model.Model.LC_Line>()[0];
+                //判断状态
+                if (my_line.State != 0)
+                    return (false, "当前线路不是未授权状态,无法进行操作!");
+                if (!my_line.UID.Equals(myuservo.uid, StringComparison.OrdinalIgnoreCase))
+                    return (false, "当前不是您的数据无法进行操作!");
+
+                //更新我方线路状态
+                sql = makesql.MakeUpdateSQL(new Model.Model.LC_Line()
+                {
+                    State = state
+                }, "id=@id", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@id",id)
+                });
+                ids = db.Exec(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (!ids.ExecOk())
+                    return (false, "授权失败请重试!");
+
+                //更新对方线路状态
+                sql = makesql.MakeUpdateSQL(new Model.Model.LC_Line()
+                {
+
+                }, "BindLogisticsUid=@BindLogisticsUid and UID=@UID", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@BindLogisticsUid",myuservo.uid),
+                    new System.Data.SqlClient.SqlParameter("@UID",my_line.BindLogisticsUid)
+                });
+                ids = db.Exec(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (!ids.ExecOk())
+                    return (false, "授权失败请重试!");
+                db.Commit();
+                return (true, string.Empty);
+            });
+            return box;
+            
+        }
 
         /// <summary>
         /// 线路绑定
