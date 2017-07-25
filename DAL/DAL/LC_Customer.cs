@@ -327,7 +327,7 @@ namespace DAL.DAL
         /// <returns></returns>
         public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetFHandZZList(string UID)
         {
-            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "State=5 Or State=7 and logisticsID='" + UID+"'");
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "(State=5 Or State=7) and logisticsID='" + UID+"'");
             ids = db.Read(sql);
             if (!ids.flag)
                 return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);
@@ -369,7 +369,79 @@ namespace DAL.DAL
         }
         public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetZCSuccessList(int VehicleNo)
         {
-            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "VehicleID='"+VehicleNo+"'");
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "VehicleID='" + VehicleNo + "'");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);
+            if (ids.ReadIsOk())
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Customer>());
+            return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, "没有任何数据!", new List<Model.Model.LC_Customer>());
+        }
+        /// <summary>
+        /// 放货-客户提货信息-放货详情
+        /// </summary>
+        /// <param name="UID"></param>
+        /// <returns></returns>
+        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetFHEditList(string UID, string logisticsID)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "State=5 and logisticsID='" + logisticsID + "' and OrderID='" + UID + "'");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);
+            if (ids.ReadIsOk())
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Customer>());
+            return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, "没有任何数据!", new List<Model.Model.LC_Customer>());
+        }
+        /// <summary>
+        /// 放货-盘点列表
+        /// </summary>
+        /// <param name="OID"></param>
+        /// <returns></returns>
+        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetInventoryList(string OID)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "State=4 and logisticsID='" + OID + "'");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);
+            if (ids.ReadIsOk())
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Customer>());
+            return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, "没有任何数据!", new List<Model.Model.LC_Customer>());
+        }
+        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetDFHList(string UID)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "logisticsID='"+UID+ "' and State=8");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);
+            if (ids.ReadIsOk())
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Customer>());
+            return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, "没有任何数据!", new List<Model.Model.LC_Customer>());
+        }
+        /// <summary>
+        /// 盘点成功
+        /// </summary>
+        /// <param name="LC_Customer"></param>
+        /// <param name="OrderID"></param>
+        /// <returns></returns>
+        public static Tuple<bool, string> UpdateIty(Model.Model.LC_Customer LC_Customer, string OrderID)
+        {
+            sql = makesql.MakeUpdateSQL(LC_Customer, "OrderID in (" + OrderID + ")");
+            ids = db.Exec(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string>(false, ids.errormsg);
+            if (!ids.ExecOk())
+                return new Tuple<bool, string>(false, "修改失败请重试!");
+            return new Tuple<bool, string>(true, string.Empty);
+        }
+
+        /// <summary>
+        /// 收货-历史记录
+        /// </summary>
+        /// <param name="UID"></param>
+        /// <returns></returns>
+        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetHistoyList(string UID)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "State=2 and logisticsID='" + UID + "'");
             ids = db.Read(sql);
             if (!ids.flag)
                 return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);

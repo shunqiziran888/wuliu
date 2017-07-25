@@ -86,7 +86,7 @@
                                   <p class="zbsh-yf">运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费： <input type="text" id="Freight" name="Freight"></p>
                                 </i>
                                 <i class="zbsh-xd2">
-                                  <p class="zbsh-yf">其它费用： <input type="text" name="" value="" placeholder="￥0.00"></p>
+                                  <p class="zbsh-yf">其它费用： <input type="text" id="OtherExpenses" name="OtherExpenses"></p>
                                 </i>
                                 <i class="zbsh-xd2">
                                   <p class="zbsh-yf">实收件数： <input type="text" id="SSNumber" name="SSNumber"></p>
@@ -146,11 +146,9 @@
         {
             var ssnumber = $("#SSNumber").val();//实收件数
             var Freight = $("#Freight").val();//运费
-            var zzCost = $("#zzCost").val();//中转费用
             var Ends = $("#Ends").val();//中转地
-            var ShzzCost = $("#ShzzCost").val();//送货费用
             var OtherExpenses = $("#OtherExpenses").val();//送货费用
-            window.location.href = "/LC/Business/ReceiptGood/LC_Success.aspx?OIDDetaila=" + OID + "&ssnumber=" + ssnumber + "&FreightDetail=" + Freight + "&zzCost=" + zzCost + "&ShzzCost=" + ShzzCost + "&OtherExpenses=" + OtherExpenses + "&Ends=" + Ends;
+            window.location.href = "/LC/Business/ReceiptGood/LC_Success.aspx?OIDDetaila=" + OID + "&ssnumber=" + ssnumber + "&FreightDetail=" + Freight + "&OtherExpenses=" + OtherExpenses + "&Ends=" + Ends;
         }
     </script>
 </body>

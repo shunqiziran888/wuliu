@@ -246,7 +246,6 @@
             $.config = {
                 router: false
             }
-
             $("#showaddwl").click(function () {
                 $.popup('.popup-addwl');
             });

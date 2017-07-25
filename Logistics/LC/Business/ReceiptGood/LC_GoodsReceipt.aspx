@@ -46,7 +46,7 @@
             <header class="bar bar-nav">
                 <a href="/LC/MenuBar/LC_BusinessIndex.aspx" class="icon iconfont icon-zuo pull-left"></a>
                 <p class="add_wuliu">
-                    <a class="add_icon icon iconfont icon-eventnote pull-right" href="history_log.html"></a>
+                    <a class="add_icon icon iconfont icon-eventnote pull-right" href="/LC/Business/ReceiptGood/LC_HistoryIndex.aspx"></a>
                     <i class="add_txt">历史记录</i>
                 </p>
                 <h1 class="title">收货</h1>
