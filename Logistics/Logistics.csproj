@@ -122,18 +122,38 @@
     <Content Include="doc\doc.aspx" />
     <Content Include="GetQR.aspx" />
     <Content Include="LC\Authorize\StaffAuthorize\StaffAuthorizeIndex.aspx" />
+    <Content Include="LC\Business\CollectDebts\LC_CDtDetails.aspx" />
+    <Content Include="LC\Business\CollectDebts\LC_CDtEdit.aspx" />
+    <Content Include="LC\Business\CollectDebts\LC_Index.aspx" />
+    <Content Include="LC\Business\CollectDebts\LC_Payment.aspx" />
+    <Content Include="LC\Business\CollectDebts\LC_Success.aspx" />
+    <Content Include="LC\Business\DschargeGood\BatchSuccess.aspx" />
+    <Content Include="LC\Business\DschargeGood\FastSuccess.aspx" />
+    <Content Include="LC\Business\DschargeGood\ItySuccess.aspx" />
+    <Content Include="LC\Business\DschargeGood\LC_FHEdit.aspx" />
     <Content Include="LC\Business\DschargeGood\IndexDhg.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_Handle.aspx" />
+    <Content Include="LC\Business\DschargeGood\LC_Inventory.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_Success.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_TransferEdit.aspx" />
+    <Content Include="LC\Business\Exception\Cargo\LC_Index.aspx" />
+    <Content Include="LC\Business\Exception\LC_Index.aspx" />
+    <Content Include="LC\Business\Exception\Revoke\LC_Cancel.aspx" />
+    <Content Include="LC\Business\Exception\Revoke\LC_Index.aspx" />
+    <Content Include="LC\Business\GoodPayment\LC_Index.aspx" />
+    <Content Include="LC\Business\GoodPayment\Paid\LC_Index.aspx" />
+    <Content Include="LC\Business\GoodPayment\Paid\LC_Receivables.aspx" />
+    <Content Include="LC\Business\GoodPayment\Paid\LC_Success.aspx" />
     <Content Include="LC\Business\MeetCar\LC_GoodDetails.aspx" />
     <Content Include="LC\Business\MeetCar\LC_IndexMC.aspx" />
     <Content Include="LC\Business\MeetCar\LC_Success.aspx" />
+    <Content Include="LC\Business\PaymentDay\LC_PaymentDay.aspx" />
     <Content Include="LC\Business\PretendCar\LC_Commodity.aspx" />
     <Content Include="LC\Business\PretendCar\LC_IndexPC.aspx" />
     <Content Include="LC\Business\PretendCar\LC_Success.aspx" />
     <Content Include="LC\Business\PretendCar\LC_Vehicle.aspx" />
     <Content Include="LC\Business\ReceiptGood\LC_GoodsReceipt.aspx" />
+    <Content Include="LC\Business\ReceiptGood\LC_HistoryIndex.aspx" />
     <Content Include="LC\Business\ReceiptGood\LC_RgDetails.aspx" />
     <Content Include="LC\Business\ReceiptGood\LC_Success.aspx" />
     <Content Include="LC\Customer\Contact\LC_AddCt.aspx" />
@@ -166,6 +186,7 @@
     <Content Include="LC\Manage\Vehicle\LC_Vehicle.aspx" />
     <Content Include="LC\Manage\Vehicle\LC_VehicleAdd.aspx" />
     <Content Include="LC\Manage\Vehicle\LC_VehicleDetails.aspx" />
+    <Content Include="LC\MenuBar\AddLC.aspx" />
     <Content Include="LC\MenuBar\LC_BusinessIndex.aspx" />
     <Content Include="LC\MenuBar\LC_Manage.aspx" />
     <Content Include="LC\MenuBar\OperationCountIndex.aspx" />
@@ -360,6 +381,153 @@
     </Compile>
     <Compile Include="LC\Authorize\StaffAuthorize\StaffAuthorizeIndex.aspx.designer.cs">
       <DependentUpon>StaffAuthorizeIndex.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\CollectDebts\LC_CDtDetails.aspx.cs">
+      <DependentUpon>LC_CDtDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\CollectDebts\LC_CDtDetails.aspx.designer.cs">
+      <DependentUpon>LC_CDtDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\CollectDebts\LC_CDtEdit.aspx.cs">
+      <DependentUpon>LC_CDtEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\CollectDebts\LC_CDtEdit.aspx.designer.cs">
+      <DependentUpon>LC_CDtEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\CollectDebts\LC_Index.aspx.cs">
+      <DependentUpon>LC_Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\CollectDebts\LC_Index.aspx.designer.cs">
+      <DependentUpon>LC_Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\CollectDebts\LC_Payment.aspx.cs">
+      <DependentUpon>LC_Payment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\CollectDebts\LC_Payment.aspx.designer.cs">
+      <DependentUpon>LC_Payment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\CollectDebts\LC_Success.aspx.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\CollectDebts\LC_Success.aspx.designer.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\BatchSuccess.aspx.cs">
+      <DependentUpon>BatchSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\BatchSuccess.aspx.designer.cs">
+      <DependentUpon>BatchSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\FastSuccess.aspx.cs">
+      <DependentUpon>FastSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\FastSuccess.aspx.designer.cs">
+      <DependentUpon>FastSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\ItySuccess.aspx.cs">
+      <DependentUpon>ItySuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\ItySuccess.aspx.designer.cs">
+      <DependentUpon>ItySuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_FHEdit.aspx.cs">
+      <DependentUpon>LC_FHEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_FHEdit.aspx.designer.cs">
+      <DependentUpon>LC_FHEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_Inventory.aspx.cs">
+      <DependentUpon>LC_Inventory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_Inventory.aspx.designer.cs">
+      <DependentUpon>LC_Inventory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\Exception\Cargo\LC_Index.aspx.cs">
+      <DependentUpon>LC_Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\Exception\Cargo\LC_Index.aspx.designer.cs">
+      <DependentUpon>LC_Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\Exception\LC_Index.aspx.cs">
+      <DependentUpon>LC_Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\Exception\LC_Index.aspx.designer.cs">
+      <DependentUpon>LC_Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\Exception\Revoke\LC_Cancel.aspx.cs">
+      <DependentUpon>LC_Cancel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\Exception\Revoke\LC_Cancel.aspx.designer.cs">
+      <DependentUpon>LC_Cancel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\Exception\Revoke\LC_Index.aspx.cs">
+      <DependentUpon>LC_Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\Exception\Revoke\LC_Index.aspx.designer.cs">
+      <DependentUpon>LC_Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\GoodPayment\LC_Index.aspx.cs">
+      <DependentUpon>LC_Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\GoodPayment\LC_Index.aspx.designer.cs">
+      <DependentUpon>LC_Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\GoodPayment\Paid\LC_Index.aspx.cs">
+      <DependentUpon>LC_Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\GoodPayment\Paid\LC_Index.aspx.designer.cs">
+      <DependentUpon>LC_Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\GoodPayment\Paid\LC_Receivables.aspx.cs">
+      <DependentUpon>LC_Receivables.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\GoodPayment\Paid\LC_Receivables.aspx.designer.cs">
+      <DependentUpon>LC_Receivables.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\GoodPayment\Paid\LC_Success.aspx.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\GoodPayment\Paid\LC_Success.aspx.designer.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\PaymentDay\LC_PaymentDay.aspx.cs">
+      <DependentUpon>LC_PaymentDay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\PaymentDay\LC_PaymentDay.aspx.designer.cs">
+      <DependentUpon>LC_PaymentDay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\ReceiptGood\LC_HistoryIndex.aspx.cs">
+      <DependentUpon>LC_HistoryIndex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\ReceiptGood\LC_HistoryIndex.aspx.designer.cs">
+      <DependentUpon>LC_HistoryIndex.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\MenuBar\AddLC.aspx.cs">
+      <DependentUpon>AddLC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\MenuBar\AddLC.aspx.designer.cs">
+      <DependentUpon>AddLC.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebCommandBase.cs" />
     <Compile Include="WebCommandVOBase.cs" />
@@ -792,6 +960,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="LC\Authorize\LineAuthorize\" />
+    <Folder Include="LC\Business\Exception\Payment\" />
+    <Folder Include="LC\Business\Exception\Reduction\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -829,11 +999,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>13839</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://192.168.0.200</IISUrl>
+          <IISUrl>http://192.168.0.201/Logistics</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -13,6 +13,8 @@ namespace Logistics.LC.Business.DschargeGood
     public partial class IndexDhg : PageLoginBase
     {
         public List<Model.Model.LC_Customer> list = new List<Model.Model.LC_Customer>();
+        public List<Model.Model.LC_Customer> DFHList = new List<Model.Model.LC_Customer>();
+        public List<Model.Model.LC_Line> LineList = new List<Model.Model.LC_Line>();
         protected void Page_Load(object sender, EventArgs e)
         {
             var myuservo = GetMyLoginUserVO();
@@ -26,6 +28,25 @@ namespace Logistics.LC.Business.DschargeGood
                 return;
             }
             list = vo.Item3;
+            //物流
+            var vo1 = DAL.DAL.LC_Line.GetLCEndList(UID);
+            if (!vo1.Item1)
+            {
+                //有错误
+                Debug.Print(vo1.Item2);
+                return;
+            }
+            LineList = vo1.Item3;
+            //放货-待放货库存
+            var vo2 = DAL.DAL.LC_Customer.GetDFHList(UID);
+            if (!vo2.Item1)
+            {
+                //有错误
+                Debug.Print(vo2.Item2);
+                return;
+            }
+            DFHList = vo2.Item3;
         }
+
     }
 }

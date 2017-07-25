@@ -1,1 +1,6 @@
+<<<<<<< HEAD
+[内容]:输入字符串的格式不正确。 [方法名]:ChangeType [代码文件路径]:D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\Tools\ConvertHelper.cs [代码行号]:37 [Time]:2017-07-24 11:48:45.858
+[内容]:输入字符串的格式不正确。 [方法名]:ChangeType [代码文件路径]:D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\Tools\ConvertHelper.cs [代码行号]:37 [Time]:2017-07-24 11:53:05.506
+=======
 [内容]:输入字符串的格式不正确。 [方法名]:ChangeType [代码文件路径]:D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\Tools\ConvertHelper.cs [代码行号]:37 [Time]:2017-07-24 18:42:01.316
+>>>>>>> 6aab3b2b2c680fa9170880b25caf8ddb7f83181d

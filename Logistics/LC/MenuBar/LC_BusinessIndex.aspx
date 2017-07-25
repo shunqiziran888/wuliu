@@ -41,8 +41,8 @@
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
                 <p class="add_wuliu">
-                    <a class="add_icon icon iconfont icon-plus pull-right" href="index.html"></a>
-                    <i class="add_txt">添加物流</i>
+                    <a class="add_icon icon iconfont icon-plus pull-right" href="/manage/line_share.html"></a>
+                    <i class="add_txt">自主开单</i>
                 </p>
                 <h1 class="title">物流业务</h1>
             </header>
@@ -128,7 +128,7 @@
                             </a>
                         </li>
                         <li class="shangjia-li5">
-                            <a href="#" onclick="No()" class="row">
+                            <a href="/LC/Business/PaymentDay/LC_PaymentDay.aspx" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-building"></span>
                                 </div>
@@ -141,7 +141,7 @@
                             </a>
                         </li>
                         <li class="shangjia-li6">
-                             <a href="#" onclick="No()" class="row">
+                             <a href="/LC/Business/CollectDebts/LC_Index.aspx" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-money"></span>
                                 </div>
@@ -155,7 +155,7 @@
                         </li>
 
                         <li class="shangjia-li7">
-                             <a href="#" onclick="No()" class="row">
+                             <a href="/LC/Business/Exception/LC_Index.aspx" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-usertimes1"></span>
                                 </div>
@@ -168,7 +168,7 @@
                             </a>
                         </li>
                         <li class="shangjia-li8">
-                             <a href="#" onclick="No()" class="row">
+                             <a href="/LC/Business/GoodPayment/LC_Index.aspx"  class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-jpy"></span>
                                 </div>

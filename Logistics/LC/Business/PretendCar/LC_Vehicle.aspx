@@ -60,17 +60,41 @@
                         <%} %>
                     </ul>
                 </div>
+                <div id="siji_box" class="dis_flex col_100 ali_center choose_siji" style="display:none; height:100%; position:fixed;top:0%; justify-content:center;" >
+                    <div class="white col_80"  style="padding:1rem; height:150px;position:relative;">
+                        <i style="position:absolute;right:5px;top:0px;" class="iconfont icon-close1 fc_ash"></i>
+                        <p class="txt_center" style="padding-bottom:1.5rem;">选择司机</p>
+                        <p>
+                            <select id="siji">
+                              <option value="">请选择</option>
+                            <option value="老王">社会王 <span>(12345678910)</span></option>
+                        </select>
+                        </p>
+
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </div>
 
     <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
-    <script src="/Style/scripts/main.js"></script>
     <script>
         $(function () {
             $.init();
             $.config = { router: false }
         });
+
+        PageInit(function () {
+            GetHTML("GetDriverList", {}, function (data) {
+                debugger;
+                if (CheckHTMLData(data)) {
+
+                }
+            });
+        });
+
     </script>
     <script type="text/javascript">
         let lastid = 0;
