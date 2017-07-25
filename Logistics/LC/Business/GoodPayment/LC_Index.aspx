@@ -50,7 +50,7 @@
                     
                     <ul class="zbshangjia-ul">
                         <li class="shangjia-li1">
-                            <a href="huokuanguanli_details.html" class="row">
+                            <a href="/LC/Business/GoodPayment/Paid/LC_Index.aspx" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-long-arrow-up" style="color: #41d9bd;"></span>
                                 </div>
@@ -64,7 +64,7 @@
                             </a>
                         </li>
                         <li class="shangjia-li2">
-                            <a href="huokuanguanli_details.html" class="row">
+                            <a href="#" onclick="No()" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-circlearrowright" style="color: #b160b3;"></span>
                                 </div>
@@ -77,7 +77,7 @@
                             </a>
                         </li>
                         <li class="shangjia-li3">
-                            <a href="huokuanguanli_details.html" class="row">
+                             <a href="#" onclick="No()" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-circlearrowleft" style="color: #009621;"></span>
                                 </div>
@@ -90,7 +90,7 @@
                             </a>
                         </li>
                         <li class="shangjia-li7">
-                            <a href="huokuanguanli_details.html" class="row">
+                              <a href="#" onclick="No()" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-cached" style="color: #f2a207;"></span>
                                 </div>
@@ -103,7 +103,7 @@
                             </a>
                         </li>
                         <li class="shangjia-li5">
-                            <a href="huokuanguanli_details.html" class="row">
+                             <a href="#" onclick="No()" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-approvalhistory" style="color: #ff0000;"></span>
                                 </div>
@@ -123,11 +123,15 @@
 
     <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
 
-    <script>
+    <script type="text/javascript">
         $(function () {
             $.init();
             $.config = { router: false }
         });
+        function No() {
+            alert("功能暂未开放！");
+            return;
+        }
     </script>
 
 </body>

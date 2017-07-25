@@ -141,6 +141,9 @@
     <Content Include="LC\Business\Exception\Revoke\LC_Cancel.aspx" />
     <Content Include="LC\Business\Exception\Revoke\LC_Index.aspx" />
     <Content Include="LC\Business\GoodPayment\LC_Index.aspx" />
+    <Content Include="LC\Business\GoodPayment\Paid\LC_Index.aspx" />
+    <Content Include="LC\Business\GoodPayment\Paid\LC_Receivables.aspx" />
+    <Content Include="LC\Business\GoodPayment\Paid\LC_Success.aspx" />
     <Content Include="LC\Business\MeetCar\LC_GoodDetails.aspx" />
     <Content Include="LC\Business\MeetCar\LC_IndexMC.aspx" />
     <Content Include="LC\Business\MeetCar\LC_Success.aspx" />
@@ -480,6 +483,27 @@
     </Compile>
     <Compile Include="LC\Business\GoodPayment\LC_Index.aspx.designer.cs">
       <DependentUpon>LC_Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\GoodPayment\Paid\LC_Index.aspx.cs">
+      <DependentUpon>LC_Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\GoodPayment\Paid\LC_Index.aspx.designer.cs">
+      <DependentUpon>LC_Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\GoodPayment\Paid\LC_Receivables.aspx.cs">
+      <DependentUpon>LC_Receivables.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\GoodPayment\Paid\LC_Receivables.aspx.designer.cs">
+      <DependentUpon>LC_Receivables.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\GoodPayment\Paid\LC_Success.aspx.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\GoodPayment\Paid\LC_Success.aspx.designer.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
     </Compile>
     <Compile Include="LC\Business\PaymentDay\LC_PaymentDay.aspx.cs">
       <DependentUpon>LC_PaymentDay.aspx</DependentUpon>

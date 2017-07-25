@@ -245,9 +245,11 @@ var i = 0;
 
 $(function () {
     if (!$.CloseWX) {
-        if (i == 0) {
-            i++;
             InitSystem();
+    }
+    else {
+        if ($.LoginOkFun != null) {
+            $.LoginOkFun();
         }
     }
 });

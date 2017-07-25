@@ -41,7 +41,7 @@
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
                 <p class="add_wuliu">
-                    <a class="add_icon icon iconfont icon-plus pull-right" href="/LC/MenuBar/AddLC.aspx"></a>
+                    <a class="add_icon icon iconfont icon-plus pull-right" href="/manage/line_share.html"></a>
                     <i class="add_txt">自主开单</i>
                 </p>
                 <h1 class="title">物流业务</h1>
