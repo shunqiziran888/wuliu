@@ -43,6 +43,7 @@
 [内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 15:14:20.584
 [内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 15:14:20.629
 >>>>>>> b61bd45ada5cb4ca308463ef1b07965ab255d912
+<<<<<<< HEAD
 [内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\Users\Administrator\Source\Repos\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 15:27:56.105
 [内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\Users\Administrator\Source\Repos\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 15:27:56.106
 [内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\Users\Administrator\Source\Repos\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 15:46:35.404
@@ -63,3 +64,57 @@
 [内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\Users\Administrator\Source\Repos\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 19:40:26.139
 [内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\Users\Administrator\Source\Repos\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 20:09:16.282
 [内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\Users\Administrator\Source\Repos\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 20:09:16.423
+=======
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 15:27:52.635
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 15:27:52.636
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 15:41:01.933
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 15:41:01.934
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 15:55:42.308
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 15:55:42.309
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 16:06:55.690
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 16:06:55.692
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 16:10:40.985
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 16:10:40.987
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 16:20:48.075
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 16:20:48.076
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 16:41:29.531
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 16:41:29.548
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 17:14:12.385
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 17:14:12.386
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 17:20:40.357
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 17:20:40.358
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 17:24:05.713
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 17:24:05.714
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 17:30:22.297
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 17:30:22.298
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 17:43:32.910
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 17:43:32.911
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 17:48:03.757
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 17:48:03.758
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 18:05:33.469
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 18:05:33.477
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 18:11:59.686
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 18:11:59.687
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 18:13:46.219
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 18:13:46.221
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 18:14:59.986
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 18:14:59.990
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 19:30:38.369
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 19:30:38.415
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 19:48:27.856
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 19:48:27.857
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 20:15:20.745
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 20:15:20.746
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 20:18:20.345
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 20:18:20.347
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 20:21:54.217
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 20:21:54.218
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 20:22:47.257
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 20:22:47.258
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 20:25:26.897
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 20:25:26.899
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 20:49:46.592
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 20:49:46.593
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:35 [Time]:2017-07-22 21:01:29.524
+[内容]:正在中止线程。 [方法名]:Application_Start [代码文件路径]:F:\work\Net\物流系统\Logistics\Global.asax.cs [代码行号]:41 [Time]:2017-07-22 21:01:29.525
+>>>>>>> 6aab3b2b2c680fa9170880b25caf8ddb7f83181d

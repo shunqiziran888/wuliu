@@ -15,6 +15,12 @@
     -right: 0px;
     margin-top: 0px;
 }
+.bar-tab {
+    height: 2.8rem;
+}
+.bar-tab .tab-item {
+    height: 2.8rem;
+}
 a.btn{
     height: 40px;
     line-height: 40px;
@@ -130,6 +136,9 @@ select {
 .fc_white{
     color:#ffffff;
 }
+.fc_orange{
+    color:#e6721e;
+}
 /* 容器宽度 */
 .col_100{
     width: 100%;
@@ -193,6 +202,9 @@ select {
     height: 1rem;
 }
 /* 字体大小 */
+.fz_32{
+    font-size: 32px;
+}
 .fz_18{
 font-size: 18px;
 }
@@ -205,6 +217,7 @@ font-size: 18px;
 .fz_12{
     font-size: 12px;
 }
+
 /* 对齐方式 */
 .txt_left{
     text-align: left;
@@ -221,8 +234,14 @@ font-size: 18px;
 .jus_aro{
     justify-content: space-around;
 }
+.jus_center{
+    justify-content: center;
+}
 .ali_center{
     align-items: center;
+}
+.flex_dir_col{
+    flex-direction: column;
 }
 /* 显示方式 */
 .dis_none{
@@ -314,6 +333,24 @@ font-size: 18px;
 }
 .padt_30{
     padding-top: 1.5rem
+}
+.padtb_10{
+    padding: .5rem 0;
+}
+.padtb_20{
+    padding: 1rem 0;
+}
+.padb_30{
+    padding: 1.5rem 0;
+}
+.padlr_10{
+    padding: 0 .5rem;
+}
+.padlr_20{
+    padding: 0 1rem;
+}
+.padlr_30{
+    padding: 0 1.5rem;
 }
 /* 定位方式 */
 .pos_r{

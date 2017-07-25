@@ -34,6 +34,10 @@ namespace Model.Model
         /// </summary>
         private float? _Carshape;
         /// <summary>
+        /// 电话
+        /// </summary>
+        private string _Phone;
+        /// <summary>
         /// 
         /// </summary>
         public int? ID
@@ -80,6 +84,14 @@ namespace Model.Model
         {
             set { _Carshape = value;}
             get { return _Carshape; }
+        }
+        /// <summary>
+        /// 电话
+        /// </summary>
+        public string Phone
+        {
+            set { _Phone = value;}
+            get { return _Phone; }
         }
     }
 }

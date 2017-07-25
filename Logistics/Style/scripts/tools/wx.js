@@ -156,6 +156,7 @@ $.initWx = function () {
         }
         else {
             Log("JSSignature---失败了:" + JSON.stringify(data));
+            //Msg("JSSignature---失败了");
         }
     });
 };

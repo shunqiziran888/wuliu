@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -86,53 +86,8 @@
                         </div>
                     </div>
                    
-                    <ul>
-                        <li class="white mart_10">
-                            <a href="line_details.html"  class="dis_flex jus_bet ali_center" style="padding:.5rem;">
-                                <div>
-                                    <div>
-                                        <div class="dis_flex ali_center ">
-                                            <p class="dis_flex" style="flex-direction: column;line-height:1.5rem;">
-                                                <strong class="fz_16">新疆</strong>
-                                                <i class="fz_16">乌鲁木齐市</i>
-                                                <i class="fz_16">哈萨克斯大北湾区</i>
-                                            </p>
-                                            <i class="iconfont " style="font-size:30px;margin:0 .5rem">&#xe6d7;</i>
-                                            <p class="dis_flex" style="flex-direction: column;line-height:1.5rem;">
-                                                <strong class="fz_16">新疆</strong>
-                                                <i class="fz_16">乌鲁木齐市</i>
-                                                <i class="fz_16">哈萨克斯大北湾区</i>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <i class="iconfont"> &#xe633;</i>
-                            </a>
-                            <!-- <p class="txt_right fz_12" style="padding-right:.5rem;">2016年-12月-23日 09：31</p> -->
-                        </li>
-                        <li class="white mart_10">
-                            <a href="line_details.html"  class="dis_flex jus_bet ali_center" style="padding:.5rem;">
-                                <div>
-                                    <div>
-                                        <div class="dis_flex ali_center ">
-                                            <p class="dis_flex" style="flex-direction: column;line-height:1.5rem;">
-                                                <strong class="fz_16">新疆</strong>
-                                                <i class="fz_16">乌鲁木齐市</i>
-                                                <i class="fz_16">哈萨克斯大北湾区</i>
-                                            </p>
-                                            <i class="iconfont " style="font-size:30px;margin:0 .5rem">&#xe6d7;</i>
-                                            <p class="dis_flex" style="flex-direction: column;line-height:1.5rem;">
-                                                <strong class="fz_16">新疆</strong>
-                                                <i class="fz_16">乌鲁木齐市</i>
-                                                <i class="fz_16">哈萨克斯大北湾区</i>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <i class="iconfont"> &#xe633;</i>
-                            </a>
-                            <!-- <p class="txt_right fz_12" style="padding-right:.5rem;">2016年-12月-23日 09：31</p> -->
-                        </li>
+                    <ul id="line_list">
+                        <!--线路列表-->
                     </ul>
 
                 </div>
@@ -143,14 +98,53 @@
     </div>
 
     <script type='text/javascript' src='/Style/scripts/all.js' charset='utf-8'></script>
-    <script type="text/javascript" src="js/main.js" charset='utf-8'></script>
     <script>
         $(function () {
             $.init();
             $.config = { router: false }
         });
-    </script>
 
+        //初始化页面
+        PageInit(function () {
+            GetHTML("GetMyLineList", {}, function (data) {
+                if (CheckHTMLData(data)) {
+                    let html = TempToHtml("line_list_temp",data);
+                    $("#line_list").html(html);
+                    RemoveLuyou();
+                }
+            });
+        });
+        
+    </script>
+    <script id="line_list_temp" type="text/html">
+        {{if data.length>0}}
+        {{each data as v}}
+        <li class="white mart_10">
+            <a href="line_details.html?id={{v.ID}}" class="dis_flex jus_bet ali_center" style="padding:.5rem;">
+                <div>
+                    <div>
+                        <div class="dis_flex ali_center ">
+                            <p class="dis_flex" style="flex-direction: column;line-height:1.5rem;">
+                                <strong class="fz_16">{{v.start_sheng}}</strong>
+                                <i class="fz_16">{{v.start_shi}}</i>
+                                <i class="fz_16">{{v.start_qu}}</i>
+                            </p>
+                            <i class="iconfont " style="font-size:30px;margin:0 .5rem">&#xe6d7;</i>
+                            <p class="dis_flex" style="flex-direction: column;line-height:1.5rem;">
+                                <strong class="fz_16">{{v.end_sheng}}</strong>
+                                <i class="fz_16">{{v.end_shi}}</i>
+                                <i class="fz_16">{{v.end_qu}}</i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <i class="iconfont"> &#xe633;</i>
+            </a>
+            <!-- <p class="txt_right fz_12" style="padding-right:.5rem;">2016年-12月-23日 09：31</p> -->
+        </li>
+        {{/each}}
+        {{/if}}
+    </script>
 </body>
 
 </html>

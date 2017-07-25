@@ -135,6 +135,31 @@ namespace DAL.DAL
         }
 
         /// <summary>
+        /// 获取完整地址
+        /// </summary>
+        /// <param name="AreaID"></param>
+        /// <returns></returns>
+        public static (string sheng, string shi, string qu) GetAllAddressNames(int? AreaID)
+        {
+            List<string> _addresslist = new List<string>();
+            Model.Model.w_address_basic_data wabd = null;
+            wabd = GetAddressFromID(AreaID.ConvertData<int>())?.Item2;
+            _addresslist.Add(wabd.Name);
+            if (wabd != null)
+            {
+                wabd = GetAddressFromID(wabd.TopAddressID.ConvertData<int>()).Item2;
+                _addresslist.Add(wabd.Name);
+                if (wabd != null)
+                {
+                    wabd = GetAddressFromID(wabd.TopAddressID.ConvertData<int>()).Item2;
+                    _addresslist.Add(wabd.Name);
+                }
+            }
+            return (_addresslist[2], _addresslist[1], _addresslist[0]);
+        }
+
+
+        /// <summary>
         /// 获取下一级地区列表
         /// </summary>
         /// <param name="id"></param>
@@ -283,6 +308,26 @@ namespace DAL.DAL
             if (ids.ReadIsOk())
                 return new Tuple<bool, string, List<Model.Model.LC_User>>(true, string.Empty, ids.GetVOList<Model.Model.LC_User>());
             return new Tuple<bool, string, List<Model.Model.LC_User>>(true, "没有任何数据!", new List<Model.Model.LC_User>());
+        }
+
+        /// <summary>
+        /// 获取职位数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static (bool,string,Model.Model.LC_Position) GetPosition(int? id)
+        {
+            if (id.ConvertData<int>() <= 0)
+                return (false, "没有数据", null);
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Position), "id=@id", new SqlParameter[] {
+                new SqlParameter("@id",id)
+            });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg,null);
+            if (!ids.ReadIsOk())
+                return (false,"没有任何数据!",null);
+            return (true, string.Empty, ids.GetVOList<Model.Model.LC_Position>()[0]);
         }
     }
 }

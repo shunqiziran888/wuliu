@@ -114,41 +114,7 @@
             </nav>
             <div class="content" style="background:#f2f2f2;">
                 <div class="page-index">
-                    <div class="header">
-                        <div class="header_main"><img src="/Style/img/user-img.jpg"><i>齐鲁分公司</i></div>
-                    </div>
-                    <ul class="ul_main">
-                        <li class="li_list">
-                            <p class="li_title">账户总览</p>
-                            <a class="a_box" href="#">
-                                <div>
-                                    <p class="p_mian"><span class="span_name">今日结余</span><span class="span_top">￥192020.21</span></p>
-                                    <p class="p_mian"><span class="span_name">昨日收款</span><span class="span_bottom">￥192020</span></p>
-                                </div>
-                                <i class="iconfont icon-angle-right"></i>
-                            </a>
-                        </li>
-                        <li class="li_list">
-                            <p class="li_title">收支概况</p>
-                            <a class="a_box" href="#">
-                                <div>
-                                    <p class="p_mian"><span class="span_name">本月支出</span><span class="span_top">￥192020.21</span></p>
-                                    <p class="p_mian"><span class="span_name">本月收款</span><span class="span_bottom">￥192020</span></p>
-                                </div>
-                                <i class="iconfont icon-angle-right"></i>
-                            </a>
-                        </li>
-                        <li class="li_list">
-                            <p class="li_title">应收应付</p>
-                            <a class="a_box" href="#">
-                                <div>
-                                    <p class="p_mian"><span class="span_name">本月应收</span><span class="span_top">￥192020.21</span></p>
-                                    <p class="p_mian"><span class="span_name">本月应付</span><span class="span_bottom">￥192020</span></p>
-                                </div>
-                                <i class="iconfont icon-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
+                    <%--内容--%>
                 </div>
 
 
@@ -163,8 +129,56 @@
             $.init();
             $.config = { router: false }
         });
-    </script>
 
+        PageInit(function () {
+            GetHTML("GetLoginData", {}, function (data) {
+                debugger;
+                if (CheckHTMLData(data)) {
+                    let html = TempToHtml("page-index-temp", data.data);
+                    $(".page-index").html(html);
+                }
+            });
+        });
+    </script>
+    <script id="page-index-temp" type="text/html">
+        <div class="header">
+            <div class="header_main">
+                <img src="{{HeadPic}}"><i>{{NickName}}</i>
+            </div>
+        </div>
+        <ul class="ul_main">
+            <li class="li_list">
+                <p class="li_title">账户总览</p>
+                <a class="a_box" href="#">
+                    <div>
+                        <p class="p_mian"><span class="span_name">今日结余</span><span class="span_top">￥192020.21</span></p>
+                        <p class="p_mian"><span class="span_name">昨日收款</span><span class="span_bottom">￥192020</span></p>
+                    </div>
+                    <i class="iconfont icon-angle-right"></i>
+                </a>
+            </li>
+            <li class="li_list">
+                <p class="li_title">收支概况</p>
+                <a class="a_box" href="#">
+                    <div>
+                        <p class="p_mian"><span class="span_name">本月支出</span><span class="span_top">￥192020.21</span></p>
+                        <p class="p_mian"><span class="span_name">本月收款</span><span class="span_bottom">￥192020</span></p>
+                    </div>
+                    <i class="iconfont icon-angle-right"></i>
+                </a>
+            </li>
+            <li class="li_list">
+                <p class="li_title">应收应付</p>
+                <a class="a_box" href="#">
+                    <div>
+                        <p class="p_mian"><span class="span_name">本月应收</span><span class="span_top">￥192020.21</span></p>
+                        <p class="p_mian"><span class="span_name">本月应付</span><span class="span_bottom">￥192020</span></p>
+                    </div>
+                    <i class="iconfont icon-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </script>
 </body>
 
 </html>

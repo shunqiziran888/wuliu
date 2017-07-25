@@ -13,14 +13,14 @@ function InitSystem() {
 
         //检测是否登陆
         checklogin(function () {
-
             //初始化微信
             $.initWx();
 
             //微信加载完成后
             $.wxReady = function () {
                 PageRun();
-                InitShare(); //初始化分享
+                if ($.WxInit!=null)
+                    $.WxInit();
                 $("#locationName").html("定位中..");
                 //获取位置
                 Relocation(function (res, latitude, longitude) {
@@ -28,7 +28,7 @@ function InitSystem() {
                     //设置最后的坐标
                     SetSession("lat", latitude);
                     SetSession("lng", longitude);
-                    InitData(); //初始化数据
+                    //InitData(); //初始化数据
                     //获取解析的地址
                     GetLatLngToAddress(GetSession("lat"), GetSession("lng"), function (obj) {
 
@@ -46,10 +46,24 @@ function InitSystem() {
         });
     });
 }
-
+/**
+ * 设置分享
+ * @param {any} title
+ * @param {any} link
+ * @param {any} imgUrl
+ * @param {any} desc
+ */
+function SetShare(title, link, imgUrl, desc) {
+    $.shareData.title=title;
+    $.shareData.link = (link);
+    $.shareData.imgUrl = (imgUrl);
+    $.shareData.desc = (desc);
+}
 //初始化分享
 function InitShare() {
-    InitShareUrl();
+    debugger;
+    if (StrIsNullOrEmpty($.shareData.link))
+        InitShareUrl();
     var shareobj = new Object();
     shareobj.title = $.shareData.title;
     shareobj.link = encodeURI($.shareData.link);
@@ -62,7 +76,9 @@ function InitShare() {
     wx.onMenuShareAppMessage(shareobj);
     wx.onMenuShareQQ(shareobj);
     wx.onMenuShareWeibo(shareobj);
+    
 }
+
 $.shareOkBackFun = function () {
     //分享成功
 }
@@ -87,6 +103,28 @@ function OutSystem(callfun) {
                 callfun();
         }
     });
+}
+
+/**
+ * 页面JS库+微信登录完毕
+ * @param {function} CallFun
+ */
+function PageInit(CallFun) {
+    $.LoginOkFun = CallFun;
+}
+
+/**
+ * 微信加载完毕执行
+ * @param {any} CallFun
+ */
+function WXFinish(CallFun) {
+    $.WxInit = CallFun;
+}
+/**
+ * 移除路由
+ */
+function RemoveLuyou() {
+    $("a").addClass("external");
 }
 
 /**
@@ -125,6 +163,7 @@ function checklogin(runpage) {
                 SetSession("code", code);
                 if ($.LoginOkFun != null) {
                     $.LoginOkFun();
+                    $("a").addClass("external");
                 }
                 runpage();
             }
@@ -140,6 +179,7 @@ function checklogin(runpage) {
                 SetSession("NickName", result.NickName);
                 if ($.LoginOkFun != null) {
                     $.LoginOkFun();
+                    $("a").addClass("external");
                 }
 
                 runpage();

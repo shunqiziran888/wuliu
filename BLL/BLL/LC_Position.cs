@@ -1,4 +1,6 @@
 using System;
+using GlobalBLL;
+
 namespace BLL.BLL
 {
     /// <summary>
@@ -9,5 +11,10 @@ namespace BLL.BLL
     {
         public LC_Position()
         {}
+
+        public static (bool, string, object) GetPositionList(HttpContextBase web)
+        {
+            return DAL.DAL.LC_Position.GetPositionList();
+        }
     }
 }

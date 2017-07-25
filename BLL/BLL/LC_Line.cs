@@ -17,6 +17,52 @@ namespace BLL.BLL
         {
             return DAL.DAL.LC_Line.Add(LC_Line,uservo);
         }
+
+        public static (bool, string, object) GetLineData(HttpContextBase web)
+        {
+            var myuservo = web.GetMyLoginUserVO();
+            long id = web.GetValue<long>("id");
+            if (id <= 0)
+                return (false, "ID参数错误!",null);
+            return DAL.DAL.LC_Line.GetLineData(myuservo, id);
+        }
+
+        /// <summary>
+        /// 主动申请线路绑定
+        /// </summary>
+        /// <param name="web"></param>
+        /// <returns></returns>
+        public static (bool, string) LineActiveApplication(HttpContextBase web)
+        {
+            var myuservo = web.GetMyLoginUserVO();
+            if (myuservo.accountType != AccountTypeEnum.物流账号)
+                return (false, "您的权限不足无法访问此接口!");
+            string Lineletter = web.GetValue("Lineletter"); //字母
+            string phone = web.GetValue("phone");
+            if (Lineletter.StrIsNull())
+                return (false, "字母不能为空!");
+            if (phone.StrIsNull())
+                return (false, "电话不能为空!");
+
+            if (phone.Equals(myuservo.phones, StringComparison.OrdinalIgnoreCase))
+                return (false, "不能绑定自己!");
+
+            return DAL.DAL.LC_Line.LineActiveApplication(myuservo, Lineletter, phone);
+        }
+
+        /// <summary>
+        /// 获取我的线路列表
+        /// </summary>
+        /// <param name="web"></param>
+        /// <returns></returns>
+        public static (bool, string, object) GetMyLineList(HttpContextBase web)
+        {
+            var myuservo = web.GetMyLoginUserVO();
+            if (myuservo.accountType != AccountTypeEnum.物流账号)
+                return (false, "您的权限不足无法获取线路数据!", null);
+            return DAL.DAL.LC_Line.GetMyLineList(myuservo);
+        }
+
         /// <summary>
         /// 线路授权
         /// </summary>
@@ -29,10 +75,16 @@ namespace BLL.BLL
                 return (false, "线路授权不能为空!");
             long id = web.GetValue<long>("id");
             int state = web.GetValue<int>("state"); //状态
+            string Lineletter = web.GetValue("Lineletter");
             if (id <= 0)
                 return (false, "线路授权ID不能为空!");
+            if(state==1)
+            {
+                if (Lineletter.StrIsNull())
+                    return (false, "运号字母不能为空!");
+            }
             
-            return DAL.DAL.LC_Line.LineAuthorization(myuservo, id, state);
+            return DAL.DAL.LC_Line.LineAuthorization(myuservo, id, state, Lineletter);
         }
 
         /// <summary>

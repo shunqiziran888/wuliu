@@ -11,6 +11,7 @@ namespace Logistics.ApiCommand.GLCommand
     /// </summary>
     [SuperCommand.Attribute.Doc(typeof(CMD_LineAuthorization),"线路授权")]
     [SuperCommand.Attribute.InputDoc("id","线路ID")]
+    [SuperCommand.Attribute.InputDoc("Lineletter","运号字母")]
     [SuperCommand.Attribute.InputDoc("state","线路状态 0未授权,1已授权 2已删除")]
     public class CMD_LineAuthorization : WebCommandBase, SuperCommand.ICommandBase<WebCommandVOBase>
     {

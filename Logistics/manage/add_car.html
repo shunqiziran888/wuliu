@@ -44,7 +44,7 @@
                     <a class="add_icon icon iconfont icon-eventnote pull-right" href="index.html"></a>
                     <i class="add_txt">历史记录</i>
                 </p> -->
-                <a href="save_add_car.html" class="icon pull-right dis_inline green" style="border-radius:4px;color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">保存</a>
+                <a href="#" id="save_vehicle" class="icon pull-right dis_inline green" style="border-radius:4px;color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">保存</a>
                 <h1 class="title">添加车辆</h1>
             </header>
 
@@ -61,14 +61,14 @@
                             <i class="line_he_44 fz_16">车型：</i>
                         </p>
                         <p class="dis_flex  col_70" style="flex-direction: column;justify-content: center;">
-                            <i class="line_he_44"><input type="text"   placeholder="￥0.00"></i>
-                            <i class="line_he_44"><input type="text"  placeholder="￥0.00"></i>
-                            <i class="line_he_44"><input type="text"  placeholder="10"></i>
+                            <i class="line_he_44"><input id="VehicleNo" type="text"   placeholder="车号"></i>
+                            <i class="line_he_44"><input id="Driver" type="text"  placeholder="驾驶员姓名"></i>
+                            <i class="line_he_44"><input id="Phone" type="text"  placeholder="138xxxxxxxx"></i>
                             <i class="line_he_44">
-                                <select >
-                                      <option value="9.6米">9.6米</option>
-                                      <option value="6.8米">6.8米</option>
-                                      <option value="14.2米">14.2米</option>
+                                <select id="Carshape">
+                                      <option value="9.6">9.6米</option>
+                                      <option value="6.8">6.8米</option>
+                                      <option value="14.2">14.2米</option>
                                 </select>
                             </i>
                         </p>
@@ -117,6 +117,43 @@
         $(function () {
             $.init();
             $.config = { router: false }
+        });
+        PageInit(function () {
+            $("#save_vehicle").click(function () {
+                let obj = {};
+                obj.VehicleNo = $("#VehicleNo").val();
+                obj.Driver = $("#Driver").val();
+                obj.Carshape = $("#Carshape").val();
+                obj.Phone = $("#Phone").val();
+                if (StrIsNullOrEmpty(obj.VehicleNo))
+                {
+                    Msg("车号不能为空!");
+                    return;
+                }
+                if (StrIsNullOrEmpty(obj.Driver))
+                {
+                    Msg("姓名不能能为空!")
+                    return;
+                }
+
+                if (StrIsNullOrEmpty(obj.Phone))
+                {
+                    Msg("电话不能为空!");
+                    return;
+                }
+
+                if (obj.Carshape <= 0)
+                {
+                    Msg("车辆长度不能为空!");
+                    return;
+                }
+
+                GetHTML("AddVehicle", obj, function (data) {
+                    if (CheckHTMLData(data)) {
+                        Msg("添加车辆成功!");
+                    }
+                });
+            });
         });
     </script>
 

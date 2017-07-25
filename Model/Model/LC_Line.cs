@@ -26,13 +26,13 @@ namespace Model.Model
         /// </summary>
         private int? _End;
         /// <summary>
-        /// 负责人联系电话
+        /// （我方）负责人联系电话
         /// </summary>
-        private string _Phone;
+        private string _MyPhone;
         /// <summary>
-        /// 
+        /// 创建时间
         /// </summary>
-        private DateTime? _DateTime;
+        private DateTime? _CreateTime;
         /// <summary>
         /// 物流公司UID
         /// </summary>
@@ -46,13 +46,29 @@ namespace Model.Model
         /// </summary>
         private string _BindLogisticsUid;
         /// <summary>
-        /// 负责人姓名
+        /// (我方)负责人姓名
         /// </summary>
-        private string _ResponsibleName;
+        private string _MyResponsibleName;
         /// <summary>
-        /// 0 未授权,1已授权
+        /// 0 未授权,1已授权,2已删除
         /// </summary>
         private int? _State;
+        /// <summary>
+        /// 申请人（主动申请需要对方授权的用户）
+        /// </summary>
+        private string _ApplicantUID;
+        /// <summary>
+        /// (对方)电话
+        /// </summary>
+        private string _DFPhone;
+        /// <summary>
+        /// (对方)负责人名称
+        /// </summary>
+        private string _DFResponsibleName;
+        /// <summary>
+        /// 开通时间
+        /// </summary>
+        private DateTime? _OpenTime;
         /// <summary>
         /// 
         /// </summary>
@@ -86,20 +102,20 @@ namespace Model.Model
             get { return _End; }
         }
         /// <summary>
-        /// 负责人联系电话
+        /// （我方）负责人联系电话
         /// </summary>
-        public string Phone
+        public string MyPhone
         {
-            set { _Phone = value;}
-            get { return _Phone; }
+            set { _MyPhone = value;}
+            get { return _MyPhone; }
         }
         /// <summary>
-        /// 
+        /// 创建时间
         /// </summary>
-        public DateTime? DateTime
+        public DateTime? CreateTime
         {
-            set { _DateTime = value;}
-            get { return _DateTime; }
+            set { _CreateTime = value;}
+            get { return _CreateTime; }
         }
         /// <summary>
         /// 物流公司UID
@@ -126,20 +142,52 @@ namespace Model.Model
             get { return _BindLogisticsUid; }
         }
         /// <summary>
-        /// 负责人姓名
+        /// (我方)负责人姓名
         /// </summary>
-        public string ResponsibleName
+        public string MyResponsibleName
         {
-            set { _ResponsibleName = value;}
-            get { return _ResponsibleName; }
+            set { _MyResponsibleName = value;}
+            get { return _MyResponsibleName; }
         }
         /// <summary>
-        /// 0 未授权,1已授权
+        /// 0 未授权,1已授权,2已删除
         /// </summary>
         public int? State
         {
             set { _State = value;}
             get { return _State; }
+        }
+        /// <summary>
+        /// 申请人（主动申请需要对方授权的用户）
+        /// </summary>
+        public string ApplicantUID
+        {
+            set { _ApplicantUID = value;}
+            get { return _ApplicantUID; }
+        }
+        /// <summary>
+        /// (对方)电话
+        /// </summary>
+        public string DFPhone
+        {
+            set { _DFPhone = value;}
+            get { return _DFPhone; }
+        }
+        /// <summary>
+        /// (对方)负责人名称
+        /// </summary>
+        public string DFResponsibleName
+        {
+            set { _DFResponsibleName = value;}
+            get { return _DFResponsibleName; }
+        }
+        /// <summary>
+        /// 开通时间
+        /// </summary>
+        public DateTime? OpenTime
+        {
+            set { _OpenTime = value;}
+            get { return _OpenTime; }
         }
     }
 }

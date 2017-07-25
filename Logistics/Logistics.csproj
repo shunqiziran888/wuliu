@@ -205,6 +205,7 @@
     <Content Include="manage\line_warrant.html" />
     <Content Include="manage\line_warrant_details.html" />
     <Content Include="manage\line_warrant_success.html" />
+    <Content Include="manage\manage_add_driver.html" />
     <Content Include="manage\manage_car.html" />
     <Content Include="manage\manage_line.html" />
     <Content Include="manage\manage_warrant.html" />
@@ -232,6 +233,7 @@
     <Content Include="Style\css\styles.css" />
     <Content Include="Style\css\success.css" />
     <Content Include="Style\font\iconfont.svg" />
+    <Content Include="Style\icon\select.png" />
     <Content Include="Style\img\1.png" />
     <Content Include="Style\img\184良食记山楂酒.jpg" />
     <Content Include="Style\img\4.png" />
@@ -340,6 +342,8 @@
     </Compile>
     <Compile Include="ApiCommand\CMD_BindUser.cs" />
     <Compile Include="ApiCommand\CMD_GetAddressNextList.cs" />
+    <Compile Include="ApiCommand\CMD_GetLoginData.cs" />
+    <Compile Include="ApiCommand\CMD_GetMyLineList.cs" />
     <Compile Include="ApiCommand\CMD_GetMyLoginData.cs" />
     <Compile Include="ApiCommand\CMD_GetSysApiDoc.cs" />
     <Compile Include="ApiCommand\CMD_GetToRegUser.cs" />
@@ -347,8 +351,15 @@
     <Compile Include="ApiCommand\CMD_LineBinding.cs" />
     <Compile Include="ApiCommand\CMD_OAuth.cs" />
     <Compile Include="ApiCommand\CMD_OutSystem.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_AddVehicle.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_EmployeeEmpowerment.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_GetAccountData.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_GetEmployeeEmpowermentList.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_GetLineData.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_GetPositionList.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_GetMyVehicleList.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_GetVehicleDataFromID.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_LineActiveApplication.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_LineAuthorization.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_LineAuthorizationList.cs" />
     <Compile Include="doc\doc.aspx.cs">
@@ -925,7 +936,6 @@
     <Folder Include="LC\Business\Exception\Payment\" />
     <Folder Include="LC\Business\Exception\Reduction\" />
     <Folder Include="Models\" />
-    <Folder Include="Style\icon\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -27,15 +27,37 @@
 
 <body>
     <div class="page-group">
-        <div class="page page-current">
-            <!-- 你的html代码 -->
+        <div class="page page-current" id="linedata">
+            <!--详细的数据内容-->
+        </div>
+    </div>
+
+    <script type='text/javascript' src='/Style/scripts/all.js' charset='utf-8'></script>
+    <script type="text/javascript" src="js/main.js" charset='utf-8'></script>
+    <script>
+        $(function () {
+            $.init();
+            let id = GET("id");
+            GetLineData(id);
+        });
+
+        function GetLineData(id)
+        {
+            GetHTML("GetLineData", { id: id }, function (data) {
+                if (CheckHTMLData(data)) {
+                    let html = TempToHtml("linedata_temp", data);
+                    $("#linedata").html(html);
+                    RemoveLuyou();
+                }
+            });
+        }
+
+    </script>
+</body>
+<script id="linedata_temp" type="text/html">
+    <!--你的html代码 -->
             <header class="bar bar-nav">
                 <a href="index.html" class="icon iconfont icon-zuo pull-left"></a>
-                <!-- <p class="add_wuliu">
-                    <a class="add_icon icon iconfont icon-eventnote pull-right" href="history_log.html"></a>
-                    <i class="add_txt">历史记录</i>
-                </p> -->
-                <!-- <a href="choose_bus.html" class="icon pull-right dis_inline" style="background:#009621;color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">下一步</a> -->
                 <h1 class="title">取消线路授权管理</h1>
             </header>
 
@@ -53,32 +75,17 @@
                                 <i class="line_he_44 fz_14">开通时间：</i>
                             </p>
                             <p class="dis_flex col_70" style="flex-direction: column;align-items: flex-start;justify-content: center;">
-                                <i class="line_he_44 fc_ash fz_12">山东省 临沂市 兰山区</i>
-                                <i class="line_he_44 fc_ash fz_12">新疆 乌鲁木齐市 啊布拉斯兰山区</i>
-                                <i class="line_he_44 fc_ash fz_12">绯红神</i>
-                                <i class="line_he_44 fc_ash fz_12">13242121332</i>
-                                <i class="line_he_44 fc_ash fz_12">2012-08-22----2013-03-13</i>
+                                <i class="line_he_44 fc_ash fz_12">{{data.StartName}}</i>
+                                <i class="line_he_44 fc_ash fz_12">{{data.EndName}}</i>
+                                <i class="line_he_44 fc_ash fz_12">{{data.DFResponsibleName}}</i>
+                                <i class="line_he_44 fc_ash fz_12">{{data.DFPhone}}</i>
+                                <i class="line_he_44 fc_ash fz_12">{{data.OpenTime}}</i>
                             </p>
                         </div>
-                        <p class="dis_flex" style="justify-content:center;"><a class="green fc_white fz_14" href="manage_warrant.html"style="width:94px;height:30px; line-height:30px; margin-right:.5rem;">返回</a><a class="red fc_white fz_14" href="manage_warrant.html" style="width:94px;height:30px; line-height:30px;">确认取消</a></p>
+                        <p class="dis_flex" style="justify-content:center;"><a class="green fc_white fz_14" href="manage_warrant.html" style="width:94px;height:30px; line-height:30px; margin-right:.5rem;">返回</a><a class="red fc_white fz_14" href="manage_warrant.html" style="width:94px;height:30px; line-height:30px;">确认取消</a></p>
                     </div>
                 </div>
 
-
             </div>
-        </div>
-    </div>
-
-    <script type='text/javascript' src='/Style/scripts/all.js' charset='utf-8'></script>
-    <script type="text/javascript" src="js/main.js" charset='utf-8'></script>
-    <script>
-        $(function () {
-            $.init();
-            $.config = { router: false }
-        });
-        
-    </script>
-
-</body>
-
+</script>
 </html>

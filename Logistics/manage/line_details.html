@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -36,22 +36,7 @@
 
 
             <div class="content" style="background:#f2f2f2;">
-                <div class="page-index">
-                    <div class=" white" style="padding:1rem;margin-top:1rem;">
-                        <!-- <p class="txt_center"> <i class="iconfont fc_green" style="font-size:55px;">&#xe67b;</i></p> -->
-                        <!-- <strong  style="font-size:25px; font-weight:400;padding-bottom:1rem;">鲁M40101(9.6米)</strong> -->
-                       
-                        <p class="fz_16 dis_flex" style="padding-top:1rem;"><span class=" col_30 txt_right" style="padding-right:.5rem;">出发地：</span><span class="fz_14 col_70 fc_ash">山东省 临沂市 兰山区</span></p>
-                        <p class="fz_16 dis_flex" style="padding-top:1rem;"><span class=" col_30 txt_right" style="padding-right:.5rem;">到达地：</span> <span class="fz_14 col_70 fc_ash">新疆 乌鲁木齐市 啊布拉斯兰山区</span></p>
-                        <p class="fz_16 dis_flex" style="padding-top:1rem;"><span class=" col_30 txt_right" style="padding-right:.5rem;">联系人：</span> <span class="fz_14 col_70 fc_ash">绯红神</span></p>
-                        <p  class="fz_16 dis_flex"style="padding-top:1rem;"><span class=" col_30 txt_right" style="padding-right:.5rem;">联系方式： </span><span class="fz_14 col_70 fc_ash">13242121332</span></p>
-                        <p  class="fz_16 dis_flex"style="padding-top:1rem;"><span class=" col_30 txt_right" style="padding-right:.5rem;">开通时间：</span> <span class="fz_14 col_70 fc_ash">2012-08-22----2013-03-13</span></p>
-                        
-                        <!-- <p class="fz_12 txt_center mart_20 fc_ash">添加日期： <span>2017-07-20 00：57</span></p> -->
-                    </div>
-                </div>
-
-
+                <!--内容-->
             </div>
         </div>
     </div>
@@ -63,11 +48,35 @@
             $.init();
             $.config = { router: false }
         });
-        // setInterval(function(){
-        //     window.location.href="manage_car.html"
-        // },2000)
+        //获取线路数据
+        PageInit(function () {
+            let id =parseInt(GET("id"));
+            if (id <= 0)
+            {
+                Msg("id参数错误!");
+                return;
+            }
+            GetHTML("GetLineData", { id: id }, function (data) {
+                if (CheckHTMLData(data)) {
+                    let html = TempToHtml("content_temp", data);
+                    $(".content").html(html);
+                }
+            });
+        });
     </script>
+    <script id="content_temp" type="text/html">
+        <div class="page-index">
+            <div class=" white" style="padding:1rem;margin-top:1rem;">
 
+                <p class="fz_16 dis_flex" style="padding-top:1rem;"><span class=" col_30 txt_right" style="padding-right:.5rem;">出发地：</span><span class="fz_14 col_70 fc_ash">{{data.StartName}}</span></p>
+                <p class="fz_16 dis_flex" style="padding-top:1rem;"><span class=" col_30 txt_right" style="padding-right:.5rem;">到达地：</span> <span class="fz_14 col_70 fc_ash">{{data.EndName}}</span></p>
+                <p class="fz_16 dis_flex" style="padding-top:1rem;"><span class=" col_30 txt_right" style="padding-right:.5rem;">联系人：</span> <span class="fz_14 col_70 fc_ash">{{data.DFResponsibleName}}</span></p>
+                <p class="fz_16 dis_flex" style="padding-top:1rem;"><span class=" col_30 txt_right" style="padding-right:.5rem;">联系方式： </span><span class="fz_14 col_70 fc_ash">{{data.DFPhone}}</span></p>
+                <p class="fz_16 dis_flex" style="padding-top:1rem;"><span class=" col_30 txt_right" style="padding-right:.5rem;">开通时间：</span> <span class="fz_14 col_70 fc_ash">{{data.OpenTime}}</span></p>
+
+            </div>
+        </div>
+    </script>
 </body>
 
 </html>

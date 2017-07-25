@@ -44,10 +44,22 @@
     <div class="content" style="background:#f2f2f2;">
         <div class="page-index">
             <div class="col_100 white" style="padding:1rem 1rem;margin-top:1rem;">
-                <p class="dis_flex marb_20" style="margin-bottom:1rem;">公司昵称：<input id="NickName" class="col_60" type="text"></p>
-                <p class="dis_flex marb_20">&nbsp;&nbsp;&nbsp;手机号：<input class="col_60" id="Phone" type="text"></p>
+                <p class="dis_flex marb_20" style="margin-bottom:1rem;">
+                    <span class="col_30 txt_right">
+                        公司昵称：
+                    </span>
+                    <input id="NickName" class="col_60" type="text">
+                </p>
                 <p class="dis_flex marb_20">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;省：
+                    <span class="col_30  txt_right">
+                        &nbsp;&nbsp;&nbsp;手机号：
+                    </span>
+                    <input class="col_60" id="Phone" type="text">
+                </p>
+                <p class="dis_flex marb_20">
+                    <span class="col_30  txt_right">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;省：
+                    </span>
                     <select class="col_60" id="sheng" onchange="show(this.value,'shi');">
                         <option value="">请选择</option>
                         {{each shenglist as v}}
@@ -56,13 +68,17 @@
                     </select>
                 </p>
                 <p class="dis_flex marb_20">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;市：
+                    <span class="col_30 txt_right">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;市：
+                    </span>
                     <select id="shi" class="col_60" onchange="show(this.value,'qu');">
                         <option value="">请选择</option>
                     </select>
                 </p>
                 <p class="dis_flex marb_20">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：
+                    <span class="col_30 txt_right">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：
+                    </span>
                     <select class="col_60" id="qu">
                         <option value="">请选择</option>
                     </select>
@@ -84,8 +100,11 @@
     <div class="content" style="background:#f2f2f2;">
         <div class="page-index">
             <div class="col_100 white" style="padding:1rem 1rem;margin-top:1rem;">
-                <p class="dis_flex marb_20">&nbsp;&nbsp;&nbsp;运号字母：
-                    <select id="Lineletter" name="Lineletter">
+                <p class="dis_flex marb_20">
+                    <span class="col_30 txt_right">
+                        运号字母：
+                    </span>
+                    <select id="Lineletter" name="Lineletter" class="col_60">
                             <option value="">请选择</option>
                             <option value="A">A</option>
                             <option value="B">B</option>
@@ -115,10 +134,16 @@
                             <option value="Z">Z</option>
                         </select>
                 </p>
-                <p class="dis_flex marb_20" style="margin-bottom:1rem;">公司昵称：<input id="NickName" class="col_60" type="text"></p>
-                <p class="dis_flex marb_20">&nbsp;&nbsp;&nbsp;手机号：<input class="col_60" id="Phone" type="text"></p>
+                <p class="dis_flex marb_20" style="margin-bottom:1rem;"><span class="col_30 txt_right">
+                        公司昵称：
+                    </span><input id="NickName" class="col_60" type="text"></p>
+                <p class="dis_flex marb_20"><span class="col_30  txt_right">
+                        手机号：
+                    </span><input class="col_60" id="Phone" type="text"></p>
                 <p class="dis_flex marb_20">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;省：
+                    <span class="col_30  txt_right">
+                        省：
+                    </span>
                     <select class="col_60" id="sheng" onchange="show(this.value,'shi');">
                         <option value="">请选择</option>
                         {{each shenglist as v}}
@@ -127,18 +152,22 @@
                     </select>
                 </p>
                 <p class="dis_flex marb_20">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;市：
+                   <span class="col_30 txt_right">
+                        市：
+                    </span>
                     <select id="shi" class="col_60" onchange="show(this.value,'qu');">
                         <option value="">请选择</option>
                     </select>
                 </p>
                 <p class="dis_flex marb_20">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：
+                    <span class="col_30 txt_right">
+                        区：
+                    </span>
                     <select class="col_60" id="qu">
                         <option value="">请选择</option>
                     </select>
                 </p>
-                <p class="txt_center"><button id="regbtn" type="button" class="green fc_white" style="padding:.5rem 1.5rem; border:none;">确认提交</button></p>
+                <p class="txt_center"><button id="regbtn" type="button" class="green fc_white" style="padding:.3rem 1.5rem; border:none;">确认提交</button></p>
             </div>
         </div>
     </div>
@@ -153,7 +182,9 @@
     <div class="content" style="background:#f2f2f2;">
         <div class="page-index">
             <div class="col_100 white" style="padding:1rem 1rem;margin-top:1rem;">
-                <p class="dis_flex marb_20">&nbsp;&nbsp;&nbsp;运号字母：
+                <p class="dis_flex marb_20"><span class="col_30 txt_right">
+                        运号字母：
+                    </span>
                     <select id="Lineletter" name="Lineletter">
                             <option value="">请选择</option>
                             <option value="A">A</option>
