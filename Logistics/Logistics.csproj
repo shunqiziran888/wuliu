@@ -193,6 +193,7 @@
     <Content Include="manage\manage_warrant.html" />
     <Content Include="manage\save_add_car.html" />
     <Content Include="manage\save_add_line.html" />
+    <Content Include="manage\user_share.html" />
     <Content Include="manage\staff_share.html" />
     <Content Include="manage\staff_warrant.html" />
     <Content Include="manage\staff_warrant_details.html" />
@@ -334,8 +335,10 @@
     <Compile Include="ApiCommand\CMD_OAuth.cs" />
     <Compile Include="ApiCommand\CMD_OutSystem.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_AddVehicle.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_VehicleBinding.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_EmployeeEmpowerment.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_GetAccountData.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_GetDriverList.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_GetEmployeeEmpowermentList.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_GetLineData.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_GetPositionList.cs" />

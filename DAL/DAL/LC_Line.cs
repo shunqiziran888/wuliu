@@ -32,6 +32,25 @@ namespace DAL.DAL
         }
 
         /// <summary>
+        /// 获取司机列表
+        /// </summary>
+        /// <param name="myuservo"></param>
+        /// <returns></returns>
+        public static (bool, string, object) GetDriverList(UserLoginVO myuservo)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "PositionID=@PositionID and State=1 and LCID=@LCID", new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@PositionID",PositionEnum.驾驶员.EnumToInt()),
+                new System.Data.SqlClient.SqlParameter("@LCID",myuservo.uid)
+            });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return (true, "没有任何数据!", new object[] { });
+            return (true, string.Empty, ids.GetVOList<Model.Model.LC_User>());
+        }
+
+        /// <summary>
         /// 获取我的线路列表
         /// </summary>
         /// <param name="myuservo"></param>
@@ -222,7 +241,8 @@ namespace DAL.DAL
                 sql = makesql.MakeUpdateSQL(new Model.Model.LC_Line()
                 {
                     State = state,
-                    Lineletter = Lineletter
+                    Lineletter = Lineletter,
+                    OpenTime = (state==1 ? (DateTime?)DateTime.Now : null)
                 }, "id=@id", new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@id",id)
                 });
@@ -235,7 +255,8 @@ namespace DAL.DAL
                 //更新对方线路状态
                 sql = makesql.MakeUpdateSQL(new Model.Model.LC_Line()
                 {
-                    State = state
+                    State = state,
+                    OpenTime = (state == 1 ? (DateTime?)DateTime.Now : null)
                 }, "BindLogisticsUid=@BindLogisticsUid and UID=@UID", new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@BindLogisticsUid",myuservo.uid),
                     new System.Data.SqlClient.SqlParameter("@UID",my_line.BindLogisticsUid)

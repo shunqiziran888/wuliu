@@ -63,10 +63,45 @@
             let id = GET("id");
             GetHTML("GetVehicleDataFromID", { id: id }, function (data) {
                 if (CheckHTMLData(data)) {
-                    let html = TempToHtml("content_temp", data);
+                    let html = TempToHtml("content_temp", data.data);
                     $("#content").html(html);
+
+                    GetHTML("GetDriverList", {}, function (data) {
+                        debugger;
+                        if (CheckHTMLData(data)) {
+                            $("#jsy").empty();
+                            $("#jsy").append('<option value="">请选择</option>');
+                            for (let i = 0; i < data.data.length; i++) {
+                                let v = data.data[i];
+                                $("#jsy").append('<option value="' + v.ID + '">' + v.UserName + '</option>');
+                            }
+                        }
+                    });
+
+                    $("#addbtn").click(function () {
+                        let id = parseInt(GET("id"));
+                        let jsy = $("#jsy").val();
+                        if (id <= 0 || isNaN(id)) {
+                            Msg("ID参数错误!");
+                            return;
+                        }
+                        if (jsy <= 0) {
+                            Msg("请选择一个驾驶员");
+                            return;
+                        }
+                        let obj = {};
+                        obj.vehicle_id = id;
+                        obj.driver_id = jsy;
+                        GetHTML("VehicleBinding", obj, function (data) {
+                            if (CheckHTMLData(data)) {
+                                Msg("添加绑定成功!");
+                            }
+                        });
+                    }); //添加一个绑定
                 }
             });
+
+
         });
 
     </script>
@@ -74,33 +109,39 @@
         <div class="white martb_10 pad_20">
             <p class="dis_flex line_he_40 ali_center">
                 <span class="col_30 txt_right fz_14">车牌号：</span>
-                <span class="col_70 fz_12">鲁M88888</span>
+                <span class="col_70 fz_12">{{lcv.VehicleNo}}</span>
             </p>
             <p class="dis_flex line_he_40 ali_center">
                 <span class="col_30 txt_right fz_14">驾驶员选择：</span>
                 <span class="col_70 fz_12">
-                    <select>
-                        <option value="什么鬼"></option>
-                        <option value="阿凡达"></option>
+                    <select id="jsy">
+                        <option value="">请选择</option>
                     </select>
                 </span>
             </p>
-            <p class="txt_center mart_10"><button type="button" class="line_he_30 padlr_30 green fc_white fz_14" style="border:none;">添加</button></p>
+            <p class="txt_center mart_10">
+            <button id="addbtn" type="button" class="line_he_30 padlr_30 green fc_white fz_14" style="border:none;">添加</button></p>
         </div>
         <div>
+            {{if lcc_list.length>0}}
+
             <p class="fz_16 marb_10 white pad_10">已绑定司机</p>
             <ul>
+                {{each lcc_list as v}}
                 <li class="white pad_10">
                     <p class="dis_flex line_he_40 ali_center">
                         <span class="col_30 txt_right fz_14">姓名：</span>
-                        <span class="col_70 fz_12">阿凡提</span>
+                        <span class="col_70 fz_12">{{v.LC_User.UserName}}</span>
                     </p>
                     <p class="dis_flex line_he_40 ali_center">
                         <span class="col_30 txt_right fz_14">联系电话：</span>
-                        <span class="col_70 fz_12">12345678901</span>
+                        <span class="col_70 fz_12">{{v.LC_User.Phone}}</span>
                     </p>
                 </li>
+                {{/each}}
             </ul>
+
+            {{/if}}
         </div>
     </script>
 </body>

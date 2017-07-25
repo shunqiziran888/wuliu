@@ -22,6 +22,20 @@ namespace BLL.BLL
         {
             return DAL.DAL.LC_User.Add(lC_User, loginvo, LogisticsUid);
         }
+
+        /// <summary>
+        /// 获取司机列表
+        /// </summary>
+        /// <param name="web"></param>
+        /// <returns></returns>
+        public static (bool, string, object) GetDriverList(HttpContextBase web)
+        {
+            var myuservo = web.GetMyLoginUserVO();
+            if (myuservo.accountType != AccountTypeEnum.物流账号)
+                return (false, "您的权限不足无法访问此接口!",null);
+            return DAL.DAL.LC_Line.GetDriverList(myuservo);
+        }
+
         /// <summary>
         /// 获取账号数据
         /// </summary>

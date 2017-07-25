@@ -247,7 +247,8 @@ namespace DAL.DAL
                     ProvincesID = sheng,
                     CityID = shi,
                     AreaID = qu,
-                    State = logistics.StrIsNotNull() ? 0 : 1
+                    State = 1
+                    //State = logistics.StrIsNotNull() ? 0 : 1
                 };
                 sql = makesql.MakeUpdateSQL(user, "uid=@uid", new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@uid",myuservo.uid)

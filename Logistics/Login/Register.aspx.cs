@@ -11,7 +11,7 @@ namespace Logistics.Login
     {
         public Register() : base(false) { }
         public List<Model.Model.w_address_basic_data> shengList = new List<Model.Model.w_address_basic_data>();
-        public List<GlobalBLL.Position> ZwList = new List<GlobalBLL.Position>();
+        public List<GlobalBLL.PositionEnum> ZwList = new List<GlobalBLL.PositionEnum>();
         protected void Page_Load(object sender, EventArgs e)
         {
             //获取地区省列表

@@ -67,7 +67,7 @@
         PageInit(function () {
             GetHTML("GetMyVehicleList", {}, function (data) {
                 if (CheckHTMLData(data)) {
-                    let html = TempToHtml("bus_list_temp",data);
+                    let html = TempToHtml("bus_list_temp", data);
                     $(".bus_list").html(html);
                     RemoveLuyou();
                 }

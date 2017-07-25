@@ -18,6 +18,7 @@ namespace GlobalBLL
         物流公司员工账号 =4
     }
 
+
     /// <summary>
     /// 用户状态
     /// </summary>
@@ -198,11 +199,12 @@ namespace GlobalBLL
         现付 = 2,
         扣付 = 3
     }
-    public enum Position
+    public enum PositionEnum
     {
-        司机=1,
-        财务=2,
-        客服=3,
-        营销员=4
+        驾驶员 = 1,
+        财务 = 2,
+        业务 = 3,
+        客服 = 4,
+        管理员 = 5
     }
 }
