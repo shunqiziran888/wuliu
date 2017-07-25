@@ -1,0 +1,7 @@
+[内容]:LOGO图地址不能为空 [方法名]:Page_Load [代码文件路径]:F:\work\Net\物流系统\Logistics\GetQR.aspx.cs [代码行号]:26 [Time]:2017-07-24 16:27:03.769
+[内容]:URL地址不能为空 [方法名]:Page_Load [代码文件路径]:F:\work\Net\物流系统\Logistics\GetQR.aspx.cs [代码行号]:22 [Time]:2017-07-24 16:27:07.465
+[内容]:LOGO图地址不能为空 [方法名]:Page_Load [代码文件路径]:F:\work\Net\物流系统\Logistics\GetQR.aspx.cs [代码行号]:26 [Time]:2017-07-24 16:27:15.165
+[内容]:LOGO图地址不能为空 [方法名]:Page_Load [代码文件路径]:F:\work\Net\物流系统\Logistics\GetQR.aspx.cs [代码行号]:26 [Time]:2017-07-24 18:25:40.679
+[内容]:LOGO图地址不能为空 [方法名]:Page_Load [代码文件路径]:F:\work\Net\物流系统\Logistics\GetQR.aspx.cs [代码行号]:26 [Time]:2017-07-24 18:25:42.586
+[内容]:LOGO图地址不能为空 [方法名]:Page_Load [代码文件路径]:F:\work\Net\物流系统\Logistics\GetQR.aspx.cs [代码行号]:26 [Time]:2017-07-24 18:26:01.202
+[内容]:LOGO图地址不能为空 [方法名]:Page_Load [代码文件路径]:F:\work\Net\物流系统\Logistics\GetQR.aspx.cs [代码行号]:26 [Time]:2017-07-24 18:26:10.914

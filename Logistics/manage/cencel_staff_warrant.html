@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -36,23 +36,14 @@
                     <i class="add_txt">历史记录</i>
                 </p> -->
                 <!-- <a href="choose_bus.html" class="icon pull-right dis_inline" style="background:#009621;color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">下一步</a> -->
-                <h1 class="title">成功</h1>
+                <h1 class="title">您确定要冻结此成员么?</h1>
             </header>
 
 
             <div class="content" style="background:#f2f2f2;">
-                <div class="page-index">
-                    <div class="txt_center white" style="padding:1rem;margin-top:1rem;">
-                        <p> <i class="iconfont fc_red" style="font-size:55px;">&#xe63d;</i></p>
-                        <strong class=" mart_10" style="font-size:25px; font-weight:400;">王大龙</strong>
-                        <p class="mart_10">管理员</p>
-                        <p class="fz_12 txt_center marb_20 mart_10 fc_ash">添加日期： <span>2017-07-20 00：57</span></p>
-                        
-                        <p class="dis_flex" style="justify-content:center;"><a class="green fc_white fz_14" href="manage_warrant.html"style="width:94px;height:30px; line-height:30px; margin-right:.5rem;">返回</a><a class="red fc_white fz_14" href="manage_warrant.html" style="width:94px;height:30px; line-height:30px;">确认取消</a></p>
-                    </div>
+                <div class="page-index" id="content">
+                   <!--内容-->
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -65,8 +56,53 @@
             $.config = { router: false }
         });
         
-    </script>
+        PageInit(function () {
+            //获取数据
+            let id = GET("id");
+            if (id <= 0) {
+                Msg("ID参数不能为空!");
+                return;
+            }
 
+            //获取账号数据
+            GetHTML("GetAccountData", { id: id }, function (data) {
+                if (CheckHTMLData(data)) {
+                    let html = TempToHtml("content_temp", data);
+                    $("#content").html(html);
+
+                    $("#quxiao").click(function () {
+                        debugger;
+                        let id = GET("id");
+                        if (id <= 0) {
+                            Msg("ID参数错误!");
+                            return;
+                        }
+                        if (confirm("您确定要冻结此账号么?")) {
+                            GetHTML("EmployeeEmpowerment", { id: id, state: 3 }, function (data) {
+                                if (CheckHTMLData(data)) {
+                                    Msg("操作成功!");
+                                    Href("manage_warrant.html");
+                                }
+                            });
+                        };
+                    });
+
+                }
+                RemoveLuyou();
+            });
+        });
+    </script>
+    <script id="content_temp" type="text/html">
+        <div class="txt_center white" style="padding:1rem;margin-top:1rem;">
+            <p> <i class="iconfont fc_red" style="font-size:55px;">&#xe63d;</i></p>
+            <strong class=" mart_10" style="font-size:25px; font-weight:400;">{{data.UserName}}</strong>
+            <p class="mart_10">{{data.PositionName}}</p>
+            <p class="fz_12 txt_center marb_20 mart_10 fc_ash">添加日期： <span>{{data.CreateTime}}</span></p>
+
+            <p class="dis_flex" style="justify-content:center;"><a class="green fc_white fz_14" href="manage_warrant.html" style="width:94px;height:30px; line-height:30px; margin-right:.5rem;">返回</a>
+            <a class="red fc_white fz_14" href="#" id="quxiao" style="width:94px;height:30px; line-height:30px;">确认取消</a></p>
+        </div>
+    </script>
 </body>
 
 </html>

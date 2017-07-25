@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -49,22 +49,7 @@
                         </div>
                     </div>
                     <ul class="bus_list">
-                        <li class="dis_flex ali_center yellow mart_10 active" style="padding:1rem;">
-                            <div class="col_100 txt_center">
-                                <strong class="marb_20" style="font-size:30px;font-weight:400;line-height:50px;">鲁M40101(9.6M)</strong>
-                                <p class="fz_14">王小丫  <span>15200000000</span></p>
-                                <p class="fz_12">添加日期：<span>2011-10-30 20：10</span></p>
-                            </div>
-                            
-                        </li>
-                        <li class="dis_flex ali_center yellow mart_10" style="padding:1rem;">
-                            <div class="col_100 txt_center">
-                                <strong class="marb_20" style="font-size:30px;font-weight:400;line-height:50px;">鲁M40101(9.6M)</strong>
-                                <p class="fz_14">王小丫  <span>15200000000</span></p>
-                                <p class="fz_12">添加日期：<span>2011-10-30 20：10</span></p>
-                            </div>
-                            
-                        </li>
+                        <!--内容-->
                     </ul>
                 </div>
 
@@ -74,14 +59,35 @@
     </div>
 
     <script type='text/javascript' src='/Style/scripts/all.js' charset='utf-8'></script>
-    <script type="text/javascript" src="js/main.js" charset='utf-8'></script>
     <script>
         $(function () {
             $.init();
             $.config = { router: false }
         });
+        PageInit(function () {
+            GetHTML("GetMyVehicleList", {}, function (data) {
+                if (CheckHTMLData(data)) {
+                    let html = TempToHtml("bus_list_temp",data);
+                    $(".bus_list").html(html);
+                    RemoveLuyou();
+                }
+            });
+        });
     </script>
-
+    <script id="bus_list_temp" type="text/html">
+        {{if data.data.length>0}}
+        {{each data.data as v}}
+        
+        <li onclick="Href('manage_add_driver.html?id={{v.ID}}');" class="dis_flex ali_center yellow mart_10 active" style="padding:1rem;">
+            <div class="col_100 txt_center">
+                <strong class="marb_20" style="font-size:30px;font-weight:400;line-height:50px;">{{v.VehicleNo}}({{v.Carshape}}M)</strong>
+                <p class="fz_14">{{v.Driver}}  <span>{{v.Phone}}</span></p>
+                <p class="fz_12">添加日期：<span>{{v.CreateTime}}</span></p>
+            </div>
+        </li>
+        {{/each}}
+        {{/if}}
+    </script>
 </body>
 
 </html>

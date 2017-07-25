@@ -30,6 +30,137 @@ namespace DAL.DAL
                 return new Tuple<bool, string, List<Model.Model.LC_Line>>(true, "没有任何数据!", new List<Model.Model.LC_Line>());
             return new Tuple<bool, string, List<Model.Model.LC_Line>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Line>());
         }
+
+        /// <summary>
+        /// 获取我的线路列表
+        /// </summary>
+        /// <param name="myuservo"></param>
+        /// <returns></returns>
+        public static (bool, string, object) GetMyLineList(UserLoginVO myuservo)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Line), "UID=@UID and State=1", new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@UID",myuservo.uid)
+            });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return (true,"没有任何数据!",new object[] { });
+            return (true, string.Empty, ids.GetVOList<Model.Model.LC_Line>().Select((x)=> {
+                var startvo = DAL.DALBase.GetAllAddressNames(x.Start);
+                var endvo = DAL.DALBase.GetAllAddressNames(x.End);
+                return new
+                {
+                    x.DFPhone,
+                    x.DFResponsibleName,
+                    x.Start,
+                    x.End,
+                    x.ID,
+                    x.LineID,
+                    x.Lineletter,
+                    x.MyPhone,
+                    x.MyResponsibleName,
+                    x.State,
+                    x.UID,
+                    start_sheng = startvo.sheng,
+                    start_shi = startvo.shi,
+                    start_qu = startvo.qu,
+                    end_sheng = endvo.sheng,
+                    end_shi = endvo.shi,
+                    end_qu = endvo.qu
+                };
+            }));
+        }
+
+        /// <summary>
+        /// 主动绑定线路
+        /// </summary>
+        /// <param name="myuservo"></param>
+        /// <param name="lineletter"></param>
+        /// <param name="phone"></param>
+        /// <returns></returns>
+        public static (bool, string) LineActiveApplication(UserLoginVO myuservo, string lineletter, string phone)
+        {
+            var box = db.CreateTranSandbox((db) =>
+            {
+                //查看此物流是否存在
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "Phone=@Phone", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@Phone",phone)
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (!ids.ReadIsOk())
+                    return (false, "没有找到您要绑定的物流公司数据!");
+                Model.Model.LC_User lcu = ids.GetVOList<Model.Model.LC_User>()[0];
+                if (lcu.State != 0)
+                    return (false, "当前您要绑定的物流公司不可用!");
+
+                //检测我是否已经绑定过此物流
+                sql = makesql.MakeCount(nameof(Model.Model.LC_Line), "UID=@UID and BindLogisticsUid=@BindLogisticsUid", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@UID",myuservo.uid),
+                    new System.Data.SqlClient.SqlParameter("@BindLogisticsUid",lcu.UID)
+                });
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (ids.Count() > 0)
+                    return (false, "不可以重复绑定相同的物流!");
+
+                //开始绑定我的数据
+                Model.Model.LC_Line my_line = new Model.Model.LC_Line()
+                {
+                    ApplicantUID = myuservo.uid,
+                    BindLogisticsUid = lcu.UID,
+                    LineID = Tools.NewGuid.GuidTo16String(),
+                    CreateTime = DateTime.Now,
+                    DFPhone = lcu.Phone,
+                    DFResponsibleName = lcu.UserName,
+                    Lineletter = lineletter,
+                    End = lcu.AreaID,
+                    MyPhone = myuservo.phones,
+                    MyResponsibleName = myuservo.username,
+                    Start = myuservo.AreaID,
+                    State = 0,
+                    UID = myuservo.uid,
+                };
+                //插入数据库
+                sql = makesql.MakeInsertSQL(my_line);
+                ids = db.Exec(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (!ids.ExecOk())
+                    return (false, "绑定失败!");
+
+                //绑定对方数据
+                Model.Model.LC_Line df_line = new Model.Model.LC_Line()
+                {
+                    ApplicantUID = myuservo.uid,
+                    BindLogisticsUid = myuservo.uid,
+                    LineID = Tools.NewGuid.GuidTo16String(),
+                    CreateTime = DateTime.Now,
+                    DFPhone = myuservo.phones,
+                    DFResponsibleName = myuservo.username,
+                    End = myuservo.AreaID,
+                    MyPhone = lcu.Phone,
+                    MyResponsibleName = lcu.UserName,
+                    Start = lcu.AreaID,
+                    State = 0,
+                    UID = lcu.UID,
+                };
+                sql = makesql.MakeInsertSQL(df_line);
+                ids = db.Exec(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (!ids.ExecOk())
+                    return (false, "绑定对方数据时失败!");
+
+                db.Commit();
+                return (true, string.Empty);
+            });
+            return box;
+        }
+
         /// <summary>
         /// 获取线路数据
         /// </summary>

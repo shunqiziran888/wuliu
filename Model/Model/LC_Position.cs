@@ -26,6 +26,10 @@ namespace Model.Model
         /// </summary>
         private string _Icon;
         /// <summary>
+        /// 图标颜色
+        /// </summary>
+        private string _IconColor;
+        /// <summary>
         /// 
         /// </summary>
         public int? ID
@@ -56,6 +60,14 @@ namespace Model.Model
         {
             set { _Icon = value;}
             get { return _Icon; }
+        }
+        /// <summary>
+        /// 图标颜色
+        /// </summary>
+        public string IconColor
+        {
+            set { _IconColor = value;}
+            get { return _IconColor; }
         }
     }
 }

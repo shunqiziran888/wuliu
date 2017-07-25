@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -40,62 +40,84 @@
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
                 <a href="index.html" class="icon iconfont icon-zuo pull-left"></a>
-               
-                <a href="save_add_line.html" class="icon pull-right dis_inline green" style="border-radius:4px;color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">保存</a>
+
+                <a href="#" id="save_binding" class="icon pull-right dis_inline green" style="border-radius:4px;color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">保存</a>
                 <h1 class="title">添加线路</h1>
             </header>
 
 
             <div class="content" style="background:#f2f2f2;">
                 <div class="page-index">
-                    <div class="dis_flex" style="padding: 1rem;background: #fff;margin-top: .5rem;">
+                    <!--<div class="dis_flex" style="padding: 1rem;background: #fff;margin-top: .5rem;">
                         <div class="col_30 txt_right fz_16" style="padding-right: 1rem;">
-                            到达地
+                            物流设置
                         </div>
                         <div class="col_70" style="padding-top: .15rem;">
                             <p class="marb_10" style="font-size:13px;">省份</p>
                             <p class="marb_10">
-                                <select>
-                                    <option value="山东">山东省</option>
-                                    <option value="海南省">海南省</option>
+                                <select id="sheng" onchange="show(this.value,'shi');">
+                                    <option value="">请选择</option>
                                 </select>
                             </p>
                             <p class="marb_10" style="font-size:13px;">城市</p>
                             <p class="marb_10">
-                                <select>
-                                    <option value="济南">济南</option>
-                                    <option value="滨州">滨州</option>
+                                <select id="shi"  onchange="show(this.value,'qu');">
+                                    <option value="">请选择</option>
                                 </select>
                             </p>
                             <p class="marb_10" style="font-size:13px;">区/县</p>
                             <p class="marb_10">
-                                <select>
-                                    <option value="历下区">历下区</option>    
-                                    <option value="天桥区">天桥区</option>    
+                                <select id="qu">
+                                    <option value="">请选择</option>
                                 </select>
                             </p>
-                            <p class="marb_10" style="font-size:13px;">运单号首字母</p>
-                             <p class="marb_10">
-                                 <select>
-                                    <option value="A">A</option>    
-                                    <option value="B">B</option>    
-                                 </select>
-                             </p>
+
+
                         </div>
-                    </div>
+                    </div>-->
                     <div class="dis_flex white" style="margin-top:.5rem; padding:1rem;">
                         <div class="col_30 txt_right fz_16" style="padding-right: 1rem;">
-                            <p class="marb_10">负责人</p>
+                            <p class="marb_10" style="font-size:13px;">运单号首字母</p>
                             <p>联系电话</p>
                         </div>
                         <div class="col_70">
-                            <p class="marb_10"><input type="text" placeholder="负责人"></p>
-                            <p><input type="text" placeholder="请输入联系电话"></p>
+                            <p class="marb_10">
+                                <select id="Lineletter" name="Lineletter">
+                                    <option value="">请选择</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                    <option value="G">G</option>
+                                    <option value="H">H</option>
+                                    <option value="I">I</option>
+                                    <option value="J">J</option>
+                                    <option value="K">K</option>
+                                    <option value="L">L</option>
+                                    <option value="M">M</option>
+                                    <option value="N">N</option>
+                                    <option value="O">O</option>
+                                    <option value="P">P</option>
+                                    <option value="Q">Q</option>
+                                    <option value="R">R</option>
+                                    <option value="S">S</option>
+                                    <option value="T">T</option>
+                                    <option value="U">U</option>
+                                    <option value="V">V</option>
+                                    <option value="W">W</option>
+                                    <option value="X">X</option>
+                                    <option value="Y">Y</option>
+                                    <option value="Z">Z</option>
+                                </select>
+                            </p>
+                            <p>
+                            <input type="text" id="phone" placeholder="请输入联系电话" value="">
+                            </p>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -107,6 +129,47 @@
             $.init();
             $.config = { router: false }
         });
+        PageInit(function () {
+            show(1, "sheng");
+
+            //保存数据
+            $("#save_binding").click(function () {
+                let Lineletter = $("#Lineletter").val();
+                let phone = $("#phone").val();
+                if (StrIsNullOrEmpty(Lineletter)) {
+                    Msg("货号不能为空!");
+                    return;
+                }
+                if (StrIsNullOrEmpty(phone)) {
+                    Msg("电话不能为空!");
+                    return;
+                }
+                GetHTML("LineActiveApplication", { Lineletter: Lineletter, phone: phone }, function (data) {
+                    if (CheckHTMLData(data)) {
+                        Msg("已绑定成功等待对方授权!");
+                    }
+                });
+            });
+
+        });
+
+        /**
+         * 地区联动
+         * @param {*} id
+         * @param {*} elename
+         */
+        function show(id, elename) {
+            GetHTML("GetAddressNextList", { id: id }, function (data) {
+                if (CheckHTMLData(data)) {
+                    let list = data.data;
+                    $("#" + elename).empty();
+                    $("#" + elename).append("<option>-请选择-</option>");
+                    for (let i = 0; i < list.length; i++) {
+                        $("#" + elename).append("<option value='" + list[i].id + "'>" + list[i].Name + "</option>");
+                    }
+                }
+            });
+        }
     </script>
 
 </body>

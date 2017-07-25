@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -36,13 +36,14 @@
             <div class="content" style="background:#f2f2f2;">
                 <div class="page-index">
                     <div class="white" style="padding:1rem;margin-top:1rem;">
-                       <p class="txt_center"><img class="col_50" src="../img/erweima.png"></p>
+                       <p class="txt_center"><img id="erweima" class="col_50" src=""></p>
                        <p class="txt_center" style="margin-top:1rem;">扫描分享二维码</p>
                     </div>
-                    <p onclick="window.location.href='staff_warrant_details.html'" class="dis_flex ali_center row_44 white" style="justify-content:center;margin-top:.5rem;"><span class="iconfont icon-share" style="color: #009621;"></span><span style="margin:0 2rem;">分享注册链接</span><span class="iconfont icon-angle-right"></span></p>
+                    <p onclick="alert('请点击右上角分享功能!');" class="dis_flex ali_center row_44 white" style="justify-content:center;margin-top:.5rem;">
+                    <span class="iconfont icon-share" style="color: #009621;"></span>
+                    <span style="margin:0 2rem;">分享注册链接</span>
+                    <span class="iconfont icon-angle-right"></span></p>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -53,6 +54,27 @@
         $(function () {
             $.init();
             $.config = { router: false }
+            
+        });
+        PageInit(function () {
+            GetHTML("GetLoginData", {}, function (data) {
+                if (CheckHTMLData(data))
+                {
+                    debugger;
+                    let id = GET("id");
+                    let logistics = data.data.uid;
+                    let href = $.apiUrl + "/login/login.html?appid=" + getAppid() + "&acctype=4&region=" + id + "&logistics=" + logistics;
+                    let url = "/GetQR.aspx?url=" + encodeURIComponent(href) + "&logo=" + $.apiUrl + "/Style/img/success.png";
+
+                    SetShare("物流公司员工授权", href, $.apiUrl + "/Style/img/erweima.png", "点击进入授权页面");
+
+                    $("#erweima").attr("src", url);
+                }
+            });
+        });
+
+        WXFinish(function () {
+            InitShare();
         });
     </script>
 

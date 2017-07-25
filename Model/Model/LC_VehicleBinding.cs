@@ -14,7 +14,7 @@ namespace Model.Model
         /// </summary>
         private long? _id;
         /// <summary>
-        /// 
+        /// 车辆ID
         /// </summary>
         private long? _VehicleID;
         /// <summary>
@@ -34,7 +34,7 @@ namespace Model.Model
             get { return _id; }
         }
         /// <summary>
-        /// 
+        /// 车辆ID
         /// </summary>
         public long? VehicleID
         {

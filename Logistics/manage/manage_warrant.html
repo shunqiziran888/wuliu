@@ -82,7 +82,7 @@
                     </div>
                     <ul class="zbshangjia-ul">
                         <li class="shangjia-li1">
-                            <a href="line_warrant.html" class="row">
+                            <a href="line_share.html" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-localshipping" style="color: #41d9bd;"></span>
                                 </div>
@@ -305,9 +305,9 @@
         {{if data.data.length > 0}}
         {{each data.data as v}}
         <li class="dis_flex ali_center jus_bet" style="border-bottom:1px solid #bbb;padding-bottom:.5rem;margin-bottom:.5rem;">
-            <a class="fc_ash" href="cencel_staff_warrant.html"><i class="iconfont icon-close1 col_10"></i></a>
+            <a class="fc_ash" href="cencel_staff_warrant.html?id={{v.ID}}"><i class="iconfont icon-close1 col_10"></i></a>
             <div class="col_90">
-                <p class="dis_flex jus_bet ali_center fz_16 fc_black" style="margin-bottom:10px;">申请管理员</p>
+                <p class="dis_flex jus_bet ali_center fz_16 fc_black" style="margin-bottom:10px;">申请{{v.PositionName}}</p>
                 <p class="marb_10">{{v.UserName}} <span>{{v.Phone}}</span></p>
                 <div class="dis_flex ali_center" style="position: relative;height:30px;">
                     {{if v.State==0}}

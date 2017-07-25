@@ -5,7 +5,7 @@ using CustomExtensions;
 using SuperDataBase.InterFace;
 using System.Linq;
 using GlobalBLL;
-
+using SuperDataBase;
 namespace DAL.DAL
 {
     /// <summary>
@@ -37,6 +37,49 @@ namespace DAL.DAL
                 return new Tuple<bool, string, List<Model.Model.LC_User>>(true, string.Empty, ids.GetVOList<Model.Model.LC_User>());
             return new Tuple<bool, string, List<Model.Model.LC_User>>(true, "没有任何数据!", new List<Model.Model.LC_User>());
         }
+
+        /// <summary>
+        /// 获取账号数据
+        /// </summary>
+        /// <param name="myuservo"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static (bool, string, object) GetAccountData(UserLoginVO myuservo, long id)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "id=@id", new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@id",id)
+            });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return (false, "没有找到任何数据!", null);
+            var vo = ids.GetVOList<Model.Model.LC_User>()[0];
+            return (true, string.Empty,new {
+                vo.AreaID,
+                vo.CityID,
+                vo.CreateTime,
+                vo.ID,
+                vo.LCID,
+                vo.LogisticsName,
+                vo.Phone,
+                vo.PositionID,
+                vo.ProvincesID,
+                PositionName = GetPosition(vo.PositionID).Item3?.PositionName,
+                vo.State,
+                vo.UID,
+                vo.UserName,
+                vo.WX_City,
+                vo.WX_Country,
+                vo.WX_HeadPic,
+                vo.WX_NickName,
+                vo.WX_Province,
+                vo.WX_Sex,
+                vo.ZNumber,
+                vo.ZType
+            });
+        }
+
         /// <summary>
         /// 员工授权
         /// </summary>
@@ -80,7 +123,8 @@ namespace DAL.DAL
         /// <returns></returns>
         public static (bool, string, object) GetEmployeeEmpowermentList(UserLoginVO myuservo, int page, int num)
         {
-            fysql = makesql.MakeSelectFY(typeof(Model.Model.LC_User), "ZType=@ZType and LCID=@LCID", "id desc", page, num, "id", new System.Data.SqlClient.SqlParameter[] {
+            var tlist = new Type[] { typeof(Model.Model.LC_User), typeof(Model.Model.LC_Position) };
+            fysql = makesql.MakeSelectFY(tlist, "{0}.PositionID={1}.id and {0}.ZType=@ZType and {0}.LCID=@LCID and {0}.State=0", "{0}.id desc", page, num, "{0}.id", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@LCID",myuservo.uid),
                 new System.Data.SqlClient.SqlParameter("@ZType",GlobalBLL.AccountTypeEnum.物流公司员工账号.EnumToInt())
             });
@@ -98,7 +142,32 @@ namespace DAL.DAL
             {
                 allcount = fysql.count,
                 pagenum = fysql.GetTotalPage(num),
-                data = ids.GetVOList<Model.Model.LC_User>()
+                data = ids.GetVOList(tlist).Select((x)=> {
+                    var lcu = x.GetDicVO<Model.Model.LC_User>();
+                    var lcp = x.GetDicVO<Model.Model.LC_Position>();
+                    return new
+                    {
+                        lcu.AreaID,
+                        lcu.CityID,
+                        lcu.CreateTime,
+                        lcu.ID,
+                        lcu.LogisticsName,
+                        lcu.Phone,
+                        lcu.PositionID,
+                        lcu.ProvincesID,
+                        lcu.UID,
+                        lcu.UserName,
+                        lcu.WX_City,
+                        lcu.WX_Country,
+                        lcu.WX_HeadPic,
+                        lcu.WX_NickName,
+                        lcu.WX_Province,
+                        lcu.WX_Sex,
+                        lcu.ZType,
+                        lcu.State,
+                        lcp.PositionName,
+                    };
+                })
             });
         }
 
