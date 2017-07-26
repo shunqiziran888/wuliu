@@ -51,7 +51,7 @@
                         <p> <i class="iconfont fc_green" style="font-size:55px;">&#xe67b;</i></p>
                         <p>装车成功</p>
                         <p>运费： <span>￥<%=v.Freight %></span></p>
-                        <strong  style="font-size:25px; font-weight:400;"><%=DAL.DAL.DALBase.GetCarFromID(VehicleIDs)?.Item2?.VehicleNo%>(<%=v.VehicleID %>M)</strong>
+                        <strong  style="font-size:25px; font-weight:400;"><%=DAL.DAL.DALBase.GetCarFromID(VehicleIDs)?.Item2?.VehicleNo%>(<%=DAL.DAL.DALBase.GetCarFromID(VehicleIDs)?.Item2?.Carshape %>M)</strong>
                         <p class="fz_12 txt_right mart_20">添加日期： <span><%=v.TruckTime %></span></p>
                     </div>
                 </div>

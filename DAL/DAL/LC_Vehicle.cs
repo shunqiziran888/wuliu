@@ -143,20 +143,33 @@ namespace DAL.DAL
 
                 long index = ids.index_id;
 
-                if(myuservo.accountType== AccountTypeEnum.物流公司员工账号)
+                if(myuservo.accountType== AccountTypeEnum.物流账号)
                 {
-                    sql = makesql.MakeInsertSQL(new Model.Model.LC_VehicleBinding()
-                    {
-                        BindingTime = DateTime.Now,
-                        DriverUID = logistics_uid,
-                        VehicleID = index
+                    sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "phone=@phone", new System.Data.SqlClient.SqlParameter[] {
+                        new System.Data.SqlClient.SqlParameter("@phone",lcv.Phone)
                     });
-                    ids = db.Exec(sql);
+                    ids = db.Read(sql);
                     if (!ids.flag)
                         return (false, ids.errormsg);
-                    if (!ids.ExecOk())
-                        return (false, "绑定司机失败!");
+                    if (!ids.ReadIsOk())
+                        return (false, "您要绑定的司机不存在!");
+                    Model.Model.LC_User siji = ids.GetVOList<Model.Model.LC_User>()[0];
+                    if (siji.State != 1)
+                        return (false, "当司机账号不可用!");
+                    logistics_uid = siji.UID;
                 }
+
+                sql = makesql.MakeInsertSQL(new Model.Model.LC_VehicleBinding()
+                {
+                    BindingTime = DateTime.Now,
+                    DriverUID = logistics_uid,
+                    VehicleID = index
+                });
+                ids = db.Exec(sql);
+                if (!ids.flag)
+                    return (false, ids.errormsg);
+                if (!ids.ExecOk())
+                    return (false, "绑定司机失败!");
 
                 db.Commit();
                 return (true, string.Empty);

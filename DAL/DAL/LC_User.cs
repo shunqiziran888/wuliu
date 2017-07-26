@@ -37,6 +37,31 @@ namespace DAL.DAL
                 return new Tuple<bool, string, List<Model.Model.LC_User>>(true, string.Empty, ids.GetVOList<Model.Model.LC_User>());
             return new Tuple<bool, string, List<Model.Model.LC_User>>(true, "没有任何数据!", new List<Model.Model.LC_User>());
         }
+        /// <summary>
+        /// 检测电话是否存在
+        /// </summary>
+        /// <param name="myuservo"></param>
+        /// <param name="phone"></param>
+        /// <returns></returns>
+        public static (bool, string, object) CheckDriverIsHaveFromPhone(UserLoginVO myuservo, string phone)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "phone=@phone", new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@phone",phone)
+            });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return (true, "检测电话不存在!", false);
+            Model.Model.LC_User lcu_vo = ids.GetVOList<Model.Model.LC_User>()[0];
+            if (lcu_vo.ZType.ConvertData<GlobalBLL.AccountTypeEnum>() != AccountTypeEnum.物流公司员工账号)
+                return (false, "绑定账号类型不是司机的电话!", null);
+            if (lcu_vo.PositionID.ConvertData<PositionEnum>() != PositionEnum.驾驶员)
+                return (false, "绑定账号类型不是司机的电话!", null);
+            if (lcu_vo.State.ConvertData<UserStateEnum>() != GlobalBLL.UserStateEnum.正常)
+                return (false, "您要绑定的司机还没有通过授权!", null);
+            return (true, string.Empty, true);
+        }
 
         /// <summary>
         /// 获取账号数据

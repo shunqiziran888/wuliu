@@ -68,7 +68,8 @@ namespace BLL.BLL
                         CreateTime = DateTime.Now,
                         Driver = web.GetValue("Driver"),
                         VehicleNo = web.GetValue("VehicleNo"),
-                        Phone = web.GetValue("Phone")
+                        Phone = web.GetValue("Phone"),
+                        State = 1
                     };
                     if (lcv.VehicleNo.StrIsNull())
                         return (false, "车号不能为空!");
