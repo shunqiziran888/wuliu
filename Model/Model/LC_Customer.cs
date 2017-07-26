@@ -134,6 +134,10 @@ namespace Model.Model
         /// </summary>
         private int? _finish;
         /// <summary>
+        /// 司机的ID (默认LC_User表中的id)
+        /// </summary>
+        private long? _DriverID;
+        /// <summary>
         /// 
         /// </summary>
         public int? ID
@@ -380,6 +384,14 @@ namespace Model.Model
         {
             set { _finish = value;}
             get { return _finish; }
+        }
+        /// <summary>
+        /// 司机的ID (默认LC_User表中的id)
+        /// </summary>
+        public long? DriverID
+        {
+            set { _DriverID = value;}
+            get { return _DriverID; }
         }
     }
 }

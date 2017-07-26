@@ -38,7 +38,7 @@
                     <a class="add_icon icon iconfont icon-eventnote pull-right" href="history_log.html"></a>
                     <i class="add_txt">历史记录</i>
                 </p> -->
-                <a href="#" onclick="Vehie()" class="icon pull-right dis_inline" style="background:#009621;color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">下一步</a>
+                <a onclick="ShowSiJi()" class="icon pull-right dis_inline" style="background:#009621;color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">下一步</a>
                 <h1 class="title">选择车牌号</h1>
             </header>
 
@@ -62,15 +62,16 @@
                 </div>
                 <div id="siji_box" class="dis_flex col_100 ali_center choose_siji" style="display:none; height:100%; position:fixed;top:0%; justify-content:center;" >
                     <div class="white col_80"  style="padding:1rem; height:150px;position:relative;">
-                        <i style="position:absolute;right:5px;top:0px;" class="iconfont icon-close1 fc_ash"></i>
+                        <i onclick="$('#siji_box').css('display','none');" style="position:absolute;right:5px;top:0px;" class="iconfont icon-close1 fc_ash"></i>
                         <p class="txt_center" style="padding-bottom:1.5rem;">选择司机</p>
                         <p>
                             <select id="siji">
-                              <option value="">请选择</option>
-                            <option value="老王">社会王 <span>(12345678910)</span></option>
-                        </select>
+                                <option value="">请选择</option>
+                            </select>
                         </p>
-
+                        <p>
+                            <a onclick="Vehie();" class="icon pull-right dis_inline" style="background:#009621;color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">确定</a>
+                        </p>
                     </div>
 
                 </div>
@@ -86,17 +87,6 @@
             $.config = { router: false }
         });
 
-        PageInit(function () {
-            GetHTML("GetDriverList", {}, function (data) {
-                debugger;
-                if (CheckHTMLData(data)) {
-
-                }
-            });
-        });
-
-    </script>
-    <script type="text/javascript">
         let lastid = 0;
         $('.bus_list li').click(function () {
             debugger;
@@ -105,17 +95,59 @@
             v.addClass('active').siblings('li').removeClass('active');
         })
 
+        PageInit(function () {
+            GetHTML("GetDriverList", {}, function (data) {
+                debugger;
+                if (CheckHTMLData(data)) {
+                    $("#siji").empty();
+                    $("#siji").append('<option value="">请选择</option>');
+                    for (var i = 0; i < data.data.length; i++)
+                    {
+                        $("#siji").append('<option value="' + data.data[i].ID + '">' + data.data[i].UserName + '<span>(' + data.data[i].Phone+')</span></option>');
+                    }
+                }
+            });
+        });
+        /**
+        * 显示选择司机
+        */
+        function ShowSiJi() {
+            let dcyf = $("#largeCar").val();
+            if (StrIsNullOrEmpty(dcyf))
+            {
+                Msg("大车运费必须填写!");
+                return;
+            }
+            if (lastid <= 0)
+            {
+                Msg("车辆必须选择!");
+                return;
+            }
+            $("#siji_box").css("display", "");
+        };
+
         function Vehie() {
             var dcyf = document.getElementById("largeCar").value;
+            var siji = $("#siji").val();
+            if (StrIsNullOrEmpty(siji)) {
+                Msg("请选择一个司机");
+                return;
+            }
+
+            if (lastid <= 0) {
+                Msg("车辆必须选择!");
+                return;
+            }
+
             if (dcyf != "" && dcyf != undefined && isNaN()) {
                 var Ord = sessionStorage.getItem("OID");
-                window.location.href = "/LC/Business/PretendCar/LC_Success.aspx?OID=" + Ord + "&VehicleID=" + lastid + "&dcyf=" + dcyf;
+                window.location.href = "/LC/Business/PretendCar/LC_Success.aspx?siji="+siji+"&OID=" + Ord + "&VehicleID=" + lastid + "&dcyf=" + dcyf;
             }
             else {
                 alert("请填写大车运费！");
             }
         }
-      </script>
+    </script>
 </body>
 
 </html>

@@ -20,11 +20,24 @@ namespace Logistics.LC.Business.PretendCar
             string OID = GetValue("OID");
             if (OID.StrIsNull())
                 return;
+            long siji = GetValue<long>("siji");
+            if(siji<=0)
+            {
+                Alert("司机必须选择!");
+                return;
+            }
             string jqOID = OID.StringToArray().Select(x=>$"'{x}'").ToList().ListToString();
             VehicleIDs =GetValue<int>("VehicleID");
             decimal dcyf =GetValue<decimal>("dcyf");
             DateTime TruckTime = DateTime.Now;
-            Tuple<bool, string> vo = DAL.DAL.LC_Customer.UpdatePC(new Model.Model.LC_Customer() { State = 3, VehicleID = VehicleIDs , largeCar = dcyf,TruckTime=TruckTime}, jqOID);
+            Tuple<bool, string> vo = DAL.DAL.LC_Customer.UpdatePC(new Model.Model.LC_Customer()
+            {
+                State = 3,
+                VehicleID = VehicleIDs,
+                largeCar = dcyf,
+                TruckTime = TruckTime,
+                DriverID = siji
+            }, jqOID);
             if (!vo.Item1)
             {
                 //有错误

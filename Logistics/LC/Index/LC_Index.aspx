@@ -52,7 +52,7 @@
                   <span class="icon iconfont icon-filetexto"></span>
                   <span class="tab-label">物流业务</span>
               </a>
-                <a class="tab-item external" href="../count/index.html">
+                <a class="tab-item external" href="/LC/MenuBar/OperationCountIndex.aspx">
                   <span class="icon iconfont icon-fcstubiao19"></span>
                   <span class="tab-label">运营统计</span>
               </a>
@@ -60,7 +60,7 @@
                   <span class="icon iconfont icon-guanli"></span>
                   <span class="tab-label">物流管理</span>
               </a>
-                <a class="tab-item external" href="../user/index.html">
+                <a class="tab-item external" href="/LC/MenuBar/Personal.aspx">
                   <span class="icon iconfont icon-user-circle"></span>
                   <span class="tab-label">我的</span>
               </a>

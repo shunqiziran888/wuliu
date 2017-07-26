@@ -38,6 +38,10 @@ namespace Model.Model
         /// </summary>
         private string _Phone;
         /// <summary>
+        /// 0不可用 1可用(已绑定)
+        /// </summary>
+        private int? _State;
+        /// <summary>
         /// 
         /// </summary>
         public int? ID
@@ -92,6 +96,14 @@ namespace Model.Model
         {
             set { _Phone = value;}
             get { return _Phone; }
+        }
+        /// <summary>
+        /// 0不可用 1可用(已绑定)
+        /// </summary>
+        public int? State
+        {
+            set { _State = value;}
+            get { return _State; }
         }
     }
 }

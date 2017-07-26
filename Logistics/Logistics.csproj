@@ -356,6 +356,7 @@
     <Compile Include="ApiCommand\CMD_OAuth.cs" />
     <Compile Include="ApiCommand\CMD_OutSystem.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_AddVehicle.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_CheckDriverIsHaveFromPhone.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_VehicleBinding.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_EmployeeEmpowerment.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_GetAccountData.cs" />
@@ -999,7 +1000,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>13839</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

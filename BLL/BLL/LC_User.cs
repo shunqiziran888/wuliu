@@ -22,6 +22,19 @@ namespace BLL.BLL
         {
             return DAL.DAL.LC_User.Add(lC_User, loginvo, LogisticsUid);
         }
+        /// <summary>
+        /// 根据手机号检测是否存在司机
+        /// </summary>
+        /// <param name="web"></param>
+        /// <returns></returns>
+        public static (bool, string, object) CheckDriverIsHaveFromPhone(HttpContextBase web)
+        {
+            var myuservo = web.GetMyLoginUserVO();
+            string phone = web.GetValue("phone");
+            if (phone.StrIsNull())
+                return (false, "电话不能为空!", null);
+            return DAL.DAL.LC_User.CheckDriverIsHaveFromPhone(myuservo, phone);
+        }
 
         /// <summary>
         /// 获取司机列表
