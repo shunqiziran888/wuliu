@@ -50,9 +50,9 @@
                         </div>
                     </div> -->
                     <div class="white mart_20" style="padding:1rem;line-height:1.5rem;">
-                        <p class="fz_16">装车： <span>23单</span><span style="margin-left:1rem;">计289件</span></p>
-                        <p class="dis_flex fz_14 jus_bet fc_ash"><i class="col_30">运费： <span>2523元</span></i><i class="col_30">运费： <span>2523元</span></i><i class="col_30">运费： <span>2523元</span></i></p>
-                        <p class="dis_flex fz_14 jus_bet fc_ash"><i class="col_30">运费： <span>2523元</span></i><i class="col_30">运费： <span>2523元</span></i><i class="col_30">运费： <span>2523元</span></i></p>
+                        <p class="fz_16">装车： <span><%=list.Count %>单</span><span style="margin-left:1rem;">计<%=list.Sum(x=>x.Number)%>件</span></p>
+                        <p class="dis_flex fz_14 jus_bet fc_ash"><i class="col_30">运费： <span><%=list.Sum(x=>Math.Round(x.Freight.ConvertData<decimal>(),2)) %>元</span></i><i class="col_30">代收： <span><%=list.Sum(x=>Math.Round(x.GReceivables.ConvertData<decimal>(),2)) %>元</span></i><i class="col_30">其他： <span><%=list.Sum(x=>Math.Round(x.OtherExpenses.ConvertData<decimal>(),2)) %>元</span></i></p>
+                        <p class="dis_flex fz_14 jus_bet fc_ash"><i class="col_30">现付： <span><%=Math.Round(tifu.ConvertData<decimal>(),2)%>元</span></i><i class="col_30">提付： <span><%=Math.Round(xianfu.ConvertData<decimal>(),2)%>元</span></i><i class="col_30">扣付： <span><%=Math.Round(koufu.ConvertData<decimal>(),2)%>元</span></i></p>
                     </div>
                     <form>
                         <%

@@ -15,6 +15,9 @@ namespace Logistics.LC.Business.PretendCar
         public int sta;
         public int end;
         public List<Model.Model.LC_Customer> list = new List<Model.Model.LC_Customer>();
+        public decimal tifu =0;
+        public decimal xianfu = 0;
+        public decimal koufu = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             var myuservo = GetMyLoginUserVO();
@@ -29,6 +32,33 @@ namespace Logistics.LC.Business.PretendCar
                 return;
             }
             list = vo.Item3;
+            //提付
+            var vo1 = DAL.DAL.LC_Customer.Gettifu(UID);
+            if (!vo1.Item1)
+            {
+                //有错误
+                Debug.Print(vo1.Item2);
+                return;
+            }
+            tifu = vo1.Item3;
+            //现付
+            var vo2 = DAL.DAL.LC_Customer.Getxianfu(UID);
+            if (!vo2.Item1)
+            {
+                //有错误
+                Debug.Print(vo2.Item2);
+                return;
+            }
+            xianfu = vo2.Item3;
+            //扣付
+            var vo3 = DAL.DAL.LC_Customer.Getkoufu(UID);
+            if (!vo3.Item1)
+            {
+                //有错误
+                Debug.Print(vo3.Item2);
+                return;
+            }
+            koufu = vo3.Item3;
         }
     }
 }
