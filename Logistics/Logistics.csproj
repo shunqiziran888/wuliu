@@ -214,6 +214,7 @@
     <Content Include="manage\manage_warrant.html" />
     <Content Include="manage\save_add_car.html" />
     <Content Include="manage\save_add_line.html" />
+    <Content Include="manage\driver_authorization.html" />
     <Content Include="manage\user_share.html" />
     <Content Include="manage\staff_share.html" />
     <Content Include="manage\staff_warrant.html" />
@@ -355,6 +356,7 @@
     <Compile Include="ApiCommand\CMD_LineBinding.cs" />
     <Compile Include="ApiCommand\CMD_OAuth.cs" />
     <Compile Include="ApiCommand\CMD_OutSystem.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_AddVehicleWait.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_AddVehicle.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_CheckDriverIsHaveFromPhone.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_VehicleBinding.cs" />

@@ -75,10 +75,42 @@ namespace DAL.DAL
                 lcc_list
             });
         }
+        /// <summary>
+        /// 添加车辆等待物流模式
+        /// </summary>
+        /// <param name="myuservo"></param>
+        /// <param name="lcv"></param>
+        /// <returns></returns>
+        public static (bool, string,object) AddVehicleWait(UserLoginVO myuservo, Model.Model.LC_Vehicle lcv)
+        {
+            //查看车号是否存在
+            sql = makesql.MakeCount(nameof(Model.Model.LC_Vehicle), "VehicleNo=@VehicleNo and UID=@UID", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@VehicleNo",lcv.VehicleNo),
+                    new System.Data.SqlClient.SqlParameter("@UID",myuservo.uid)
+                });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg,null);
+            if (ids.Count() > 0)
+                return (false, "已经存在相同车号车辆,无法进行添加!",null);
+
+            //添加一个绑定车辆
+            sql = makesql.MakeInsertSQL(lcv);
+            ids = db.Exec(sql,true);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ExecOk())
+                return (false, "添加车辆不能为空!",null);
+            return (true, string.Empty,new {
+                ID = ids.index_id,
+                region = GlobalBLL.PositionEnum.驾驶员.EnumToInt(),
+                logistics = myuservo.uid
+            });
+        }
 
         public static (bool, string, object) GetMyVehicleList(UserLoginVO myuservo, int page, int num)
         {
-            fysql = makesql.MakeSelectFY(typeof(Model.Model.LC_Vehicle), "UID=@UID", "id asc", page, num, "id", new System.Data.SqlClient.SqlParameter[] {
+            fysql = makesql.MakeSelectFY(typeof(Model.Model.LC_Vehicle), "UID=@UID and State=1", "id asc", page, num, "id", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@UID",myuservo.uid)
             });
             ids = db.Read(fysql);

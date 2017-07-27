@@ -115,6 +115,7 @@ namespace BLL.BLL
             int sheng = web.GetValue<int>("sheng");
             int shi = web.GetValue<int>("shi");
             int qu = web.GetValue<int>("qu");
+            long bindvehicleid = web.GetValue<long>("bindvehicleid"); //绑定的车辆ID
 
             if (NickName.StrIsNull())
                 return (false, "昵称不能为空!");
@@ -135,7 +136,7 @@ namespace BLL.BLL
                         return (false, "区不能为空!");
                     return DAL.DAL.LC_User.OrdinaryAccountBind(myuservo, NickName, phone, logistics, sheng, shi, qu);
                 case AccountTypeEnum.物流公司员工账号:
-                    return DAL.DAL.LC_User.EmployeeAccountBind(myuservo, NickName, phone, logistics);
+                    return DAL.DAL.LC_User.EmployeeAccountBind(myuservo, NickName, phone, logistics, bindvehicleid);
                 case AccountTypeEnum.物流账号:
                     if (sheng <= 0)
                         return (false, "省不能为空!");

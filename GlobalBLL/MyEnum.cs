@@ -200,6 +200,9 @@ namespace GlobalBLL
         现付 = 2,
         扣付 = 3
     }
+    /// <summary>
+    /// 职位枚举
+    /// </summary>
     public enum PositionEnum
     {
         驾驶员 = 1,
