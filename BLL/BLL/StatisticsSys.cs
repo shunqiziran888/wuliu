@@ -19,7 +19,7 @@ namespace BLL.BLL
         /// <returns></returns>
         public static (bool, string, object) GetOperationStatistics(HttpContextBase web)
         {
-
+            return (false,"",null);
         }
     }
 }

@@ -139,7 +139,7 @@ namespace DAL.DAL
         private static (bool, string) AddToHistory(string orderNumberStr, SuperDataBase.Model.DBSandbox db)
         {
             //获取所有订单数据
-            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), $"OrderID={orderNumberStr}");
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), $"OrderID in({orderNumberStr})");
             ids = db.Read(sql);
             if (!ids.flag)
                 return (false, ids.errormsg);
