@@ -30,7 +30,7 @@ namespace Model.Model
         /// </summary>
         private string _Consignor;
         /// <summary>
-        /// 物流公司ID
+        /// (接货时更新）当前线路开始的物流公司UID
         /// </summary>
         private string _logisticsID;
         /// <summary>
@@ -138,6 +138,14 @@ namespace Model.Model
         /// </summary>
         private long? _DriverID;
         /// <summary>
+        /// 当前线路开始的物流公司UID
+        /// </summary>
+        private string _beginUID;
+        /// <summary>
+        /// 当前线路结束的物流公司UID
+        /// </summary>
+        private string _finishUID;
+        /// <summary>
         /// 
         /// </summary>
         public int? ID
@@ -178,7 +186,7 @@ namespace Model.Model
             get { return _Consignor; }
         }
         /// <summary>
-        /// 物流公司ID
+        /// (接货时更新）当前线路开始的物流公司UID
         /// </summary>
         public string logisticsID
         {
@@ -392,6 +400,22 @@ namespace Model.Model
         {
             set { _DriverID = value;}
             get { return _DriverID; }
+        }
+        /// <summary>
+        /// 当前线路开始的物流公司UID
+        /// </summary>
+        public string beginUID
+        {
+            set { _beginUID = value;}
+            get { return _beginUID; }
+        }
+        /// <summary>
+        /// 当前线路结束的物流公司UID
+        /// </summary>
+        public string finishUID
+        {
+            set { _finishUID = value;}
+            get { return _finishUID; }
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Logistics.ApiCommand
     [SuperCommand.Attribute.InputDoc("sheng", "省（物流公司注册与普通成员注册需要上传）")]
     [SuperCommand.Attribute.InputDoc("shi", "市（物流公司注册与普通成员注册需要上传）")]
     [SuperCommand.Attribute.InputDoc("qu", "区（物流公司注册与普通成员注册需要上传）")]
+    [SuperCommand.Attribute.InputDoc("bindvehicleid","司机绑定的车辆ID，只有公司账号的驾驶员才有效")]
     public class CMD_BindUser : WebCommandBase, SuperCommand.ICommandBase<WebCommandVOBase>
     {
         public TCommandState ExeCommand<TCommandState>(WebCommandVOBase command) where TCommandState : CommandState, new()

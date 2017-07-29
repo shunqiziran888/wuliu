@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>物流管理系统</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- <link rel="shortcut icon" href="/favicon.ico"> -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="/Style/css/sui/sm.min.css">
+    <link rel="stylesheet" href="/Style/css/sui/sm-extend.min.css">
+    <link href="/Style/css/iconlink.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Style/css/style.css">
+    <style>
+        .prompt_msg {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: #f00;
+            border-radius: 20px;
+            color: #fff;
+            line-height: 22px;
+            top: 50%;
+            left: 68%;
+            margin-top: -11px;
+            font-size: 10px;
+            text-align: center;
+        }
+
+        select {
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <!-- 你的html代码 -->
+            <header class="bar bar-nav">
+                <a href="javascript:;" onclick="window.history.go(-1)" class="icon iconfont icon-zuo pull-left"></a>
+                <a href="shouhuokaidan_details.html" class="icon pull-right dis_inline green" style="color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">下一步</a>
+                <h1 class="title">收货开单</h1>
+            </header>
+
+
+            <div class="content" style="background:#f2f2f2;">
+                <div class="page-index marb_20">
+                    <div class="pad_20 white mart_10">
+                        <p class="dis_flex jus_bet line_he_40">
+                            <span class="col_30 txt_right">发货人：</span>
+                            <span class="col_70"><input type="text" placeholder="请输入收货人姓名"></span>
+                        </p>
+                        <p class="dis_flex jus_bet line_he_40">
+                            <span class="col_30 txt_right">发货电话：</span>
+                            <span class="col_70"><input type="number" placeholder=" 发货人手机号"></span>
+                        </p>
+                    </div>
+                    <div class="pad_20 white mart_10">
+                        <p class="dis_flex jus_bet line_he_40">
+                            <span class="col_30 txt_right">货物名称：</span>
+                            <span class="col_70"><input type="text" placeholder="货物名称"></span>
+                        </p>
+                        <p class="dis_flex jus_bet line_he_40">
+                            <span class="col_30 txt_right">件数：</span>
+                            <span class="col_70"><input type="number" placeholder="请输入数字"></span>
+                        </p>
+                        <p class="dis_flex jus_bet line_he_40">
+                            <span class="col_30 txt_right">代收货款：</span>
+                            <span class="col_70"><input type="number" placeholder="收货人手机号"></span>
+                        </p>
+                    </div>
+                    <div class="pad_20 white mart_10">
+                        <p class="dis_flex jus_bet line_he_40">
+                            <span class="col_30 txt_right">收货人：</span>
+                            <span class="col_70"><input type="text" placeholder="请输入收货人姓名"></span>
+                        </p>
+                        <p class="dis_flex jus_bet line_he_40">
+                            <span class="col_30 txt_right">收货电话：</span>
+                            <span class="col_70"><input type="number" placeholder="收货人手机号"></span>
+                        </p>
+                        <p class="dis_flex jus_bet line_he_40">
+                            <span class="col_30 txt_right">收货地址：</span>
+                            <span class="col_70">
+                                <select>
+                                    <option value="">已开通物流地 A</option>
+                                    <option value="">已开通物流地 B</option>
+                                    <option value="">已开通物流地 C</option>
+                                </select>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="pad_20 white mart_10">
+
+                        <p class="dis_flex jus_bet line_he_40">
+                            <span class="col_30 txt_right">省份：</span>
+                            <span class="col_70">
+                                <select>
+                                    <option value="">河北</option>
+                                    <option value="">山东</option>
+                                    <option value="">北京</option>
+                                </select>
+                            </span>
+                        </p>
+                        <p class="dis_flex jus_bet line_he_40">
+                            <span class="col_30 txt_right">地区：</span>
+                            <span class="col_70">
+                                <select>
+                                    <option value="">济南</option>
+                                    <option value="">滨州</option>
+                                    <option value="">潍坊</option>
+                                </select>
+                            </span>
+                        </p>
+                        <p class="dis_flex jus_bet line_he_40">
+                            <span class="col_30 txt_right">区县：</span>
+                            <span class="col_70">
+                                <select>
+                                    <option value="">滨城区</option>
+                                    <option value="">惠民县</option>
+                                    <option value="">阳新县</option>
+                                </select>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script type='text/javascript' src='/Style/scripts/all.js' charset='utf-8'></script>
+
+    <script>
+        $(function () {
+            $.init();
+            $.config = { router: false }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -51,6 +51,8 @@
     <Compile Include="Model\LC_History.cs" />
     <Compile Include="Model\LC_Line.cs" />
     <Compile Include="Model\LC_Line_Other.cs" />
+    <Compile Include="Model\LC_Payment.cs" />
+    <Compile Include="Model\LC_Payment_History.cs" />
     <Compile Include="Model\LC_Position.cs" />
     <Compile Include="Model\LC_Region.cs" />
     <Compile Include="Model\LC_User.cs" />

@@ -113,12 +113,60 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="business\add_wuliu_details.html" />
+    <Content Include="business\add_wuliu_success.html" />
+    <Content Include="business\choose_bus.html" />
+    <Content Include="business\fahuochexiao.html" />
+    <Content Include="business\fahuochexiao_success.html" />
+    <Content Include="business\fanghuo.html" />
+    <Content Include="business\fanghuo_details.html" />
+    <Content Include="business\fanghuo_pandian.html" />
+    <Content Include="business\fanghuo_pandian_success.html" />
+    <Content Include="business\fangkuan.html" />
+    <Content Include="business\fangkuan_details.html" />
+    <Content Include="business\fangkuan_success.html" />
+    <Content Include="business\history_log.html" />
+    <Content Include="business\huishouhuokuan.html" />
+    <Content Include="business\huokuanguanli.html" />
+    <Content Include="business\huokuanguanli_details.html" />
+    <Content Include="business\huosunchuli.html" />
+    <Content Include="business\huosunshensu.html" />
+    <Content Include="business\index.html" />
+    <Content Include="business\jieche.html" />
+    <Content Include="business\jieche_qingdan.html" />
+    <Content Include="business\jieche_success.html" />
+    <Content Include="business\peisong_success.html" />
+    <Content Include="business\qiankuantihuo.html" />
+    <Content Include="business\rijiezhang.html" />
+    <Content Include="business\shangjiaohuokuan.html" />
+    <Content Include="business\share.html" />
+    <Content Include="business\shouhuo.html" />
+    <Content Include="business\shouhuokaidan.html" />
+    <Content Include="business\shouhuokaidan_details.html" />
+    <Content Include="business\shouhuo_set.html" />
+    <Content Include="business\shouhuo_success.html" />
+    <Content Include="business\shouqiankuan.html" />
+    <Content Include="business\shouqiankuan_details.html" />
+    <Content Include="business\shouqiankuan_true.html" />
+    <Content Include="business\songhuo.html" />
+    <Content Include="business\tongzhi_quhuo.html" />
+    <Content Include="business\xuanhuo.html" />
+    <Content Include="business\yichangchuli.html" />
+    <Content Include="business\yuanfan.html" />
+    <Content Include="business\zhongzhuan.html" />
+    <Content Include="business\zhuangche.html" />
+    <Content Include="business\zhuangche_success.html" />
     <Content Include="Command\AddLogisticsFromPhone.aspx" />
     <Content Include="Command\GetAddressNextList.aspx" />
     <Content Include="Command\GetLineListFromLogisticsId.aspx" />
     <Content Include="Command\GetLogisticsLineListFromUid.aspx" />
     <Content Include="Command\GetSHPhoneAdressList.aspx" />
     <Content Include="Command\RegisterUserBinding.aspx" />
+    <Content Include="count\caiwu.html" />
+    <Content Include="count\fengongsi_caiwu.html" />
+    <Content Include="count\fengongsi_yunying.html" />
+    <Content Include="count\index.html" />
+    <Content Include="count\yunying.html" />
     <Content Include="doc\doc.aspx" />
     <Content Include="GetQR.aspx" />
     <Content Include="LC\Authorize\StaffAuthorize\StaffAuthorizeIndex.aspx" />
@@ -218,6 +266,7 @@
     <Content Include="manage\manage_warrant.html" />
     <Content Include="manage\save_add_car.html" />
     <Content Include="manage\save_add_line.html" />
+    <Content Include="manage\driver_authorization.html" />
     <Content Include="manage\user_share.html" />
     <Content Include="manage\staff_share.html" />
     <Content Include="manage\staff_warrant.html" />
@@ -359,6 +408,7 @@
     <Compile Include="ApiCommand\CMD_LineBinding.cs" />
     <Compile Include="ApiCommand\CMD_OAuth.cs" />
     <Compile Include="ApiCommand\CMD_OutSystem.cs" />
+    <Compile Include="ApiCommand\GLCommand\CMD_AddVehicleWait.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_AddVehicle.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_CheckDriverIsHaveFromPhone.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_VehicleBinding.cs" />
@@ -373,6 +423,12 @@
     <Compile Include="ApiCommand\GLCommand\CMD_LineActiveApplication.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_LineAuthorization.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_LineAuthorizationList.cs" />
+    <Compile Include="ApiCommand\PaymentCommand\CMD_GetLendersList.cs" />
+    <Compile Include="ApiCommand\PaymentCommand\CMD_GetPaymentRecording.cs" />
+    <Compile Include="ApiCommand\PaymentCommand\CMD_LendersPayment.cs" />
+    <Compile Include="ApiCommand\PaymentCommand\CMD_TurnedOrIssuedPayment.cs" />
+    <Compile Include="ApiCommand\TJCommand\CMD_GetFinancialStatistics.cs" />
+    <Compile Include="ApiCommand\TJCommand\CMD_GetOperationStatistics.cs" />
     <Compile Include="doc\doc.aspx.cs">
       <DependentUpon>doc.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

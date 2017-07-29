@@ -10,8 +10,12 @@ $.LoginOkFun = function () {
             let region = GET("region"); //职位
             let logistics = GET("logistics"); //物流UID
             let isbind = parseInt(GET("isbind")); //物流
+            let bindvehicleid = parseInt(GET("bindvehicleid")); //要绑定的车辆ID
             if (isNaN(isbind))
                 isbind = 0;
+            if (isNaN(bindvehicleid))
+                bindvehicleid = 0;
+
             if (!IsReg) { //如果没有注册则显示需要注册的界面
 
                 //获取省列表
@@ -128,6 +132,7 @@ $.LoginOkFun = function () {
                                 $("#regbtn").click(function () {
                                     obj.NickName = $("#NickName").val();
                                     obj.Phone = $("#Phone").val();
+                                    obj.bindvehicleid = bindvehicleid;  //司机绑定的车辆id
                                     if (StrIsNullOrEmpty(obj.NickName)) {
                                         Msg("昵称不能为空!");
                                         return;

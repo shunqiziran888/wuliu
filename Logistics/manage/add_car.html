@@ -109,7 +109,14 @@
 
             </div>
         </div>
+        <div class="popup erweima">
+            邀请驾驶员二维码
+            <img src="" id="rwm" />
+
+            <p><a href="#" class="close-popup">关闭</a></p>
+        </div>
     </div>
+    
 
     <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
 
@@ -120,6 +127,7 @@
         });
         PageInit(function () {
             $("#save_vehicle").click(function () {
+                debugger;
                 let obj = {};
                 obj.VehicleNo = $("#VehicleNo").val();
                 obj.Driver = $("#Driver").val();
@@ -148,9 +156,35 @@
                     return;
                 }
 
-                GetHTML("AddVehicle", obj, function (data) {
+                //检测手机号是否存在老司机
+                GetHTML("CheckDriverIsHaveFromPhone", {phone:obj.Phone}, function (data) {
                     if (CheckHTMLData(data)) {
-                        Msg("添加车辆成功!");
+                        if (data == true)
+                        {
+                            //添加车辆
+                            GetHTML("AddVehicle", obj, function (data) {
+                                if (CheckHTMLData(data)) {
+                                    Msg("添加车辆成功!");
+                                }
+                            });         
+                        }
+                        else {
+                            GetHTML("AddVehicleWait", obj, function (data) {
+                                debugger;
+                                if (CheckHTMLData(data)) {
+                                    let ID = data.data.ID; //车辆的ID
+                                    let region = data.data.region; //职位
+                                    let logistics = data.data.logistics; //物流公司ID
+                                    let href = $.apiUrl + "/login/login.html?appid=" + getAppid() + "&acctype=4&region=" + region + "&logistics=" + logistics + "&bindvehicleid=" + ID;
+                                    let url = "/GetQR.aspx?url=" + encodeURIComponent(href) + "&logo=" + $.apiUrl + "/Style/img/success.png";
+
+                                    SetShare("物流公司驾驶员授权绑定", href, $.apiUrl + "/Style/img/erweima.png", "点击进入授权页面");
+
+                                    $("#rwm").attr("src", url);
+                                    Popup(".erweima");
+                                }
+                            });
+                        }
                     }
                 });
             });

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>物流管理系统</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- <link rel="shortcut icon" href="/favicon.ico"> -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="/Style/css/sui/sm.min.css">
+    <link rel="stylesheet" href="/Style/css/sui/sm-extend.min.css">
+    <link href="/Style/css/iconlink.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Style/css/style.css">
+    <style>
+       
+    </style>
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <!-- 你的html代码 -->
+            <header class="bar bar-nav">
+                <a href="javascript:;" onclick="history.go(-1)" class="icon iconfont icon-zuo pull-left"></a>
+                <p class="add_wuliu">
+                    <a class="add_icon icon iconfont icon-plus pull-right" href="share.html"></a>
+                    <i class="add_txt">添加物流</i>
+                </p>
+                <h1 class="title">物流业务</h1>
+            </header>
+
+
+            <div class="content" style="background:#f2f2f2;">
+                <div class="page-index">
+                    <div class="white" style="padding:1rem;">
+                        <p class="dis_flex ali_center"><span class="col_30 line_he_44 txt_center fz_16">目标地</span> <input class="col_70" type="text" placeholder="输入目标地"></p>
+                        <p class="dis_flex ali_center"><span class="col_30 line_he_44 txt_center fz_16">中转费用</span> <input class="col_70" type="text" placeholder="输入中转费用"></p>
+                        <p class="dis_flex ali_center"><span class="col_30 line_he_44 txt_center fz_16">中转物流</span> <select class="col_70">
+                          <option value="">联邦物流</option>
+                          <option value="">邦德物流</option>
+                      </select></p>
+                        <p class="dis_flex" style="justify-content:center; margin:.5rem 0;"><a style="line-height: 30px;background: #a3c478;color: #fff;padding:0 1rem;text-align: center;border: 1px solid #a3c478;"
+                                href="tongzhi_quhuo.html">通知物流取货</a></p>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script type='text/javascript' src='/Style/scripts/all.js' charset='utf-8'></script>
+
+    <script>
+        $(function () {
+            $.init();
+            $.config = { router: false }
+        });
+    </script>
+
+</body>
+
+</html>

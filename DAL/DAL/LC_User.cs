@@ -60,6 +60,7 @@ namespace DAL.DAL
                 return (false, "绑定账号类型不是司机的电话!", null);
             if (lcu_vo.State.ConvertData<UserStateEnum>() != GlobalBLL.UserStateEnum.正常)
                 return (false, "您要绑定的司机还没有通过授权!", null);
+
             return (true, string.Empty, true);
         }
 
@@ -385,8 +386,9 @@ namespace DAL.DAL
         /// <param name="nickName"></param>
         /// <param name="phone"></param>
         /// <param name="logistics">要绑定到的物流公司</param>
+        /// <param name="bindvehicleid">绑定的车辆ID</param>
         /// <returns></returns>
-        public static (bool, string) EmployeeAccountBind(UserLoginVO myuservo, string nickName, long phone,string logistics)
+        public static (bool, string) EmployeeAccountBind(UserLoginVO myuservo, string nickName, long phone,string logistics,long bindvehicleid)
         {
             var box = db.CreateTranSandbox((db) =>
             {
@@ -431,6 +433,56 @@ namespace DAL.DAL
                     return (false, ids.errormsg);
                 if (!ids.ExecOk())
                     return (false, "绑定失败请重试!");
+
+                //绑定车辆
+                if(bindvehicleid>0)
+                {
+                    //检测车辆是否存在
+                    sql = makesql.MakeCount(nameof(Model.Model.LC_Vehicle), "id=@id", new System.Data.SqlClient.SqlParameter[] {
+                        new System.Data.SqlClient.SqlParameter("@id",bindvehicleid)
+                    });
+                    ids = db.Read(sql);
+                    if (!ids.flag)
+                        return (false, ids.errormsg);
+                    if (ids.Count() > 0)
+                    {
+                        //检测我是否绑定过此车辆
+                        sql = makesql.MakeCount(nameof(Model.Model.LC_VehicleBinding), "VehicleID=@VehicleID and DriverUID=@DriverUID", new System.Data.SqlClient.SqlParameter[] {
+                            new System.Data.SqlClient.SqlParameter("@VehicleID",bindvehicleid),
+                            new System.Data.SqlClient.SqlParameter("@DriverUID",myuservo.uid)
+                        });
+                        ids = db.Read(sql);
+                        if (!ids.flag)
+                            return (false, ids.errormsg);
+                        if (ids.Count() == 0)
+                        {
+                            //创建一个绑定
+                            sql = makesql.MakeInsertSQL(new Model.Model.LC_VehicleBinding()
+                            {
+                                BindingTime = DateTime.Now,
+                                DriverUID = myuservo.uid,
+                                VehicleID = bindvehicleid
+                            });
+                            ids = db.Exec(sql);
+                            if (!ids.flag)
+                                return (false, ids.errormsg);
+                            if (!ids.ExecOk())
+                                return (false, "添加绑定失败，请重试!");
+                            //更新车辆为可用
+                            sql = makesql.MakeUpdateSQL(new Model.Model.LC_Vehicle()
+                            {
+                                State = 1
+                            },"id=@id",new System.Data.SqlClient.SqlParameter[] {
+                                new System.Data.SqlClient.SqlParameter("@id",bindvehicleid)
+                            });
+                            ids = db.Exec(sql);
+                            if (!ids.flag)
+                                return (false, ids.errormsg);
+                            if (!ids.ExecOk())
+                                return (false, "更新车辆状态失败!");
+                        }
+                    }
+                }
                 db.Commit();
                 return (true, string.Empty);
             });
@@ -549,7 +601,8 @@ namespace DAL.DAL
                         suser.ZType = null;
                         suser.PositionID = null;
                     }
-                    
+                    //不更新昵称
+
                     sql = makesql.MakeUpdateSQL(suser, "WX_OpenID=@WX_OpenID");
                 }
                 else

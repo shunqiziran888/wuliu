@@ -22,6 +22,8 @@ namespace BLL.BLL
             return DAL.DAL.LC_Vehicle.Add(LC_Vehicle);
         }
 
+
+
         /// <summary>
         /// 根据ID获取车辆数据
         /// </summary>
@@ -48,6 +50,38 @@ namespace BLL.BLL
             if (num <= 0)
                 num = 1000;
             return DAL.DAL.LC_Vehicle.GetMyVehicleList(myuservo, page, num);
+        }
+
+        /// <summary>
+        /// 添加车辆（物流等待模式）
+        /// </summary>
+        /// <param name="web"></param>
+        /// <returns></returns>
+        public static (bool, string,object) AddVehicleWait(HttpContextBase web)
+        {
+            var myuservo = web.GetMyLoginUserVO();
+            if (myuservo.accountType != AccountTypeEnum.物流账号)
+                return (false, "您的权限不足无法访问此接口!",null);
+            Model.Model.LC_Vehicle lcv = new Model.Model.LC_Vehicle()
+            {
+                Carshape = web.GetValue<float>("Carshape"),
+                CreateTime = DateTime.Now,
+                Driver = web.GetValue("Driver"),
+                VehicleNo = web.GetValue("VehicleNo"),
+                Phone = web.GetValue("Phone"),
+                UID = myuservo.uid,
+                State = 0
+            };
+            if (lcv.VehicleNo.StrIsNull())
+                return (false, "车号不能为空!", null);
+            if (lcv.Carshape <= 0)
+                return (false, "车辆长度不能为空!", null);
+            if (lcv.Driver.StrIsNull())
+                return (false, "司机姓名不能为空!", null);
+            if (lcv.Driver.StrIsNull())
+                return (false, "司机电话不能为空!", null);
+
+            return DAL.DAL.LC_Vehicle.AddVehicleWait(myuservo, lcv);
         }
 
         /// <summary>
