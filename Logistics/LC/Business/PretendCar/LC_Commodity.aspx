@@ -79,7 +79,7 @@
     </div>
 
   <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
-    <%--<script type="text/javascript" src="js/main.js" charset='utf-8'></script>--%>
+    <%----%>
     <script>
         $(function () {
             $.init();

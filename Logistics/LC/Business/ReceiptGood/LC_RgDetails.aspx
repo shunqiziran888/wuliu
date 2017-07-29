@@ -100,13 +100,13 @@
                                             if (v.Destination.Value == v1.End.Value)
                                             {
                                     %>
-                                    <option selected value="<%=v1.End %>"><%=DAL.DAL.DALBase.GetAddressFromID(v1.End.Value)?.Item2?.Name%></option>
+                                    <option selected value="<%=v1.End %>|<%=v1.BindLogisticsUid %>"><%=DAL.DAL.DALBase.GetAddressFromID(v1.End.Value)?.Item2?.Name%></option>
                                     <%
                                         }
                                         else
                                         {
                                     %>
-                                    <option value="<%=v1.End %>"><%=DAL.DAL.DALBase.GetAddressFromID(v1.End.Value)?.Item2?.Name%></option>
+                                    <option value="<%=v1.End %>|<%=v1.BindLogisticsUid %>"><%=DAL.DAL.DALBase.GetAddressFromID(v1.End.Value)?.Item2?.Name%></option>
                                     <%
                                         }
                                     %>
@@ -146,9 +146,11 @@
         {
             var ssnumber = $("#SSNumber").val();//实收件数
             var Freight = $("#Freight").val();//运费
-            var Ends = $("#Ends").val();//中转地
+            let arr = $("#Ends").val().split("|");
+            var Ends = arr[0];//中转地
+            let BindLogisticsUid = arr[1];
             var OtherExpenses = $("#OtherExpenses").val();//送货费用
-            window.location.href = "/LC/Business/ReceiptGood/LC_Success.aspx?OIDDetaila=" + OID + "&ssnumber=" + ssnumber + "&FreightDetail=" + Freight + "&OtherExpenses=" + OtherExpenses + "&Ends=" + Ends;
+            window.location.href = "/LC/Business/ReceiptGood/LC_Success.aspx?OIDDetaila=" + OID + "&ssnumber=" + ssnumber + "&FreightDetail=" + Freight + "&OtherExpenses=" + OtherExpenses + "&Ends=" + Ends + "&BindLogisticsUid=" + BindLogisticsUid;
         }
     </script>
 </body>

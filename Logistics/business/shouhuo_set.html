@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>物流管理系统</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- <link rel="shortcut icon" href="/favicon.ico"> -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="/Style/css/sui/sm.min.css">
+    <link rel="stylesheet" href="/Style/css/sui/sm-extend.min.css">
+    <link href="/Style/css/iconlink.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Style/css/style.css">
+    <style>
+        .zbsh-zffs .huo_name {
+            position: relative;
+        }
+
+        .zbsh-zffs .huo_num {
+            position: absolute;
+            top: -10px;
+            right: -35px;
+            font-size: 16px;
+            color: #f00;
+        }
+
+        .huo_fnagshi {
+            margin-left: 80px;
+            color: #009621;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <!-- 你的html代码 -->
+            <header class="bar bar-nav">
+                <a href="index.html" class="icon iconfont icon-zuo pull-left"></a>
+                <!-- <p class="add_wuliu">
+                    <a class="add_icon icon iconfont icon-eventnote pull-right" href="index.html"></a>
+                    <i class="add_txt">历史记录</i>
+                </p> -->
+                <h1 class="title">收货</h1>
+            </header>
+
+
+            <div class="content" style="background:#f2f2f2;">
+                <div class="page-index">
+                    <div class="searchbar">
+                        <div class="search-input">
+                            <label class="icon icon-search" for="search"></label>
+                            <input type="search" id='search' placeholder='搜索订单' />
+                        </div>
+                    </div>
+                    <ul class="zbsh-tab1">
+                        
+                        <li class="zbsh-li">
+                            <a href="#">
+                                <div class="col-100">
+                                    <i class="zbsh-xd2">
+                                  <p class="zbsh-zffs">货物名： <span class="huo_name ft_color_ash">一大箱可口可乐 <i class="huo_num">x12</i></span>
+                                    <span class="huo_fnagshi">(现付)</span></p>
+                                    </i>
+                                    <i class="zbsh-xd1">
+                                  <p class="zbsh-shr">发货人： <span class="ft_color_ash">司马相如</span></p>
+                                  <p class="zbsh-hh ft_color_ash">电话： <span>18990012991</span></p>
+                                </i>
+                                    <i class="zbsh-xd1">
+                                  <p class="zbsh-mdd">收货人： <span class="ft_color_ash">赵大人</span></p>
+                                  <p class="zbsh-hm ft_color_ash">电话： <span>18990012991</span></p>
+                                </i>
+
+                                    <i class="zbsh-xd2">
+                                  <p class="zbsh-yf">运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费： <input type="text" name="" value="" placeholder="￥0.00"></p>
+                                </i>
+                                <i class="zbsh-xd2">
+                                  <p class="zbsh-yf">其它费用： <input type="text" name="" value="" placeholder="￥0.00"></p>
+                                </i>
+                                <i class="zbsh-xd2">
+                                  <p class="zbsh-yf">实收件数： <input type="text" name="" value="" placeholder="10"></p>
+                                </i>
+                                 <i class="zbsh-xd2">
+                                  <p class="zbsh-yf">运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费： <select style="width:60%;">
+                                      <option value="阿鲁科尔沁旗去是暗示">阿鲁科尔沁旗去是暗示</option>
+                                  </select></p>
+                                </i>
+                                    <i class="zbsh-xd2">
+                                  <p class="zbsh-zffs">目的地： <span class="ft_color_ash">火星</span></p>
+                                </i>
+                                </div>
+
+                            </a>
+                            <div class="xiangdan-btn">
+                                <a href="shouhuo_success.html">确认收货</a>
+                                
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script type='text/javascript' src='/Style/scripts/all.js' charset='utf-8'></script>
+
+    <script>
+        $(function () {
+            $.init();
+            $.config = { router: false }
+        });
+    </script>
+
+</body>
+
+</html>

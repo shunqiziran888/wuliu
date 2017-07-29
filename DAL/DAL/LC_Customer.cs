@@ -4,7 +4,7 @@ using Model.Model;
 using SuperDataBase;
 using CustomExtensions;
 using System.Data;
-
+using System.Linq;
 namespace DAL.DAL
 {
     /// <summary>
@@ -22,13 +22,136 @@ namespace DAL.DAL
         /// <returns></returns>
         public static Tuple<bool, string> Add(Model.Model.LC_Customer LC_Customer)
         {
-            sql = makesql.MakeInsertSQL(LC_Customer);
+            var box = db.CreateTranSandbox((db) =>
+            {
+                sql = makesql.MakeInsertSQL(LC_Customer);
+                ids = db.Exec(sql);
+                if (!ids.flag)
+                    return new Tuple<bool, string>(false, ids.errormsg);
+                if (!ids.ExecOk())
+                    return new Tuple<bool, string>(false, "添加失败请重试!");
+                AddToHistory(LC_Customer,db);
+                db.Commit();
+                return new Tuple<bool, string>(true, string.Empty);
+            });
+            return box;
+        }
+
+        /// <summary>
+        /// 数据添加到历史记录
+        /// </summary>
+        /// <param name="lcc"></param>
+        /// <returns></returns>
+        private static (bool,string) AddToHistory(Model.Model.LC_Customer lcc,SuperDataBase.Model.DBSandbox db)
+        {
+            sql = makesql.MakeInsertSQL(new Model.Model.LC_History()
+            {
+                begins = lcc.begins,
+                beginUID = lcc.beginUID,
+                CarryGood = lcc.CarryGood,
+                Consignee = lcc.Consignee,
+                ConsigneeTime = lcc.ConsigneeTime,
+                Consignor = lcc.Consignor,
+                ConsignorID = lcc.ConsignorID,
+                DdTime = lcc.DdTime,
+                Destination = lcc.Destination,
+                DischargeTime = lcc.DischargeTime,
+                DriverID = lcc.DriverID,
+                FHPhone = lcc.FHPhone,
+                finish = lcc.finish,
+                finishUID = lcc.finishUID,
+                Freight = lcc.Freight,
+                FreightCollect = lcc.FreightCollect,
+                freightMode = lcc.freightMode,
+                GoodName = lcc.GoodName,
+                GoodNo = lcc.GoodNo,
+                GReceivables = lcc.GReceivables,
+                HistoryTime = DateTime.Now,
+                Initially = lcc.Initially,
+                largeCar = lcc.largeCar,
+                logisticsID = lcc.logisticsID,
+                MeetCarTime = lcc.MeetCarTime,
+                Number = lcc.Number,
+                OrderID = lcc.OrderID,
+                OtherExpenses = lcc.OtherExpenses,
+                ReceiptGood = lcc.ReceiptGood,
+                SHPhone = lcc.SHPhone,
+                State = lcc.State,
+                Total = lcc.Total,
+                TruckTime = lcc.TruckTime,
+                VehicleID = lcc.VehicleID
+            });
             ids = db.Exec(sql);
             if (!ids.flag)
-                return new Tuple<bool, string>(false, ids.errormsg);
+                return (false, ids.errormsg);
             if (!ids.ExecOk())
-                return new Tuple<bool, string>(false, "添加失败请重试!");
-            return new Tuple<bool, string>(true, string.Empty);
+                return (false, "添加历史失败!");
+            return (true, string.Empty);
+        }
+
+        /// <summary>
+        /// 把订单列表添加到历史
+        /// </summary>
+        /// <param name="orderNumberList"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        private static (bool, string) AddToHistory(List<string> orderNumberList, SuperDataBase.Model.DBSandbox db)
+        {
+            return AddToHistory(orderNumberList.Select(x=>$"'{x}'").ToList().ListToString(), db);
+        }
+
+        /// <summary>
+        /// 添加历史记录
+        /// </summary>
+        /// <param name="VehicleID">车辆ID</param>
+        /// <param name="nowUid">当前物流公司UID</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        private static (bool, string) AddToHistory(int VehicleID,string nowUid, SuperDataBase.Model.DBSandbox db)
+        {
+            //获取所有订单数据
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), $"VehicleID=@VehicleID and finishUID=@finishUID",new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@VehicleID",VehicleID),
+                new System.Data.SqlClient.SqlParameter("@finishUID",nowUid)
+            });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg);
+            if (!ids.ReadIsOk())
+                return (false, "获取数据失败!");
+            foreach (var p in ids.GetVOList<Model.Model.LC_Customer>())
+            {
+                var vv = AddToHistory(p, db);
+                if (!vv.Item1)
+                    return (false, vv.Item2);
+            }
+            return (true, string.Empty);
+        }
+
+
+
+        /// <summary>
+        /// 把订单列表添加到历史
+        /// </summary>
+        /// <param name="orderNumberStr"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        private static (bool, string) AddToHistory(string orderNumberStr, SuperDataBase.Model.DBSandbox db)
+        {
+            //获取所有订单数据
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), $"OrderID={orderNumberStr}");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg);
+            if (!ids.ReadIsOk())
+                return (false, "获取数据失败!");
+            foreach (var p in ids.GetVOList<Model.Model.LC_Customer>())
+            {
+                var vv = AddToHistory(p, db);
+                if (!vv.Item1)
+                    return (false, vv.Item2);
+            }
+            return (true, string.Empty);
         }
 
         /// <summary>
@@ -52,9 +175,10 @@ namespace DAL.DAL
                      State = 4,
                      logisticsID = UID,
                      MeetCarTime = DateTime.Now
-                 }, "Destination=finish and VehicleID=@VehicleID and State=3 and finish=@finish", new System.Data.SqlClient.SqlParameter[] {
+                 }, "Destination=finish and VehicleID=@VehicleID and State=3 and finish=@finish and finishUID=@finishUID", new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@VehicleID",cH),
-                    new System.Data.SqlClient.SqlParameter("@finish",End)
+                    new System.Data.SqlClient.SqlParameter("@finish",End),
+                    new System.Data.SqlClient.SqlParameter("@finishUID",UID)
                  });
                  ids = db.Exec(sql);
                  if (!ids.flag)
@@ -74,6 +198,10 @@ namespace DAL.DAL
                  if (!ids.flag)
                      return new Tuple<bool, string>(false, ids.errormsg);
                  #endregion
+
+                 var ath = AddToHistory(cH,UID,db);
+                 if (!ath.Item1)
+                     return new Tuple<bool, string>(false,ath.Item2);
 
                  db.Commit();
                  return new Tuple<bool, string>(true, string.Empty);
@@ -104,37 +232,84 @@ namespace DAL.DAL
         /// <returns></returns>
         public static Tuple<bool, string> Update(Model.Model.LC_Customer LC_Customer, string OrderID, bool updateGoodNum = false)
         {
-            if (updateGoodNum)
+            Model.Model.LC_Customer lcc = null;
+            var box = db.CreateTranSandbox((db) =>
             {
-                //获取此订单数据
-                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "OrderID=@OrderID", new System.Data.SqlClient.SqlParameter[] {
+                if (updateGoodNum)
+                {
+                    //获取此订单数据
+                    sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "OrderID=@OrderID", new System.Data.SqlClient.SqlParameter[] {
+                        new System.Data.SqlClient.SqlParameter("@OrderID",OrderID)
+                    });
+                    ids = db.Read(sql);
+                    if (!ids.flag)
+                        return new Tuple<bool, string>(false, ids.errormsg);
+                    if (!ids.ReadIsOk())
+                        return new Tuple<bool, string>(false, "没有找到任何订单数据！");
+                    lcc = ids.GetVOList<Model.Model.LC_Customer>()[0];
+                    lcc.finish = LC_Customer.finish;
+                    lcc.begins = LC_Customer.begins;
+                    if (lcc.GoodNo.StrIsNull())
+                    {
+                        var vo = GetGoodNo(ref lcc);
+                        if (vo.Item1)
+                            LC_Customer.GoodNo = vo.Item2;
+                    }
+                }
+
+                sql = makesql.MakeUpdateSQL(LC_Customer, "OrderID=@OrderID", new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@OrderID",OrderID)
                 });
-                ids = db.Read(sql);
+                ids = db.Exec(sql);
                 if (!ids.flag)
                     return new Tuple<bool, string>(false, ids.errormsg);
-                if (!ids.ReadIsOk())
-                    return new Tuple<bool, string>(false, "没有找到任何订单数据！");
-                Model.Model.LC_Customer lcc = ids.GetVOList<Model.Model.LC_Customer>()[0];
-                lcc.finish = LC_Customer.finish;
-                lcc.begins = LC_Customer.begins;
-                if (lcc.GoodNo.StrIsNull())
-                {
-                    var vo = GetGoodNo(ref lcc);
-                    if (vo.Item1)
-                        LC_Customer.GoodNo = vo.Item2;
-                }
-            }
+                if (!ids.ExecOk())
+                    return new Tuple<bool, string>(false, "修改失败请重试!");
 
-            sql = makesql.MakeUpdateSQL(LC_Customer, "OrderID=@OrderID", new System.Data.SqlClient.SqlParameter[] {
-                new System.Data.SqlClient.SqlParameter("@OrderID",OrderID)
+                if (LC_Customer.State.ConvertData<GlobalBLL.OrderStateEnum>() == GlobalBLL.OrderStateEnum.订单完成)
+                {
+                    //添加一个货款数据
+                    sql = makesql.MakeInsertSQL(new Model.Model.LC_Payment()
+                    {
+                        CreateTime = DateTime.Now,
+                        LastOperationTime = DateTime.Now,
+                        LastState = 1,
+                        LocationLogisticsUID = lcc.beginUID,
+                        StartLogisticsUID = lcc.logisticsID,
+                        OrderNumber = lcc.OrderID,
+                        PaymentAllAmount = lcc.Freight + lcc.GReceivables + lcc.OtherExpenses,
+                    });
+                    ids = db.Exec(sql);
+                    if (!ids.flag)
+                        return new Tuple<bool, string>(false, ids.errormsg);
+                    if (!ids.ExecOk())
+                        return new Tuple<bool, string>(false, "创建货款数据失败!");
+
+                    //创建货款历史数据
+                    sql = makesql.MakeInsertSQL(new Model.Model.LC_Payment_History()
+                    {
+                        CreateTime = DateTime.Now,
+                        LastOperationTime = DateTime.Now,
+                        LocationLogisticsUID = lcc.beginUID,
+                        StartLogisticsUID = lcc.logisticsID,
+                        OrderNumber = lcc.OrderID,
+                        PaymentAllAmount = lcc.Freight + lcc.GReceivables + lcc.OtherExpenses,
+                    });
+                    ids = db.Exec(sql);
+                    if (!ids.flag)
+                        return new Tuple<bool, string>(false, ids.errormsg);
+                    if (!ids.ExecOk())
+                        return new Tuple<bool, string>(false, "添加货款历史失败!");
+
+                }
+
+                var addh = AddToHistory(new string[] { OrderID }.ToList(), db);
+                if (!addh.Item1)
+                    return new Tuple<bool,string>(false, addh.Item2);
+                db.Commit();
+                return new Tuple<bool, string>(true, string.Empty);
             });
-            ids = db.Exec(sql);
-            if (!ids.flag)
-                return new Tuple<bool, string>(false, ids.errormsg);
-            if (!ids.ExecOk())
-                return new Tuple<bool, string>(false, "修改失败请重试!");
-            return new Tuple<bool, string>(true, string.Empty);
+            return box;
         }
         /// <summary>
         /// 装车：列表查询
@@ -160,13 +335,22 @@ namespace DAL.DAL
         /// <returns></returns>
         public static Tuple<bool, string> UpdatePC(Model.Model.LC_Customer LC_Customer, string OrderID)
         {
-            sql = makesql.MakeUpdateSQL(LC_Customer, "OrderID in (" + OrderID + ")");
-            ids = db.Exec(sql);
-            if (!ids.flag)
-                return new Tuple<bool, string>(false, ids.errormsg);
-            if (!ids.ExecOk())
-                return new Tuple<bool, string>(false, "修改失败请重试!");
-            return new Tuple<bool, string>(true, string.Empty);
+            var box = db.CreateTranSandbox((db) =>
+            {
+                sql = makesql.MakeUpdateSQL(LC_Customer, "OrderID in (" + OrderID + ")");
+                ids = db.Exec(sql);
+                if (!ids.flag)
+                    return new Tuple<bool, string>(false, ids.errormsg);
+                if (!ids.ExecOk())
+                    return new Tuple<bool, string>(false, "修改失败请重试!");
+
+                var ath = AddToHistory(OrderID, db);
+                if (!ath.Item1)
+                    return new Tuple<bool,string>(false, ath.Item2);
+                db.Commit();
+                return new Tuple<bool, string>(true, string.Empty);
+            });
+            return box;
         }
 
         /// <summary>
@@ -425,13 +609,22 @@ namespace DAL.DAL
         /// <returns></returns>
         public static Tuple<bool, string> UpdateIty(Model.Model.LC_Customer LC_Customer, string OrderID)
         {
-            sql = makesql.MakeUpdateSQL(LC_Customer, "OrderID in (" + OrderID + ")");
-            ids = db.Exec(sql);
-            if (!ids.flag)
-                return new Tuple<bool, string>(false, ids.errormsg);
-            if (!ids.ExecOk())
-                return new Tuple<bool, string>(false, "修改失败请重试!");
-            return new Tuple<bool, string>(true, string.Empty);
+            var box = db.CreateTranSandbox((db) =>
+            {
+                sql = makesql.MakeUpdateSQL(LC_Customer, "OrderID in (" + OrderID + ")");
+                ids = db.Exec(sql);
+                if (!ids.flag)
+                    return new Tuple<bool, string>(false, ids.errormsg);
+                if (!ids.ExecOk())
+                    return new Tuple<bool, string>(false, "修改失败请重试!");
+
+                var ath = AddToHistory(OrderID, db);
+                if (!ath.Item1)
+                    return new Tuple<bool, string>(false, ath.Item2);
+                db.Commit();
+                return new Tuple<bool, string>(true, string.Empty);
+            });
+            return box;
         }
 
         /// <summary>

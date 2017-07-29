@@ -52,11 +52,11 @@
                   <span class="icon iconfont icon-filetexto"></span>
                   <span class="tab-label">物流业务</span>
               </a>
-                <a class="tab-item external" href="/LC/MenuBar/OperationCountIndex.aspx">
+                <a class="tab-item external" href="/count/">
                   <span class="icon iconfont icon-fcstubiao19"></span>
                   <span class="tab-label">运营统计</span>
               </a>
-                <a class="tab-item external" href="../manage/index.html">
+                <a class="tab-item external" href="/manage/">
                   <span class="icon iconfont icon-guanli"></span>
                   <span class="tab-label">物流管理</span>
               </a>

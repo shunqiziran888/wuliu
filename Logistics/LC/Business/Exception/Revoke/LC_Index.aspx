@@ -255,7 +255,7 @@
     </div>
 
     <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
-     <script src="/Style/scripts/main.js"></script>
+     <script src="/Style/scripts/all.js"></script>
     <script>
         $(function () {
             $.init();

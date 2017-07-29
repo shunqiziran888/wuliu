@@ -601,7 +601,8 @@ namespace DAL.DAL
                         suser.ZType = null;
                         suser.PositionID = null;
                     }
-                    
+                    //²»¸üÐÂêÇ³Æ
+
                     sql = makesql.MakeUpdateSQL(suser, "WX_OpenID=@WX_OpenID");
                 }
                 else

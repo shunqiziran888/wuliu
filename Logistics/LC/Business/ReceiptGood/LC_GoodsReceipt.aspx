@@ -99,13 +99,13 @@
                                                                          if (v.Destination.Value == v1.End.Value)
                                                                          {
                                                                  %>
-                                                                 <option selected value="<%=v1.End %>"><%=DAL.DAL.DALBase.GetAddressFromID(v1.End.Value)?.Item2?.Name%></option>
+                                                                 <option selected value="<%=v1.End %>|<%=v1.BindLogisticsUid %>"><%=DAL.DAL.DALBase.GetAddressFromID(v1.End.Value)?.Item2?.Name%></option>
                                                                  <%
                                                                      }
                                                                      else
                                                                      {
                                                                  %>
-                                                                 <option value="<%=v1.End %>"><%=DAL.DAL.DALBase.GetAddressFromID(v1.End.Value)?.Item2?.Name%></option>
+                                                                 <option value="<%=v1.End %>|<%=v1.BindLogisticsUid %>"><%=DAL.DAL.DALBase.GetAddressFromID(v1.End.Value)?.Item2?.Name%></option>
                                                                  <%
                                                                      }
                                                                  %>
@@ -152,10 +152,12 @@
     function UpdateYF(OID)
     {
         var yf = $("#Freight" + OID).val();
-        var finish = $("#End" + OID).val();
+        let arr = $("#End" + OID).val().split("|");
+        var finish = arr[0];
+        let BindLogisticsUid = arr[1];
         if (yf != "" && yf != undefined &&  finish!="请选择" && finish!=undefined)
         {
-            window.location.href = "/LC/Business/ReceiptGood/LC_Success.aspx?OrderID=" + OID + "&YF=" + yf + "&finish="+finish;
+            window.location.href = "/LC/Business/ReceiptGood/LC_Success.aspx?OrderID=" + OID + "&YF=" + yf + "&finish=" + finish + "&BindLogisticsUid=" + BindLogisticsUid;
         }
         else
         {

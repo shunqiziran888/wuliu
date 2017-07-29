@@ -26,10 +26,14 @@ namespace Logistics.LC.Business.GoodsReceipt
             int End = GetValue<int>("End");//目的地
             int finish = GetValue<int>("finish");//中转地
             int Ends = GetValue<int>("Ends");//详情收货目的地
+            string BindLogisticsUid = GetValue("BindLogisticsUid"); //终点的绑定UID
             DateTime ConsigneeTimes = DateTime.Now;
             if(ShNumber==0 || FreightDetail==0)
             {
-                Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() { State = 2, ConsigneeTime = ConsigneeTimes, Freight = yf, begins = myuservo.AreaID, finish = finish }, OrderID, true);
+                Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() { State = 2, ConsigneeTime = ConsigneeTimes, Freight = yf, begins = myuservo.AreaID, finish = finish,
+                     beginUID = myuservo.uid,
+                     finishUID = BindLogisticsUid
+                }, OrderID, true);
                 if (!vo.Item1)
                 {
                     //有错误
@@ -39,7 +43,10 @@ namespace Logistics.LC.Business.GoodsReceipt
             }
            else
             {
-                Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() { State = 2, ConsigneeTime = ConsigneeTimes, Freight = FreightDetail, begins = myuservo.AreaID, finish = Ends,Number= ShNumber, OtherExpenses= OtherExpenses }, OIDDetaila, true);
+                Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() { State = 2, ConsigneeTime = ConsigneeTimes, Freight = FreightDetail, begins = myuservo.AreaID, finish = Ends,Number= ShNumber, OtherExpenses= OtherExpenses ,
+                    beginUID = myuservo.uid,
+                    finishUID = BindLogisticsUid
+                }, OIDDetaila, true);
                 if (!vo.Item1)
                 {
                     //有错误
