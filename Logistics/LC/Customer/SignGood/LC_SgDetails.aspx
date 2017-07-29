@@ -206,7 +206,7 @@
                                 <p><a href="/LC/Customer/SignGood/LC_Transfer.aspx?OID=<%=v.OrderID %>" class="button button-big shenqingzhongzhuan" style="background:#29b6f6;border:none;color:#fff;">申请中转 </a></p>
                             </div>
                             <div class="col-50 " style="float:right;">
-                                <p><a href="#" class="button button-big shenqingzhongzhuan" style="background:#7e57c2;border:none;color:#fff;">申请送货</a></p>
+                                <p><a href="/LC/Customer/SignGood/LC_ApplyGiveGood.aspx?OID=<%=v.OrderID %>" class="button button-big shenqingzhongzhuan" style="background:#7e57c2;border:none;color:#fff;">申请送货</a></p>
                             </div>
                         </div>
                         <p style="    margin-top: 1rem;    padding:0 2.5rem;"><a href="#" class="button button-big shenqingzhongzhuan" style="background:#ffa726;border:none;color:#fff;">不去原返</a></p>

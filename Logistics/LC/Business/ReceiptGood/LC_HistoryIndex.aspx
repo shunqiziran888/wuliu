@@ -222,9 +222,10 @@
                                     <i class="zbsh-xd2">
                                   <p class="zbsh-zffs fz_16">目的地： <span class="mudidi fc_ash fz_14" id="mdd"><%=DAL.DAL.DALBase.GetAddressFromID(v.finish.Value)?.Item2?.Name %></span>
                                       <select id="finish" style="display:none;width:150px;height:35px;">
-                                          <option value="5">沾化区</option>
-                                          <option>2</option>
-                                          <option>3</option>
+                                          <%foreach (var v1 in list2)
+                                              { %>
+                                          <option value="<%=v1.End %>"><%=DAL.DAL.DALBase.GetAddressFromID(v1.End.Value)?.Item2?.Name %></option>
+                                          <%} %>
                                       </select></p>
                                     </i>
                                     <p class="fz_16 dis_flex jus_bet ali_center fc_red" style="padding:0 10%;"><i>合计金额： <span>暂不显示</span></i><i class="fz_12 fc_ash"><%=v.ConsigneeTime %></i></p>

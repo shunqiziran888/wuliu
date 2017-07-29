@@ -14,6 +14,7 @@ namespace Logistics.LC.Business.PretendCar
     {
         public List<Dictionary<string,I_ModelBase>> list = new List<Dictionary<string, I_ModelBase>>();
         public List<Model.Model.LC_Customer> list2 = new List<Model.Model.LC_Customer>();
+        public List<Model.Model.LC_Customer> list3 = new List<Model.Model.LC_Customer>();
         protected void Page_Load(object sender, EventArgs e)
         {
             var myuservo = GetMyLoginUserVO();

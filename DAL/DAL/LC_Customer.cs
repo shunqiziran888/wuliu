@@ -235,18 +235,19 @@ namespace DAL.DAL
             Model.Model.LC_Customer lcc = null;
             var box = db.CreateTranSandbox((db) =>
             {
-                if (updateGoodNum)
-                {
-                    //获取此订单数据
-                    sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "OrderID=@OrderID", new System.Data.SqlClient.SqlParameter[] {
+                //获取此订单数据
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "OrderID=@OrderID", new System.Data.SqlClient.SqlParameter[] {
                         new System.Data.SqlClient.SqlParameter("@OrderID",OrderID)
                     });
-                    ids = db.Read(sql);
-                    if (!ids.flag)
-                        return new Tuple<bool, string>(false, ids.errormsg);
-                    if (!ids.ReadIsOk())
-                        return new Tuple<bool, string>(false, "没有找到任何订单数据！");
-                    lcc = ids.GetVOList<Model.Model.LC_Customer>()[0];
+                ids = db.Read(sql);
+                if (!ids.flag)
+                    return new Tuple<bool, string>(false, ids.errormsg);
+                if (!ids.ReadIsOk())
+                    return new Tuple<bool, string>(false, "没有找到任何订单数据！");
+                lcc = ids.GetVOList<Model.Model.LC_Customer>()[0];
+                if (updateGoodNum)
+                {
+
                     lcc.finish = LC_Customer.finish;
                     lcc.begins = LC_Customer.begins;
                     if (lcc.GoodNo.StrIsNull())
@@ -694,7 +695,7 @@ namespace DAL.DAL
         /// <returns></returns>
         public static (bool, string, decimal) GettifuMeetCar(string OID)
         {
-            sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_Customer), new string[] { "sum(Freight)" }, "freightMode=1 and logisticsID='" + OID + "' and State=3");
+            sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_Customer), new string[] { "sum(Freight)" }, "freightMode=1 and finishUID='" + OID + "' and State=3");
             ids = db.Read(sql);
             if (!ids.flag)
                 return (false, ids.errormsg, 0);
@@ -709,7 +710,7 @@ namespace DAL.DAL
         /// <returns></returns>
         public static (bool, string, decimal) GetxianfuMeetCar(string OID)
         {
-            sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_Customer), new string[] { "sum(Freight)" }, "freightMode=2 and logisticsID='" + OID + "' and State=3");
+            sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_Customer), new string[] { "sum(Freight)" }, "freightMode=2 and finishUID='" + OID + "' and State=3");
             ids = db.Read(sql);
             if (!ids.flag)
                 return (false, ids.errormsg, 0);
@@ -724,7 +725,26 @@ namespace DAL.DAL
         /// <returns></returns>
         public static (bool, string, decimal) GetkoufuMeetCar(string OID)
         {
-            sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_Customer), new string[] { "sum(Freight)" }, "freightMode=3 and logisticsID='" + OID + "' and State=3");
+            sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_Customer), new string[] { "sum(Freight)" }, "freightMode=3 and finishUID='" + OID + "' and State=3");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, 0);
+            if (ids.ReadIsOk())
+                return (true, string.Empty, ids.GetFristData<decimal>(0));
+            return (true, "没有任何数据!", 0);
+        }
+        /// <summary>
+        /// 获取收货第一单的时间
+        /// </summary>
+        /// <param name="OID"></param>
+        /// <returns></returns>
+        public static (bool, string, decimal) GetSHFristTime(string OID,int begins,int finish)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), $"logisticsID=@logisticsID and begins=@begins and finish=@finish",new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@begins",begins),
+                new System.Data.SqlClient.SqlParameter("@finish",finish),
+                new System.Data.SqlClient.SqlParameter("@logisticsID",OID)
+            }, "ConsigneeTime asc",1);
             ids = db.Read(sql);
             if (!ids.flag)
                 return (false, ids.errormsg, 0);

@@ -820,5 +820,18 @@ namespace DAL.DAL
                 return new Tuple<bool, string>(false, "修改失败请重试!");
             return new Tuple<bool, string>(true, string.Empty);
         }
+        public static Tuple<bool, string, List<Model.Model.LC_User>> GetStaffList(string UID)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "LCID=@UID and ZType=@ZType",new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@UID",UID),
+                new System.Data.SqlClient.SqlParameter("@ZType","4")
+            });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string, List<Model.Model.LC_User>>(false, ids.errormsg, null);
+            if (ids.ReadIsOk())
+                return new Tuple<bool, string, List<Model.Model.LC_User>>(true, string.Empty, ids.GetVOList<Model.Model.LC_User>());
+            return new Tuple<bool, string, List<Model.Model.LC_User>>(true, "没有任何数据!", new List<Model.Model.LC_User>());
+        }
     }
 }
