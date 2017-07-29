@@ -7,7 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SuperDataBase;
 using System.Diagnostics;
-
+using CustomExtensions;
 namespace Logistics.LC.Business.DschargeGood
 {
     public partial class LC_Success : PageLoginBase
@@ -21,7 +21,7 @@ namespace Logistics.LC.Business.DschargeGood
             decimal SShj = GetValue<decimal>("SShj");//实收合计
             if(SSyf==0 || SSdsk==0 || SStf==0 || SShj==0)
             {
-                Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() { State = 6 }, OID);
+                Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() { State = GlobalBLL.OrderStateEnum.订单完成.EnumToInt() }, OID);
                 if (!vo.Item1)
                 {
                     //有错误
@@ -31,7 +31,7 @@ namespace Logistics.LC.Business.DschargeGood
             }
             else
             {
-                Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() { State = 5,Freight= SSyf,GReceivables=SSdsk,Total=SShj }, OID);
+                Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() { State = GlobalBLL.OrderStateEnum.客户取货.EnumToInt(), Freight= SSyf,GReceivables=SSdsk,Total=SShj }, OID);
                 if (!vo.Item1)
                 {
                     //有错误

@@ -130,10 +130,12 @@
     <Content Include="LC\Business\DschargeGood\BatchSuccess.aspx" />
     <Content Include="LC\Business\DschargeGood\FastSuccess.aspx" />
     <Content Include="LC\Business\DschargeGood\ItySuccess.aspx" />
+    <Content Include="LC\Business\DschargeGood\LC_DeliveryEdit.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_FHEdit.aspx" />
     <Content Include="LC\Business\DschargeGood\IndexDhg.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_Handle.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_Inventory.aspx" />
+    <Content Include="LC\Business\DschargeGood\LC_SHSuccess.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_Success.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_TransferEdit.aspx" />
     <Content Include="LC\Business\Exception\Cargo\LC_Index.aspx" />
@@ -147,6 +149,7 @@
     <Content Include="LC\Business\MeetCar\LC_GoodDetails.aspx" />
     <Content Include="LC\Business\MeetCar\LC_IndexMC.aspx" />
     <Content Include="LC\Business\MeetCar\LC_Success.aspx" />
+    <Content Include="LC\Business\ReceiptGood\LC_HistoryEdit.aspx" />
     <Content Include="LC\OperationOverview\LC_Index.aspx" />
     <Content Include="LC\Business\PaymentDay\LC_PaymentDay.aspx" />
     <Content Include="LC\Business\PretendCar\LC_Commodity.aspx" />
@@ -440,6 +443,13 @@
     <Compile Include="LC\Business\DschargeGood\ItySuccess.aspx.designer.cs">
       <DependentUpon>ItySuccess.aspx</DependentUpon>
     </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_DeliveryEdit.aspx.cs">
+      <DependentUpon>LC_DeliveryEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_DeliveryEdit.aspx.designer.cs">
+      <DependentUpon>LC_DeliveryEdit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LC\Business\DschargeGood\LC_FHEdit.aspx.cs">
       <DependentUpon>LC_FHEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -453,6 +463,13 @@
     </Compile>
     <Compile Include="LC\Business\DschargeGood\LC_Inventory.aspx.designer.cs">
       <DependentUpon>LC_Inventory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_SHSuccess.aspx.cs">
+      <DependentUpon>LC_SHSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_SHSuccess.aspx.designer.cs">
+      <DependentUpon>LC_SHSuccess.aspx</DependentUpon>
     </Compile>
     <Compile Include="LC\Business\Exception\Cargo\LC_Index.aspx.cs">
       <DependentUpon>LC_Index.aspx</DependentUpon>
@@ -509,6 +526,13 @@
     </Compile>
     <Compile Include="LC\Business\GoodPayment\Paid\LC_Success.aspx.designer.cs">
       <DependentUpon>LC_Success.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\ReceiptGood\LC_HistoryEdit.aspx.cs">
+      <DependentUpon>LC_HistoryEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\ReceiptGood\LC_HistoryEdit.aspx.designer.cs">
+      <DependentUpon>LC_HistoryEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="LC\OperationOverview\LC_Index.aspx.cs">
       <DependentUpon>LC_Index.aspx</DependentUpon>

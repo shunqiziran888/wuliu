@@ -97,7 +97,6 @@
                                 <%
                                     foreach (var v in list)
                                     {
-
                                 %>
                                 <div class="content-block">
                                     <form>
@@ -108,13 +107,17 @@
                                                     <p class="fz_14 fc_black">货名件数： <i><%=v.GoodName %> <span class="fc_red">x<%=v.Number %>件</span><span class="fc_green" style="margin-left: 10px;">(<%=v.freightMode.ConvertData<YFFSEnum>().EnumToName() %>)</span></i></p>
                                                     <p class="fz_14 dis_flex jus_bet fc_black"><i>运费：<span class="fc_ash"><%=v.Freight %></span></i><i>代收款：<span class="fc_ash"><%=v.GReceivables %></span></i> <i>应收合计：<span class="fc_ash">暂时不显示（合计）</span></i></p>
                                                     <p class="fz_14 dis_flex jus_bet fc_black"><i>货号：<span><%=v.GoodNo %></span></i><i class="fz_12 fc_ash" style="margin-left: 1rem;">暂时不显示（时间）</i></p>
-                                                    <%if (v.State == 5)
+                                                    <%if (v.State == 5 && v.CarryGood==1)/*正常放货*/
                                                         {%>
                                                     <p class="dis_flex" style="justify-content: center;"><a style="line-height: 30px; background: #a3c478; color: #fff; width: 90px; text-align: center; border: 1px solid #a3c478;" href="/LC/Business/DschargeGood/LC_FHEdit.aspx?OID=<%=v.OrderID %>">放货</a></p>
                                                     <%} %>
-                                                    <%if (v.State == 7)
+                                                    <%if (v.State == 7)/*中转*/
                                                         {%>
                                                     <p class="dis_flex" style="justify-content: center;"><a style="line-height: 30px; background: #a3c478; color: #fff; width: 90px; text-align: center; border: 1px solid #a3c478;" href="/LC/Business/DschargeGood/LC_TransferEdit.aspx?OID=<%=v.OrderID %>&Destination=<%=v.Destination %>">中转</a></p>
+                                                    <%} %>
+                                                    <%if (v.CarryGood == 2)/*送货*/
+                                                        {%>
+                                                    <p class="dis_flex" style="justify-content: center;"><a style="line-height: 30px; background: #a3c478; color: #fff; width: 90px; text-align: center; border: 1px solid #a3c478;" href="/LC/Business/DschargeGood/LC_DeliveryEdit.aspx?OID=<%=v.OrderID %>">送货</a></p>
                                                     <%} %>
                                                 </div>
                                             </div>

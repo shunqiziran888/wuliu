@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LC_IndexPC.aspx.cs" Inherits="Logistics.LC.Business.PretendCar.LC_IndexPC" %>
 <%@ Import Namespace="SuperDataBase" %>
+<%@ Import Namespace="CustomExtensions" %>
+<%@ import Namespace="GlobalBLL" %>
 <!DOCTYPE html>
 
 <html>
@@ -97,7 +99,9 @@
                                  Model.Model.LC_User user = v.GetDicVO<Model.Model.LC_User>();
                                  var addressvoStart = DAL.DAL.DALBase.GetAllAddress(line.Start.Value);
                                  var addressvoEnd = DAL.DAL.DALBase.GetAllAddress(line.End.Value);
-                                     %>
+                                 var vo2 = DAL.DAL.LC_Customer.GetCmdList(user.UID,(int)line.Start,(int)line.End);
+                                 list2 = vo2.Item3;
+                             %>
                         <li class="white mart_10">
                             <a href="/LC/Business/PretendCar/LC_Commodity.aspx?Initially=<%=line.Start %>&Destination=<%=line.End %>"  class="dis_flex jus_bet ali_center" style="padding:.5rem;">
                                 <div>
@@ -116,8 +120,8 @@
                                             </p>
                                         </div>
                                         <div style="line-height:1.5rem;margin-top:.5rem;">
-                                            <p class="fz_14 fc_ash">收货： <span>23单</span> <span>计289件</span></p>
-                                            <p class="fz_14 fc_ash"><i>运费： <span>2523元</span></i><i>代收运费： <span>1523元</span></i></p>
+                                            <p class="fz_14 fc_ash">收货： <span><%=list2.Count %>单</span> <span>共计<%=list2.Sum(x=>x.Number)%>件</span></p>
+                                            <p class="fz_14 fc_ash"><i>运费： <span><%=list2.Sum(x=>Math.Round(x.Freight.ConvertData<decimal>(),2)) %>元&nbsp;&nbsp;&nbsp;</span></i><i>代收运费： <span><%=list2.Sum(x=>Math.Round(x.GReceivables.ConvertData<decimal>(),2)) %>元</span></i></p>
                                         </div>
                                     </div>
                                 </div>

@@ -34,7 +34,7 @@ namespace Logistics.LC.Business.MeetCar
             }
             list = vo.Item3;
             //提付
-            var vo1 = DAL.DAL.LC_Customer.Gettifu(UID);
+            var vo1 = DAL.DAL.LC_Customer.GettifuMeetCar(UID);
             if (!vo1.Item1)
             {
                 //有错误
@@ -43,7 +43,7 @@ namespace Logistics.LC.Business.MeetCar
             }
             tifu = vo1.Item3;
             //现付
-            var vo2 = DAL.DAL.LC_Customer.Getxianfu(UID);
+            var vo2 = DAL.DAL.LC_Customer.GetxianfuMeetCar(UID);
             if (!vo2.Item1)
             {
                 //有错误
@@ -52,7 +52,7 @@ namespace Logistics.LC.Business.MeetCar
             }
             xianfu = vo2.Item3;
             //扣付
-            var vo3 = DAL.DAL.LC_Customer.Getkoufu(UID);
+            var vo3 = DAL.DAL.LC_Customer.GetkoufuMeetCar(UID);
             if (!vo3.Item1)
             {
                 //有错误

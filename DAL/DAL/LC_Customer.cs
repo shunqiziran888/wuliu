@@ -450,13 +450,13 @@ namespace DAL.DAL
             return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, "没有任何数据!", new List<Model.Model.LC_Customer>());
         }
         /// <summary>
-        /// 提付
+        /// 装车-提付
         /// </summary>
         /// <param name="UID"></param>
         /// <returns></returns>
         public static (bool, string, decimal) Gettifu(string OID)
         {
-            sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_Customer),new string[] { "sum(Freight)" }, "freightMode=1 and logisticsID='" + OID + "'");
+            sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_Customer),new string[] { "sum(Freight)" }, "freightMode=1 and logisticsID='" + OID + "' and State=2");
             ids = db.Read(sql);
             if (!ids.flag)
                 return (false, ids.errormsg, 0);
@@ -465,13 +465,13 @@ namespace DAL.DAL
             return (true, "没有任何数据!", 0);
         }
         /// <summary>
-        /// 现付
+        /// 装车-现付
         /// </summary>
         /// <param name="OID"></param>
         /// <returns></returns>
         public static (bool, string, decimal) Getxianfu(string OID)
         {
-            sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_Customer), new string[] { "sum(Freight)" }, "freightMode=2 and logisticsID='" + OID + "'");
+            sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_Customer), new string[] { "sum(Freight)" }, "freightMode=2 and logisticsID='" + OID + "' and State=2");
             ids = db.Read(sql);
             if (!ids.flag)
                 return (false, ids.errormsg, 0);
@@ -480,13 +480,58 @@ namespace DAL.DAL
             return (true, "没有任何数据!", 0);
         }
         /// <summary>
-        /// 扣付
+        /// 装车-扣付
         /// </summary>
         /// <param name="OID"></param>
         /// <returns></returns>
         public static (bool, string, decimal) Getkoufu(string OID)
         {
-            sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_Customer), new string[] { "sum(Freight)" }, "freightMode=3 and logisticsID='" + OID + "'");
+            sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_Customer), new string[] { "sum(Freight)" }, "freightMode=3 and logisticsID='" + OID + "' and State=2");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, 0);
+            if (ids.ReadIsOk())
+                return (true, string.Empty, ids.GetFristData<decimal>(0));
+            return (true, "没有任何数据!", 0);
+        }
+        /// <summary>
+        /// 接车-提付
+        /// </summary>
+        /// <param name="UID"></param>
+        /// <returns></returns>
+        public static (bool, string, decimal) GettifuMeetCar(string OID)
+        {
+            sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_Customer), new string[] { "sum(Freight)" }, "freightMode=1 and logisticsID='" + OID + "' and State=3");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, 0);
+            if (ids.ReadIsOk())
+                return (true, string.Empty, ids.GetFristData<decimal>(0));
+            return (true, "没有任何数据!", 0);
+        }
+        /// <summary>
+        /// 接车-现付
+        /// </summary>
+        /// <param name="OID"></param>
+        /// <returns></returns>
+        public static (bool, string, decimal) GetxianfuMeetCar(string OID)
+        {
+            sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_Customer), new string[] { "sum(Freight)" }, "freightMode=2 and logisticsID='" + OID + "' and State=3");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, 0);
+            if (ids.ReadIsOk())
+                return (true, string.Empty, ids.GetFristData<decimal>(0));
+            return (true, "没有任何数据!", 0);
+        }
+        /// <summary>
+        /// 接车-扣付
+        /// </summary>
+        /// <param name="OID"></param>
+        /// <returns></returns>
+        public static (bool, string, decimal) GetkoufuMeetCar(string OID)
+        {
+            sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_Customer), new string[] { "sum(Freight)" }, "freightMode=3 and logisticsID='" + OID + "' and State=3");
             ids = db.Read(sql);
             if (!ids.flag)
                 return (false, ids.errormsg, 0);

@@ -148,7 +148,7 @@
             for (var i = 0; i < obj.length; i++) {
                 if (obj[i].checked) s += obj[i].value + ',';
             }
-            if (s == "") { alert("你还没有选择任何记录"); }
+            if (s == "") { Msg("您还没有选择任何物品!"); }
             else {
                 window.location.href = "/LC/Business/DschargeGood/BatchSuccess.aspx?OID=" + OIDSS + "";
                 

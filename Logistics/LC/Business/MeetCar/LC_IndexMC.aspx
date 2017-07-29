@@ -78,7 +78,7 @@
                     <a class="add_icon icon iconfont icon-eventnote pull-right" href="history_log.html"></a>
                     <i class="add_txt">历史记录</i>
                 </p> -->
-                <h1 class="title">装车</h1>
+                <h1 class="title">接车</h1>
             </header>
 
 
@@ -110,17 +110,17 @@
                                                 <i class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoStart.Item2.Value)?.Item2?.Name%></i>
                                                 <i class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoStart.Item3.Value)?.Item2?.Name%></i>
                                                 <i class="fz_14 fc_ash"><span>收货： <span><%=list.Count %></span></span></i>
-                                                <i class="fz_14 fc_ash"><span>代收款： <span><%=v.GReceivables %></span></span></i>
-                                                <i class="fz_14 fc_ash"><span>车运费： <span><%=v.Freight %></span></span></i>
-                                                <i class="fz_14 fc_ash"><span>联系电话： <span><%=v.FHPhone%></span></span></i>
+                                                <i class="fz_14 fc_ash"><span>代收款： <span><%=list.Sum(x=>Math.Round(x.GReceivables.ConvertData<decimal>(),2)) %></span></span></i>
+                                                <i class="fz_14 fc_ash"><span>大车运费： <span><%=Math.Round(v.largeCar.ConvertData<decimal>(),2)%></span></span></i>
+                                                <i class="fz_14 fc_ash"><span>司机电话： <span><%=DAL.DAL.DALBase.GetCarFromID(v.VehicleID.Value)?.Item2?.Phone%></span></span></i>
                                             </p>
                                             <i class="iconfont " style="font-size:30px;margin:0 .5rem">&#xe6d7;</i>
                                             <p class="dis_flex" style="flex-direction: column;line-height:1.5rem;">
                                                 <strong class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoEnd.Item1.Value)?.Item2?.Name%></strong>
                                                 <i class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoEnd.Item2.Value)?.Item2?.Name%></i>
                                                 <i class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoEnd.Item3.Value)?.Item2?.Name%></i>
-                                                <i class="fz_14 fc_ash"><span>件数： <span><%=v.Number %></span></span></i>
-                                                <i class="fz_14 fc_ash"><span>总运费： <span>暂时不显示</span></span></i>
+                                                <i class="fz_14 fc_ash"><span>件数： <span><%=list.Sum(x=>x.Number)%></span></span></i>
+                                                <i class="fz_14 fc_ash"><span>总运费： <span><%=list.Sum(x=>x.Freight)+v.largeCar%></span></span></i>
                                                 <i class="fz_14 fc_ash"><span>车号： <span><%=DAL.DAL.DALBase.GetCarFromID(v.VehicleID.Value)?.Item2?.VehicleNo%></span></span></i>
                                             </p>
                                         </div>

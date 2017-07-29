@@ -7,25 +7,22 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SuperDataBase;
 using System.Diagnostics;
+using CustomExtensions;
 
-namespace Logistics.LC.Business.PretendCar
+namespace Logistics.LC.Business.DschargeGood
 {
-    public partial class LC_IndexPC : PageLoginBase
+    public partial class LC_SHSuccess : PageLoginBase
     {
-        public List<Dictionary<string,I_ModelBase>> list = new List<Dictionary<string, I_ModelBase>>();
-        public List<Model.Model.LC_Customer> list2 = new List<Model.Model.LC_Customer>();
         protected void Page_Load(object sender, EventArgs e)
         {
-            var myuservo = GetMyLoginUserVO();
-            string uid = myuservo.uid;
-            var vo = DAL.DAL.LC_Line.GetNewLineList(uid);
+            string OID = GetValue("OID");
+            Tuple<bool, string> vo = DAL.DAL.LC_Customer.UpdateIty(new Model.Model.LC_Customer() { State = GlobalBLL.OrderStateEnum.订单完成.EnumToInt()}, OID);
             if (!vo.Item1)
             {
                 //有错误
                 Debug.Print(vo.Item2);
                 return;
             }
-            list = vo.Item3;
         }
     }
 }

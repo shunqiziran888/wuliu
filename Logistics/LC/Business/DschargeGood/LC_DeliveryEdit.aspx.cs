@@ -8,17 +8,16 @@ using System.Web.UI.WebControls;
 using SuperDataBase;
 using System.Diagnostics;
 
-namespace Logistics.LC.Business.PretendCar
+namespace Logistics.LC.Business.DschargeGood
 {
-    public partial class LC_IndexPC : PageLoginBase
+    public partial class LC_DeliveryEdit : PageLoginBase
     {
-        public List<Dictionary<string,I_ModelBase>> list = new List<Dictionary<string, I_ModelBase>>();
-        public List<Model.Model.LC_Customer> list2 = new List<Model.Model.LC_Customer>();
+        public List<Model.Model.LC_Customer> list = new List<Model.Model.LC_Customer>();
         protected void Page_Load(object sender, EventArgs e)
         {
-            var myuservo = GetMyLoginUserVO();
-            string uid = myuservo.uid;
-            var vo = DAL.DAL.LC_Line.GetNewLineList(uid);
+            //放货-送货
+            string OID = GetValue("OID");
+            var vo = DAL.DAL.LC_Customer.GetGRList(OID);
             if (!vo.Item1)
             {
                 //有错误
@@ -26,6 +25,9 @@ namespace Logistics.LC.Business.PretendCar
                 return;
             }
             list = vo.Item3;
+
+            
+
         }
     }
 }

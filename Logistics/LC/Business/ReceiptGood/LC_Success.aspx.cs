@@ -14,6 +14,7 @@ namespace Logistics.LC.Business.GoodsReceipt
     {
         public string OrderID = null;
         public string OIDDetaila = null;
+        public List<Model.Model.LC_Customer> list = new List<Model.Model.LC_Customer>();
         protected void Page_Load(object sender, EventArgs e)
         {
             var myuservo = GetMyLoginUserVO();
@@ -29,6 +30,7 @@ namespace Logistics.LC.Business.GoodsReceipt
             DateTime ConsigneeTimes = DateTime.Now;
             if(ShNumber==0 || FreightDetail==0)
             {
+                //快速收货
                 Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() { State = 2, ConsigneeTime = ConsigneeTimes, Freight = yf, begins = myuservo.AreaID, finish = finish }, OrderID, true);
                 if (!vo.Item1)
                 {
@@ -36,9 +38,18 @@ namespace Logistics.LC.Business.GoodsReceipt
                     Debug.Print(vo.Item2);
                     return;
                 }
+                //var volist = DAL.DAL.LC_Customer.GetGRList(OrderID);
+                //if (!volist.Item1)
+                //{
+                //    //有错误
+                //    Debug.Print(volist.Item2);
+                //    return;
+                //}
+                //list = volist.Item3;
             }
            else
             {
+                //详情收货
                 Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() { State = 2, ConsigneeTime = ConsigneeTimes, Freight = FreightDetail, begins = myuservo.AreaID, finish = Ends,Number= ShNumber, OtherExpenses= OtherExpenses }, OIDDetaila, true);
                 if (!vo.Item1)
                 {
