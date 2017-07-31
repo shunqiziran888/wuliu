@@ -42,6 +42,10 @@ namespace Model.Model
         /// </summary>
         private int? _LastState;
         /// <summary>
+        /// 最后操作人
+        /// </summary>
+        private string _LastOperatorsUID;
+        /// <summary>
         /// 
         /// </summary>
         public long? id
@@ -104,6 +108,14 @@ namespace Model.Model
         {
             set { _LastState = value;}
             get { return _LastState; }
+        }
+        /// <summary>
+        /// 最后操作人
+        /// </summary>
+        public string LastOperatorsUID
+        {
+            set { _LastOperatorsUID = value;}
+            get { return _LastOperatorsUID; }
         }
     }
 }

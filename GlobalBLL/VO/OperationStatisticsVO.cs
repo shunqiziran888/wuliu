@@ -13,9 +13,9 @@ namespace GlobalBLL.VO
     {
 #region 货单统计
         /// <summary>
-        /// 订单数
+        /// 接单数
         /// </summary>
-        public long HDTJ_OrderNumber { get; set; } = 0;
+        public long HDTJ_JieDanShu { get; set; } = 0;
         
         /// <summary>
         /// 运输单数
@@ -65,13 +65,9 @@ namespace GlobalBLL.VO
         /// 运输总数
         /// </summary>
         public long YunShuZongShu { get; set; } = 0;
-        /// <summary>
-        /// 发车统计
-        /// </summary>
-        public long FaCheTongJi { get; set; } = 0;
 
         /// <summary>
-        /// 汇总车次
+        /// 汇总车次(已经接车和发车的)
         /// </summary>
         public long HuiCheTongJi { get; set; } = 0;
         #endregion

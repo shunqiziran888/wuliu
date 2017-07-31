@@ -91,6 +91,7 @@ namespace DAL.DAL
                 {
                     LastState = 2,
                     LastOperationTime = DateTime.Now,
+                    LastOperatorsUID = myuservo.uid
                 }, $"OrderNumber in ({ordernumberstr})");
                 ids = db.Exec(sql);
                 if (!ids.flag)
@@ -237,7 +238,8 @@ namespace DAL.DAL
                 return (false, "当前操作存在不可回收的货款项，操作失败!");
             //执行回收操作
             sql = makesql.MakeUpdateSQL(new Model.Model.LC_Payment() {
-                LastState=1
+                LastState=1,
+                LastOperatorsUID = myuservo.uid
             }, $"OrderNumber in ({orderNumberStr})");
             ids = db.Exec(sql);
             if (!ids.flag)
@@ -267,7 +269,7 @@ namespace DAL.DAL
                 return (false, "当前操作存在非上缴货款项，操作失败!");
 
             //更新到上缴人
-            sql = new SuperDataBase.Vo.SqlVO($"update a set LocationLogisticsUID=b.beginUID,a.LastOperationTime=@LastOperationTime,a.LastState=0 FROM {nameof(Model.Model.LC_Payment)} a,{nameof(Model.Model.LC_History)} b where a.OrderNumber in ({paymentlist.Select(x => $"'{x.OrderNumber}'").ToList().ListToString()}) and a.OrderNumber=b.OrderID and LocationLogisticsUID=@LocationLogisticsUID;", new System.Data.SqlClient.SqlParameter[] {
+            sql = new SuperDataBase.Vo.SqlVO($"update a set LocationLogisticsUID=b.beginUID,a.LastOperationTime=@LastOperationTime,a.LastOperatorsUID={myuservo.uid},a.LastState=0 FROM {nameof(Model.Model.LC_Payment)} a,{nameof(Model.Model.LC_History)} b where a.OrderNumber in ({paymentlist.Select(x => $"'{x.OrderNumber}'").ToList().ListToString()}) and a.OrderNumber=b.OrderID and LocationLogisticsUID=@LocationLogisticsUID;", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@LocationLogisticsUID",myuservo.uid),
                 new System.Data.SqlClient.SqlParameter("@LastOperationTime",DateTime.Now)
             });
