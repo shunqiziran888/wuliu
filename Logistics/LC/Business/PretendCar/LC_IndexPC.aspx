@@ -101,6 +101,8 @@
                                  var addressvoEnd = DAL.DAL.DALBase.GetAllAddress(line.End.Value);
                                  var vo2 = DAL.DAL.LC_Customer.GetCmdList(user.UID,(int)line.Start,(int)line.End);
                                  list2 = vo2.Item3;
+                                  var vo3 = DAL.DAL.LC_Customer.GetSHFristTime(user.UID,(int)line.Start,(int)line.End);
+                                 list3 = vo2.Item3;
                              %>
                         <li class="white mart_10">
                             <a href="/LC/Business/PretendCar/LC_Commodity.aspx?Initially=<%=line.Start %>&Destination=<%=line.End %>"  class="dis_flex jus_bet ali_center" style="padding:.5rem;">
@@ -127,7 +129,7 @@
                                 </div>
                                 <i class="iconfont"> &#xe633;</i>
                             </a>
-                            <p class="txt_right fz_12" style="padding-right:.5rem;">2016年-12月-23日 09：31</p>
+                            <p class="txt_right fz_12" style="padding-right:.5rem;"><%=list3.GetIndexValue(0)?.ConsigneeTime %></p>
                         </li>
                         <%} %>
                     </ul>
@@ -137,7 +139,6 @@
     </div>
 
    <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
-<%--    --%>
     <script>
         $(function () {
             $.init();

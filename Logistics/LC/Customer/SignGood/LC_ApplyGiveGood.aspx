@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LC_DeliveryEdit.aspx.cs" Inherits="Logistics.LC.Business.DschargeGood.LC_DeliveryEdit" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LC_ApplyGiveGood.aspx.cs" Inherits="Logistics.LC.Customer.SignGood.LC_ApplyGiveGood" %>
 <%@ import Namespace="GlobalBLL" %>
 <%@ Import Namespace="CustomExtensions" %>
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-   <link rel="stylesheet" href="/Style/css/sui/sm.min.css">
+    <link rel="stylesheet" href="/Style/css/sui/sm.min.css">
     <link rel="stylesheet" href="/Style/css/sui/sm-extend.min.css">
     <link href="/Style/css/iconlink.css" rel="stylesheet">
     <link rel="stylesheet" href="/Style/css/style.css">
@@ -95,7 +95,10 @@
                             <i class="txt_right fz_16 line_he_44 ">运费提付：</i>
                             <i class="txt_right fz_16 line_he_44 ">合计金额：</i>
                         </p>
-                        <%foreach (var v in list) {%>
+                        <%
+                            foreach (var v in list)
+                            {
+                            %>
                         <p class="dis_flex col_70 line_he_44" style="flex-direction: column;padding-left:.5rem;">
                             <i class="txt_left fc_ash line_he_44"><%=v.GoodNo %></i>
                             <i class="txt_left fc_ash fz_14 line_he_44"><%=v.GoodName %><span class="fc_red">x<%=v.Number %>件</spa><span class="fc_green" style="margin-left:.5rem;">(<%=v.freightMode.ConvertData<YFFSEnum>().EnumToName() %>)</span></i>
@@ -103,49 +106,48 @@
                             <i class="txt_left fc_ash fz_14 line_he_44"><%=v.SHPhone %></i>
                             <i class="txt_left fc_ash fz_14 line_he_44"><%=v.Freight %></i>
                             <i class="txt_left fc_ash fz_14 line_he_44"><%=v.GReceivables %></i>
-                            <i class="txt_left fc_ash fz_14 line_he_44">暂时不显示</i>
-                            <i class="txt_left fc_ash fz_14 line_he_44">暂时不显示</i>
+                            <i class="txt_left fc_ash fz_14 line_he_44">暂不显示</i>
+                            <i class="txt_left fc_ash fz_14 line_he_44">暂不显示</i>
+                            <input type="hidden" id="OID" value="<%=v.OrderID %>"/>
                         </p>
                         <%} %>
                     </div>
                     <div style="line-height:1.5rem;margin-top:.5rem;" class="dis_flex white">
                         <p class="dis_flex   col_30" style="flex-direction: column;">
-                            <i class="txt_right fz_16 line_he_44">送货人：</i>
-                           <%-- <i class="txt_right fz_16  line_he_44">送货电话：</i>--%>
+                            
                             <i class="txt_right fz_16  line_he_44">送货地址：</i>
                             <i class="txt_right fz_16  line_he_44">送货费用：</i>
                         </p>
                         <p class="dis_flex col_70 line_he_44" style="flex-direction: column;padding-left:.5rem;">
-                            <i class="txt_left fc_ash line_he_44">
-                                <select class="col_90">
-                                    <%
-                                        foreach (var v in list2)
-                                        {
-                                        %>
-                                    <option value="<%=v.UID %>"><%=v.UserName %>(电话：<%=v.Phone %>)</option>
-                                    <%} %>
-                                </select>
-                        </i>
-                            <%--<i class="txt_left fc_ash fz_14 line_he_44">12345678901</i>--%>
-                            <i class="txt_left fc_ash fz_14 line_he_44"><input class="col_90"  type="text"  value="<%=DAL.DAL.DALBase.GetAllAddressNames(list.GetIndexValue(0).Destination.ConvertData<int>()).Item1 %>&nbsp;&nbsp;<%=DAL.DAL.DALBase.GetAllAddressNames(list.GetIndexValue(0).Destination.ConvertData<int>()).Item2 %>&nbsp;&nbsp;<%=DAL.DAL.DALBase.GetAllAddressNames(list.GetIndexValue(0).Destination.ConvertData<int>()).Item3 %>"></i>
-                            <i class="txt_left fc_ash fz_14 line_he_44"><input class="col_90" type="text" placeholder="输入数字"></i>
+                            
+                            <i class="txt_left fc_ash fz_14 line_he_44"><input class="col_90"  id="DetailedAddress" name="DetailedAddress"  type="text" value="<%=DAL.DAL.DALBase.GetAllAddressNames(list.GetIndexValue(0).Destination.ConvertData<int>()).Item1 %>&nbsp;&nbsp;<%=DAL.DAL.DALBase.GetAllAddressNames(list.GetIndexValue(0).Destination.ConvertData<int>()).Item2 %>&nbsp;&nbsp;<%=DAL.DAL.DALBase.GetAllAddressNames(list.GetIndexValue(0).Destination.ConvertData<int>()).Item3 %>"></i>
+                            <i class="txt_left fc_ash fz_14 line_he_44"><input class="col_90" id="DeliveryCost" name="DeliveryCost" type="text" placeholder="输入数字"></i>
                         </p>
+                        
                     </div>
-                    <p class="dis_flex" style="justify-content:center;"><a style="line-height: 30px;background: #a3c478;color: #fff;width: 90px;text-align: center;border: 1px solid #a3c478;margin-top:1rem;" href="/LC/Business/DschargeGood/LC_SHSuccess.aspx?OID=<%=list.GetIndexValue(0)?.OrderID %>">装车送货</a></p>
+                    <p class="dis_flex white padb_10" style="justify-content:center;"><a style="line-height: 30px;background: #a3c478;color: #fff;width: 90px;text-align: center;border: 1px solid #a3c478;margin-top:1rem;" onclick="SQSH()">确认</a></p>
                 </div>
             </div>
         </div>
     </div>
 
     <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
-    <script src="/Style/scripts/main.js"></script>
+     <script src="/Style/scripts/all.js"></script>
     <script>
         $(function () {
             $.init();
             $.config = { router: false }
         });
     </script>
-
 </body>
-
 </html>
+<script type="text/javascript">
+    function SQSH()
+    {
+        var OID = document.getElementById("OID").value;
+        var DetailedAddress = document.getElementById("DetailedAddress").value;
+        var DeliveryCost = document.getElementById("DeliveryCost").value;
+        alert(OID + " and " + DetailedAddress + " and " + DeliveryCost);
+        <%--href = "/LC/Customer/SignGood/LC_GiveSuccess.aspx?OID=<%=list.GetIndexValue(0).OrderID%>--%>
+    }
+</script>

@@ -80,7 +80,7 @@
             <div class="content" style="background:#f2f2f2;">
                 <div class="page-index">
                     <div class="white mart_10" style="padding:1rem;line-height:1.5rem;">
-                        <p class="fz_16">装车： <span>23单</span><span style="margin-left:1rem;">计289件</span></p>
+                        <p class="fz_16">装车： <span><%=list.Count %>单</span><span style="margin-left:1rem;">计<%=list.Sum(x=>x.Number) %>件</span></p>
                     </div>
                     <form>
                         <%foreach (var v in list)
@@ -101,8 +101,8 @@
                                 <p class="fz_14"><i>货号：<span><%=v.GoodNo %></span></i><i class="fz_12" style="margin-left:1rem;">暂时不显示（时间）</i></p>
                             </div>
                             </a>
-                            <%} %>
                         </label>
+                         <%} %>
                     </form>
                 </div>
             </div>

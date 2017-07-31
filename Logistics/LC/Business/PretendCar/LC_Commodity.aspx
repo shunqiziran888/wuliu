@@ -67,7 +67,7 @@
                                 <p class="fz_14">收货人： <i><%=v.Consignee %></i></p>
                                 <p class="fz_14">货名件数： <i><%=v.GoodName %> <span class="fc_red">x<%=v.Number %>件</span></i></p>
                                 <p class="fz_14"><i>运费：<span><%=Math.Round(v.Freight.ConvertData<decimal>(),2) %>&nbsp;&nbsp;&nbsp;</span></i><i>代收款：<span><%=Math.Round(v.GReceivables.ConvertData<decimal>(),2) %></span></i></p>
-                                <p class="fz_14"><i>货号：<span><%=v.GoodNo %></span></i><i class="fz_12" style="margin-left:1rem;">2016年-12月-23日 09：21</i></p>
+                                <p class="fz_14"><i>货号：<span><%=v.GoodNo %></span></i><i class="fz_12" style="margin-left:1rem;"><%=v.ConsigneeTime %></i></p>
                             </div>
                             </a>
                         </label>

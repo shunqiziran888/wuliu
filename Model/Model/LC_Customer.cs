@@ -146,8 +146,13 @@ namespace Model.Model
         /// </summary>
         private string _finishUID;
         /// <summary>
-        /// 
+        /// 送货详细地址
         /// </summary>
+        private string _DetailedAddress;
+        /// <summary>
+        /// 送货费用
+        /// </summary>
+        private decimal? _DeliveryCost;
         public int? ID
         {
             set { _ID = value;}
@@ -417,5 +422,8 @@ namespace Model.Model
             set { _finishUID = value;}
             get { return _finishUID; }
         }
+
+        public string DetailedAddress { get => _DetailedAddress; set => _DetailedAddress = value; }
+        public decimal? DeliveryCost { get => _DeliveryCost; set => _DeliveryCost = value; }
     }
 }
