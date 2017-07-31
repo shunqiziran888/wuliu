@@ -98,7 +98,7 @@
                         <%foreach (var v in list) {%>
                         <p class="dis_flex col_70 line_he_44" style="flex-direction: column;padding-left:.5rem;">
                             <i class="txt_left fc_ash line_he_44"><%=v.GoodNo %></i>
-                            <i class="txt_left fc_ash fz_14 line_he_44"><%=v.GoodName %><span class="fc_red">x<%=v.Number %>件</spa><span class="fc_green" style="margin-left:.5rem;">(<%=v.freightMode.ConvertData<YFFSEnum>().EnumToName() %>)</span></i>
+                            <i class="txt_left fc_ash fz_14 line_he_44"><%=v.GoodName %><span class="fc_red">x<%=v.Number %>件</span><span class="fc_green" style="margin-left:.5rem;">(<%=v.freightMode.ConvertData<YFFSEnum>().EnumToName() %>)</span></i>
                             <i class="txt_left fc_ash fz_14 line_he_44"><%=v.Consignee %></i>
                             <i class="txt_left fc_ash fz_14 line_he_44"><%=v.SHPhone %></i>
                             <i class="txt_left fc_ash fz_14 line_he_44"><%=v.Freight %></i>

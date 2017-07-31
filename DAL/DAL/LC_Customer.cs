@@ -269,14 +269,27 @@ namespace DAL.DAL
 
                 if (LC_Customer.State.ConvertData<GlobalBLL.OrderStateEnum>() == GlobalBLL.OrderStateEnum.订单完成)
                 {
+
+                    sql = makesql.MakeSelectSql(typeof(Model.Model.LC_History), $"OrderID=@OrderID and State={GlobalBLL.OrderStateEnum.已发货.EnumToInt()}",new System.Data.SqlClient.SqlParameter[] {
+                        new System.Data.SqlClient.SqlParameter("@OrderID",lcc.OrderID)
+                    });
+                    ids = db.Read(sql);
+                    if (!ids.flag)
+                        return new Tuple<bool,string>(false, ids.errormsg);
+
+                    if (!ids.ReadIsOk())
+                        return new Tuple<bool, string>(false, "订单数据不能为空!");
+
+                    var fastordervo = ids.GetVOList<Model.Model.LC_History>()[0];
+
                     //添加一个货款数据
                     sql = makesql.MakeInsertSQL(new Model.Model.LC_Payment()
                     {
                         CreateTime = DateTime.Now,
                         LastOperationTime = DateTime.Now,
                         LastState = 1,
-                        LocationLogisticsUID = lcc.beginUID,
-                        StartLogisticsUID = lcc.logisticsID,
+                        LocationLogisticsUID = lcc.logisticsID,
+                        StartLogisticsUID = fastordervo.logisticsID,
                         OrderNumber = lcc.OrderID,
                         PaymentAllAmount = lcc.Freight + lcc.GReceivables + lcc.OtherExpenses,
                     });

@@ -126,6 +126,7 @@
     <Content Include="business\fangkuan_details.html" />
     <Content Include="business\fangkuan_success.html" />
     <Content Include="business\history_log.html" />
+    <Content Include="business\huikuanguanli_details.html" />
     <Content Include="business\huishouhuokuan.html" />
     <Content Include="business\huokuanguanli.html" />
     <Content Include="business\huokuanguanli_details.html" />
@@ -145,6 +146,7 @@
     <Content Include="business\shouhuokaidan_details.html" />
     <Content Include="business\shouhuo_set.html" />
     <Content Include="business\shouhuo_success.html" />
+    <Content Include="business\shoukuan.html" />
     <Content Include="business\shouqiankuan.html" />
     <Content Include="business\shouqiankuan_details.html" />
     <Content Include="business\shouqiankuan_true.html" />

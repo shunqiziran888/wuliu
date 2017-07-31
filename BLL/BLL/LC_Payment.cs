@@ -30,12 +30,13 @@ namespace BLL.BLL
             string enduid = web.GetValue("enduid");
             int page = web.GetValue<int>("page");
             int num = web.GetValue<int>("num");
+            string orderlist = web.GetValue("orderlist");
 
             if (page <= 0)
                 page = 1;
             if (num <= 0)
                 num = 10;
-            return DAL.DAL.LC_Payment.GetPaymentRecording(myuservo,state,starttime,endtime,startuid,enduid,page,num);
+            return DAL.DAL.LC_Payment.GetPaymentRecording(myuservo,state,starttime,endtime,startuid,enduid,page,num, orderlist);
         }
 
         /// <summary>

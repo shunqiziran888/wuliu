@@ -27,39 +27,52 @@ namespace DAL.DAL
         /// <param name="enduid">物流结束地</param>
         /// <param name="page">当前页</param>
         /// <param name="num">每页个数</param>
+        /// <param name="orderlist">订单列表</param>
         /// <returns></returns>
-        public static (bool, string, object) GetPaymentRecording(UserLoginVO myuservo, int state, DateTime starttime, DateTime endtime, string startuid, string enduid, int page, int num)
+        public static (bool, string, object) GetPaymentRecording(UserLoginVO myuservo, int state, DateTime starttime, DateTime endtime, string startuid, string enduid, int page, int num, string orderlist)
         {
             var tlist = new Type[] {
                 typeof(Model.Model.LC_Payment),
                 typeof(Model.Model.LC_Customer),
             };
-            fysql = makesql.MakeSelectFY(tlist, "{0}.OrderNumber={1}.OrderID and {0}.state=@state and {0}.LastOperationTime between @starttime and @endtime", "{0}.id desc",page,num,"{0}.id",new System.Data.SqlClient.SqlParameter[] {
+            string where = string.Empty;
+            if (!starttime.IsNull() && !endtime.IsNull())
+            {
+                where = " and {0}.LastOperationTime between @starttime and @endtime";
+            }
+            else
+            {
+                starttime = DateTime.Now;
+                endtime = DateTime.Now;
+            }
+            if (orderlist.StrIsNotNull())
+            {
+                where += " and {1}.OrderID in("+ orderlist.StringToArray().Select(x => $"'{x}'").ToList().ListToString() +")";
+            }
+
+
+
+            sql = makesql.MakeSelectArrSql(tlist, "{0}.OrderNumber={1}.OrderID and {0}.StartLogisticsUID<>{0}.LocationLogisticsUID and {0}.LocationLogisticsUID=@LocationLogisticsUID and {0}.LastState=@state" + where, new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@state",state),
                 new System.Data.SqlClient.SqlParameter("@starttime",starttime),
-                new System.Data.SqlClient.SqlParameter("@endtime",endtime)
+                new System.Data.SqlClient.SqlParameter("@endtime",endtime),
+                new System.Data.SqlClient.SqlParameter("@LocationLogisticsUID",myuservo.uid)
             });
-            ids = db.Read(fysql);
+            ids = db.Read(sql);
             if (!ids.flag)
                 return (false, ids.errormsg, null);
             if (!ids.ReadIsOk())
-                return (true, "没有任何数据!",new {
-                    allcount = fysql.count,
-                    data = new object[] { }
-                });
-            return (true, string.Empty, new
-            {
-                allcount =fysql.count,
-                data = ids.GetVOList(tlist).Select((x)=> {
-                    var lcp = x.GetDicVO<Model.Model.LC_Payment>();
-                    var lcc = x.GetDicVO<Model.Model.LC_Customer>();
-                    return new
-                    {
-                        lcp,
-                        lcc,
-                    };
-                })
-            });
+                return (true, "没有任何数据!",new object[] { });
+            return (true, string.Empty, ids.GetVOList(tlist).Select((x) => {
+                var lcp = x.GetDicVO<Model.Model.LC_Payment>();
+                var lcc = x.GetDicVO<Model.Model.LC_Customer>();
+                return new
+                {
+                    lcp,
+                    lcc,
+                    freightModeName = lcc.freightMode.ConvertData<GlobalBLL.YFFSEnum>().EnumToName()
+                };
+            }));
         }
 
         /// <summary>
@@ -155,7 +168,7 @@ namespace DAL.DAL
             FROM
                 {nameof(Model.Model.LC_Customer)} d
             WHERE
-                OrderID IN({orderList.ListToString()})
+                OrderID IN({orderList.Select(x=>$"'{x.ordernumber}'").ToList().ListToString()})
             GROUP BY
                 d.FHPhone;");
 
@@ -191,7 +204,7 @@ namespace DAL.DAL
             var box = db.CreateTranSandbox((db) =>
             {
                 //检测所有订单号是否我可以操作
-                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Payment), $"OrderNumber in ({orderlist.ListToString()}) and LocationLogisticsUID=@LocationLogisticsUID", new System.Data.SqlClient.SqlParameter[] {
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Payment), $"OrderNumber in ({orderlist.Select(x=>$"'{x}'").ToList().ListToString()}) and LocationLogisticsUID=@LocationLogisticsUID", new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@LocationLogisticsUID",myuservo.uid)
                 });
                 ids = db.Read(sql);
@@ -269,7 +282,11 @@ namespace DAL.DAL
                 return (false, "当前操作存在非上缴货款项，操作失败!");
 
             //更新到上缴人
-            sql = new SuperDataBase.Vo.SqlVO($"update a set LocationLogisticsUID=b.beginUID,a.LastOperationTime=@LastOperationTime,a.LastOperatorsUID={myuservo.uid},a.LastState=0 FROM {nameof(Model.Model.LC_Payment)} a,{nameof(Model.Model.LC_History)} b where a.OrderNumber in ({paymentlist.Select(x => $"'{x.OrderNumber}'").ToList().ListToString()}) and a.OrderNumber=b.OrderID and LocationLogisticsUID=@LocationLogisticsUID;", new System.Data.SqlClient.SqlParameter[] {
+            sql = new SuperDataBase.Vo.SqlVO($@"update a set LocationLogisticsUID=b.beginUID,a.LastOperationTime=@LastOperationTime,a.LastOperatorsUID='{myuservo.uid}',a.LastState=0 FROM {nameof(Model.Model.LC_Payment)} a,{nameof(Model.Model.LC_History)} b 
+                                                                        where a.OrderNumber in ({paymentlist.Select(x => $"'{x.OrderNumber}'").ToList().ListToString()}) 
+                                                                        and a.OrderNumber=b.OrderID 
+                                                                        and b.State = {GlobalBLL.OrderStateEnum.订单完成.EnumToInt()}
+                                                                        and LocationLogisticsUID=@LocationLogisticsUID;", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@LocationLogisticsUID",myuservo.uid),
                 new System.Data.SqlClient.SqlParameter("@LastOperationTime",DateTime.Now)
             });

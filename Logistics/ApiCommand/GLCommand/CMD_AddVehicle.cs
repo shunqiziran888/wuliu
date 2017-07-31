@@ -19,6 +19,7 @@ namespace Logistics.ApiCommand.GLCommand
         public TCommandState ExeCommand<TCommandState>(WebCommandVOBase command) where TCommandState : CommandState, new()
         {
             (bool, string) vo = BLL.BLL.LC_Vehicle.AddVehicle(web);
+           
             return Show<TCommandState>(vo);
         }
     }

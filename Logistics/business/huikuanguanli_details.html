@@ -15,7 +15,7 @@
     <link href="/Style/css/iconlink.css" rel="stylesheet">
     <link rel="stylesheet" href="/Style/css/style.css">
     <style>
-        input[type="checkbox" i] {
+        input[type="checkbox"] {
             -webkit-appearance: checkbox;
             box-sizing: border-box;
         }
@@ -33,7 +33,7 @@
         }
 
         .huo_fnagshi {
-            margin-left: 80px;
+            margin-left: 50px;
             color: #009621;
         }
 
@@ -47,18 +47,18 @@
             color: #5986de;
         }
 
-        .check_box .check_main_left form label.active input {
-            display: block;
-        }
+            .check_box .check_main_left form label.active input {
+                display: block;
+            }
 
 
         .check_box .check_main_right form label.active {
             color: #5986de;
         }
 
-        .check_box .check_main_right form label.active input {
-            display: block;
-        }
+            .check_box .check_main_right form label.active input {
+                display: block;
+            }
     </style>
 </head>
 
@@ -68,8 +68,8 @@
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
                 <a href="javascript:;" onclick="window.history.go(-1)" class="icon iconfont icon-zuo pull-left"></a>
-                <a  onclick="Test()" class="icon pull-right dis_inline  green" style="color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">下一步</a>
-                <h1 class="title">上缴货款</h1>
+                <a onclick="Next()" class="icon pull-right dis_inline  green" style="color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">下一步</a>
+                <h1 class="title">货款管理</h1>
             </header>
 
 
@@ -101,19 +101,19 @@
                             <form class="bor_bottom" style="padding:1rem; margin: 0 .3rem;">
                                 <label class="dis_flex jus_bet ali_center fz_14 line_he_40">
                                     今天
-                                    <input name="time" type="radio" class="col_50 bor_none dis_none txt_right iconfont icon-right"/>
-                                 </label>
+                                    <input name="time" type="radio" class="col_50 bor_none dis_none txt_right iconfont icon-right" />
+                                </label>
                                 <label class="dis_flex jus_bet ali_center fz_14 line_he_40 active">
                                     最近一周
-                                    <input name="time" type="radio" class="col_50 bor_none  dis_none txt_right iconfont icon-right"/> 
+                                    <input name="time" type="radio" class="col_50 bor_none  dis_none txt_right iconfont icon-right" />
                                 </label>
                                 <label class="dis_flex jus_bet ali_center fz_14 line_he_40">
-                                    最近一月 
-                                    <input name="time" type="radio" class="col_50 bor_none dis_none txt_right iconfont icon-right"/>
+                                    最近一月
+                                    <input name="time" type="radio" class="col_50 bor_none dis_none txt_right iconfont icon-right" />
                                 </label>
                                 <label class="dis_flex jus_bet ali_center fz_14 line_he_40">
-                                    最近三月 
-                                    <input name="time" type="radio" class="col_50 bor_none dis_none txt_right iconfont icon-right"/>
+                                    最近三月
+                                    <input name="time" type="radio" class="col_50 bor_none dis_none txt_right iconfont icon-right" />
                                 </label>
                             </form>
                             <div class="dis_flex jus_aro bor_bottom" style="padding:.5rem;">
@@ -131,19 +131,19 @@
                                 <form class="bor_bottom" style="padding:1rem 0; margin: 0 .3rem;">
                                     <label class="dis_flex jus_bet ali_center fz_14 line_he_40">
                                         山东淄博---------河北邯郸
-                                        <input name="city" type="radio" class="bor_none col_30 dis_none txt_right iconfont icon-right"/> 
+                                        <input name="city" type="radio" class="bor_none col_30 dis_none txt_right iconfont icon-right" />
                                     </label>
                                     <label class="dis_flex jus_bet ali_center fz_14 line_he_40 active">
                                         山东淄博---------河北邯郸
-                                        <input name="city" type="radio" class="bor_none col_30  dis_none txt_right iconfont icon-right"/> 
+                                        <input name="city" type="radio" class="bor_none col_30  dis_none txt_right iconfont icon-right" />
                                     </label>
                                     <label class="dis_flex jus_bet ali_center fz_14 line_he_40">
-                                        山东淄博---------河北邯郸 
-                                        <input name="city" type="radio" class="bor_none col_30 dis_none txt_right iconfont icon-right"/>
+                                        山东淄博---------河北邯郸
+                                        <input name="city" type="radio" class="bor_none col_30 dis_none txt_right iconfont icon-right" />
                                     </label>
                                     <label class="dis_flex jus_bet ali_center fz_14 line_he_40">
-                                        山东淄博---------河北邯郸 
-                                        <input name="city" type="radio" class="bor_none col_30 dis_none txt_right iconfont icon-right"/>
+                                        山东淄博---------河北邯郸
+                                        <input name="city" type="radio" class="bor_none col_30 dis_none txt_right iconfont icon-right" />
                                     </label>
                                 </form>
                             </ul>
@@ -163,19 +163,17 @@
                             <i class="col_50 fz_16">汇总运费： <span class="fz_14">1201.1</span></i>
                             <i class="col_50 fz_16">汇总代收： <span class="fz_14">1201.1</span></i>
                         </p>
-                       
-                        <p class="zongji_top dis_flex marb_10">
+                        <p class="zongji_top dis_flex  marb_10">
                             <i class="col_50 fz_16">微信收款： <span class="fz_14">1201.1</span></i>
                             <i class="col_50 fz_16">现金收款： <span class="fz_14">1201.1</span></i>
                         </p>
-                         <p class="zongji_top dis_flex ">
+                        <p class="zongji_top dis_flex">
                             <i class="col_50 fz_16">支付宝： <span class="fz_14">1201.1</span></i>
                             <i class="col_50 fz_16">银行卡： <span class="fz_14">1201.1</span></i>
                         </p>
+
                     </div>
-                    <ul class="zbsh-tab1" id="content_list">
-                        <!--数据列表-->
-                    </ul>
+                    <ul class="zbsh-tab1" id="content_list"></ul>
                 </div>
             </div>
         </div>
@@ -187,25 +185,26 @@
 
         {{if data.length>0}}
         {{each data as v}}
-        <li class="zbsh-li dis_flex ali_center">
-            <i class="col_10"><input type="checkbox" name="checkCommd" value="{{v.lcc.OrderID}}" class="col_40" /></i>
+        <li class="zbsh-li" style="padding:.5rem 10%;">
             <a href="#">
-                <div class="col-90">
+                <div class="col_100">
                     <i class="zbsh-xd2">
-                        <p class="zbsh-zffs fz_16">
+                        <p class="zbsh-zffs fz_14">货号： <span class="huo_name fc_ash fz_14">{{v.lcc.GoodNo}}</span></p>
+                    </i>
+                    <i class="zbsh-xd2">
+                        <p class="zbsh-zffs fz_14">
                             货物名： <span class="huo_name fc_ash fz_14">{{v.lcc.GoodName}} <i class="huo_num">x{{v.lcc.Number}}</i></span>
                             <span class="huo_fnagshi">({{v.freightModeName}})</span>
-                            <input type="hidden" id="OIDSS" name="OIDSS" value="{{v.lcc.OrderID}}" />
                         </p>
                     </i>
                     <i class="zbsh-xd1">
-                        <p class="zbsh-shr col_50 fz_16">发货人： <span class="ft_color_ash fz_14">{{v.lcc.Consignor}}</span></p>
-                        <p class="zbsh-hh fc_ash col_50 fz_16">收货人： <span class="fz_14">{{v.lcc.Consignee}}</span></p>
+                        <p class="zbsh-shr col_50 fz_14">发货人： <span class="ft_color_ash fz_14">{{v.lcc.Consignor}}</span></p>
+                        <p class="zbsh-hh fc_ash col_50 fz_14">收货人： <span class="fz_14">{{v.lcc.Consignee}}</span></p>
 
                     </i>
                     <i class="zbsh-xd1">
-                        <p class="zbsh-shr col_50 fz_16">运费： <span class="ft_color_ash fz_14">{{v.lcc.Freight}}</span></p>
-                        <p class="zbsh-hh fc_ash col_50 fz_16">代收款： <span class="fz_14">{{v.lcc.GReceivables}}</span></p>
+                        <p class="zbsh-shr col_50 fz_14">运费： <span class="ft_color_ash fz_14">{{v.lcc.Freight}}</span></p>
+                        <p class="zbsh-hh fc_ash col_50 fz_14">代收款： <span class="fz_14">{{v.lcc.GReceivables}}</span></p>
 
                     </i>
                     <p class="fz_16 dis_flex jus_bet ali_center fc_red"><i>合计金额： <span>123</span></i><i class="fz_12 fc_ash">2016年-12月-23日 09：21</i></p>
@@ -217,57 +216,34 @@
 
     </script>
 
-    <script>
+
+    <script type="text/javascript">
         $(function () {
             $.init();
             $.config = { router: false }
         });
-
         PageInit(function () {
-            GetHTML("GetPaymentRecording", { state: 1 }, function (data) {
+            GetHTML("GetPaymentRecording", { state: 0 }, function (data) {
                 if (CheckHTMLData(data)) {
                     let html = TempToHtml("content_list_temp", data);
                     $("#content_list").html(html);
                 }
             });
         });
+        function Next() {
+            debugger;
+            let arrorder = GET("orderlist");
+            arrorder = arrorder.split(",");
+            arrorder = JSON.stringify(arrorder);
+            GetHTML("TurnedOrIssuedPayment", { model: 2, orderlist: arrorder }, function (data) {
+                if (CheckHTMLData(data)) {
+                    window.location.href = "/business/huishouhuokuan.html";
+                }
+            });
+        }
+
     </script>
 
 </body>
 
 </html>
-<script type="text/javascript">
-        $(function () {
-            $("input[type='checkbox']").each(function () {
-                this.checked = true;
-            });
-            isCheckAll = true;
-        });
-        var isCheckAll = false;
-        function swapCheck() {
-            if (isCheckAll) {
-                $("input[type='checkbox']").each(function () {
-                    this.checked = false;
-                });
-                isCheckAll = false;
-            } else {
-                $("input[type='checkbox']").each(function () {
-                    this.checked = true;
-                });
-                isCheckAll = true;
-            }
-        }
-        function Test() {
-            var obj = document.getElementsByName("checkCommd");
-            var OIDSS = $("#OIDSS").val();
-            var s = '';
-            for (var i = 0; i < obj.length; i++) {
-                if (obj[i].checked) s += obj[i].value + ',';
-            }
-            if (s == "") { Msg("您还没有选择任何物品!"); }
-            else {
-                sessionStorage.setItem("OID", s);
-                window.location.href = "/business/huokuanguanli_details.html?orderlist=" + OIDSS + "";
-            }
-        }
-</script>
