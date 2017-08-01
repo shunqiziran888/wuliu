@@ -354,6 +354,10 @@ function frameUploadImgBackErrFun(obj) {
 // function SetSession(key, value) {
 // 	localStorage[key] = value;
 // }
+/**
+ * 清空本地存储
+ * @param {any} key
+ */
 function clearLocalData(key) {
 	localStorage.removeItem(key);
 }

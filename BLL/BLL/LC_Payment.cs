@@ -31,12 +31,13 @@ namespace BLL.BLL
             int page = web.GetValue<int>("page");
             int num = web.GetValue<int>("num");
             string orderlist = web.GetValue("orderlist");
+            string HKDetail = web.GetValue("HKDetail");
 
             if (page <= 0)
                 page = 1;
             if (num <= 0)
                 num = 10;
-            return DAL.DAL.LC_Payment.GetPaymentRecording(myuservo,state,starttime,endtime,startuid,enduid,page,num, orderlist);
+            return DAL.DAL.LC_Payment.GetPaymentRecording(myuservo,state,starttime,endtime,startuid,enduid,page,num, orderlist, HKDetail);
         }
 
         /// <summary>

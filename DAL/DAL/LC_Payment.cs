@@ -14,7 +14,7 @@ namespace DAL.DAL
     public partial class LC_Payment : DALBase
     {
         public LC_Payment()
-        {}
+        { }
 
         /// <summary>
         /// 获取货款记录
@@ -29,7 +29,7 @@ namespace DAL.DAL
         /// <param name="num">每页个数</param>
         /// <param name="orderlist">订单列表</param>
         /// <returns></returns>
-        public static (bool, string, object) GetPaymentRecording(UserLoginVO myuservo, int state, DateTime starttime, DateTime endtime, string startuid, string enduid, int page, int num, string orderlist)
+        public static (bool, string, object) GetPaymentRecording(UserLoginVO myuservo, int state, DateTime starttime, DateTime endtime, string startuid, string enduid, int page, int num, string orderlist, string HKDetail)
         {
             var tlist = new Type[] {
                 typeof(Model.Model.LC_Payment),
@@ -47,23 +47,38 @@ namespace DAL.DAL
             }
             if (orderlist.StrIsNotNull())
             {
-                where += " and {1}.OrderID in("+ orderlist.StringToArray().Select(x => $"'{x}'").ToList().ListToString() +")";
+                where += " and {1}.OrderID in(" + orderlist.StringToArray().Select(x => $"'{x}'").ToList().ListToString() + ")";
             }
 
 
+            if (HKDetail!="have")
+            {
+                if (state != 0)
+                    where += " and {0}.StartLogisticsUID<>{0}.LocationLogisticsUID";
 
-            sql = makesql.MakeSelectArrSql(tlist, "{0}.OrderNumber={1}.OrderID and {0}.StartLogisticsUID<>{0}.LocationLogisticsUID and {0}.LocationLogisticsUID=@LocationLogisticsUID and {0}.LastState=@state" + where, new System.Data.SqlClient.SqlParameter[] {
-                new System.Data.SqlClient.SqlParameter("@state",state),
-                new System.Data.SqlClient.SqlParameter("@starttime",starttime),
-                new System.Data.SqlClient.SqlParameter("@endtime",endtime),
-                new System.Data.SqlClient.SqlParameter("@LocationLogisticsUID",myuservo.uid)
-            });
+                sql = makesql.MakeSelectArrSql(tlist, "{0}.OrderNumber={1}.OrderID and {0}.LocationLogisticsUID=@LocationLogisticsUID and {0}.LastState=@state" + where, new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@state",state),
+                    new System.Data.SqlClient.SqlParameter("@starttime",starttime),
+                    new System.Data.SqlClient.SqlParameter("@endtime",endtime),
+                    new System.Data.SqlClient.SqlParameter("@LocationLogisticsUID",myuservo.uid)
+                });
+            }
+           else if(HKDetail=="have")
+            {
+                sql = makesql.MakeSelectArrSql(tlist, "{0}.OrderNumber={1}.OrderID and {0}.StartLogisticsUID={0}.LocationLogisticsUID and {0}.LocationLogisticsUID=@LocationLogisticsUID and {0}.LastState=@state" + where, new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@state",state),
+                    new System.Data.SqlClient.SqlParameter("@starttime",starttime),
+                    new System.Data.SqlClient.SqlParameter("@endtime",endtime),
+                    new System.Data.SqlClient.SqlParameter("@LocationLogisticsUID",myuservo.uid)
+                });
+            }
             ids = db.Read(sql);
             if (!ids.flag)
                 return (false, ids.errormsg, null);
             if (!ids.ReadIsOk())
-                return (true, "没有任何数据!",new object[] { });
-            return (true, string.Empty, ids.GetVOList(tlist).Select((x) => {
+                return (true, "没有任何数据!", new object[] { });
+            return (true, string.Empty, ids.GetVOList(tlist).Select((x) =>
+            {
                 var lcp = x.GetDicVO<Model.Model.LC_Payment>();
                 var lcc = x.GetDicVO<Model.Model.LC_Customer>();
                 return new
@@ -143,6 +158,7 @@ namespace DAL.DAL
                         a.OrderNumber = c.OrderID
                     AND b.Phone = c.FHPhone
                     AND a.LastState = '1'
+                    AND a.StartLogisticsUID = a.LocationLogisticsUID
                     AND a.LocationLogisticsUID = '{myuservo.uid}'");
             ids = db.Read(sql);
             if (!ids.flag)
@@ -161,6 +177,8 @@ namespace DAL.DAL
             sql = new SuperDataBase.Vo.SqlVO($@"
             SELECT
                 d.FHPhone,
+                max(d.Consignee) as 'Consignee',
+                max(d.Consignor) as 'Consignor',
                 COUNT(d.OrderID) as 'num',
                 SUM(
                     d.GReceivables + d.Freight + d.OtherExpenses
@@ -184,6 +202,8 @@ namespace DAL.DAL
                 obj_list.Add(new
                 {
                     FHPhone = v["FHPhone"],
+                    Consignee=v["Consignee"],
+                    Consignor=v["Consignor"],
                     num = v["num"],
                     allamount = v["allamount"],
                     OrderList = orderList.Where(x=>x.phone.Equals(v["FHPhone"].ConvertData(), StringComparison.OrdinalIgnoreCase)).Select(y=>y.ordernumber).ToList()

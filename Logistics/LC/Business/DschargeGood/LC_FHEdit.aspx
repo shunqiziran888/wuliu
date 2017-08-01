@@ -120,10 +120,10 @@
                             
                             <i class="txt_left fz_16 line_he_40">电话： <span class=" fz_14 fc_ash"><%=v.SHPhone %></span></i>
                             <i class="txt_left fz_16 line_he_40">电话： <span class=" fz_14 fc_ash"><%=v.FHPhone %></span></i>
-                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="12331.1" id="SSyf"></i>
-                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="12331.1" id="SSdsk"></i>
-                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="12331.1" id="SStf"></i>
-                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="12331.1" id="SShj"></i>
+                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="0" id="SSyf"></i>
+                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="0" id="SSdsk"></i>
+                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="0" id="SStf"></i>
+                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="0" id="SShj"></i>
                         </p>
                     </div>
                     <%} %>
@@ -140,7 +140,6 @@
     </div>
 
     <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
-    <script src="/Style/scripts/all.js"></script>
     <script>
         $(function () {
             $.init();

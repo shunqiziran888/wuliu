@@ -17,6 +17,9 @@ namespace Logistics.ApiCommand.PaymentCommand
     [SuperCommand.Attribute.InputDoc("enduid", "结束的物流公司UID")]
     [SuperCommand.Attribute.InputDoc("page","当前页")]
     [SuperCommand.Attribute.InputDoc("num","每页个数")]
+    [SuperCommand.Attribute.InputDoc("orderlist", "订单列表")]
+    [SuperCommand.Attribute.InputDoc("HKDetail", "放款列表时使用(传入have字符串)")]
+    
     public class CMD_GetPaymentRecording : WebCommandBase, SuperCommand.ICommandBase<WebCommandVOBase>
     {
         public TCommandState ExeCommand<TCommandState>(WebCommandVOBase command) where TCommandState : CommandState, new()

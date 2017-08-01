@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -87,7 +87,7 @@
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
                 <a href="javascript:;"  onclick="window.history.go(-1)" class="icon iconfont icon-zuo pull-left"></a>
-                <a href="fangkuan_success.html" class="icon pull-right dis_inline green" style="color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">下一步</a>
+                <a onclick="Next()" class="icon pull-right dis_inline green" style="color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">下一步</a>
                 <h1 class="title">放款详单</h1>
             </header>
 
@@ -183,102 +183,96 @@
                             <i class="col_50 fz_16">未装代收： <span class="fz_14">1201.1</span></i>
                         </p>
                     </div>
-                    <ul class="zbsh-tab1">
-
-                        <li class="zbsh-li">
-                            <a href="#">
-                                <div class="col-100">
-                                    <i class="zbsh-xd2">
-                                  <p class="zbsh-zffs fz_16">货号： <span class="fc_ash fz_14">xxx2222</span></p>
-                                    </i>
-                                    <i class="zbsh-xd2">
-                                  <p class="zbsh-zffs fz_16">货物名： <span class="huo_name fc_ash fz_14">一大箱可口可乐 <i class="huo_num">x12</i></span>
-                                    <span class="huo_fnagshi">(现付)</span></p>
-                                    </i>
-                                    <i class="zbsh-xd1">
-                                  <p class="zbsh-shr col_50 fz_16">发货人： <span class="ft_color_ash fz_14">司马相如</span></p>
-                                  <p class="zbsh-hh fc_ash col_50 fz_16">收货人： <span class="fz_14">包大人</span></p>
-                                  
-                                </i>
-                                    <i class="zbsh-xd1">
-                                  <p class="zbsh-shr col_50 fz_16">运费： <span class="yunfei ft_color_ash fz_14">3010</span></p>
-                                  <p class="zbsh-hh fc_ash col_50 fz_16">代收款： <span class="fz_14">1899</span></p>
-                                  
-                                </i>
-                                    <i class="zbsh-xd2">
-                                  <p class="zbsh-zffs fz_16">目的地： <span class="mudidi fc_ash fz_14">火星</span></p>
-                                    </i>
-                                    <p class="fz_16 dis_flex jus_bet ali_center fc_red" style="padding:0 10%;"><i>合计金额： <span>123</span></i><i class="fz_12 fc_ash">2016年-12月-23日 09：21</i></p>
-                                </div>
-
-                            </a>
-                            <!-- <p class="dis_flex jus_center"><button class="change_btn line_he_30 padlr_30 green fc_white fz_14 mart_10" style="border:none;">更改</button></p> -->
-                        </li>
-                        <li class="zbsh-li">
-                            <a href="#">
-                                <div class="col-100">
-                                    <i class="zbsh-xd2">
-                                  <p class="zbsh-zffs fz_16">货号： <span class="fc_ash fz_14">xxx2222</span></p>
-                                    </i>
-                                    <i class="zbsh-xd2">
-                                  <p class="zbsh-zffs fz_16">货物名： <span class="huo_name fc_ash fz_14">一大箱可口可乐 <i class="huo_num">x12</i></span>
-                                    <span class="huo_fnagshi">(现付)</span></p>
-                                    </i>
-                                    <i class="zbsh-xd1">
-                                  <p class="zbsh-shr col_50 fz_16">发货人： <span class="ft_color_ash fz_14">司马相如</span></p>
-                                  <p class="zbsh-hh fc_ash col_50 fz_16">收货人： <span class="fz_14">包大人</span></p>
-                                  
-                                </i>
-                                    <i class="zbsh-xd1">
-                                  <p class="zbsh-shr col_50 fz_16">运费： <span class="yunfei ft_color_ash fz_14">3010</span></p>
-                                  <p class="zbsh-hh fc_ash col_50 fz_16">代收款： <span class="fz_14">1899</span></p>
-                                  
-                                </i>
-                                    <i class="zbsh-xd2">
-                                  <p class="zbsh-zffs fz_16">目的地： <span class="mudidi fc_ash fz_14">火星</span></p>
-                                    </i>
-                                    <p class="fz_16 dis_flex jus_bet ali_center fc_red" style="padding:0 10%;"><i>合计金额： <span>123</span></i><i class="fz_12 fc_ash">2016年-12月-23日 09：21</i></p>
-                                </div>
-
-                            </a>
-                            <!-- <p class="dis_flex jus_center"><button class="change_btn line_he_30 padlr_30 green fc_white fz_14 mart_10" style="border:none;">更改</button></p> -->
-                        </li>
-
-
+                    <ul class="zbsh-tab1" id="content_list">
+                        <!--数据-->
                     </ul>
                 </div>
-
-
             </div>
         </div>
-    </div>
 
     <script type='text/javascript' src='/Style/scripts/all.js' charset='utf-8'></script>
     
-    <!-- <script>
-        $(function () {
-            $.init();
-            $.config = { router: false }
-            $('.change_btn').click(function () {
-                var v = $(this);
-                var val = v.html()
-                if (val == '更改') {
-                    v.html('确认')
-                        .parents('.zbsh-li').find('.huo_num,.mudidi,.yunfei').html('<input type="text" class="col_60"/>');
-                } else {
-                    v.html('更改');
-                    var huonum = v.parents('.zbsh-li').find('.huo_num input').val();
-                    v.parents('.zbsh-li').find('.huo_num').html('x' + huonum);
-                    var huonum = v.parents('.zbsh-li').find('.mudidi input').val();
-                    v.parents('.zbsh-li').find('.mudidi').html(huonum);
-                    var huonum = v.parents('.zbsh-li').find('.yunfei input').val();
-                    v.parents('.zbsh-li').find('.yunfei').html(huonum);
+    <script id="content_list_temp" type="text/html">
+
+        {{if data.length>0}}
+        {{each data as v}}
+        <li class="zbsh-li">
+            <a href="#">
+                <div class="col-100">
+                    <i class="zbsh-xd2">
+                        <p class="zbsh-zffs fz_16">货号： <span class="fc_ash fz_14">xxx2222</span></p>
+                    </i>
+                    <i class="zbsh-xd2">
+                        <p class="zbsh-zffs fz_16">
+                            货物名： <span class="huo_name fc_ash fz_14">一大箱可口可乐 <i class="huo_num">x12</i></span>
+                            <span class="huo_fnagshi">(现付)</span>
+                        </p>
+                    </i>
+                    <i class="zbsh-xd1">
+                        <p class="zbsh-shr col_50 fz_16">发货人： <span class="ft_color_ash fz_14">司马相如</span></p>
+                        <p class="zbsh-hh fc_ash col_50 fz_16">收货人： <span class="fz_14">包大人</span></p>
+
+                    </i>
+                    <i class="zbsh-xd1">
+                        <p class="zbsh-shr col_50 fz_16">运费： <span class="yunfei ft_color_ash fz_14">3010</span></p>
+                        <p class="zbsh-hh fc_ash col_50 fz_16">代收款： <span class="fz_14">1899</span></p>
+
+                    </i>
+                    <i class="zbsh-xd2">
+                        <p class="zbsh-zffs fz_16">目的地： <span class="mudidi fc_ash fz_14">火星</span></p>
+                    </i>
+                    <p class="fz_16 dis_flex jus_bet ali_center fc_red" style="padding:0 10%;"><i>合计金额： <span>123</span></i><i class="fz_12 fc_ash">2016年-12月-23日 09：21</i></p>
+                </div>
+            </a>
+            <!-- <p class="dis_flex jus_center"><button class="change_btn line_he_30 padlr_30 green fc_white fz_14 mart_10" style="border:none;">更改</button></p> -->
+        </li>
+        {{/each}}
+        {{/if}}
+
+    </script>
+
+    <script>
+        
+        PageInit(function () {
+            let orderlist = GetLocalData("OrderList");
+            var HKDetail = "have";
+            if (StrIsNullOrEmpty(orderlist))
+            {
+                Msg("订单列表不能为空!");
+                return;
+            }
+            GetHTML("GetPaymentRecording", { orderlist: orderlist, HKDetail: HKDetail,state:1}, function (data) {
+                debugger;
+                if (CheckHTMLData(data)) {
+                    let html = TempToHtml("content_list_temp", data);
+                    $("#content_list").html(html);
                 }
-
-            })
+            });
         });
-    </script> -->
-
+    </script>
 </body>
 
 </html>
+<script type="text/javascript">
+        function Next() {
+            debugger;
+            let arrorder = GetLocalData("OrderList");
+            arrorder = arrorder.split(",");
+            let arr = [];
+            for (let i = 0; i < arrorder.length; i++) {
+                if (!StrIsNullOrEmpty(arrorder[i]))
+                    arr.push(arrorder[i]);
+            }
+            if (arr.length == 0)
+            {
+                Msg("请至少选择一个订单!");
+                return;
+            }
+            arrorder = JSON.stringify(arr);
+            GetHTML("LendersPayment", { model: 1, orderdata: arrorder }, function (data) {
+                if (CheckHTMLData(data)) {
+                    Href("/business/fangkuan.html");
+                }
+            });
+        }
+</script>
