@@ -4,7 +4,7 @@ document.write("<scri" + "pt src='/Style/scripts/sm-extend.min.js'></sc" + "ript
 document.write("<scri" + "pt src='http://map.qq.com/api/js?v=2.exp&key=M72BZ-BYJWX-ZMA4E-TSSBE-373LZ-Q5BBL&libraries=geometry,convertor'></sc" + "ript>");
 document.write('<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js?' + Math.random() + '"></script>');
 document.write("<scri" + "pt src='/Style/scripts/tools/template.js'></sc" + "ript>");
-document.write("<scri" + "pt src='/Style/scripts/config.js?" + Math.random() + "'></sc" + "ript>");                          
+document.write("<scri" + "pt src='/Style/scripts/config.js?" + Math.random() + "'></sc" + "ript>");           
 document.write("<scri" + "pt src='/Style/scripts/tools/newbase.js?" + Math.random() + "'></sc" + "ript>");
 document.write("<scri" + "pt src='/Style/scripts/tools/tools.js?" + Math.random() + "'></sc" + "ript>");
 document.write("<scri" + "pt src='/Style/scripts/main.js?" + Math.random() + "'></sc" + "ript>");

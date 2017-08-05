@@ -99,7 +99,7 @@
                   <span class="icon iconfont icon-filetexto"></span>
                   <span class="tab-label">物流业务</span>
               </a>
-                <a class="tab-item external" href="/count/">
+                <a class="tab-item external" href="/count/index.html">
                   <span class="icon iconfont icon-fcstubiao19"></span>
                   <span class="tab-label">运营统计</span>
               </a>

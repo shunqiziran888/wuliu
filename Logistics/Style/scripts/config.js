@@ -10,8 +10,15 @@ $.CloseWX = false; //是否关闭微信
 
 $(function () {
     $("a").addClass("external");
+    InitKongJian();
+});
+
+/**
+ * 初始化控件
+ */
+function InitKongJian() {
     $('.check_tab_nav>div').click(function (index) {
-        // debugger;
+        //debugger;
         var index = $(this).index();
         $(this).children('span.iconfont')
             .html('&#xe758;')
@@ -44,4 +51,4 @@ $(function () {
         $(this).addClass('active').siblings('li').removeClass('active');
     })
     // 选车
-});
+}

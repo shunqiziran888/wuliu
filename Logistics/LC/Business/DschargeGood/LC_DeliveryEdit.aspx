@@ -127,8 +127,8 @@
                                 </select>
                         </i>
                             <%--<i class="txt_left fc_ash fz_14 line_he_44">12345678901</i>--%>
-                            <i class="txt_left fc_ash fz_14 line_he_44"><input class="col_90"  type="text"  value="<%=DAL.DAL.DALBase.GetAllAddressNames(list.GetIndexValue(0).Destination.ConvertData<int>()).Item1 %>&nbsp;&nbsp;<%=DAL.DAL.DALBase.GetAllAddressNames(list.GetIndexValue(0).Destination.ConvertData<int>()).Item2 %>&nbsp;&nbsp;<%=DAL.DAL.DALBase.GetAllAddressNames(list.GetIndexValue(0).Destination.ConvertData<int>()).Item3 %>"></i>
-                            <i class="txt_left fc_ash fz_14 line_he_44"><input class="col_90" type="text" placeholder="输入数字"></i>
+                            <i class="txt_left fc_ash fz_14 line_he_44"><input class="col_90"  type="text"  value="<%=list.GetIndexValue(0).DetailedAddress %>"></i>
+                            <i class="txt_left fc_ash fz_14 line_he_44"><input class="col_90" type="text" placeholder="输入数字" value="<%=list.GetIndexValue(0).DeliveryCost %>"></i>
                         </p>
                     </div>
                     <p class="dis_flex" style="justify-content:center;"><a style="line-height: 30px;background: #a3c478;color: #fff;width: 90px;text-align: center;border: 1px solid #a3c478;margin-top:1rem;" href="/LC/Business/DschargeGood/LC_SHSuccess.aspx?OID=<%=list.GetIndexValue(0)?.OrderID %>">装车送货</a></p>

@@ -82,96 +82,13 @@
                         </div>
                     </div>
                     <div class="check_box row_44 white pos_r">
-
-
-                        <div class="check_tab_nav jus_bet dis_flex ali_center ">
-                            <div class="check_left col_40 txt_right row_44 li_row_44">
-                                <span>一周</span>
-                                <span class="iconfont fz_18" style="color: #7d7d7d;">&#xe637;</span>
-                            </div>
-                            <div class="check_right col_40 txt_left row_44 li_row_44">
-                                <span>线路</span>
-                                <span class="iconfont fz_18" style="color: #7d7d7d;">&#xe637;</span>
-                            </div>
-                        </div>
-
-
-
-                        <div class="check_main check_main_left pos_a col_100 white bor_top  dis_none" style="top:2.2rem; z-index:2;">
-                            <form class="bor_bottom" style="padding:1rem; margin: 0 .3rem;">
-                                <label class="dis_flex jus_bet ali_center fz_14 line_he_40">
-                                    今天
-                                    <input name="time" type="radio" class="col_50 bor_none dis_none txt_right iconfont icon-right"/>
-                                 </label>
-                                <label class="dis_flex jus_bet ali_center fz_14 line_he_40 active">
-                                    最近一周
-                                    <input name="time" type="radio" class="col_50 bor_none  dis_none txt_right iconfont icon-right"/> 
-                                </label>
-                                <label class="dis_flex jus_bet ali_center fz_14 line_he_40">
-                                    最近一月 
-                                    <input name="time" type="radio" class="col_50 bor_none dis_none txt_right iconfont icon-right"/>
-                                </label>
-                                <label class="dis_flex jus_bet ali_center fz_14 line_he_40">
-                                    最近三月 
-                                    <input name="time" type="radio" class="col_50 bor_none dis_none txt_right iconfont icon-right"/>
-                                </label>
-                            </form>
-                            <div class="dis_flex jus_aro bor_bottom" style="padding:.5rem;">
-                                <input class="gray col_30" type="date" placeholder="2017.07.12" value="2017-07-21">
-                                <span class="iconfont icon-hengxian"></span>
-                                <input class="gray col_30" type="date" placeholder="2017.07.12" value="2017-08-31">
-                                <input class="close_btn  col_25" type="button" style="color:#5986de; border:1px solid #5986de;padding: 0;" value="确定">
-                            </div>
-                        </div>
-
-
-
-                        <div class="check_main check_main_right pos_a col_100 white bor_top dis_none" style="top:2.2rem; z-index:2;">
-                            <ul>
-                                <form class="bor_bottom" style="padding:1rem 0; margin: 0 .3rem;">
-                                    <label class="dis_flex jus_bet ali_center fz_14 line_he_40">
-                                        山东淄博---------河北邯郸
-                                        <input name="city" type="radio" class="bor_none col_30 dis_none txt_right iconfont icon-right"/> 
-                                    </label>
-                                    <label class="dis_flex jus_bet ali_center fz_14 line_he_40 active">
-                                        山东淄博---------河北邯郸
-                                        <input name="city" type="radio" class="bor_none col_30  dis_none txt_right iconfont icon-right"/> 
-                                    </label>
-                                    <label class="dis_flex jus_bet ali_center fz_14 line_he_40">
-                                        山东淄博---------河北邯郸 
-                                        <input name="city" type="radio" class="bor_none col_30 dis_none txt_right iconfont icon-right"/>
-                                    </label>
-                                    <label class="dis_flex jus_bet ali_center fz_14 line_he_40">
-                                        山东淄博---------河北邯郸 
-                                        <input name="city" type="radio" class="bor_none col_30 dis_none txt_right iconfont icon-right"/>
-                                    </label>
-                                </form>
-                            </ul>
-                            <div class="dis_flex bor_bottom" style="padding:.5rem;justify-content: flex-end;">
-                                <input class="close_btn col_25" type="button" style="color:#5986de; border:1px solid #5986de;padding: 0;" value="确定">
-                            </div>
-                        </div>
-
-
-
+                        <!--查询-->
                     </div>
                     <!-- 选择 -->
 
 
-                    <div class="zongji mart_10">
-                        <p class="zongji_top dis_flex  marb_10">
-                            <i class="col_50 fz_16">汇总运费： <span class="fz_14">1201.1</span></i>
-                            <i class="col_50 fz_16">汇总代收： <span class="fz_14">1201.1</span></i>
-                        </p>
-                       
-                        <p class="zongji_top dis_flex marb_10">
-                            <i class="col_50 fz_16">微信收款： <span class="fz_14">1201.1</span></i>
-                            <i class="col_50 fz_16">现金收款： <span class="fz_14">1201.1</span></i>
-                        </p>
-                         <p class="zongji_top dis_flex ">
-                            <i class="col_50 fz_16">支付宝： <span class="fz_14">1201.1</span></i>
-                            <i class="col_50 fz_16">银行卡： <span class="fz_14">1201.1</span></i>
-                        </p>
+                    <div class="zongji mart_10" id="PaidCount_list">
+                       <!--统计-->
                     </div>
                     <ul class="zbsh-tab1" id="content_list">
 
@@ -217,7 +134,79 @@
         {{/if}}
 
     </script>
+    <script id="PaidCount_list_temp" type="text/html">
+        <p class="zongji_top dis_flex  marb_10">
+            <i class="col_50 fz_16">汇总运费： <span class="fz_14">{{data.Freight}}</span></i>
+            <i class="col_50 fz_16">汇总代收： <span class="fz_14">{{data.GReceivables}}</span></i>
+        </p>
 
+        <p class="zongji_top dis_flex marb_10">
+            <i class="col_50 fz_16">微信收款： <span class="fz_14">1201.1</span></i>
+            <i class="col_50 fz_16">现金收款： <span class="fz_14">1201.1</span></i>
+        </p>
+        <p class="zongji_top dis_flex ">
+            <i class="col_50 fz_16">支付宝： <span class="fz_14">1201.1</span></i>
+            <i class="col_50 fz_16">银行卡： <span class="fz_14">1201.1</span></i>
+        </p>
+    </script>
+    <script id="kongjian_temp" type="text/html">
+
+        <div class="check_tab_nav jus_bet dis_flex ali_center ">
+            <div class="check_left col_40 txt_right row_44 li_row_44">
+                <span>一周</span>
+                <span class="iconfont fz_18" style="color: #7d7d7d;"></span>
+            </div>
+            <div class="check_right col_40 txt_left row_44 li_row_44">
+                <span>线路</span>
+                <span class="iconfont fz_18" style="color: #7d7d7d;"></span>
+            </div>
+        </div>
+
+        <div class="check_main check_main_left pos_a col_100 white bor_top  dis_none" style="top: 2.2rem; z-index: 2;">
+            <form class="bor_bottom" style="padding: 1rem; margin: 0 .3rem;">
+                <label class="dis_flex jus_bet ali_center fz_14 line_he_40">
+                    今天
+                    <input name="time" type="radio" class="col_50 bor_none dis_none txt_right iconfont icon-right" onclick="SelectDate()">
+                </label>
+                <label class="dis_flex jus_bet ali_center fz_14 line_he_40 active">
+                    最近一周
+                    <input name="time" type="radio" class="col_50 bor_none  dis_none txt_right iconfont icon-right" onclick="aweek()">
+                </label>
+                <label class="dis_flex jus_bet ali_center fz_14 line_he_40">
+                    最近一月
+                    <input name="time" type="radio" class="col_50 bor_none dis_none txt_right iconfont icon-right" onclick="OneMonth()">
+                </label>
+                <label class="dis_flex jus_bet ali_center fz_14 line_he_40">
+                    最近三月
+                    <input name="time" type="radio" class="col_50 bor_none dis_none txt_right iconfont icon-right" onclick="ThreeMonth()">
+                </label>
+            </form>
+            <div class="dis_flex jus_aro bor_bottom" style="padding: .5rem;">
+                <input class="gray col_30" type="date" id="startTime">
+                <span class="iconfont icon-hengxian"></span>
+                <input class="gray col_30" type="date" id="endTime">
+                <input class="close_btn  col_25" type="button" style="color: #5986de; border: 1px solid #5986de; padding: 0;" name="SouSuo" value="确定">
+            </div>
+        </div>
+
+        <div class="check_main check_main_right pos_a col_100 white bor_top dis_none" style="top: 2.2rem; z-index: 2;">
+            <ul>
+                <form class="bor_bottom" style="padding: 1rem 0; margin: 0 .3rem;">
+                    {{if data.length>0}}
+                    {{each data as v}}
+                    <label class="dis_flex jus_bet ali_center fz_14 line_he_40">
+                        {{v.start_sheng}} {{v.start_shi}} {{v.start_qu}}---------{{v.end_sheng}} {{v.end_shi}} {{v.end_qu}}
+                        <input name="endline" id="endline" startdata="{{v.UID}}" value="{{v.BindLogisticsUid}}" type="radio" class="bor_none col_30 dis_none txt_right iconfont icon-right">
+                    </label>
+                    {{/each}}
+                    {{/if}}
+                </form>
+            </ul>
+            <div class="dis_flex bor_bottom" style="padding: .5rem; justify-content: flex-end;">
+                <input class="close_btn col_25" type="button" style="color: #5986de; border: 1px solid #5986de; padding: 0;" name="SouSuo" value="确定">
+            </div>
+        </div>
+    </script>
     <script>
         $(function () {
             $.init();
@@ -231,7 +220,97 @@
                     $("#content_list").html(html);
                 }
             });
+             GetHTML("GetPaidCount", { state: 0 }, function (data) {
+                if (CheckHTMLData(data)) {
+                    let html = TempToHtml("PaidCount_list_temp", data);
+                    $("#PaidCount_list").html(html);
+                }
+            });
+            if ($(".check_box.row_44.white.pos_r") != null) {
+                GetHTML("GetMyLineList", {}, function (data) {
+                    if (CheckHTMLData(data)) {
+                        let html = TempToHtml("kongjian_temp", data);
+                        $(".check_box.row_44.white.pos_r").html(html);
+                        InitKongJian();
+                        //增加搜索按钮事件
+                        $("input[name^='SouSuo']").click(function () {
+                            //取选择的时间
+                            let startTime = $("#startTime").val();
+                            let endTime = $("#endTime").val();
+                            let startline = $('input[name="endline"]:checked').attr("startdata");
+                            let endline = $('input[name="endline"]:checked').val();
+                            RunSouSuo(startTime, endTime, startline, endline);
+                        });
+                    }
+                });
+            }
         });
+        //进后台
+        function RunSouSuo(startTime, endTime, startline, endline) {
+                //日期查询
+                var accuracystartTime = startTime + " 00:00:00";
+                var accuracyendTime = endTime + " 23:59:59";
+                GetHTML("GetPaymentRecording", { state: 0, starttime: accuracystartTime, endtime: accuracyendTime }, function (data) {
+                    if (CheckHTMLData(data)) {
+                        let html = TempToHtml("content_list_temp", data);
+                        $("#content_list").html(html);
+                    }
+                });
+        }
+        //获取今天日期
+        function SelectDate() {
+            var myDate = new Date();
+            var yue = myDate.getMonth() + 1
+            var dqDate = myDate.getFullYear() + "-" + yue + "-" + myDate.getDate();
+            var dqDate2 = Format(new Date(Date.parse(dqDate)), "yyyy-MM-dd");
+            $("#startTime").val(dqDate2);
+            $("#endTime").val(dqDate2);
+        }
+        //当前时间
+        function CurrentDate() {
+            var myDate = new Date();
+            var yue = myDate.getMonth() + 1
+            var dqDate = myDate.getFullYear() + "-" + yue + "-" + myDate.getDate();
+            var dqDate2 = Format(new Date(Date.parse(dqDate)), "yyyy-MM-dd");
+            $("#endTime").val(dqDate2);
+        }
+        //获取一周前的日期
+        function aweek() {
+            debugger;
+            var now = new Date();
+            var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var AweekDate = year + "-" + month + "-" + day;
+            $("#startTime").val(Format(new Date(Date.parse(AweekDate)), "yyyy-MM-dd"));
+            var yue = now.getMonth() + 1
+            var dqDate = now.getFullYear() + "-" + yue + "-" + now.getDate();
+            var dqDate2 = Format(new Date(Date.parse(dqDate)), "yyyy-MM-dd");
+            $("#endTime").val(dqDate2);
+        }
+        //前一个月
+        function OneMonth() {
+            var nowdate = new Date();
+            nowdate.setMonth(nowdate.getMonth() - 1);
+            var year = nowdate.getFullYear();
+            var month = nowdate.getMonth() + 1;
+            var day = nowdate.getDate();
+            var AweekDate = year + "-" + month + "-" + day;
+            $("#startTime").val(Format(new Date(Date.parse(AweekDate)), "yyyy-MM-dd"));
+            CurrentDate();
+        }
+        //前三个月
+        function ThreeMonth() {
+            var nowdate = new Date();
+            nowdate.setMonth(nowdate.getMonth() - 3);
+            var year = nowdate.getFullYear();
+            var month = nowdate.getMonth() + 1;
+            var day = nowdate.getDate();
+            var AweekDate = year + "-" + month + "-" + day;
+            $("#startTime").val(Format(new Date(Date.parse(AweekDate)), "yyyy-MM-dd"));
+            CurrentDate();
+        }
     </script>
 
 </body>

@@ -77,7 +77,11 @@ namespace DAL.DAL
                 where += " and HistoryTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
                 where += " and beginUID=@beginUID and finishUID=@finishUID";
-
+            else
+            {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取回收汇总
             sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_History), new string[] { "sum(largeCar)" }, $"State<>@State  {where}", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@logisticsID",myuservo.uid), //与我相关
@@ -96,7 +100,11 @@ namespace DAL.DAL
                 where += " and HistoryTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
                 where += " and beginUID=@beginUID and finishUID=@finishUID";
-
+            else
+            {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取回收汇总
             sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_History), new string[] { "sum(Freight)" }, $"State<>@State  {where}", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@logisticsID",myuservo.uid), //与我相关
@@ -124,7 +132,11 @@ namespace DAL.DAL
                 where += " and HistoryTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
                 where += " and beginUID=@beginUID and finishUID=@finishUID";
-
+            else
+            {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取回收汇总
             sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_History),new string[] { "sum(Freight)" }, $"State=@State  {where}", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@logisticsID",myuservo.uid), //与我相关
@@ -143,7 +155,11 @@ namespace DAL.DAL
                 where += " and a.LastOperationTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
                 where += " and b.beginUID=@beginUID and b.finishUID=@finishUID";
-
+            else
+            {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取与我相关的全部订单
             sql = new SuperDataBase.Vo.SqlVO($@"SELECT
 	                count(OrderNumber)
@@ -152,7 +168,7 @@ namespace DAL.DAL
 	                {nameof(Model.Model.LC_Customer)} b
                 WHERE
 	                a.OrderNumber = b.OrderID AND
-                b.finishUID = {myuservo.uid} {where}
+                b.finishUID ='{myuservo.uid}' {where}
                 group by OrderNumber");
             ids = db.Read(sql);
             if (!ids.flag)
@@ -170,11 +186,15 @@ namespace DAL.DAL
                 where += " and {0}.LastOperationTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
                 where += " and {1}.beginUID=@beginUID and {1}.finishUID=@finishUID";
-
+            else
+            {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取回收汇总
             sql = makesql.MakeCount(new Type[] { typeof(Model.Model.LC_Payment_History), typeof(Model.Model.LC_Customer) }, "{0}.OrderNumber={1}.OrderID and {0}.LastOperatorsUID=@LastOperatorsUID and {0}.LocationLogisticsUID=LastOperatorsUID and {0}.LastState <> 1" + where, new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@LastOperatorsUID",myuservo.uid)
-            });
+            }, "{0}.id");
             ids = db.Read(sql);
             if (!ids.flag)
                 return 0;
@@ -188,11 +208,15 @@ namespace DAL.DAL
                 where += " and {0}.LastOperationTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
                 where += " and {1}.beginUID=@beginUID and {1}.finishUID=@finishUID";
-
+            else
+            {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取未上缴汇总
             sql = makesql.MakeCount(new Type[] { typeof(Model.Model.LC_Payment_History), typeof(Model.Model.LC_Customer) }, "{0}.OrderNumber={1}.OrderID and {0}.LastOperatorsUID=@LastOperatorsUID and {0}.LocationLogisticsUID=LastOperatorsUID and {0}.LastState<>2" + where, new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@LastOperatorsUID",myuservo.uid)
-            });
+            }, "{0}.id");
             ids = db.Read(sql);
             if (!ids.flag)
                 return 0;
@@ -206,11 +230,15 @@ namespace DAL.DAL
                 where += " and {0}.LastOperationTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
                 where += " and {1}.beginUID=@beginUID and {1}.finishUID=@finishUID";
-
+            else
+            {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取上缴汇总
-            sql = makesql.MakeCount(new Type[] { typeof(Model.Model.LC_Payment_History), typeof(Model.Model.LC_Customer) }, "{0}.OrderNumber={1}.OrderID and {0}.LastOperatorsUID=@LastOperatorsUID and {0}.LocationLogisticsUID<>LastOperatorsUID and {0}.LastState<>2" + where, new System.Data.SqlClient.SqlParameter[] {
+            sql = makesql.MakeCount(new Type[] { typeof(Model.Model.LC_Payment_History), typeof(Model.Model.LC_Customer) }, "{0}.OrderNumber={1}.OrderID and {0}.LastOperatorsUID=@LastOperatorsUID and {0}.LocationLogisticsUID<>LastOperatorsUID and {0}.LastState<>2" + where,new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@LastOperatorsUID",myuservo.uid)
-            });
+            },"{0}.id");
             ids = db.Read(sql);
             if (!ids.flag)
                 return 0;
@@ -229,7 +257,11 @@ namespace DAL.DAL
                 where += " and HistoryTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
                 where += " and beginUID=@beginUID and finishUID=@finishUID";
-
+            else
+            {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取接单数
             sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_History), new string[] { "count(FHPhone)" }, $"State=@State and logisticsID=@logisticsID {where}  group by FHPhone", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@State",OrderStateEnum.客户取货.EnumToInt()),
@@ -253,7 +285,11 @@ namespace DAL.DAL
                 where += " and HistoryTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
                 where += " and beginUID=@beginUID and finishUID=@finishUID";
-
+            else
+            {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取接单数
             sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_History), new string[] { "count(FHPhone)" }, $"State=@State and logisticsID=@logisticsID {where}  group by FHPhone", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@State",OrderStateEnum.已发货.EnumToInt()),
@@ -277,7 +313,11 @@ namespace DAL.DAL
                 where += " and HistoryTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
                 where += " and beginUID=@beginUID and finishUID=@finishUID";
-
+            else
+            {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取接单数
             sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_History), new string[] { "count(VehicleID)" }, $"State=@State and logisticsID=@logisticsID {where}  group by VehicleID", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@State",OrderStateEnum.已装车运输中.EnumToInt()),
@@ -310,8 +350,11 @@ namespace DAL.DAL
                 where += " and HistoryTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
                 where += " and beginUID=@beginUID and finishUID=@finishUID";
-
-
+            else
+            {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取接单数
             sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_History), new string[] { "count(VehicleID)" }, $"State in({OrderStateEnum.已到收货地可提货.EnumToInt()},{OrderStateEnum.货物已中转.EnumToInt()}) and logisticsID=@logisticsID {where}  group by VehicleID", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@logisticsID",myuservo.uid),
@@ -334,6 +377,11 @@ namespace DAL.DAL
                 where += " and HistoryTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
                 where += " and beginUID=@beginUID and finishUID=@finishUID";
+            else
+            {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取接单数
             sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_History), new string[] { "sum(Number)" }, $"State=@State and logisticsID=@logisticsID {where}", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@State",OrderStateEnum.订单完成.EnumToInt()),
@@ -357,6 +405,11 @@ namespace DAL.DAL
                 where += " and HistoryTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
                 where += " and beginUID=@beginUID and finishUID=@finishUID";
+            else
+            {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取接单数
             sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_History), new string[] { "sum(Number)" }, $"State=@State and logisticsID=@logisticsID {where}", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@State",OrderStateEnum.已装车运输中.EnumToInt()),
@@ -389,6 +442,11 @@ namespace DAL.DAL
                 where += " and HistoryTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
                 where += " and beginUID=@beginUID and finishUID=@finishUID";
+            else
+            {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取接单数
             sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_History), new string[] { "sum(Number)" }, $"State=@State and logisticsID=@logisticsID {where}", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@State",OrderStateEnum.物流已收货.EnumToInt()),
@@ -412,6 +470,11 @@ namespace DAL.DAL
                 where += " and HistoryTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
                 where += " and beginUID=@beginUID and finishUID=@finishUID";
+            else
+            {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取接单数
             sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_History), new string[] { "count(Number)" }, $"State=@State and logisticsID=@logisticsID {where}", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@State",OrderStateEnum.订单完成.EnumToInt()),
@@ -444,6 +507,11 @@ namespace DAL.DAL
                 where += " and HistoryTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
                 where += " and beginUID=@beginUID and finishUID=@finishUID";
+            else
+            {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取接单数
             sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_History), new string[] { "count(Number)" }, $"State in({OrderStateEnum.已到收货地可提货.EnumToInt()},{OrderStateEnum.货物已中转.EnumToInt()}) and logisticsID=@logisticsID {where}", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@logisticsID",myuservo.uid),
@@ -466,6 +534,11 @@ namespace DAL.DAL
                 where += " and HistoryTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
                 where += " and beginUID=@beginUID and finishUID=@finishUID";
+            else
+            {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取接单数
             sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_History), new string[] { "count(Number)" }, $"State=@State and logisticsID=@logisticsID {where}", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@State",OrderStateEnum.已装车运输中.EnumToInt()),
@@ -488,7 +561,13 @@ namespace DAL.DAL
             if (!starttime.IsNull() && !endtime.IsNull())
                 where += " and HistoryTime between @starttime and @endtime";
             if (startuid.StrIsNotNull() && enduid.StrIsNotNull())
+            {
                 where += " and beginUID=@beginUID and finishUID=@finishUID";
+            }
+            else {
+                startuid = string.Empty;
+                enduid = string.Empty;
+            }
             //获取接单数
             sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_History), new string[] { "count(Number)" }, $"State=@State and logisticsID=@logisticsID {where}", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@State",OrderStateEnum.已装车运输中.EnumToInt()),
@@ -519,6 +598,7 @@ namespace DAL.DAL
             string where = string.Empty;
             if (!starttime.IsNull() && !endtime.IsNull())
                 where += " and HistoryTime between @starttime and @endtime";
+
             //获取接单数
             sql = makesql.MakeSelectFieldSql(typeof(Model.Model.LC_History), new string[] { "count(Number)" }, $"State=@State and logisticsID=@logisticsID {where}", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@State",GlobalBLL.OrderStateEnum.物流已收货.EnumToInt()),

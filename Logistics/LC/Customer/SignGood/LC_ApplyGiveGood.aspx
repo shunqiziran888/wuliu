@@ -147,7 +147,8 @@
         var OID = document.getElementById("OID").value;
         var DetailedAddress = document.getElementById("DetailedAddress").value;
         var DeliveryCost = document.getElementById("DeliveryCost").value;
-        alert(OID + " and " + DetailedAddress + " and " + DeliveryCost);
+        //alert(OID + " and " + DetailedAddress + " and " + DeliveryCost);
         <%--href = "/LC/Customer/SignGood/LC_GiveSuccess.aspx?OID=<%=list.GetIndexValue(0).OrderID%>--%>
+        window.location.href = "/LC/Customer/SignGood/LC_GiveSuccess.aspx?OID=" + OID + "&DetailedAddress=" + DetailedAddress + "&DeliveryCost=" + DeliveryCost+"";
     }
 </script>

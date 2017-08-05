@@ -35,7 +35,11 @@ namespace Logistics.ApiCommand
                 //获取我登陆的数据
                 var myuservo = web.GetMyLoginUserVO();
                 if (!myuservo.IsLogin)
+                {
+                    web.SessionClear();
                     return (false, "您还没有登陆!");
+                }
+
                 return (true, string.Empty);
             }
             return (true, string.Empty);

@@ -44,6 +44,18 @@ namespace DAL.DAL
         /// <returns></returns>
         private static (bool,string) AddToHistory(Model.Model.LC_Customer lcc,SuperDataBase.Model.DBSandbox db)
         {
+            sql = makesql.MakeCount(nameof(Model.Model.LC_History), "OrderID=@OrderID and state=@state", new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@state",lcc.State),
+                new System.Data.SqlClient.SqlParameter("@OrderID",lcc.OrderID)
+            });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg);
+            if (ids.Count()>0)
+            {
+                return (true, "已经存在了相同的状态");
+            }
+
             sql = makesql.MakeInsertSQL(new Model.Model.LC_History()
             {
                 begins = lcc.begins,
@@ -764,6 +776,44 @@ namespace DAL.DAL
             if (ids.ReadIsOk())
                 return (true, string.Empty, ids.GetFristData<decimal>(0));
             return (true, "没有任何数据!", 0);
+        }
+        /// <summary>
+        /// 条件查询：路线
+        /// </summary>
+        /// <param name="UID"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetCityOrderList(string UID,string start,string end)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "logisticsID=@logisticsID and beginUID=@beginUID and finishUID=@finishUID", new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@logisticsID",UID),
+                new System.Data.SqlClient.SqlParameter("@beginUID",start),
+                new System.Data.SqlClient.SqlParameter("@finishUID",end)
+            });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);
+            if (ids.ReadIsOk())
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Customer>());
+            return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, "没有任何数据!", new List<Model.Model.LC_Customer>());
+        }
+        /// <summary>
+        /// 条件查询：日期
+        /// </summary>
+        /// <param name="UID"></param>
+        /// <param name="StartTime"></param>
+        /// <param name="EndTime"></param>
+        /// <returns></returns>
+        public static Tuple<bool, string, List<Model.Model.LC_Customer>> GetDateOrderList(string UID, string StartTime, string EndTime)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Customer), "ConsigneeTime between '"+StartTime+"' and '"+EndTime+ "' and logisticsID='"+UID+"'");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(false, ids.errormsg, null);
+            if (ids.ReadIsOk())
+                return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, string.Empty, ids.GetVOList<Model.Model.LC_Customer>());
+            return new Tuple<bool, string, List<Model.Model.LC_Customer>>(true, "没有任何数据!", new List<Model.Model.LC_Customer>());
         }
     }
 }
