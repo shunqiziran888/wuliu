@@ -329,5 +329,23 @@ namespace DAL.DAL
                 return (false,"没有任何数据!",null);
             return (true, string.Empty, ids.GetVOList<Model.Model.LC_Position>()[0]);
         }
+
+        /// <summary>
+        /// 获取物流公司索引
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public static (bool flag, string msg, long index) GetLogisticsIndex(string uid)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_History), "state in (1,4) and logisticsID=@logisticsID ", new SqlParameter[] {
+                new SqlParameter("@logisticsID",uid)
+            },"id asc",1);
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, 0);
+            if (!ids.ReadIsOk())
+                return (false, "没有找到任何数据!", 0);
+            return (true, string.Empty, ids.GetVOList<Model.Model.LC_History>()[0].ID.ConvertData<long>());
+        }
     }
 }

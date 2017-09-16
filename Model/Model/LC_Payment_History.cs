@@ -46,6 +46,10 @@ namespace Model.Model
         /// </summary>
         private string _LastOperatorsUID;
         /// <summary>
+        /// 当前物流索引
+        /// </summary>
+        private long? _LocationLogisticsIndex;
+        /// <summary>
         /// 
         /// </summary>
         public long? id
@@ -116,6 +120,14 @@ namespace Model.Model
         {
             set { _LastOperatorsUID = value;}
             get { return _LastOperatorsUID; }
+        }
+        /// <summary>
+        /// 当前物流索引
+        /// </summary>
+        public long? LocationLogisticsIndex
+        {
+            set { _LocationLogisticsIndex = value;}
+            get { return _LocationLogisticsIndex; }
         }
     }
 }

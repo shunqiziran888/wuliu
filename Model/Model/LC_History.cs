@@ -10,10 +10,6 @@ namespace Model.Model
         public LC_History()
         {}
         /// <summary>
-        /// 
-        /// </summary>
-        private int? _ID;
-        /// <summary>
         /// 订单ID
         /// </summary>
         private string _OrderID;
@@ -152,11 +148,7 @@ namespace Model.Model
         /// <summary>
         /// 
         /// </summary>
-        public int? ID
-        {
-            set { _ID = value;}
-            get { return _ID; }
-        }
+        private long? _ID;
         /// <summary>
         /// 订单ID
         /// </summary>
@@ -428,6 +420,14 @@ namespace Model.Model
         {
             set { _HistoryTime = value;}
             get { return _HistoryTime; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public long? ID
+        {
+            set { _ID = value;}
+            get { return _ID; }
         }
     }
 }

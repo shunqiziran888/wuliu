@@ -300,9 +300,9 @@ namespace DAL.DAL
             var f = paymentlist.Where(x => x.StartLogisticsUID.Equals(x.LocationLogisticsUID, StringComparison.OrdinalIgnoreCase)).ToList();
             if (f.Count > 0)
                 return (false, "当前操作存在非上缴货款项，操作失败!");
-
+            
             //更新到上缴人
-            sql = new SuperDataBase.Vo.SqlVO($@"update a set LocationLogisticsUID=b.beginUID,a.LastOperationTime=@LastOperationTime,a.LastOperatorsUID='{myuservo.uid}',a.LastState=0 FROM {nameof(Model.Model.LC_Payment)} a,{nameof(Model.Model.LC_History)} b 
+            sql = new SuperDataBase.Vo.SqlVO($@"update a set LocationLogisticsIndex=(select top 1 ID from {nameof(Model.Model.LC_History)} where state in ({GlobalBLL.OrderStateEnum.已发货.EnumToInt()},{OrderStateEnum.已到收货地可提货.EnumToInt()}) and logisticsID=b.beginUID order by id asc) LocationLogisticsUID=b.beginUID , a.LastOperationTime=@LastOperationTime,a.LastOperatorsUID='{myuservo.uid}',a.LastState=0 FROM {nameof(Model.Model.LC_Payment)} a,{nameof(Model.Model.LC_History)} b 
                                                                         where a.OrderNumber in ({paymentlist.Select(x => $"'{x.OrderNumber}'").ToList().ListToString()}) 
                                                                         and a.OrderNumber=b.OrderID 
                                                                         and b.State = {GlobalBLL.OrderStateEnum.订单完成.EnumToInt()}

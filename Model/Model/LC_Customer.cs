@@ -12,7 +12,7 @@ namespace Model.Model
         /// <summary>
         /// 
         /// </summary>
-        private int? _ID;
+        private long? _ID;
         /// <summary>
         /// 订单ID
         /// </summary>
@@ -146,14 +146,17 @@ namespace Model.Model
         /// </summary>
         private string _finishUID;
         /// <summary>
-        /// 送货详细地址
+        /// 详细地址
         /// </summary>
-        private string _DetailedAddress;
+        private string _DetaileAddress;
         /// <summary>
-        /// 送货费用
+        /// 送货费
         /// </summary>
         private decimal? _DeliveryCost;
-        public int? ID
+        /// <summary>
+        /// 
+        /// </summary>
+        public long? ID
         {
             set { _ID = value;}
             get { return _ID; }
@@ -422,8 +425,21 @@ namespace Model.Model
             set { _finishUID = value;}
             get { return _finishUID; }
         }
-
-        public string DetailedAddress { get => _DetailedAddress; set => _DetailedAddress = value; }
-        public decimal? DeliveryCost { get => _DeliveryCost; set => _DeliveryCost = value; }
+        /// <summary>
+        /// 详细地址
+        /// </summary>
+        public string DetaileAddress
+        {
+            set { _DetaileAddress = value;}
+            get { return _DetaileAddress; }
+        }
+        /// <summary>
+        /// 送货费
+        /// </summary>
+        public decimal? DeliveryCost
+        {
+            set { _DeliveryCost = value;}
+            get { return _DeliveryCost; }
+        }
     }
 }

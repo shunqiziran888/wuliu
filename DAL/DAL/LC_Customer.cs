@@ -292,6 +292,7 @@ namespace DAL.DAL
                         StartLogisticsUID = fastordervo.logisticsID,
                         OrderNumber = lcc.OrderID,
                         PaymentAllAmount = lcc.Freight + lcc.GReceivables + lcc.OtherExpenses,
+                        LocationLogisticsIndex = GetLogisticsIndex(lcc.logisticsID).index
                     });
                     ids = db.Exec(sql);
                     if (!ids.flag)
