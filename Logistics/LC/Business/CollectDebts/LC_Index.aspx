@@ -85,94 +85,8 @@
                             <input type="search" id='search' placeholder='搜索订单' />
                         </div>
                     </div>
-                    <ul>
-                        
-                        <li class="white pad_20 mart_10">
-                            <a href="/LC/Business/CollectDebts/LC_CDtDetails.aspx" class="dis_flex ali_center">
-                                <div class="col_90">
-                                    <p class=" line_he_30 fz_16">
-                                        收货人：<span class="fz_14 fc_ash">马大哈</span>
-                                    </p>
-                                    <p class=" line_he_30 fz_16">
-                                        起始日期：<span class="fz_14 fc_ash">2016-01-26----2017 05-20</span>
-                                    </p>
-                                    <div>
-                                        <p class="dis_flex line_he_30 fz_16">
-                                            <i class="col_50">
-                                                欠款单数：
-                                                <span class="fz_14 fc_ash">
-                                                    1544单
-                                                </span>
-                                            </i>
-                                            <i class="col_50">
-                                                欠运费：
-                                                <span class="fz_14 fc_ash">
-                                                    1544
-                                                </span>
-                                            </i>
-                                        </p>
-                                        <p class="dis_flex line_he_30 fz_16">
-                                            <i class="col_50">
-                                                欠代收：
-                                                <span class="fz_14 fc_ash">
-                                                    1544
-                                                </span>
-                                            </i>
-                                            <i class="col_50">
-                                                欠款总额：
-                                                <span class="fz_14 fc_ash">
-                                                    1544
-                                                </span>
-                                            </i>
-                                        </p>
-                                    </div>
-                                </div>
-                                <i class="iconfont col_10">&#xe633;</i>
-                            </a>
-                        </li>
-                        <li class="white pad_20 mart_10">
-                            <a href="/LC/Business/CollectDebts/LC_CDtDetails.aspx" class="dis_flex ali_center">
-                                <div class="col_90">
-                                    <p class=" line_he_30 fz_16">
-                                        收货人：<span class="fz_14 fc_ash">马大哈</span>
-                                    </p>
-                                    <p class=" line_he_30 fz_16">
-                                        起始日期：<span class="fz_14 fc_ash">2016-01-26----2017 05-20</span>
-                                    </p>
-                                    <div>
-                                        <p class="dis_flex line_he_30 fz_16">
-                                            <i class="col_50">
-                                                欠款单数：
-                                                <span class="fz_14 fc_ash">
-                                                    1544单
-                                                </span>
-                                            </i>
-                                            <i class="col_50">
-                                                欠运费：
-                                                <span class="fz_14 fc_ash">
-                                                    1544
-                                                </span>
-                                            </i>
-                                        </p>
-                                        <p class="dis_flex line_he_30 fz_16">
-                                            <i class="col_50">
-                                                欠代收：
-                                                <span class="fz_14 fc_ash">
-                                                    1544
-                                                </span>
-                                            </i>
-                                            <i class="col_50">
-                                                欠款总额：
-                                                <span class="fz_14 fc_ash">
-                                                    1544
-                                                </span>
-                                            </i>
-                                        </p>
-                                    </div>
-                                </div>
-                                <i class="iconfont col_10">&#xe633;</i>
-                            </a>
-                        </li>
+                    <ul id="content_list">
+                        <%--数据模板--%>
                     </ul>
                 </div>
             </div>
@@ -181,10 +95,75 @@
 
     <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
      <script src="/Style/scripts/all.js"></script>
+    <script type="text/html" id="content_list_temp">
+         {{if data.length>0}}
+        {{each data as v}}
+     <li class="white pad_20 mart_10">
+        <a href="/LC/Business/CollectDebts/LC_CDtDetails.aspx?SHPhone={{v.SHPhone}}" class="dis_flex ali_center">
+            <div class="col_90">
+                <p class=" line_he_30 fz_16">
+                    收货人：<span class="fz_14 fc_ash">{{v.Consignee}}</span>
+                </p>
+                <p class=" line_he_30 fz_16">
+                    起始日期：<span class="fz_14 fc_ash">{{v.StartTime}}----{{v.EndTime}}</span>
+                </p>
+                <div>
+                    <p class="dis_flex line_he_30 fz_16">
+                        <i class="col_50">
+                            欠款单数：
+                            <span class="fz_14 fc_ash">
+                                {{v.SHPhone1}}单
+                            </span>
+                        </i>
+                        <i class="col_50">
+                            欠运费：
+                            <span class="fz_14 fc_ash">
+                                {{v.Freight}}
+                            </span>
+                        </i>
+                    </p>
+                    <p class="dis_flex line_he_30 fz_16">
+                        <i class="col_50">
+                            欠代收：
+                            <span class="fz_14 fc_ash">
+                                {{v.GReceivables}}
+                            </span>
+                        </i>
+                        <i class="col_50">
+                            欠款总额：
+                            <span class="fz_14 fc_ash">
+                                {{v.Freight+v.GReceivables}}
+                            </span>
+                        </i>
+                    </p>
+                </div>
+            </div>
+            <i class="iconfont col_10">&#xe633;</i>
+        </a>
+    </li>
+         {{/each}}
+        
+        {{else}}
+        <div style="text-align: center; line-height: 200px; overflow: hidden;">无任何数据</div>
+        {{/if}}
+        </script>
     <script>
         $(function () {
             $.init();
             $.config = { router: false }
+        });
+        PageInit(function () {
+            GetHTML("GetCollectDebts", { }, function (data) {
+                if (CheckHTMLData(data)) {
+                    let html = TempToHtml("content_list_temp", data);
+                    $("#content_list").html(html);
+                    RemoveLuyou();
+                }
+            });
+
+
+
+
         });
     </script>
 

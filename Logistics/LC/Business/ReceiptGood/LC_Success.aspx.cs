@@ -29,11 +29,18 @@ namespace Logistics.LC.Business.GoodsReceipt
             int Ends = GetValue<int>("Ends");//详情收货目的地
             string BindLogisticsUid = GetValue("BindLogisticsUid"); //终点的绑定UID
             DateTime ConsigneeTimes = DateTime.Now;
-            if(ShNumber==0 || FreightDetail==0)
+            decimal Total = GetValue<decimal>("Total");
+            if (ShNumber==0 && FreightDetail==0 && Ends==0 && OtherExpenses==0)
             {
-                Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() { State = 2, ConsigneeTime = ConsigneeTimes, Freight = yf, begins = myuservo.AreaID, finish = finish,
-                     beginUID = myuservo.uid,
-                     finishUID = BindLogisticsUid
+                Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() {
+                    State = 2,
+                    ConsigneeTime = ConsigneeTimes,
+                    Freight = yf,
+                    begins = myuservo.AreaID,
+                    finish = finish,
+                    beginUID = myuservo.uid,
+                    finishUID = BindLogisticsUid,
+                    Total=Total
                 }, OrderID, true);
                 if (!vo.Item1)
                 {
@@ -41,20 +48,20 @@ namespace Logistics.LC.Business.GoodsReceipt
                     Debug.Print(vo.Item2);
                     return;
                 }
-                //var volist = DAL.DAL.LC_Customer.GetGRList(OrderID);
-                //if (!volist.Item1)
-                //{
-                //    //有错误
-                //    Debug.Print(volist.Item2);
-                //    return;
-                //}
-                //list = volist.Item3;
             }
            else
             {
-                Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() { State = 2, ConsigneeTime = ConsigneeTimes, Freight = FreightDetail, begins = myuservo.AreaID, finish = Ends,Number= ShNumber, OtherExpenses= OtherExpenses ,
+                Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() {
+                    State = 2,
+                    ConsigneeTime = ConsigneeTimes,
+                    Freight = FreightDetail,
+                    begins = myuservo.AreaID,
+                    finish = Ends,
+                    Number = ShNumber,
+                    OtherExpenses = OtherExpenses ,
                     beginUID = myuservo.uid,
-                    finishUID = BindLogisticsUid
+                    finishUID = BindLogisticsUid,
+                    Total= Total
                 }, OIDDetaila, true);
                 if (!vo.Item1)
                 {

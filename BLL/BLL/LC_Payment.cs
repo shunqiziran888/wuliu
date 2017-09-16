@@ -40,6 +40,20 @@ namespace BLL.BLL
             return DAL.DAL.LC_Payment.GetPaymentRecording(myuservo,state,starttime,endtime,startuid,enduid,page,num, orderlist, HKDetail);
         }
 
+        public static (bool, string, object) Yesterdaybalance(HttpContextBase web)
+        {
+            var myuservo = web.GetMyLoginUserVO();
+            if (myuservo.accountType != AccountTypeEnum.普通用户账号)
+                return (false, "您的权限不足无法访问此列表!", null);
+            var AweekDate = web.GetValue("AweekDate");
+            DateTime zuotian = AweekDate.ConvertData<DateTime>();
+            DateTime fristtime = zuotian.ToString("yyyy-MM-dd 00:00:00").ConvertData<DateTime>();
+            DateTime lasttime = zuotian.ToString("yyyy-MM-dd 23:59:59").ConvertData<DateTime>();
+            DateTime fristToday = DateTime.Now.ToString("yyyy-MM-dd 00:00:00").ConvertData<DateTime>();
+            DateTime lastToday = DateTime.Now.ToString("yyyy-MM-dd 23:59:59").ConvertData<DateTime>();
+            return DAL.DAL.LC_Payment.Yesterdaybalance(myuservo, fristtime, lasttime, fristToday, lastToday);
+        }
+
         public static (bool, string, object) GetPaymentDay(HttpContextBase web)
         {
             var myuservo = web.GetMyLoginUserVO();

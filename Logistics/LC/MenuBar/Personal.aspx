@@ -96,34 +96,99 @@
 
             <nav class="bar bar-tab">
                 <a class="tab-item external " href="/LC/MenuBar/LC_BusinessIndex.aspx">
-                  <span class="icon iconfont icon-filetexto"></span>
-                  <span class="tab-label">物流业务</span>
-              </a>
+                    <span class="icon iconfont icon-filetexto"></span>
+                    <span class="tab-label">物流业务</span>
+                </a>
                 <a class="tab-item external" href="/count/index.html">
-                  <span class="icon iconfont icon-fcstubiao19"></span>
-                  <span class="tab-label">运营统计</span>
-              </a>
+                    <span class="icon iconfont icon-fcstubiao19"></span>
+                    <span class="tab-label">运营统计</span>
+                </a>
                 <a class="tab-item external" href="/manage/index.html">
-                  <span class="icon iconfont icon-guanli"></span>
-                  <span class="tab-label">物流管理</span>
-              </a>
+                    <span class="icon iconfont icon-guanli"></span>
+                    <span class="tab-label">物流管理</span>
+                </a>
                 <a class="tab-item external active" href="/LC/MenuBar/Personal.aspx">
-                  <span class="icon iconfont icon-user-circle"></span>
-                  <span class="tab-label">我的</span>
-              </a>
+                    <span class="icon iconfont icon-user-circle"></span>
+                    <span class="tab-label">我的</span>
+                </a>
             </nav>
-            <div class="content" style="background:#f2f2f2;">
+            <div class="content" style="background: #f2f2f2;">
                 <div class="page-index">
-                    <%--内容--%>
+                    <div class="header" id="txnc">
+                        <%--内容--%>
+                    </div>
+                    <ul class="ul_main" id="MyCount">
+                       <%--统计数据--%>
+                    </ul>
                 </div>
-
-
             </div>
         </div>
     </div>
 
    <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
-
+      <script id="txnc_temp" type="text/html">
+         <div class="header_main">
+                <img src="{{HeadPic}}"><i>{{NickName}}</i>
+            </div>
+    </script>
+    <script type="text/html" id="MyCount_temp">
+        <li class="li_list">
+            <p class="li_title">账户总览</p>
+            <a class="a_box" href="#">
+                <div>
+                    {{if TotalCount==0}}
+                     <p class="p_mian"><span class="span_name">今日结余</span><span class="span_top">￥0</span></p>     
+                    {{else}}
+                    <p class="p_mian"><span class="span_name">今日结余</span><span class="span_top">￥{{TotalCount}}</span></p>
+                     {{/if}}
+                    {{if YesterdayTotalCount==0}}
+                    <p class="p_mian"><span class="span_name">昨日收款</span><span class="span_bottom">￥0</span></p>
+                    {{else}}
+                     <p class="p_mian"><span class="span_name">昨日收款</span><span class="span_bottom">￥{{YesterdayTotalCount}}</span></p> 
+                     {{/if}}
+                </div>
+                <i class="iconfont icon-angle-right"></i>
+            </a>
+        </li>
+        <li class="li_list">
+            <p class="li_title">收支概况</p>
+            <a class="a_box" href="#">
+                <div>
+                    {{if ThismonthCount==0}}
+                    <p class="p_mian"><span class="span_name">本月支出</span><span class="span_top">￥0</span></p>
+                    {{else}}
+                     <p class="p_mian"><span class="span_name">本月支出</span><span class="span_top">￥{{ThismonthCount}}</span></p>
+                    {{/if}}
+                    {{if ThismonthCount==0}}
+                     <p class="p_mian"><span class="span_name">本月收款</span><span class="span_bottom">￥0</span></p>
+                    {{else}}
+                     <p class="p_mian"><span class="span_name">本月收款</span><span class="span_bottom">￥{{ThismonthCount}}</span></p>
+                    {{/if}}
+                   
+                </div>
+                <i class="iconfont icon-angle-right"></i>
+            </a>
+        </li>
+        <li class="li_list">
+            <p class="li_title">应收应付</p>
+            <a class="a_box" href="#">
+                <div>
+                    {{if ThismonthCount==0}}
+                     <p class="p_mian"><span class="span_name">本月应收</span><span class="span_top">￥0</span></p>
+                    {{else}}
+                     <p class="p_mian"><span class="span_name">本月应收</span><span class="span_top">￥{{ThismonthCount}}</span></p>
+                    {{/if}}
+                    {{if ThismonthCount==0}}
+                    <p class="p_mian"><span class="span_name">本月应付</span><span class="span_bottom">￥0</span></p>
+                    {{else}}
+                    <p class="p_mian"><span class="span_name">本月应付</span><span class="span_bottom">￥{{ThismonthCount}}</span></p>
+                    {{/if}}
+                    
+                </div>
+                <i class="iconfont icon-angle-right"></i>
+            </a>
+        </li>
+    </script>
     <script>
         $(function () {
             $.init();
@@ -131,54 +196,33 @@
         });
 
         PageInit(function () {
+            //头像、昵称
             GetHTML("GetLoginData", {}, function (data) {
-                debugger;
                 if (CheckHTMLData(data)) {
-                    let html = TempToHtml("page-index-temp", data.data);
-                    $(".page-index").html(html);
+                    let html = TempToHtml("txnc_temp", data.data);
+                    $("#txnc").html(html);
                 }
             });
+            //获取昨天时间
+            var now = new Date();
+            var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var AweekDate = year + "-" + month + "-" + day;
+            //统计
+            GetHTML("GetMyCount", { AweekDate: AweekDate}, function (data) {
+                if (CheckHTMLData(data)) {
+                    let html = TempToHtml("MyCount_temp", data.data);
+                    $("#MyCount").html(html);
+                }
+            });
+
+
+
         });
     </script>
-    <script id="page-index-temp" type="text/html">
-        <div class="header">
-            <div class="header_main">
-                <img src="{{HeadPic}}"><i>{{NickName}}</i>
-            </div>
-        </div>
-        <ul class="ul_main">
-            <li class="li_list">
-                <p class="li_title">账户总览</p>
-                <a class="a_box" href="#">
-                    <div>
-                        <p class="p_mian"><span class="span_name">今日结余</span><span class="span_top">￥192020.21</span></p>
-                        <p class="p_mian"><span class="span_name">昨日收款</span><span class="span_bottom">￥192020</span></p>
-                    </div>
-                    <i class="iconfont icon-angle-right"></i>
-                </a>
-            </li>
-            <li class="li_list">
-                <p class="li_title">收支概况</p>
-                <a class="a_box" href="#">
-                    <div>
-                        <p class="p_mian"><span class="span_name">本月支出</span><span class="span_top">￥192020.21</span></p>
-                        <p class="p_mian"><span class="span_name">本月收款</span><span class="span_bottom">￥192020</span></p>
-                    </div>
-                    <i class="iconfont icon-angle-right"></i>
-                </a>
-            </li>
-            <li class="li_list">
-                <p class="li_title">应收应付</p>
-                <a class="a_box" href="#">
-                    <div>
-                        <p class="p_mian"><span class="span_name">本月应收</span><span class="span_top">￥192020.21</span></p>
-                        <p class="p_mian"><span class="span_name">本月应付</span><span class="span_bottom">￥192020</span></p>
-                    </div>
-                    <i class="iconfont icon-angle-right"></i>
-                </a>
-            </li>
-        </ul>
-    </script>
+ 
 </body>
 
 </html>

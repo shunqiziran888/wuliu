@@ -129,7 +129,7 @@
             $.config = { router: false }
         });
         function No() {
-            alert("功能暂未开放！");
+            Msg("功能测试阶段中！");
             return;
         }
     </script>

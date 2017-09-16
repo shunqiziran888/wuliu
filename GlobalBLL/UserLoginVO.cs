@@ -73,5 +73,9 @@ namespace GlobalBLL
         /// 区（微信）
         /// </summary>
         public string Country { get; set; }
+        /// <summary>
+        /// 物流名称
+        /// </summary>
+        public string LogisticsName { get; set; }
     }
 }

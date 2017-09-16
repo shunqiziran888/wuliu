@@ -15,6 +15,9 @@ namespace Logistics.LC.Business.DschargeGood
         public List<Model.Model.LC_Customer> list = new List<Model.Model.LC_Customer>();
         public List<Model.Model.LC_Customer> DFHList = new List<Model.Model.LC_Customer>();
         public List<Model.Model.LC_Line> LineList = new List<Model.Model.LC_Line>();
+        public decimal tifu = 0;
+        public decimal xianfu = 0;
+        public decimal koufu = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             var myuservo = GetMyLoginUserVO();
@@ -46,6 +49,33 @@ namespace Logistics.LC.Business.DschargeGood
                 return;
             }
             DFHList = vo2.Item3;
+            //提付
+            var vo3 = DAL.DAL.LC_Customer.GettifuDHG(UID);
+            if (!vo3.Item1)
+            {
+                //有错误
+                Debug.Print(vo3.Item2);
+                return;
+            }
+            tifu = vo3.Item3;
+            //现付
+            var vo4 = DAL.DAL.LC_Customer.GetxianfuDHG(UID);
+            if (!vo4.Item1)
+            {
+                //有错误
+                Debug.Print(vo4.Item2);
+                return;
+            }
+            xianfu = vo4.Item3;
+            //扣付
+            var vo5 = DAL.DAL.LC_Customer.GetkoufuDHG(UID);
+            if (!vo5.Item1)
+            {
+                //有错误
+                Debug.Print(vo5.Item2);
+                return;
+            }
+            koufu = vo5.Item3;
         }
 
     }

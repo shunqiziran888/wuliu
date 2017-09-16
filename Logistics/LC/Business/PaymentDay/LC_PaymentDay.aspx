@@ -67,10 +67,10 @@
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
                 <a href="/LC/MenuBar/LC_BusinessIndex.aspx" class="icon iconfont icon-zuo pull-left"></a>
-                <p class="add_wuliu">
+               <%-- <p class="add_wuliu">
                     <a class="add_icon icon iconfont icon-eventnote pull-right" href="#"></a>
                     <i class="add_txt">历史记录</i>
-                </p>
+                </p>--%>
                 <h1 class="title">日结账</h1>
             </header>
 
@@ -89,15 +89,8 @@
                     <!-- 选择 -->
 
 
-                    <div class="zongji mart_10">
-                        <p class="zongji_top dis_flex  marb_10">
-                            <i class="col_50 fz_16">汇总运费： <span class="fz_14">1201.1</span></i>
-                            <i class="col_50 fz_16">汇总代收： <span class="fz_14">1201.1</span></i>
-                        </p>
-                        <p class="zongji_top dis_flex">
-                            <i class="col_50 fz_16">未装运费： <span class="fz_14">1201.1</span></i>
-                            <i class="col_50 fz_16">未装代收： <span class="fz_14">1201.1</span></i>
-                        </p>
+                    <div class="zongji mart_10" id="PaidCount_list">
+                       <%--数据统计--%>
                     </div>
                     <ul class="zbsh-tab1" id="PaymentDay_list">
                         <%--数据--%>
@@ -108,6 +101,21 @@
     </div>
 
     <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
+    <script id="PaidCount_list_temp" type="text/html">
+        <p class="zongji_top dis_flex  marb_10">
+            <i class="col_50 fz_16">汇总运费： <span class="fz_14">{{data.Freight}}</span></i>
+            <i class="col_50 fz_16">汇总代收： <span class="fz_14">{{data.GReceivables}}</span></i>
+        </p>
+
+        <p class="zongji_top dis_flex marb_10">
+            <i class="col_50 fz_16">微信收款： <span class="fz_14">0元</span></i>
+            <i class="col_50 fz_16">现金收款： <span class="fz_14">0元</span></i>
+        </p>
+        <p class="zongji_top dis_flex ">
+            <i class="col_50 fz_16">支付宝： <span class="fz_14">0元</span></i>
+            <i class="col_50 fz_16">银行卡： <span class="fz_14">0元</span></i>
+        </p>
+    </script>
     <script type="text/html" id="PaymentDay_list_temp">
          {{if data.length>0}}
          {{each data as v}}
@@ -129,11 +137,24 @@
                           <p class="zbsh-shr col_50 fz_16">运费： <span class="ft_color_ash fz_14">{{v.lcc.Freight}}</span></p>
                           <p class="zbsh-hh fc_ash col_50 fz_16">代收款： <span class="fz_14">{{v.lcc.GReceivables}}</span></p>
                       </i>
-                      <p class="fz_16 dis_flex jus_bet ali_center fc_red" style="padding: 0 10%;"><i>合计金额： <span>123</span></i><i class="fz_12 fc_ash">{{v.lch.HistoryTime}}</i></p>
+                      <p class="fz_16 dis_flex jus_bet ali_center fc_red" style="padding: 0 10%;">
+                          {{if v.lcc.freightMode==1}}
+                          <i>合计金额： <span>{{v.lcc.Freight+v.lcc.GReceivables+v.lcc.OtherExpenses}}</span></i>
+                          {{/if}}
+                          {{if v.lcc.freightMode==2}}
+                          <i>合计金额： <span>{{v.lcc.GReceivables+v.lcc.OtherExpenses}}</span></i>
+                          {{/if}}
+                          {{if v.lcc.freightMode==3}}
+                          <i>合计金额： <span>{{(v.lcc.GReceivables-v.lcc.Freight)+v.lcc.OtherExpenses}}</span></i>
+                          {{/if}}
+                          <i class="fz_12 fc_ash">{{v.lch.HistoryTime}}</i>
+                      </p>
                   </div>
               </a>
           </li> 
          {{/each}}
+         {{else}}
+        <div style="text-align: center; line-height: 200px; overflow: hidden;">无任何数据</div>
          {{/if}}
     </script>
         <script id="kongjian_temp" type="text/html">
@@ -209,6 +230,12 @@
                     $("#PaymentDay_list").html(html);
                 }
             });
+            GetHTML("GetPaidCount", { state: 1 }, function (data) {
+                if (CheckHTMLData(data)) {
+                    let html = TempToHtml("PaidCount_list_temp", data);
+                    $("#PaidCount_list").html(html);
+                }
+            });
         if ($(".check_box.row_44.white.pos_r") != null) {
             GetHTML("GetMyLineList", {}, function (data) {
                 if (CheckHTMLData(data)) {
@@ -234,8 +261,8 @@
                 //线路查询
                 GetHTML("PaymentDay", {enduid: endline, startuid: startline }, function (data) {
                     if (CheckHTMLData(data)) {
-                        let html = TempToHtml("content_list_temp", data);
-                        $("#content_list").html(html);
+                        let html = TempToHtml("PaymentDay_list_temp", data);
+                        $("#PaymentDay_list").html(html);
                     }
                 });
             }
@@ -245,8 +272,8 @@
                 var accuracyendTime = endTime + " 23:59:59";
                 GetHTML("PaymentDay", {starttime: accuracystartTime, endtime: accuracyendTime }, function (data) {
                     if (CheckHTMLData(data)) {
-                        let html = TempToHtml("content_list_temp", data);
-                        $("#content_list").html(html);
+                        let html = TempToHtml("PaymentDay_list_temp", data);
+                        $("#PaymentDay_list").html(html);
                     }
                 });
             }

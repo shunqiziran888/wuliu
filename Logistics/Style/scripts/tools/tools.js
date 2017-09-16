@@ -40,6 +40,14 @@ function Format (date,fmt) { //author: meizz
     return fmt;
 }
 
+function filter(str)
+{
+    let laststr = str.substr(str.length - 1, 1);
+    if (laststr == ",") {
+        return str.substr(0, str.length - 1);
+    }
+    return str;
+}
 
 /**
  * 去空格

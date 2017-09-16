@@ -74,7 +74,7 @@
         <div class="page page-current">
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
-                <a href="javascript:;" onclick="history.go(-1)" class="icon iconfont icon-zuo pull-left"></a>
+                <a href="/LC/Business/DschargeGood/IndexDhg.aspx" class="icon iconfont icon-zuo pull-left"></a>
                 <!-- <p class="add_wuliu">
                     <a class="add_icon icon iconfont icon-eventnote pull-right" href="history_log.html"></a>
                     <i class="add_txt">历史记录</i>
@@ -89,11 +89,11 @@
                     <div class="white" style="padding:1rem .5rem;margin-top:1rem;">
                         <p class="dis_flex jus_aro marb_10">
                             <a class="btn col_35 fz_14 txt_center green fc_white" href="/LC/Business/DschargeGood/LC_TransferEdit.aspx?OID=<%=list.GetIndexValue(0)?.OrderID %>&Destination=<%=list.GetIndexValue(0)?.Destination %>">中转</a>
-                            <a class="btn col_35 fz_14 txt_center blue fc_white" href="yuanfan.html">原返</a>
+                            <a class="btn col_35 fz_14 txt_center blue fc_white" onclick="No()">原返</a>
                         </p>
                         <p class="dis_flex jus_aro">
                             <a class="btn col_35 fz_14 txt_center brown fc_white" onclick="CashReceipt('<%=list.GetIndexValue(0)?.OrderID %>')">现金提货</a>
-                            <a class="btn col_35 fz_14 txt_center red fc_white" href="qiankuantihuo.html">欠款提货</a>
+                            <a class="btn col_35 fz_14 txt_center red fc_white" href="/LC/Business/DschargeGood/LC_ArrearsSuccess.aspx?OID=<%=list.GetIndexValue(0).OrderID %>">欠款提货</a>
                         </p>
                     </div>
                     <%foreach (var v in list)
@@ -113,26 +113,75 @@
                             <i class="txt_left fz_16 line_he_40">发货人： <span class=" fz_14 fc_ash"><%=v.Consignor %></span></i>
                             <i class="txt_left fz_16 line_he_40">运费：<span class=" fz_14 fc_ash"><%=v.Freight %></span></i>
                             <i class="txt_left fz_16 line_he_40">代收款：<span class=" fz_14 fc_ash"><%=v.GReceivables %></span></i>
-                            <i class="txt_left fz_16 line_he_40 ">运费提付：<span class=" fz_14 fc_ash">暂不显示（金额）</span></i>
-                            <i class="txt_left fz_16 line_he_40 ">合计金额：<span class=" fz_14 fc_ash">暂不显示（金额）</span></i>
+                              <%if (v.freightMode == 1)
+                                {%>
+                                 <i class="txt_left fz_16 line_he_40 ">运费提付：<span class=" fz_14 fc_ash"><%=v.Freight %></span></i>
+                            <%}%>
+                            <%if (v.freightMode == 2)
+                                {%>
+                                 <i class="txt_left fz_16 line_he_40 ">运费现付：<span class=" fz_14 fc_ash"><%=v.Freight %></span></i>
+                            <%}%>
+                            <%if (v.freightMode == 3)
+                                {%>
+                                 <i class="txt_left fz_16 line_he_40 ">运费扣付：<span class=" fz_14 fc_ash"><%=v.Freight %></span></i>
+                            <%}%>
+                            <%if (list.GetIndexValue(0).freightMode == 1)
+                                    {%>
+                                    <i class="txt_left fz_16 line_he_40 ">合计金额：<span class=" fz_14 fc_ash" id="TotalAmount"><%=list.GetIndexValue(0).GReceivables+list.GetIndexValue(0).Freight+list.GetIndexValue(0).OtherExpenses %></span></i>
+                                <%}%>
+                                <%if (list.GetIndexValue(0).freightMode == 2)
+                                    {%>
+                                        <i class="txt_left fz_16 line_he_40 ">合计金额：<span class=" fz_14 fc_ash" id="TotalAmount"><%=list.GetIndexValue(0).GReceivables+list.GetIndexValue(0).OtherExpenses %></span></i>
+                                <%}%>
+                                <%if (list.GetIndexValue(0).freightMode == 3)
+                                    {%>
+                                        <i class="txt_left fz_16 line_he_40 ">合计金额：<span class=" fz_14 fc_ash" id="TotalAmount"><%=(list.GetIndexValue(0).GReceivables-list.GetIndexValue(0).Freight)+list.GetIndexValue(0).OtherExpenses %></span></i>
+                                <%}%>
                         </p>
                         <p class="dis_flex col_50 line_he_44" style="flex-direction: column;padding-left:.5rem;">
                             
                             <i class="txt_left fz_16 line_he_40">电话： <span class=" fz_14 fc_ash"><%=v.SHPhone %></span></i>
                             <i class="txt_left fz_16 line_he_40">电话： <span class=" fz_14 fc_ash"><%=v.FHPhone %></span></i>
-                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="0" id="SSyf"></i>
-                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="0" id="SSdsk"></i>
-                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="0" id="SStf"></i>
-                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="0" id="SShj"></i>
+                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="<%=v.Freight %>" id="SSyf"></i>
+                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="<%=v.GReceivables %>" id="SSdsk"></i>
+                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="<%=v.Freight %>" id="SStf"></i>
+                            <%if (list.GetIndexValue(0).freightMode == 1)
+                                    {%>
+                                <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="<%=list.GetIndexValue(0).GReceivables+list.GetIndexValue(0).Freight+list.GetIndexValue(0).OtherExpenses %>" id="SShj" onkeyup="fillB()"></i>
+                            <%}%>
+                                <%if (list.GetIndexValue(0).freightMode == 2)
+                                    {%>
+                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="<%=list.GetIndexValue(0).GReceivables+list.GetIndexValue(0).OtherExpenses %>" id="SShj" onkeyup="fillB()"></i>
+                                <%}%>
+                                <%if (list.GetIndexValue(0).freightMode == 3)
+                                    {%>
+                             <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="<%=(list.GetIndexValue(0).GReceivables-list.GetIndexValue(0).Freight)+list.GetIndexValue(0).OtherExpenses %>" id="SShj" onkeyup="fillB()"></i>    
+                            <%}%>
                         </p>
                     </div>
                     <%} %>
                     <div style="line-height:1.5rem;margin-top:.5rem; margin-bottom:.5rem;padding:.5rem;" class=" white">
                         <p class="dis_flex ali_center col_100" style="flex-direction: column;">
-                            <i class="txt_right fz_16 line_he_30">应收合计： <span class=" fz_14 fc_ash">暂不显示（合计）</span></i>
-                            <i class="txt_right fz_16 line_he_30">实收合计： <span class=" fz_14 fc_ash">暂不显示（合计）</span></i>
+
+                            <i class="txt_right fz_16 line_he_30 col_100 dis_flex "><span class="col_40">应收合计：</span> 
+                                <%if (list.GetIndexValue(0).freightMode == 1)
+                                    {%>
+                                    <i><span class="fc_ash"><%=list.GetIndexValue(0).GReceivables+list.GetIndexValue(0).Freight+list.GetIndexValue(0).OtherExpenses %></span></i>
+                                <%}%>
+                                <%if (list.GetIndexValue(0).freightMode == 2)
+                                    {%>
+                                    <i><span class="fc_ash"><%=list.GetIndexValue(0).GReceivables+list.GetIndexValue(0).OtherExpenses %></span></i>
+                                <%}%>
+                                <%if (list.GetIndexValue(0).freightMode == 3)
+                                    {%>
+                                    <i><span class="fc_ash"><%=(list.GetIndexValue(0).GReceivables-list.GetIndexValue(0).Freight)+list.GetIndexValue(0).OtherExpenses %></span></i>
+                                <%}%>
+                                <span class=" fz_14 fc_ash"></span>
+
+                            </i>
+                            <i class="txt_right fz_16 line_he_30 col_100 dis_flex "><span class="col_40">实收合计：</span><span style="padding:0;" class="col_60 fz_16 txt_left"  id="TestSSHJ" ></span></i>
                         </p>
-                        <p class="txt_right fz_12 fc_ash">暂不显示（时间）</p>
+                        <p class="txt_right fz_12 fc_ash"><%=list.GetIndexValue(0).MeetCarTime %></p>
                     </div>
                 </div>
             </div>
@@ -144,6 +193,8 @@
         $(function () {
             $.init();
             $.config = { router: false }
+            var TotalAmount = document.getElementById("TotalAmount").innerHTML;
+            document.getElementById("TestSSHJ").innerHTML = "" + TotalAmount + "";
         });
     </script>
     <script type="text/javascript">
@@ -153,7 +204,22 @@
             var SSdsk = $ ("#SSdsk").val();
             var SStf = $("#SStf").val();
             var SShj = $("#SShj").val();
-            window.location.href = "/LC/Business/DschargeGood/LC_Success.aspx?OID=" + OID + "&SSyf=" + SSyf + "&SSdsk=" + SSdsk + "&SStf=" + SStf + "&SShj=" + SShj+"";
+            var TotalAmount = document.getElementById("TotalAmount").innerHTML;
+            window.location.href = "/LC/Business/DschargeGood/LC_Receivables.aspx?OID=" + OID + "&SSyf=" + SSyf + "&SSdsk=" + SSdsk + "&SStf=" + SStf + "&SShj=" + SShj + "&TotalAmount=" + TotalAmount;
+        }
+        function fillB() {
+            var a = document.getElementById("SShj").value;
+            if (a != "") {
+                document.getElementById("TestSSHJ").innerHTML = parseInt(a);
+            }
+            else if (a == "") {
+                var TotalAmount = document.getElementById("TotalAmount").innerHTML;
+                document.getElementById("TestSSHJ").innerHTML = "" + TotalAmount + "";
+            }
+        }
+        function No()
+        {
+            Msg("功能正在测试中！");
         }
     </script>
 </body>

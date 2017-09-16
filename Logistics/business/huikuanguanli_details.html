@@ -160,8 +160,8 @@
 
                     <div class="zongji mart_10">
                         <p class="zongji_top dis_flex  marb_10">
-                            <i class="col_50 fz_16">汇总运费： <span class="fz_14">1201.1</span></i>
-                            <i class="col_50 fz_16">汇总代收： <span class="fz_14">1201.1</span></i>
+                            <i class="col_50 fz_16">汇总运费： <span class="fz_14" id="testyf"></span></i>
+                            <i class="col_50 fz_16">汇总代收： <span class="fz_14" id="testdsk"></span></i>
                         </p>
                         <p class="zongji_top dis_flex  marb_10">
                             <i class="col_50 fz_16">微信收款： <span class="fz_14">1201.1</span></i>
@@ -186,6 +186,7 @@
         {{if data.length>0}}
         {{each data as v}}
         <li class="zbsh-li" style="padding:.5rem 10%;">
+            <input type="checkbox" name="checkCommd" value="{{v.lcc.OrderID}},{{v.lcc.Freight}},{{v.lcc.GReceivables}}" style="display:none" />
             <a href="#">
                 <div class="col_100">
                     <i class="zbsh-xd2">
@@ -207,7 +208,17 @@
                         <p class="zbsh-hh fc_ash col_50 fz_14">代收款： <span class="fz_14">{{v.lcc.GReceivables}}</span></p>
 
                     </i>
-                    <p class="fz_16 dis_flex jus_bet ali_center fc_red"><i>合计金额： <span>123</span></i><i class="fz_12 fc_ash">2016年-12月-23日 09：21</i></p>
+                    <p class="fz_16 dis_flex jus_bet ali_center fc_red">
+                        {{if v.lcc.freightMode==1}}
+                        <i>合计金额： <span>{{v.lcc.Freight+v.lcc.GReceivables+v.lcc.OtherExpenses}}</span></i>
+                        {{/if}}
+                        {{if v.lcc.freightMode==2}}
+                        <i>合计金额： <span>{{v.lcc.GReceivables+v.lcc.OtherExpenses}}</span></i>
+                        {{/if}}
+                        {{if v.lcc.freightMode==3}}
+                        <i>合计金额： <span>{{(v.lcc.GReceivables-v.lcc.Freight)+v.lcc.OtherExpenses}}</span></i>
+                        {{/if}}
+                    <i class="fz_12 fc_ash">{{v.lcc.DischargeTime}}</i></p>
                 </div>
             </a>
         </li>
@@ -223,19 +234,37 @@
             $.config = { router: false }
         });
         PageInit(function () {
-            GetHTML("GetPaymentRecording", { state: 0 }, function (data) {
+            var Ord = sessionStorage.getItem("OID");
+            GetHTML("GetPaymentRecording", { state: 0, orderlist: Ord }, function (data) {
                 if (CheckHTMLData(data)) {
                     let html = TempToHtml("content_list_temp", data);
                     $("#content_list").html(html);
                 }
+                $("input[type='checkbox']").each(function () {
+                    this.checked = true;
+                });
+                let yf = 0;
+                let dsk = 0;
+                var obj = document.getElementsByName("checkCommd");
+                for (var i = 0; i < obj.length; i++) {
+                    if (obj[i].checked) {
+                        let arr = obj[i].value.split(",");
+                        yf += parseFloat(arr[1]);
+                        dsk += parseFloat(arr[2]);
+                    }
+                }
+                document.getElementById("testyf").innerHTML = yf + "元";
+                document.getElementById("testdsk").innerHTML = dsk + "元";
             });
         });
         function Next() {
             debugger;
-            let arrorder = GET("orderlist");
-            arrorder = arrorder.split(",");
-            arrorder = JSON.stringify(arrorder);
-            GetHTML("TurnedOrIssuedPayment", { model: 2, orderlist: arrorder }, function (data) {
+            //let arrorder = GET("orderlist");
+            var Ord = sessionStorage.getItem("OID");
+            var Ord = filter(Ord);
+            var Ord = Ord.split(",");
+            var Ord = JSON.stringify(Ord);
+            GetHTML("TurnedOrIssuedPayment", { model: 2, orderlist: Ord }, function (data) {
                 if (CheckHTMLData(data)) {
                     window.location.href = "/business/huishouhuokuan.html";
                 }

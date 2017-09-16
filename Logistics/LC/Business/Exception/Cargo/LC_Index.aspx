@@ -42,7 +42,7 @@
         <div class="page page-current">
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
-                <a href="index.html" class="icon iconfont icon-zuo pull-left"></a>
+                <a href="/LC/Business/Exception/LC_Index.aspx" class="icon iconfont icon-zuo pull-left"></a>
                 
                 <h1 class="title">货损申诉</h1>
             </header>

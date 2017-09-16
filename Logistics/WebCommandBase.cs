@@ -126,6 +126,7 @@ namespace Logistics.ApiCommand
             web.SetSession(LoginEnum.ProvincesID.EnumToName(), vo.ProvincesID);
             web.SetSession(LoginEnum.state.EnumToName(), vo.State);
             web.SetSession(LoginEnum.username.EnumToName(), vo.UserName);
+            web.SetSession(LoginEnum.LogisticsName.EnumToName(), vo.LogisticsName);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace DAL.DAL
     {
         private static Dictionary<int, Model.Model.w_address_basic_data> addressDic = null;
         private static Dictionary<int, Model.Model.LC_Vehicle> aCarDic = null;
+        private static Dictionary<int, Model.Model.LC_User> DriverList = null;
         private static object _lockobj = new object();
         /// <summary>
         /// 数据库操作类
@@ -328,6 +329,52 @@ namespace DAL.DAL
             if (!ids.ReadIsOk())
                 return (false,"没有任何数据!",null);
             return (true, string.Empty, ids.GetVOList<Model.Model.LC_Position>()[0]);
+        }
+        /// <summary>
+        /// 获取司机师傅电话
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Tuple<bool, Model.Model.LC_User> GetDriverPhone(int id)
+        {
+            lock (_lockobj)
+            {
+                Model.Model.LC_User lcr = null;
+
+                if (DriverList == null)
+                    DriverList = LC_User.GetDriverPhone();
+
+                if (DriverList.TryGetValue(id, out lcr))
+                {
+                    return new Tuple<bool, Model.Model.LC_User>(true, lcr);
+                }
+                return new Tuple<bool, Model.Model.LC_User>(false, null);
+            }
+        }
+        public static (bool, string, Model.Model.LC_User) GetUserVoFromUIDKXZ(string uid)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User), "UID=@uid", new SqlParameter[] {
+                new SqlParameter("@uid",uid)
+            }, string.Empty, 1);
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return (false, "没有任何数据!", null);
+            return (true, string.Empty, ids.GetVOList<Model.Model.LC_User>()[0]);
+        }
+
+        public static (bool, string, int) GetLineCountKXZ(string logisticsID)
+        {
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Line), "UID=@logisticsID", new SqlParameter[] {
+                new SqlParameter("@logisticsID",logisticsID)
+            });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, 0);
+            if (!ids.ReadIsOk())
+                return (false, "没有任何数据!", 0);
+            return (true, string.Empty, ids.num);
         }
     }
 }

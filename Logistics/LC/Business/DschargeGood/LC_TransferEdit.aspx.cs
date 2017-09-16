@@ -17,10 +17,12 @@ namespace Logistics.LC.Business.DschargeGood
         public List<Model.Model.LC_Line_Other> list2 = new List<Model.Model.LC_Line_Other>();
         public string OID;
         public int Destination;
+        public decimal yf;
         protected void Page_Load(object sender, EventArgs e)
         {
             OID = GetValue("OID");
             Destination = GetValue<int>("Destination");
+            yf = GetValue<decimal>("yf");
             var vo1 = DAL.DAL.LC_User.GetLCList();
             if (!vo1.Item1)
             {

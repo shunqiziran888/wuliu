@@ -17,7 +17,13 @@ namespace Logistics.LC.Customer.SignGood
             string OID = GetValue("OID");
             string DetailedAddress = GetValue("DetailedAddress");
             decimal DeliveryCost =GetValue<decimal>("DeliveryCost");
-            Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() { State = 5,CarryGood=2,DetailedAddress=DetailedAddress,DeliveryCost=DeliveryCost }, OID);
+            Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() {
+                State = 5,
+                CarryGood =2,
+                DetailedAddress =DetailedAddress,
+                DeliveryCost =DeliveryCost,
+                GiveGoodTime=DateTime.Now
+            }, OID);
             if (!vo.Item1)
             {
                 //有错误

@@ -52,7 +52,7 @@
                         <li class="dis_flex ali_center yellow mart_10" style="padding:1rem;" mydata="<%=v.ID %>">
                             <div class="col_90 txt_center">
                                 <strong class="marb_20" style="font-size:30px;font-weight:400;line-height:50px;"><%=v.VehicleNo %>(<%=v.Carshape %>)</strong>
-                                <p class="fz_14"><%=v.Driver %> <span>电话暂不显示</span></p>
+                                <p class="fz_14"><%=v.Driver %> <span><%=v.Phone %></span></p>
                                 <p class="fz_12">添加日期：<span><%=v.CreateTime %></span></p>
                             </div>
                             <i class="iconfont fc_green dis_none">&#xe67b;</i>
@@ -73,9 +73,7 @@
                             <a onclick="Vehie();" class="icon pull-right dis_inline" style="background:#009621;color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">确定</a>
                         </p>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>

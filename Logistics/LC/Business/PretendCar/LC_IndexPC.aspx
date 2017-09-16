@@ -123,7 +123,7 @@
                                         </div>
                                         <div style="line-height:1.5rem;margin-top:.5rem;">
                                             <p class="fz_14 fc_ash">收货： <span><%=list2.Count %>单</span> <span>共计<%=list2.Sum(x=>x.Number)%>件</span></p>
-                                            <p class="fz_14 fc_ash"><i>运费： <span><%=list2.Sum(x=>Math.Round(x.Freight.ConvertData<decimal>(),2)) %>元&nbsp;&nbsp;&nbsp;</span></i><i>代收运费： <span><%=list2.Sum(x=>Math.Round(x.GReceivables.ConvertData<decimal>(),2)) %>元</span></i></p>
+                                            <p class="fz_14 fc_ash"><i>运费： <span><%=list2.Sum(x=>Math.Round(x.Freight.ConvertData<decimal>(),2)) %>元&nbsp;&nbsp;&nbsp;</span></i><i>代收款： <span><%=list2.Sum(x=>Math.Round(x.GReceivables.ConvertData<decimal>(),2)) %>元</span></i></p>
                                         </div>
                                     </div>
                                 </div>

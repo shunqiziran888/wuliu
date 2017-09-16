@@ -53,31 +53,40 @@
                             <span class="col_20 txt_right fz_16">
                                 应收款：
                             </span>
-                            <span class="col_80 txt_left">
-                                122133
+                          <%if (SShj != 0 && SShj != null)
+                              { %>
+                            <span class="col_80 txt_left" id="zuizhong">
+                                <%=SShj %>
                             </span>
+                            <%} %>
+                            <%else
+                                { %>
+                            <span class="col_80 txt_left" id="zuizhong">
+                                <%=TotalAmount %>
+                            </span>
+                            <%} %>
                         </p>
                         <p class="dis_flex jus_bet">
                             <span class="col_20 txt_right fz_16">
                                 实收款：
                             </span>
                             <span class="col_80 txt_left">
-                                <input  class="col_80" type="number" placeholder="请输入数字">
+                                <input  class="col_80" type="number" placeholder="请输入数字" id="yunfei">
                             </span>
                         </p>
                     </div>
                     <div class="white pad_10">
                         <p class="fz_16 marb_20">选择收款方式</p>
                         <div class="dis_flex jus_bet padlr_30">
-                            <a href="/LC/Business/CollectDebts/LC_Success.aspx" class="dis_flex flex_dir_col ali_center jus_center" >
+                            <a onclick="No()" class="dis_flex flex_dir_col ali_center jus_center" >
                                  <span class="iconfont icon-cntencentwechat fc_green fz_32" ></span>
                                  <span class="fc_ash">微信支付</span>
                              </a>
-                            <a href="/LC/Business/CollectDebts/LC_Success.aspx"" class="dis_flex flex_dir_col ali_center jus_center" >
+                            <a onclick="No()" class="dis_flex flex_dir_col ali_center jus_center" >
                                  <span class="iconfont icon-cc-visa fc_ash fz_32"></span>
                                  <span class="fc_ash">银行卡</span>
                              </a>
-                            <a href="/LC/Business/CollectDebts/LC_Success.aspx"" class="dis_flex flex_dir_col ali_center jus_center" >
+                            <a onclick="success()" class="dis_flex flex_dir_col ali_center jus_center" >
                                  <span class="iconfont icon-money fc_orange fz_32"></span>
                                  <span class="fc_ash">现金</span>
                              </a>
@@ -90,11 +99,29 @@
 
     <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
 
-    <script>
+    <script type="text/javascript">
         $(function () {
             $.init();
             $.config = { router: false }
         });
+        function No()
+        {
+            Msg("请点击现金支付！");
+        }
+        function success() {
+            var confirmTotal = $("#yunfei").val();
+            var OID = "<%=OID%>";
+            var SSyf = "<%=SSyf%>";
+            var SSdsk = "<%=SSdsk%>";
+            var SStf = "<%=SStf%>";
+            var SShj = "<%=SShj%>";
+            if (confirmTotal != "" && confirmTotal != undefined) {
+                window.location.href = "/LC/Business/CollectDebts/LC_Success.aspx?OID=" + OID + "&SSyf=" + SSyf + "&SSdsk=" + SSdsk + "&SStf=" + SStf + "&SShj=" + confirmTotal;
+            }
+            else {
+                window.location.href = "/LC/Business/CollectDebts/LC_Success.aspx?OID=" + OID + "&SSyf=" + SSyf + "&SSdsk=" + SSdsk + "&SStf=" + SStf + "&SShj=" + SShj;
+            }
+        }
     </script>
 
 </body>

@@ -379,6 +379,18 @@ namespace DAL.DAL
             return box;
         }
 
+        public static Dictionary<int, Model.Model.LC_User> GetDriverPhone()
+        {
+            Dictionary<int, Model.Model.LC_User> vlist = new Dictionary<int, Model.Model.LC_User>();
+            sql = makesql.MakeSelectSql(typeof(Model.Model.LC_User));
+            ids = db.Read(sql);
+            foreach (var x in ids.GetVOList<Model.Model.LC_User>())
+            {
+                vlist.Add(x.ID.ConvertData<int>(), x);
+            }
+            return vlist;
+        }
+
         /// <summary>
         /// ‘±π§’À∫≈∞Û∂®
         /// </summary>

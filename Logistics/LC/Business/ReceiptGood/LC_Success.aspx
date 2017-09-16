@@ -73,7 +73,6 @@
         <div class="page page-current">
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
-                <a href="javascript:;" onclick="history.go(-1)" class="icon iconfont icon-zuo pull-left"></a>
                 <!-- <p class="add_wuliu">
                     <a class="add_icon icon iconfont icon-eventnote pull-right" href="history_log.html"></a>
                     <i class="add_txt">历史记录</i>
@@ -130,9 +129,10 @@
             $.init();
             $.config = { router: false };
         });
-        setInterval(function () {
-            window.location.href = "/LC/Business/ReceiptGood/LC_GoodsReceipt.aspx";
-        }, 2000)
+        //setInterval(function () {
+        //    window.location.href = "/LC/Business/ReceiptGood/LC_GoodsReceipt.aspx";
+        //}, 50)
+        Href("/LC/Business/ReceiptGood/LC_GoodsReceipt.aspx",200);
     </script>
 
 </body>

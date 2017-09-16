@@ -15,7 +15,7 @@ namespace Logistics.LC.Business.DschargeGood
         protected void Page_Load(object sender, EventArgs e)
         {
             string OID = GetValue("OID");
-            Tuple<bool, string> vo = DAL.DAL.LC_Customer.UpdateIty(new Model.Model.LC_Customer() { State = 8 }, OID);
+            Tuple<bool, string> vo = DAL.DAL.LC_Customer.UpdateIty(new Model.Model.LC_Customer() { State = 8,InventoryTime=DateTime.Now}, OID);
             if (!vo.Item1)
             {
                 //有错误

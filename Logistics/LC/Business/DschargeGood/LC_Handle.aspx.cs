@@ -16,9 +16,12 @@ namespace Logistics.LC.Business.DschargeGood
         {
             string OID = GetValue("OID");
             decimal Freight = GetValue<decimal>("Freight");
-            string logisticsID = GetValue("logisticsID");
-            int Destination = GetValue<int>("Destination");
-            Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() {Freight=Freight,logisticsID=logisticsID,Destination=Destination,State=1}, OID);
+            int logisticsID = GetValue<int>("logisticsID");
+            Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() {
+                Freight =Freight,
+                Destination = logisticsID,
+                State =1
+            }, OID);
             if (!vo.Item1)
             {
                 //有错误

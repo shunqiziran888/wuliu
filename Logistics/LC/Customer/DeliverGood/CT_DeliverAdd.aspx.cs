@@ -35,13 +35,14 @@ namespace Logistics.LC.Customer
             ReceiptGood = GetValue<int>("ReceiptGood");
             try
             {
-                if (IsPostBack)
+                var Ident = GetValue("Ident");
+                if(Ident!="1")
                 {
                     var myuservo = GetMyLoginUserVO();
-                    string UserName=myuservo.username;
+                    string UserName = myuservo.username;
                     string Phone = myuservo.phones;
                     int cfd = myuservo.AreaID;
-                    
+
                     var lcc = new Model.Model.LC_Customer()
                     {
                         OrderID = Tools.NewGuid.GuidToLongID().ToString(),//订单ID
@@ -56,20 +57,22 @@ namespace Logistics.LC.Customer
                         GoodName = GetValue("GoodName"),//货物名称
                         Number = GetValue<int>("Number"),//件数
                         GReceivables = GetValue<decimal>("GReceivables"),//代收款
-                        //GoodNo = Tools.NewGuid.GuidTo16String(),//货号
                         freightMode = GetValue<int>("freightMode"),//付款方式
                         CarryGood = GetValue<int>("CarryGood"),//提货方式
                         ReceiptGood = GetValue<int>("ReceiptGood"),//收货方式
                         DdTime = DateTime.Now,//发货时间
+                        OtherExpenses = GetValue<decimal>("OtherExpenses"),//其他费用
+                        PickupCost = GetValue<decimal>("PickupCost"),
+                        GivegoodCost=GetValue<decimal>("GivegoodCost"),
                         State = 1
                     };
                     //添加
                     Tuple<bool, string> vo = BLL.BLL.LC_Customer.Add(lcc);
                     if (vo.Item1)
                     {
-                        Jump("/LC/Customer/DeliverGood/CT_Success.aspx?OID=" + lcc.OrderID); 
+                        Jump("/LC/Customer/DeliverGood/CT_Success.aspx?OID=" + lcc.OrderID+ "&DdTime="+lcc.DdTime+ "&GoodName=" +lcc.GoodName+ "&Number=" +lcc.Number+ "&freightMode=" +lcc.freightMode+ "&Consignee=" +lcc.Consignee+ "&Consignor=" +lcc.Consignor+ "&Destination=" +lcc.Destination+ "&OtherExpenses=" +lcc.OtherExpenses+ "&GReceivables=" +lcc.GReceivables+ "&CarryGood=" +lcc.CarryGood+ "&ReceiptGood=" +lcc.ReceiptGood+ "&SHPhone=" +lcc.SHPhone+ "&FHPhone=" +lcc.FHPhone+ "&OtherExpenses=" + lcc.OtherExpenses);
                     }
-                    else if(lcc.logisticsID=="0")
+                    else if (lcc.logisticsID == "0")
                     {
                         ReturnPager("请选择物流！");
                     }
@@ -88,10 +91,8 @@ namespace Logistics.LC.Customer
                     //有错误
                     Debug.Print(vo1.Item2);
                     return;
-
                 }
                 list = vo1.Item3.Distinct(new DistinctObj()).ToList();
-                //var f = vo1.Item3.GroupBy(x => x.GetDicVO<Model.Model.LC_Line>().UID);
             }
             catch (Exception)
             {

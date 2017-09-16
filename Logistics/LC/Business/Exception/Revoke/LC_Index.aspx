@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LC_Index.aspx.cs" Inherits="Logistics.LC.Business.Exception.Revoke.LC_Index" %>
-
+<%@ import Namespace="GlobalBLL" %>
+<%@ Import Namespace="CustomExtensions" %>
 <!DOCTYPE html>
 
 <html>
@@ -70,8 +71,8 @@
         <div class="page page-current">
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
-                <a href="index.html" class="icon iconfont icon-zuo pull-left"></a>
-                <a href="/LC/Business/Exception/Revoke/LC_Cancel.aspx" class="icon pull-right dis_inline red" style="color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">确认取消</a>
+                <a href="/LC/Business/Exception/LC_Index.aspx" class="icon iconfont icon-zuo pull-left"></a>
+                <a onclick="Test()" class="icon pull-right dis_inline red" style="color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">确认取消</a>
                 <h1 class="title">发货撤销</h1>
             </header>
 
@@ -163,93 +164,52 @@
 
                     <div class="zongji mart_10">
                         <p class="zongji_top dis_flex  marb_10">
-                            <i class="col_50 fz_16">汇总运费： <span class="fz_14">1201.1</span></i>
-                            <i class="col_50 fz_16">汇总代收： <span class="fz_14">1201.1</span></i>
+                            <i class="col_50 fz_16">汇总运费： <span class="fz_14" id="testyf"></span></i>
+                            <i class="col_50 fz_16">汇总代收： <span class="fz_14" id="testdsk"></span></i>
                         </p>
                         <p class="zongji_top dis_flex">
-                            <i class="col_50 fz_16">未装运费： <span class="fz_14">1201.1</span></i>
-                            <i class="col_50 fz_16">未装代收： <span class="fz_14">1201.1</span></i>
+                            <i class="col_50 fz_16">未装运费： <span class="fz_14">0元</span></i>
+                            <i class="col_50 fz_16">未装代收： <span class="fz_14">0元</span></i>
                         </p>
                     </div>
                     <ul class="zbsh-tab1">
+                           <%if (list.Count > 0)
+                                        { %>
+                                        <%
+                                            foreach (var v in list)
+                                            {
 
+                                        %>
                         <li class="zbsh-li dis_flex ali_center">
-                            <i  class="col_10"><input class="col_40" type="checkbox"></i>
+                            <i  class="col_10"><input type="checkbox" name="checkCommd" value="<%=v.OrderID %>,<%=v.Freight %>,<%=v.GReceivables %>" class="col_10" onclick="Selected()"/></i>
                             <a href="#">
                                 <div class="col-90">
                                     <i class="zbsh-xd2">
-                                  <p class="zbsh-zffs fz_16">货物名： <span class="huo_name fc_ash fz_14">一大箱可口可乐 <i class="huo_num">x12</i></span>
-                                    <span class="huo_fnagshi">(现付)</span></p>
+                                  <p class="zbsh-zffs fz_16">货物名： <span class="huo_name fc_ash fz_14"><%=v.GoodName %> <i class="huo_num">x<%=v.Number %></i></span>
+                                    <span class="huo_fnagshi">(<%=v.freightMode.ConvertData<YFFSEnum>().EnumToName() %>)</span></p>
                                     </i>
                                     <i class="zbsh-xd1">
-                                  <p class="zbsh-shr col_50 fz_16">发货人： <span class="ft_color_ash fz_14">司马相如</span></p>
-                                  <p class="zbsh-hh fc_ash col_50 fz_16">收货人： <span class="fz_14">包大人</span></p>
+                                  <p class="zbsh-shr col_50 fz_16">发货人： <span class="ft_color_ash fz_14"><%=v.Consignor %></span></p>
+                                  <p class="zbsh-hh fc_ash col_50 fz_16">收货人： <span class="fz_14"><%=v.Consignee %></span></p>
                                   
                                 </i>
                                     <i class="zbsh-xd1">
-                                  <p class="zbsh-shr col_50 fz_16">运费： <span class="ft_color_ash fz_14">3010</span></p>
-                                  <p class="zbsh-hh fc_ash col_50 fz_16">代收款： <span class="fz_14">1899</span></p>
+                                  <p class="zbsh-shr col_50 fz_16">运费： <span class="ft_color_ash fz_14"><%=v.Freight %></span></p>
+                                  <p class="zbsh-hh fc_ash col_50 fz_16">代收款： <span class="fz_14"><%=v.GReceivables %></span></p>
                                   
                                 </i>
-                                    <p class="fz_16 dis_flex jus_bet ali_center fc_red"><i>合计金额： <span>123</span></i><i class="fz_12 fc_ash">2016年-12月-23日 09：21</i></p>
+                                    <p class="fz_16 dis_flex jus_bet ali_center fc_red"><i>合计金额： <span>待处理</span></i><i class="fz_12 fc_ash"><%=v.DdTime %></i></p>
                                 </div>
-
                             </a>
-
                         </li>
-                         <li class="zbsh-li dis_flex ali_center">
-                            <i  class="col_10"><input class="col_40" type="checkbox"></i>
-                            <a href="#">
-                                <div class="col-90">
-                                    <i class="zbsh-xd2">
-                                  <p class="zbsh-zffs fz_16">货物名： <span class="huo_name fc_ash fz_14">一大箱可口可乐 <i class="huo_num">x12</i></span>
-                                    <span class="huo_fnagshi">(现付)</span></p>
-                                    </i>
-                                    <i class="zbsh-xd1">
-                                  <p class="zbsh-shr col_50 fz_16">发货人： <span class="ft_color_ash fz_14">司马相如</span></p>
-                                  <p class="zbsh-hh fc_ash col_50 fz_16">收货人： <span class="fz_14">包大人</span></p>
-                                  
-                                </i>
-                                    <i class="zbsh-xd1">
-                                  <p class="zbsh-shr col_50 fz_16">运费： <span class="ft_color_ash fz_14">3010</span></p>
-                                  <p class="zbsh-hh fc_ash col_50 fz_16">代收款： <span class="fz_14">1899</span></p>
-                                  
-                                </i>
-                                    <p class="fz_16 dis_flex jus_bet ali_center fc_red"><i>合计金额： <span>123</span></i><i class="fz_12 fc_ash">2016年-12月-23日 09：21</i></p>
-                                </div>
-
-                            </a>
-
-                        </li>
-                         <li class="zbsh-li dis_flex ali_center">
-                            <i  class="col_10"><input class="col_40" type="checkbox"></i>
-                            <a href="#">
-                                <div class="col-90">
-                                    <i class="zbsh-xd2">
-                                  <p class="zbsh-zffs fz_16">货物名： <span class="huo_name fc_ash fz_14">一大箱可口可乐 <i class="huo_num">x12</i></span>
-                                    <span class="huo_fnagshi">(现付)</span></p>
-                                    </i>
-                                    <i class="zbsh-xd1">
-                                  <p class="zbsh-shr col_50 fz_16">发货人： <span class="ft_color_ash fz_14">司马相如</span></p>
-                                  <p class="zbsh-hh fc_ash col_50 fz_16">收货人： <span class="fz_14">包大人</span></p>
-                                  
-                                </i>
-                                    <i class="zbsh-xd1">
-                                  <p class="zbsh-shr col_50 fz_16">运费： <span class="ft_color_ash fz_14">3010</span></p>
-                                  <p class="zbsh-hh fc_ash col_50 fz_16">代收款： <span class="fz_14">1899</span></p>
-                                  
-                                </i>
-                                    <p class="fz_16 dis_flex jus_bet ali_center fc_red"><i>合计金额： <span>123</span></i><i class="fz_12 fc_ash">2016年-12月-23日 09：21</i></p>
-                                </div>
-
-                            </a>
-
-                        </li>
-
+                        <%} %>
+                                        <%}
+                                        else
+                                        {%>
+                                        <div style="text-align: center; line-height: 200px; overflow: hidden;">无任何数据</div>
+                                        <%} %>
                     </ul>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -260,9 +220,36 @@
         $(function () {
             $.init();
             $.config = { router: false }
+            Selected();
         });
     </script>
-
+    <script type="text/javascript">
+        function Test() {
+            var obj = document.getElementsByName("checkCommd");
+            var s = '';
+            for (var i = 0; i < obj.length; i++) {
+                if (obj[i].checked) s += obj[i].value.split(",")[0] + ',';
+            }
+            if (s == "") { Msg("您还没有选择任何物品!"); }
+            else {
+                window.location.href = "/LC/Business/Exception/Revoke/LC_Cancel.aspx?OID=" + s;
+            }
+        }
+        function Selected() {
+            let yf = 0;
+            let dsk = 0;
+            var obj = document.getElementsByName("checkCommd");
+            for (var i = 0; i < obj.length; i++) {
+                if (obj[i].checked) {
+                    let arr = obj[i].value.split(",");
+                    yf += parseFloat(arr[1]);
+                    dsk += parseFloat(arr[2]);
+                }
+            }
+            document.getElementById("testyf").innerHTML = yf + "元";
+            document.getElementById("testdsk").innerHTML = dsk + "元";
+        }
+    </script>
 </body>
 
 </html>

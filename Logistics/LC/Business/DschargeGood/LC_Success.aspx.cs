@@ -25,7 +25,8 @@ namespace Logistics.LC.Business.DschargeGood
                 State = GlobalBLL.OrderStateEnum.订单完成.EnumToInt(),
                 Freight = SSyf > 0 ? SSyf : null,
                 GReceivables = SSdsk > 0 ? SSdsk : null,
-                Total = SShj > 0 ? SShj : null
+                Total = SShj > 0 ? SShj : null,
+                DischargeTime=DateTime.Now
             }, OID);
             if (!vo.Item1)
             {

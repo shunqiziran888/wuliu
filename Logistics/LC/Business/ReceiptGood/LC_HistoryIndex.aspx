@@ -116,12 +116,12 @@
 
                     <div class="zongji mart_10">
                         <p class="zongji_top dis_flex  marb_10">
-                            <i class="col_50 fz_16">汇总运费： <span class="fz_14">1201.1</span></i>
-                            <i class="col_50 fz_16">汇总代收： <span class="fz_14">1201.1</span></i>
+                            <i class="col_50 fz_16">汇总运费： <span class="fz_14"><%=list.Sum(x=>Math.Round(x.Freight.ConvertData<decimal>(),2)) %></span></i>
+                            <i class="col_50 fz_16">汇总代收： <span class="fz_14"><%=list.Sum(x=>Math.Round(x.GReceivables.ConvertData<decimal>(),2)) %></span></i>
                         </p>
                         <p class="zongji_top dis_flex">
-                            <i class="col_50 fz_16">未装运费： <span class="fz_14">1201.1</span></i>
-                            <i class="col_50 fz_16">未装代收： <span class="fz_14">1201.1</span></i>
+                            <i class="col_50 fz_16">未装运费： <span class="fz_14"><%=list.Sum(x=>Math.Round(x.Freight.ConvertData<decimal>(),2)) %></span></i>
+                            <i class="col_50 fz_16">未装代收： <span class="fz_14"><%=list.Sum(x=>Math.Round(x.GReceivables.ConvertData<decimal>(),2)) %></span></i>
                         </p>
                     </div>
                     <ul class="zbsh-tab1">
@@ -168,7 +168,7 @@
                                             </select>
                                         </p>
                                     </i>
-                                    <p class="fz_16 dis_flex jus_bet ali_center fc_red" style="padding: 0 10%;"><i>合计金额： <span>暂不显示</span></i><i class="fz_12 fc_ash"><%=v.ConsigneeTime %></i></p>
+                                    <p class="fz_16 dis_flex jus_bet ali_center fc_red" style="padding: 0 10%;"><i>合计金额： <span><%=v.Total %></span></i><i class="fz_12 fc_ash"><%=v.ConsigneeTime %></i></p>
                                 </div>
 
                             </a>

@@ -7,10 +7,10 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Logistics.LC.Customer.Contact {
+namespace Logistics.LC.OwnBilling {
     
     
-    public partial class LC_AddCt {
+    public partial class LC_DeliverGoods {
         
         /// <summary>
         /// form1 控件。
