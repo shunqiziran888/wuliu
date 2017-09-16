@@ -14,7 +14,7 @@ namespace Logistics.LC.Customer.Contact
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            AlertJump("功能暂未开放!", "/LC/Index/LC_IndexKH.aspx");
+            
         }
     }
 }

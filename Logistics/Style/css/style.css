@@ -91,6 +91,9 @@ select {
 .gray{
     background:#ebebeb;
 }
+.ash {
+    background: #bbb;
+}
 .yellow{
     background: #ffd057;
 }
@@ -204,6 +207,9 @@ select {
 /* 字体大小 */
 .fz_32{
     font-size: 32px;
+}
+.fz_28{
+    font-size28px;
 }
 .fz_18{
 font-size: 18px;
@@ -362,6 +368,20 @@ position: relative;
 .pos_f{
     position: fixed;
 }
+
+
+
+
+/*input 样式*/
+
+input[type="checkbox"] {
+    width: 18px;
+    -webkit-appearance: checkbox;
+    height: .8rem;
+}
+
+
+
 
 
 ul{

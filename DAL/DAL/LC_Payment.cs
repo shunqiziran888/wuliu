@@ -4,6 +4,8 @@ using System.Linq;
 using CustomExtensions;
 using SuperDataBase;
 using System.Collections.Generic;
+using SuperDataBase.Vo;
+using SuperDataBase.InterFace;
 
 namespace DAL.DAL
 {
@@ -45,32 +47,41 @@ namespace DAL.DAL
                 starttime = DateTime.Now;
                 endtime = DateTime.Now;
             }
+            if(startuid.StrIsNotNull() && enduid.StrIsNotNull())
+            {
+                where += " and {1}.logisticsID=@logisticsID and {1}.finishUID=@finishUID";
+            }
             if (orderlist.StrIsNotNull())
             {
                 where += " and {1}.OrderID in(" + orderlist.StringToArray().Select(x => $"'{x}'").ToList().ListToString() + ")";
             }
 
 
-            if (HKDetail!="have")
+            if (HKDetail != "have")
             {
                 if (state != 0)
                     where += " and {0}.StartLogisticsUID<>{0}.LocationLogisticsUID";
 
+                //默认查询
                 sql = makesql.MakeSelectArrSql(tlist, "{0}.OrderNumber={1}.OrderID and {0}.LocationLogisticsUID=@LocationLogisticsUID and {0}.LastState=@state" + where, new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@state",state),
                     new System.Data.SqlClient.SqlParameter("@starttime",starttime),
                     new System.Data.SqlClient.SqlParameter("@endtime",endtime),
-                    new System.Data.SqlClient.SqlParameter("@LocationLogisticsUID",myuservo.uid)
+                    new System.Data.SqlClient.SqlParameter("@LocationLogisticsUID",myuservo.uid),
+                    new System.Data.SqlClient.SqlParameter("@logisticsID",startuid),
+                    new System.Data.SqlClient.SqlParameter("@finishUID",enduid)
                 });
             }
            else if(HKDetail=="have")
             {
-                sql = makesql.MakeSelectArrSql(tlist, "{0}.OrderNumber={1}.OrderID and {0}.StartLogisticsUID={0}.LocationLogisticsUID and {0}.LocationLogisticsUID=@LocationLogisticsUID and {0}.LastState=@state" + where, new System.Data.SqlClient.SqlParameter[] {
+                    sql = makesql.MakeSelectArrSql(tlist, "{0}.OrderNumber={1}.OrderID and {0}.StartLogisticsUID={0}.LocationLogisticsUID and {0}.LocationLogisticsUID=@LocationLogisticsUID and {0}.LastState=@state" + where, new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@state",state),
                     new System.Data.SqlClient.SqlParameter("@starttime",starttime),
                     new System.Data.SqlClient.SqlParameter("@endtime",endtime),
-                    new System.Data.SqlClient.SqlParameter("@LocationLogisticsUID",myuservo.uid)
-                });
+                    new System.Data.SqlClient.SqlParameter("@LocationLogisticsUID",myuservo.uid),
+                     new System.Data.SqlClient.SqlParameter("@logisticsID",startuid),
+                    new System.Data.SqlClient.SqlParameter("@finishUID",enduid)
+                    });
             }
             ids = db.Read(sql);
             if (!ids.flag)
@@ -85,9 +96,167 @@ namespace DAL.DAL
                 {
                     lcp,
                     lcc,
-                    freightModeName = lcc.freightMode.ConvertData<GlobalBLL.YFFSEnum>().EnumToName()
+                    freightModeName = lcc.freightMode.ConvertData<GlobalBLL.YFFSEnum>().EnumToName(),
+                    DestinationName=DAL.DALBase.GetAddressFromID(lcc.Destination.ConvertData<int>()).Item2.Name
                 };
             }));
+        }
+
+        public static (bool, string, object) Yesterdaybalance(UserLoginVO myuservo, DateTime fristtime, DateTime lasttime, DateTime fristToday, DateTime lastToday)
+        {
+            //昨日收款
+            sql = new SuperDataBase.Vo.SqlVO(@"select Sum(Total) as 'Yesterdaybalance' from LC_Customer where State=6 and DischargeTime BETWEEN '"+ fristtime + "' and '"+ lasttime + "' and logisticsID='"+myuservo.uid+"'");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return (true, "没有任何数据!", new object[] { });
+            decimal Yesterdaybalance = ids.dt.Rows[0]["Yesterdaybalance"].ConvertData<decimal>();
+            //昨日放款
+            sql = new SuperDataBase.Vo.SqlVO(@"select Sum(PaymentAllAmount) as 'Loan' from LC_Payment_History where CreateTime between '"+ fristtime + "' and '"+ lasttime + "' and LastState=2");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return (true, "没有任何数据!", new object[] { });
+            decimal Loan = ids.dt.Rows[0]["Loan"].ConvertData<decimal>();
+            //昨日上缴款
+            sql = new SuperDataBase.Vo.SqlVO(@"select Sum(PaymentAllAmount) as 'Paid' from LC_Payment_History where CreateTime between '"+fristtime+"' and '"+lasttime+"' and LastState=0");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return (true, "没有任何数据!", new object[] { });
+            decimal Paid = ids.dt.Rows[0]["Paid"].ConvertData<decimal>();
+            //今天收款
+            sql = new SuperDataBase.Vo.SqlVO(@"select Sum(Total) as 'CollectionToday' from LC_Customer where State=6 and DischargeTime BETWEEN '"+fristToday+"' and '"+lastToday+"' and logisticsID='"+myuservo.uid+"'");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return (true, "没有任何数据!", new object[] { });
+            decimal CollectionToday = ids.dt.Rows[0]["CollectionToday"].ConvertData<decimal>();
+            //今天支付
+            sql = new SuperDataBase.Vo.SqlVO(@"select Sum(Total) as 'PaymentToday' from LC_Customer where State=6 and DischargeTime BETWEEN '"+fristToday+"' and '"+lastToday+"' and logisticsID='"+myuservo.uid+"'");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return (true, "没有任何数据!", new object[] { });
+            decimal PaymentToday = ids.dt.Rows[0]["PaymentToday"].ConvertData<decimal>();
+
+            //今天回收代收款
+            sql = new SuperDataBase.Vo.SqlVO(@"select Sum(PaymentAllAmount) as 'RecoveryFund' from LC_Payment_History where CreateTime between '"+fristToday+"' and '"+lastToday+"'and LastState=1");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return (true, "没有任何数据!", new object[] { });
+            decimal RecoveryFund = ids.dt.Rows[0]["RecoveryFund"].ConvertData<decimal>();
+
+            //昨天支付
+            sql = new SuperDataBase.Vo.SqlVO(@"select Sum(Total) as 'PaymentYesterday' from LC_Customer where State=6 and DischargeTime BETWEEN '" + fristtime + "' and '" + lasttime + "' and logisticsID='" + myuservo.uid + "'");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return (true, "没有任何数据!", new object[] { });
+            decimal PaymentYesterday = ids.dt.Rows[0]["PaymentYesterday"].ConvertData<decimal>();
+
+            //昨天回收代收款
+            sql = new SuperDataBase.Vo.SqlVO(@"select Sum(PaymentAllAmount) as 'YesterdayRecoveryFund' from LC_Payment_History where CreateTime between '" + fristtime + "' and '" + lasttime + "'and LastState=1");
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return (true, "没有任何数据!", new object[] { });
+            decimal YesterdayRecoveryFund = ids.dt.Rows[0]["YesterdayRecoveryFund"].ConvertData<decimal>();
+
+            return (true, string.Empty, new {
+                Yesterdaybalance, //昨天收款
+                Loan,//昨天付款
+                Paid,//上缴款
+                CollectionToday,//今天收款
+                PaymentToday,//放货款
+                PaymentYesterday,//昨天放货款
+                RecoveryFund,//回收款
+                YesterdayRecoveryFund,//昨天回收款
+                Yesterdaymoney = Yesterdaybalance-(Loan+ Paid),//昨日余额
+                PayToday= PaymentToday+ RecoveryFund,//今天支付
+                PaymentYesterdays= PaymentYesterday+ YesterdayRecoveryFund,//昨天支付
+            });
+
+        }
+
+
+        //日结账列表
+        public static (bool, string, object) GetPaymentDay(UserLoginVO myuservo, DateTime starttime, DateTime endtime)
+        {
+            var tlist = new Type[] {
+                typeof(Model.Model.LC_Customer),
+                typeof(Model.Model.LC_History),
+            };
+            string where = string.Empty;
+            where = " and {1}.HistoryTime between @starttime and @endtime";
+            string dqstarttime = DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
+            string dqsendtime= DateTime.Now.ToString("yyyy-MM-dd 23:59:59");
+            if (starttime.IsNull() && endtime.IsNull())
+            {
+                sql = makesql.MakeSelectArrSql(tlist, "{0}.OrderID={1}.OrderID and {1}.logisticsID=@logisticsID and {1}.State=@State" + where, new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@logisticsID", myuservo.uid),
+                new System.Data.SqlClient.SqlParameter("@State","6"),
+                new System.Data.SqlClient.SqlParameter("@starttime",dqstarttime),
+                new System.Data.SqlClient.SqlParameter("@endtime",dqsendtime)
+            });
+            }
+            else
+            {
+                sql = makesql.MakeSelectArrSql(tlist, "{0}.OrderID={1}.OrderID and {1}.logisticsID=@logisticsID and {1}.State=@State" + where, new System.Data.SqlClient.SqlParameter[] {
+                new System.Data.SqlClient.SqlParameter("@logisticsID", myuservo.uid),
+                new System.Data.SqlClient.SqlParameter("@State","6"),
+                new System.Data.SqlClient.SqlParameter("@starttime",starttime),
+                new System.Data.SqlClient.SqlParameter("@endtime",endtime)
+                  });
+            }
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return (true, "没有任何数据!", new object[] { });
+            return (true, string.Empty, ids.GetVOList(tlist).Select(x =>
+            {
+                var lcc = x.GetDicVO<Model.Model.LC_Customer>();
+                var lch = x.GetDicVO<Model.Model.LC_History>();
+                return new
+                {
+                    lcc,
+                    lch,
+                    freightModeName = lcc.freightMode.ConvertData<GlobalBLL.YFFSEnum>().EnumToName()
+                };
+            }).ToList());
+        }
+
+        public static (bool, string, object) GetPaidCount(UserLoginVO myuservo, int state, int page, int num)
+        {
+            var tlist = new Type[] {
+                typeof(Model.Model.LC_Payment),
+                typeof(Model.Model.LC_Customer),
+            };
+            sql = makesql.MakeSelectFieldSql(tlist, new string[] { " SUM(LC_Customer.Freight) as Freight", "SUM(LC_Customer.GReceivables) as GReceivables" }, "{0}.OrderNumber={1}.OrderID and {0}.LocationLogisticsUID=@LocationLogisticsUID and {0}.LastState=@state", new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@state",state),
+                    new System.Data.SqlClient.SqlParameter("@LocationLogisticsUID",myuservo.uid),
+                });
+            ids = db.Read(sql);
+            if (!ids.flag)
+                return (false, ids.errormsg, null);
+            if (!ids.ReadIsOk())
+                return (true, "没有任何数据!", new object[] { });
+
+            return (true, string.Empty, new
+            {
+                Freight = ids.dt.Rows[0]["Freight"].ConvertData<decimal>(),
+                GReceivables = ids.dt.Rows[0]["GReceivables"].ConvertData<decimal>()
+            });
         }
 
         /// <summary>
@@ -179,6 +348,7 @@ namespace DAL.DAL
                 d.FHPhone,
                 max(d.Consignee) as 'Consignee',
                 max(d.Consignor) as 'Consignor',
+                max(d.DischargeTime) as DischargeTime,
                 COUNT(d.OrderID) as 'num',
                 SUM(
                     d.GReceivables + d.Freight + d.OtherExpenses
@@ -188,7 +358,7 @@ namespace DAL.DAL
             WHERE
                 OrderID IN({orderList.Select(x=>$"'{x.ordernumber}'").ToList().ListToString()})
             GROUP BY
-                d.FHPhone;");
+                d.FHPhone,d.DischargeTime;");
 
             ids = db.Read(sql);
             if (!ids.flag)
@@ -206,7 +376,8 @@ namespace DAL.DAL
                     Consignor=v["Consignor"],
                     num = v["num"],
                     allamount = v["allamount"],
-                    OrderList = orderList.Where(x=>x.phone.Equals(v["FHPhone"].ConvertData(), StringComparison.OrdinalIgnoreCase)).Select(y=>y.ordernumber).ToList()
+                    OrderList = orderList.Where(x=>x.phone.Equals(v["FHPhone"].ConvertData(), StringComparison.OrdinalIgnoreCase)).Select(y=>y.ordernumber).ToList(),
+                    DischargeTime=v["DischargeTime"]
                 });
             }
             return (true, string.Empty, obj_list);
@@ -224,7 +395,7 @@ namespace DAL.DAL
             var box = db.CreateTranSandbox((db) =>
             {
                 //检测所有订单号是否我可以操作
-                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Payment), $"OrderNumber in ({orderlist.Select(x=>$"'{x}'").ToList().ListToString()}) and LocationLogisticsUID=@LocationLogisticsUID", new System.Data.SqlClient.SqlParameter[] {
+                sql = makesql.MakeSelectSql(typeof(Model.Model.LC_Payment), $"OrderNumber in ({orderlist.Where(y => y.StrIsNotNull()).Select(x=>$"'{x}'").ToList().ListToString()}) and LocationLogisticsUID=@LocationLogisticsUID", new System.Data.SqlClient.SqlParameter[] {
                     new System.Data.SqlClient.SqlParameter("@LocationLogisticsUID",myuservo.uid)
                 });
                 ids = db.Read(sql);
@@ -308,7 +479,8 @@ namespace DAL.DAL
                                                                         and b.State = {GlobalBLL.OrderStateEnum.订单完成.EnumToInt()}
                                                                         and LocationLogisticsUID=@LocationLogisticsUID;", new System.Data.SqlClient.SqlParameter[] {
                 new System.Data.SqlClient.SqlParameter("@LocationLogisticsUID",myuservo.uid),
-                new System.Data.SqlClient.SqlParameter("@LastOperationTime",DateTime.Now)
+                new System.Data.SqlClient.SqlParameter("@LastOperationTime",DateTime.Now),
+                //new System.Data.SqlClient.SqlParameter("@PaidTime",DateTime.Now)
             });
             ids = db.Exec(sql);
             if (!ids.flag)

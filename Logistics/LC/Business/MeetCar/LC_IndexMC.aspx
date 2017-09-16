@@ -91,68 +91,69 @@
                         </div>
                     </div> -->
                    
-                    <ul>
-                        <%if (list.Count > 0)
-        { %>
-                                         <%
-                                             foreach (var v in list)
-                                             {
-                                                 var addressvoStart = DAL.DAL.DALBase.GetAllAddress(v.Initially.Value);
-                                                var addressvoEnd = DAL.DAL.DALBase.GetAllAddress(v.begins.Value);
-                                                    %>
-                        <li class="white mart_10 padb_10">
-                            <div  class="dis_flex jus_bet ali_center" style="padding:.5rem;">
-                                <div>
-                                    <div>
-                                        <div class="dis_flex ali_center ">
-                                            <p class="dis_flex" style="flex-direction: column;line-height:1.5rem;">
-                                                <strong class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoStart.Item1.Value)?.Item2?.Name%></strong>
-                                                <i class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoStart.Item2.Value)?.Item2?.Name%></i>
-                                                <i class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoStart.Item3.Value)?.Item2?.Name%></i>
-                                                <i class="fz_14 fc_ash"><span>收货： <span><%=list.Count %></span></span></i>
-                                                <i class="fz_14 fc_ash"><span>代收款： <span><%=list.Sum(x=>Math.Round(x.GReceivables.ConvertData<decimal>(),2)) %></span></span></i>
-                                                <i class="fz_14 fc_ash"><span>大车运费： <span><%=Math.Round(v.largeCar.ConvertData<decimal>(),2)%></span></span></i>
-                                                <i class="fz_14 fc_ash"><span>司机电话： <span><%=DAL.DAL.DALBase.GetCarFromID(v.VehicleID.Value)?.Item2?.Phone%></span></span></i>
-                                            </p>
-                                            <i class="iconfont " style="font-size:30px;margin:0 .5rem">&#xe6d7;</i>
-                                            <p class="dis_flex" style="flex-direction: column;line-height:1.5rem;">
-                                                <strong class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoEnd.Item1.Value)?.Item2?.Name%></strong>
-                                                <i class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoEnd.Item2.Value)?.Item2?.Name%></i>
-                                                <i class="fz_16"><%=DAL.DAL.DALBase.GetAddressFromID(addressvoEnd.Item3.Value)?.Item2?.Name%></i>
-                                                <i class="fz_14 fc_ash"><span>件数： <span><%=list.Sum(x=>x.Number)%></span></span></i>
-                                                <i class="fz_14 fc_ash"><span>总运费： <span><%=list.Sum(x=>x.Freight)+v.largeCar%></span></span></i>
-                                                <i class="fz_14 fc_ash"><span>车号： <span><%=DAL.DAL.DALBase.GetCarFromID(v.VehicleID.Value)?.Item2?.VehicleNo%></span></span></i>
-                                            </p>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                               
-                            </div>
-                            <p class="dis_flex txt_center fz_16" style="justify-content:center;margin-bottom:.5rem;"><a class="dis_block" style="height:30px; line-height:30px; width:90px; background-color: #a3c478;color:#fff;" href="/LC/Business/MeetCar/LC_GoodDetails.aspx?CH=<%=v.VehicleID %>&CFD=<%=v.Initially %>&MDD=<%=v.Destination %>" class="">接车</a></p>
-                            <p class="txt_center fz_12" style="padding-right:.5rem;">2016年-12月-23日 09：31</p>
-                        </li>
-                        <%} %>
-                        <%}
-        else
-        {%>
-    <div style="text-align: center; line-height: 200px; overflow:hidden;">无任何数据</div>
-    <%} %>
+                    <ul id="content_list">
+                       <%--数据--%>
                     </ul>
-
                 </div>
-
-
             </div>
         </div>
     </div>
 
     <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
     <script src="/Style/scripts/all.js"></script>
+    <script type="text/html" id="content_list_temp">
+         {{if data.Count>0}}
+         <li class="white mart_10 padb_10">
+            <div  class="dis_flex jus_bet ali_center" style="padding:.5rem;">
+                <div>
+                    <div>
+                        <div class="dis_flex ali_center ">
+                            <p class="dis_flex" style="flex-direction: column;line-height:1.5rem;">
+                                <strong class="fz_16">{{data.StartSheng}}</strong>
+                                <i class="fz_16">{{data.StartShi}}</i>
+                                <i class="fz_16">{{data.StartQu}}</i>
+                                <i class="fz_14 fc_ash"><span>单数： <span>{{data.Count}}</span></span></i>
+                                <i class="fz_14 fc_ash"><span>代收款： <span>{{data.GReceivables}}</span></span></i>
+                                <i class="fz_14 fc_ash"><span>大车运费： <span>{{data.largeCar}}</span></span></i>
+                                <i class="fz_14 fc_ash"><span>司机电话： <span>{{data.DrivePhone}}</span></span></i>
+                            </p>
+                            <i class="iconfont " style="font-size:30px;margin:0 .5rem">&#xe6d7;</i>
+                            <p class="dis_flex" style="flex-direction: column;line-height:1.5rem;">
+                                <strong class="fz_16">{{data.EndSheng}}</strong>
+                                <i class="fz_16">{{data.EndShi}}</i>
+                                <i class="fz_16">{{data.EndQu}}</i>
+                                <i class="fz_14 fc_ash"><span>件数： <span>{{data.number}}</span></span></i>
+                                <i class="fz_14 fc_ash"><span>总运费：<span>{{data.Freight}}</span></span></i>
+                                <i class="fz_14 fc_ash"><span>车号： <span>{{data.VehicleNo}}</span></span></i>
+                            </p>
+                        </div>              
+                    </div>
+                </div>            
+            </div>
+            <p class="dis_flex txt_center fz_16" style="justify-content:center;margin-bottom:.5rem;"><a class="dis_block" style="height:30px; line-height:30px; width:90px; background-color: #a3c478;color:#fff;" href="/LC/Business/MeetCar/LC_GoodDetails.aspx?CH={{data.VehicleID}}&CFD={{data.Initially}}&MDD={{data.finish}}">接车</a></p>
+            <p class="txt_center fz_12" style="padding-right:.5rem;">{{data.TruckTime}}</p>
+        </li>
+        {{else}}
+        <div style="text-align: center; line-height: 200px; overflow: hidden;">无任何数据</div>
+        {{/if}}
+    </script>
     <script>
         $(function () {
             $.init();
             $.config = { router: false }
+        });
+        PageInit(function () {
+            GetHTML("GetMeetCarList", {}, function (data) {
+                if (CheckHTMLData(data)) {
+                    let html = TempToHtml("content_list_temp", data);
+                    $("#content_list").html(html);
+                    RemoveLuyou();
+                }
+            });
+
+
+
+
         });
     </script>
 

@@ -87,7 +87,8 @@
                             </a>
                         </li>
                         <li class="shangjia-li7">
-                            <a href="huokuanguanli_details.html" class="row">
+                            <!--<a href="huokuanguanli_details.html" class="row">-->
+                            <a onclick="No()" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-cached" style="color: #f2a207;"></span>
                                 </div>
@@ -100,7 +101,8 @@
                             </a>
                         </li>
                         <li class="shangjia-li5">
-                            <a href="huokuanguanli_details.html" class="row">
+                            <!--<a href="huokuanguanli_details.html" class="row">-->
+                            <a onclick="No()" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-approvalhistory" style="color: #ff0000;"></span>
                                 </div>
@@ -126,6 +128,10 @@
             $.init();
             $.config = { router: false }
         });
+        function No()
+        {
+            Msg("功能测试阶段中！");
+        }
     </script>
 
 </body>

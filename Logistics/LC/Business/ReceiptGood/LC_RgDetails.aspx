@@ -80,6 +80,7 @@
                                     <i class="zbsh-xd1">
                                   <p class="zbsh-mdd">收货人： <span class="ft_color_ash"><%=v.Consignee %></span></p>
                                   <p class="zbsh-hm ft_color_ash">电话： <span><%=v.SHPhone %></span></p>
+                                        <input type="hidden"  value="<%=v.GReceivables %>" id="GReceivables"/>
                                 </i>
 
                                     <i class="zbsh-xd2">
@@ -92,7 +93,7 @@
                                   <p class="zbsh-yf">实收件数： <input type="text" id="SSNumber" name="SSNumber"></p>
                                 </i>
                                  <i class="zbsh-xd2">
-                                  <p class="zbsh-yf">中&nbsp;&nbsp;转&nbsp;&nbsp;地： <select id="Ends" name="Ends" style="width: 300px;">
+                                  <p class="zbsh-yf dis_flex ali_center"><span class="col_30">中&nbsp;&nbsp;转&nbsp;&nbsp;地：</span> <select class="col_70" id="Ends" name="Ends" style="width: 300px;">
                                     <option>请选择</option>
                                     <%
                                         foreach (var v1 in list2)
@@ -121,14 +122,18 @@
 
                             </a>
                             <div class="xiangdan-btn">
+                                <%if (v.freightMode == 2)
+                                    { %>
+                                <a href="#" onclick="zhifu('<%=v.OrderID %>')">确定收货</a>
+                                <%} %>
+                                <%if(v.freightMode==1 || v.freightMode==3){ %>
                                <a href="#" onclick="Submits('<%=v.OrderID %>')">确定收货</a>
+                                <%} %>
                             </div>
                         </li>
                         <%} %>
                     </ul>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -144,13 +149,38 @@
     <script type="text/javascript">
         function Submits(OID)
         {
+            var Number = GET("Number");
             var ssnumber = $("#SSNumber").val();//实收件数
             var Freight = $("#Freight").val();//运费
             let arr = $("#Ends").val().split("|");
             var Ends = arr[0];//中转地
             let BindLogisticsUid = arr[1];
             var OtherExpenses = $("#OtherExpenses").val();//送货费用
-            window.location.href = "/LC/Business/ReceiptGood/LC_Success.aspx?OIDDetaila=" + OID + "&ssnumber=" + ssnumber + "&FreightDetail=" + Freight + "&OtherExpenses=" + OtherExpenses + "&Ends=" + Ends + "&BindLogisticsUid=" + BindLogisticsUid;
+            if (ssnumber != 0)
+            {
+                window.location.href = "/LC/Business/ReceiptGood/LC_Success.aspx?OIDDetaila=" + OID + "&ssnumber=" + ssnumber + "&FreightDetail=" + Freight + "&OtherExpenses=" + OtherExpenses + "&Ends=" + Ends + "&BindLogisticsUid=" + BindLogisticsUid;
+            }
+            else
+            {
+                window.location.href = "/LC/Business/ReceiptGood/LC_Success.aspx?OIDDetaila=" + OID + "&ssnumber=" + Number + "&FreightDetail=" + Freight + "&OtherExpenses=" + OtherExpenses + "&Ends=" + Ends + "&BindLogisticsUid=" + BindLogisticsUid;
+            }
+        }
+        function zhifu(OID)
+        {
+            var Number = GET("Number");
+            var ssnumber = $("#SSNumber").val();//实收件数
+            var Freight = $("#Freight").val();//运费
+            let arr = $("#Ends").val().split("|");
+            var Ends = arr[0];//中转地
+            let BindLogisticsUid = arr[1];
+            var OtherExpenses = $("#OtherExpenses").val();//送货费用
+            var GReceivables = $("#GReceivables").val();
+            if (ssnumber != 0) {
+                window.location.href = "/LC/Business/ReceiptGood/LC_ReceivablesDetails.aspx?OIDDetaila=" + OID + "&ssnumber=" + ssnumber + "&FreightDetail=" + Freight + "&OtherExpenses=" + OtherExpenses + "&Ends=" + Ends + "&BindLogisticsUid=" + BindLogisticsUid + "&GReceivables=" + GReceivables;
+            }
+            else {
+                window.location.href = "/LC/Business/ReceiptGood/LC_ReceivablesDetails.aspx?OIDDetaila=" + OID + "&ssnumber=" + Number + "&FreightDetail=" + Freight + "&OtherExpenses=" + OtherExpenses + "&Ends=" + Ends + "&BindLogisticsUid=" + BindLogisticsUid + "&GReceivables=" + GReceivables;
+            }
         }
     </script>
 </body>

@@ -38,7 +38,8 @@ namespace GlobalBLL
                 Province = GetLoginValue(LoginEnum.Province),
                 ProvincesID = GetLoginValue<int>(LoginEnum.ProvincesID),
                 state = GetLoginValue<int>(LoginEnum.state),
-                username = GetLoginValue(LoginEnum.username)
+                username = GetLoginValue(LoginEnum.username),
+                LogisticsName=GetLoginValue(LoginEnum.LogisticsName)
             };
         }
 

@@ -84,12 +84,17 @@
     <Reference Include="SuperCommand">
       <HintPath>C:\Users\Administrator\Documents\WeChat Files\kxz128448145\Files\SuperCommand.dll</HintPath>
     </Reference>
-    <Reference Include="SuperDataBase">
-      <HintPath>D:\Users\晓龙\Source\Workspaces\3.7版本(通用版)GIT版本\运营商API平台\bin\SuperDataBase.dll</HintPath>
+    <Reference Include="SuperDataBase, Version=2.4.1.8, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\SuperDataBase\SuperDataBase.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.3.1\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
@@ -101,6 +106,12 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -180,14 +191,17 @@
     <Content Include="LC\Business\DschargeGood\BatchSuccess.aspx" />
     <Content Include="LC\Business\DschargeGood\FastSuccess.aspx" />
     <Content Include="LC\Business\DschargeGood\ItySuccess.aspx" />
+    <Content Include="LC\Business\DschargeGood\LC_ArrearsSuccess.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_DeliveryEdit.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_FHEdit.aspx" />
     <Content Include="LC\Business\DschargeGood\IndexDhg.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_Handle.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_Inventory.aspx" />
+    <Content Include="LC\Business\DschargeGood\LC_Receivables.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_SHSuccess.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_Success.aspx" />
     <Content Include="LC\Business\DschargeGood\LC_TransferEdit.aspx" />
+    <Content Include="LC\Business\DschargeGood\LC_WFHEdit.aspx" />
     <Content Include="LC\Business\Exception\Cargo\LC_Index.aspx" />
     <Content Include="LC\Business\Exception\LC_Index.aspx" />
     <Content Include="LC\Business\Exception\Revoke\LC_Cancel.aspx" />
@@ -200,6 +214,9 @@
     <Content Include="LC\Business\MeetCar\LC_IndexMC.aspx" />
     <Content Include="LC\Business\MeetCar\LC_Success.aspx" />
     <Content Include="LC\Business\ReceiptGood\LC_HistoryEdit.aspx" />
+    <Content Include="LC\Business\ReceiptGood\LC_Receivables.aspx" />
+    <Content Include="LC\Business\ReceiptGood\LC_ReceivablesDetails.aspx" />
+    <Content Include="LC\Customer\Contact\LC_CtDetails.aspx" />
     <Content Include="LC\Customer\SignGood\LC_ApplyGiveGood.aspx" />
     <Content Include="LC\Customer\SignGood\LC_GiveSuccess.aspx" />
     <Content Include="LC\OperationOverview\LC_Index.aspx" />
@@ -212,7 +229,6 @@
     <Content Include="LC\Business\ReceiptGood\LC_HistoryIndex.aspx" />
     <Content Include="LC\Business\ReceiptGood\LC_RgDetails.aspx" />
     <Content Include="LC\Business\ReceiptGood\LC_Success.aspx" />
-    <Content Include="LC\Customer\Contact\LC_AddCt.aspx" />
     <Content Include="LC\Customer\Contact\LC_IndexCt.aspx" />
     <Content Include="LC\Customer\DeliverGood\CT_DeliverAdd.aspx" />
     <Content Include="LC\Customer\DeliverGood\CT_Delivergod.aspx" />
@@ -247,6 +263,9 @@
     <Content Include="LC\MenuBar\LC_Manage.aspx" />
     <Content Include="LC\MenuBar\OperationCountIndex.aspx" />
     <Content Include="LC\MenuBar\Personal.aspx" />
+    <Content Include="LC\OwnBilling\LC_DeliverGoodContinue.aspx" />
+    <Content Include="LC\OwnBilling\LC_DeliverGoods.aspx" />
+    <Content Include="LC\OwnBilling\LC_Success.aspx" />
     <Content Include="LC_Pick.aspx" />
     <Content Include="Login\Login.aspx" />
     <Content Include="Login\login.html" />
@@ -403,15 +422,24 @@
     </Compile>
     <Compile Include="ApiCommand\CMD_BindUser.cs" />
     <Compile Include="ApiCommand\CMD_GetAddressNextList.cs" />
+    <Compile Include="ApiCommand\CMD_GetCollectDebts.cs" />
+    <Compile Include="ApiCommand\CMD_GetCollectDebtsDetail.cs" />
+    <Compile Include="ApiCommand\CMD_GetCollectDebtsDetailTop.cs" />
+    <Compile Include="ApiCommand\CMD_GetCollectDebtsEdit.cs" />
     <Compile Include="ApiCommand\CMD_GetLoginData.cs" />
+    <Compile Include="ApiCommand\CMD_GetMeetCarList.cs" />
+    <Compile Include="ApiCommand\CMD_GetMyCount.cs" />
     <Compile Include="ApiCommand\CMD_GetMyLineList.cs" />
     <Compile Include="ApiCommand\CMD_GetMyLoginData.cs" />
+    <Compile Include="ApiCommand\CMD_GetPaidCount.cs" />
     <Compile Include="ApiCommand\CMD_GetSysApiDoc.cs" />
     <Compile Include="ApiCommand\CMD_GetToRegUser.cs" />
     <Compile Include="ApiCommand\CMD_JSSignature.cs" />
     <Compile Include="ApiCommand\CMD_LineBinding.cs" />
     <Compile Include="ApiCommand\CMD_OAuth.cs" />
     <Compile Include="ApiCommand\CMD_OutSystem.cs" />
+    <Compile Include="ApiCommand\CMD_PaymentDay.cs" />
+    <Compile Include="ApiCommand\CMD_Yesterdaybalance.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_AddVehicleWait.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_AddVehicle.cs" />
     <Compile Include="ApiCommand\GLCommand\CMD_CheckDriverIsHaveFromPhone.cs" />
@@ -503,6 +531,13 @@
     <Compile Include="LC\Business\DschargeGood\ItySuccess.aspx.designer.cs">
       <DependentUpon>ItySuccess.aspx</DependentUpon>
     </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_ArrearsSuccess.aspx.cs">
+      <DependentUpon>LC_ArrearsSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_ArrearsSuccess.aspx.designer.cs">
+      <DependentUpon>LC_ArrearsSuccess.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LC\Business\DschargeGood\LC_DeliveryEdit.aspx.cs">
       <DependentUpon>LC_DeliveryEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -524,12 +559,26 @@
     <Compile Include="LC\Business\DschargeGood\LC_Inventory.aspx.designer.cs">
       <DependentUpon>LC_Inventory.aspx</DependentUpon>
     </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_Receivables.aspx.cs">
+      <DependentUpon>LC_Receivables.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_Receivables.aspx.designer.cs">
+      <DependentUpon>LC_Receivables.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LC\Business\DschargeGood\LC_SHSuccess.aspx.cs">
       <DependentUpon>LC_SHSuccess.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="LC\Business\DschargeGood\LC_SHSuccess.aspx.designer.cs">
       <DependentUpon>LC_SHSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_WFHEdit.aspx.cs">
+      <DependentUpon>LC_WFHEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\DschargeGood\LC_WFHEdit.aspx.designer.cs">
+      <DependentUpon>LC_WFHEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="LC\Business\Exception\Cargo\LC_Index.aspx.cs">
       <DependentUpon>LC_Index.aspx</DependentUpon>
@@ -594,6 +643,27 @@
     <Compile Include="LC\Business\ReceiptGood\LC_HistoryEdit.aspx.designer.cs">
       <DependentUpon>LC_HistoryEdit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="LC\Business\ReceiptGood\LC_Receivables.aspx.cs">
+      <DependentUpon>LC_Receivables.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\ReceiptGood\LC_Receivables.aspx.designer.cs">
+      <DependentUpon>LC_Receivables.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Business\ReceiptGood\LC_ReceivablesDetails.aspx.cs">
+      <DependentUpon>LC_ReceivablesDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Business\ReceiptGood\LC_ReceivablesDetails.aspx.designer.cs">
+      <DependentUpon>LC_ReceivablesDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\Customer\Contact\LC_CtDetails.aspx.cs">
+      <DependentUpon>LC_CtDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\Customer\Contact\LC_CtDetails.aspx.designer.cs">
+      <DependentUpon>LC_CtDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LC\Customer\SignGood\LC_ApplyGiveGood.aspx.cs">
       <DependentUpon>LC_ApplyGiveGood.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -635,6 +705,27 @@
     </Compile>
     <Compile Include="LC\MenuBar\AddLC.aspx.designer.cs">
       <DependentUpon>AddLC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\OwnBilling\LC_DeliverGoodContinue.aspx.cs">
+      <DependentUpon>LC_DeliverGoodContinue.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\OwnBilling\LC_DeliverGoodContinue.aspx.designer.cs">
+      <DependentUpon>LC_DeliverGoodContinue.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\OwnBilling\LC_DeliverGoods.aspx.cs">
+      <DependentUpon>LC_DeliverGoods.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\OwnBilling\LC_DeliverGoods.aspx.designer.cs">
+      <DependentUpon>LC_DeliverGoods.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LC\OwnBilling\LC_Success.aspx.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LC\OwnBilling\LC_Success.aspx.designer.cs">
+      <DependentUpon>LC_Success.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebCommandBase.cs" />
     <Compile Include="WebCommandVOBase.cs" />
@@ -787,13 +878,6 @@
     </Compile>
     <Compile Include="LC\Business\ReceiptGood\LC_Success.aspx.designer.cs">
       <DependentUpon>LC_Success.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="LC\Customer\Contact\LC_AddCt.aspx.cs">
-      <DependentUpon>LC_AddCt.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="LC\Customer\Contact\LC_AddCt.aspx.designer.cs">
-      <DependentUpon>LC_AddCt.aspx</DependentUpon>
     </Compile>
     <Compile Include="LC\Customer\Contact\LC_IndexCt.aspx.cs">
       <DependentUpon>LC_IndexCt.aspx</DependentUpon>
@@ -1106,7 +1190,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>13839</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

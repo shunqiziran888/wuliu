@@ -70,7 +70,7 @@
         <div class="page page-current">
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
-                <a href="index.html" class="icon iconfont icon-zuo pull-left"></a>
+                <a href="/LC/Business/Exception/Revoke/LC_Index.aspx" class="icon iconfont icon-zuo pull-left"></a>
                 <!-- <a href="fahuochexiao_success.html" class="icon pull-right dis_inline red" style="color:#fff;border:1px solid #bbb; line-height:1.5rem; padding:0 1rem;margin-top:.28rem;">确认取消</a> -->
                 <h1 class="title">发货撤销</h1>
             </header>
@@ -86,7 +86,7 @@
                     <!-- 选择 -->
 
 
-                    <div class="zongji mart_10">
+<%--                    <div class="zongji mart_10">
                         <p class="zongji_top dis_flex  marb_10">
                             <i class="col_50 fz_16">汇总运费： <span class="fz_14">1201.1</span></i>
                             <i class="col_50 fz_16">汇总代收： <span class="fz_14">1201.1</span></i>
@@ -168,7 +168,7 @@
                             </a>
 
                         </li>
-                    </ul>
+                    </ul>--%>
                 </div>
 
 
@@ -183,6 +183,7 @@
             $.init();
             $.config = { router: false }
         });
+        Href("/LC/Business/Exception/Revoke/LC_Index.aspx", 200);
     </script>
 
 </body>

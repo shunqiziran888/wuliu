@@ -67,9 +67,10 @@
             $.init();
             $.config = { router: false }
         });
-        setInterval(function(){
-            window.location.href ="/LC/Business/DschargeGood/IndexDhg.aspx"
-        },2000)
+        //setInterval(function(){
+        //    window.location.href ="/LC/Business/DschargeGood/IndexDhg.aspx"
+        //},2000)
+        Href("/LC/Business/DschargeGood/IndexDhg.aspx", 200);
     </script>
 
 </body>

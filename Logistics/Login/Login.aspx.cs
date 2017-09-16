@@ -29,6 +29,7 @@ namespace Logistics.Login
                 if (!vo.Item1)
                 {
                     ReturnPager("手机号或密码错误！");
+                    //Alert("手机号或密码错误！");
                     return;
                 }
                 SetSession("islogin", "true");
@@ -92,6 +93,7 @@ namespace Logistics.Login
             SetSession(LoginEnum.ProvincesID.EnumToName(), vo.ProvincesID);
             SetSession(LoginEnum.state.EnumToName(), vo.State);
             SetSession(LoginEnum.username.EnumToName(), vo.UserName);
+            SetSession(LoginEnum.LogisticsName.EnumToName(), vo.LogisticsName);
         }
     }
 }

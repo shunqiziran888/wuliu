@@ -15,7 +15,10 @@ namespace Logistics.LC.Customer.SignGood
         protected void Page_Load(object sender, EventArgs e)
         {
             string OID = GetValue("OID");
-            Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() { State = 5 }, OID);
+            Tuple<bool, string> vo = DAL.DAL.LC_Customer.Update(new Model.Model.LC_Customer() {
+                State = 5 ,
+                DeliveryTime =DateTime.Now //客户提货时间更新
+            }, OID);
             if (!vo.Item1)
             {
                 //有错误

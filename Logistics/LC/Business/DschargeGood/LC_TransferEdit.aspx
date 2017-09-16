@@ -112,7 +112,9 @@
     {
         var Destination = $("#Destination").val();
         var Freight = $("#Freight").val();
+        var beforeyf = '<%=yf%>';
+        var Final = parseInt(beforeyf) + parseInt(Freight);
         var logisticsID = $("#logisticsID").val();
-        window.location.href = "/LC/Business/DschargeGood/LC_Handle.aspx?OID=" + OID + "&Freight=" + Freight + "&logisticsID=" + logisticsID + "&Destination="+Destination;
+        window.location.href = "/LC/Business/DschargeGood/LC_Handle.aspx?OID=" + OID + "&Freight=" + Final + "&logisticsID=" + logisticsID + "&Destination="+Destination;
     }
 </script>

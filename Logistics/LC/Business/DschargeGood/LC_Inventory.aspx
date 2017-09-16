@@ -66,7 +66,7 @@
         <div class="page page-current">
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
-                <a href="#" onclick="history.go(-1)" class="icon iconfont icon-zuo pull-left"></a>
+                <a href="/LC/Business/DschargeGood/IndexDhg.aspx?sw2=1" class="icon iconfont icon-zuo pull-left"></a>
                 <!-- <p class="add_wuliu">
                     <a class="add_icon icon iconfont icon-eventnote pull-right" href="history_log.html"></a>
                     <i class="add_txt">历史记录</i>
@@ -91,14 +91,14 @@
                                 <input type="hidden"  id="OIDSS" name="OIDSS" value="<%=v.OrderID %>"/>
                                 <div style="line-height:1.5rem;">
                                     <div class="dis_flex jus_bet ali_center">
-                                        <div class="col_70">
+                                        <div class="col_100">
                                             <p class="fz_14">收货人： <i><%=v.Consignee %></i></p>
                                             <p class="fz_14">货名件数： <i><%=v.GoodName %> <span class="fc_red">x<%=v.Number %>件</span></i></p>
-                                            <p class="fz_14"><i>运费：<span><%=v.Freight %></span></i><i>代收款：<span><%=v.GReceivables %></span></i></p>
+                                            <p class="fz_14"><i>运费：<span><%=Math.Round(v.Freight.ConvertData<decimal>(),2)%></span></i><i>代收款：<span><%=v.GReceivables %></span></i></p>
                                         </div>
-                                        <i class="iconfont col_30 fc_green" style="font-size:55px;">&#xe67b;</i>
+                                        <!-- <i class="iconfont col_30 fc_green" style="font-size:55px;">&#xe67b;</i> -->
                                     </div>
-                                <p class="fz_14"><i>货号：<span><%=v.GoodNo %></span></i><i class="fz_12" style="margin-left:1rem;">暂时不显示（时间）</i></p>
+                                <p class="fz_14"><i>货号：<span><%=v.GoodNo %></span></i><i class="fz_12" style="margin-left:1rem;"><%=v.MeetCarTime %></i></p>
                             </div>
                             </a>
                         </label>

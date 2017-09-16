@@ -40,7 +40,7 @@
         <div class="page page-current">
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
-               <a href="javascript:;" onclick="window.history.go(-1)" class="icon iconfont icon-zuo pull-left"></a>
+               <a href="/LC/MenuBar/LC_BusinessIndex.aspx" class="icon iconfont icon-zuo pull-left"></a>
                 <h1 class="title">异常业务</h1>
             </header>
 
@@ -56,7 +56,10 @@
                                 </div>
                                 <div class="col-50 shangjia-center">
                                     发货撤销
-                                    <span class="prompt_msg" >10</span>
+                                    <%if (list.Count > 0)
+                                    {%>
+                                    <span class="prompt_msg"><%=list.Count%></span>
+                                    <%} %>
                                 </div>
                                 <div class="col-20 shangjia-right">
                                     <span class="iconfont icon-gengduo"></span>
@@ -64,7 +67,8 @@
                             </a>
                         </li>
                         <li class="shangjia-li2">
-                            <a href="#" class="row">
+                            <%--<a href="#" class="row">--%>
+                            <a onclick="No()" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-shopping-basket"></span>
                                 </div>
@@ -77,7 +81,8 @@
                             </a>
                         </li>
                         <li class="shangjia-li3">
-                            <a href="#" class="row">
+                           <%-- <a href="#" class="row">--%>
+                            <a onclick="No()" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-refresh"></span>
                                 </div>
@@ -119,6 +124,10 @@
             $.init();
             $.config = { router: false }
         });
+        function No()
+        {
+            Msg("此功能正在测试中！");
+        }
     </script>
 
 </body>

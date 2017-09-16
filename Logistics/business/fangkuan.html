@@ -179,15 +179,15 @@
 
                     <div class="zongji mart_10">
                         <p class="zongji_top dis_flex  marb_10">
-                            <i class="col_50 fz_16">已回款： <span class="fz_14">1201</span></i>
-                            <i class="col_50 fz_16">本次放款： <span class="fz_14">1201.1</span></i>
+                            <i class="col_50 fz_16">已回款： <span class="fz_14">0元</span></i>
+                            <i class="col_50 fz_16">本次放款： <span class="fz_14">0元</span></i>
                         </p>
                         <p class="zongji_top dis_flex">
-                            <i class="col_50 fz_16">银行卡： <span class="fz_14">1201.1</span></i>
-                            <i class="col_50 fz_16">现金放款： <span class="fz_14">1201.1</span></i>
+                            <i class="col_50 fz_16">银行卡： <span class="fz_14">0元</span></i>
+                            <i class="col_50 fz_16">现金放款： <span class="fz_14">0元</span></i>
                         </p>
                     </div>
-                    <form>
+                    <form id="content_list">
                         <!--<label class="dis_flex jus_bet ali_center mart_10 white" style="padding:.5rem">
                             <span class="col_20"><input class="col_90" type="checkbox"></span>
                             <a href="choose_bus.html" class="col_80">
@@ -203,9 +203,6 @@
                                 </div>
                             </a>
                         </label>-->
-                        <label class="dis_flex jus_bet ali_center mart_10 white" style="padding:.5rem" id="content_list">
-                            <!--数据-->
-                        </label>
                     </form>
                 </div>
             </div>
@@ -219,22 +216,26 @@
 
         {{if data.length>0}}
         {{each data as v}}
-        <span class="col_20"><input type="checkbox" name="checkCommd" id="fxk" value="{{each v.OrderList as v}}{{v}},{{/each}}" class="col_40" /></span>
-        <i class="col_80">
-            <div style="line-height:1.5rem;">
-                <p class="fz_14 dis_flex jus_bet">
-                    <span class="col_50">收货人： <i>{{v.Consignee}}</i></span>
-                    <span class="col_50">发货人： <i>{{v.Consignor}}</i></span>
-                    <span class="col_50">单数：<i>{{v.num}}</i></span>
-                </p>
-                <p class="fz_14 dis_flex jus_bet">
-                    <span class="col_60">应放总金额： <i>{{v.allamount}}</i></span>
-                    <!--<span class="col_40 dis_flex"><a href="../payee/shoukuan.html" class="green fc_white fz_14 padlr_20 line_he_30" style="border:none;">现金放款</a></span>-->
-                </p>
-                <p class="fz_14 dis_flex" style="justify-content:flex-end"><i class="fz_12" style="margin-left:1rem;">2016年-12月-23日 09：21</i></p>
-            </div>
-        </i>
+        <label class="dis_flex jus_bet ali_center mart_10 white" style="padding:.5rem">
+            <span class="col_20"><input type="checkbox" name="checkCommd" id="fxk" value="{{each v.OrderList as v}}{{v}},{{/each}}" class="col_40" /></span>
+            <i class="col_80">
+                <div style="line-height:1.5rem;">
+                    <p class="fz_14 dis_flex jus_bet">
+                        <span class="col_50">收货人： <i>{{v.Consignee}}</i></span>
+                        <span class="col_50">发货人： <i>{{v.Consignor}}</i></span>
+                        <span class="col_50">单数：<i>{{v.num}}</i></span>
+                    </p>
+                    <p class="fz_14 dis_flex jus_bet">
+                        <span class="col_60">应放总金额： <i>{{v.allamount}}</i></span>
+                        <!--<span class="col_40 dis_flex"><a href="../payee/shoukuan.html" class="green fc_white fz_14 padlr_20 line_he_30" style="border:none;">现金放款</a></span>-->
+                    </p>
+                    <p class="fz_14 dis_flex" style="justify-content:flex-end"><i class="fz_12" style="margin-left:1rem;">{{v.DischargeTime}}</i></p>
+                </div>
+            </i>
+        </label>
         {{/each}}
+        {{else}}
+        <div style="text-align: center; line-height: 200px; overflow: hidden;">无任何数据</div>
         {{/if}}
 
     </script>

@@ -26,11 +26,11 @@ namespace BLL.BLL
             int state = web.GetValue<int>("state");
             DateTime starttime = web.GetValue<DateTime>("starttime");
             DateTime endtime = web.GetValue<DateTime>("endtime");
-            string startuid = web.GetValue("startuid");
-            string enduid = web.GetValue("enduid");
+            string startuid = web.GetValue("startuid",string.Empty);
+            string enduid = web.GetValue("enduid", string.Empty);
             int page = web.GetValue<int>("page");
             int num = web.GetValue<int>("num");
-            string orderlist = web.GetValue("orderlist");
+            string orderlist = web.GetValue("orderlist", string.Empty);
             string HKDetail = web.GetValue("HKDetail");
 
             if (page <= 0)
@@ -38,6 +38,45 @@ namespace BLL.BLL
             if (num <= 0)
                 num = 10;
             return DAL.DAL.LC_Payment.GetPaymentRecording(myuservo,state,starttime,endtime,startuid,enduid,page,num, orderlist, HKDetail);
+        }
+
+        public static (bool, string, object) Yesterdaybalance(HttpContextBase web)
+        {
+            var myuservo = web.GetMyLoginUserVO();
+            if (myuservo.accountType != AccountTypeEnum.普通用户账号)
+                return (false, "您的权限不足无法访问此列表!", null);
+            var AweekDate = web.GetValue("AweekDate");
+            DateTime zuotian = AweekDate.ConvertData<DateTime>();
+            DateTime fristtime = zuotian.ToString("yyyy-MM-dd 00:00:00").ConvertData<DateTime>();
+            DateTime lasttime = zuotian.ToString("yyyy-MM-dd 23:59:59").ConvertData<DateTime>();
+            DateTime fristToday = DateTime.Now.ToString("yyyy-MM-dd 00:00:00").ConvertData<DateTime>();
+            DateTime lastToday = DateTime.Now.ToString("yyyy-MM-dd 23:59:59").ConvertData<DateTime>();
+            return DAL.DAL.LC_Payment.Yesterdaybalance(myuservo, fristtime, lasttime, fristToday, lastToday);
+        }
+
+        public static (bool, string, object) GetPaymentDay(HttpContextBase web)
+        {
+            var myuservo = web.GetMyLoginUserVO();
+            if (myuservo.accountType != AccountTypeEnum.物流账号)
+                return (false, "您的权限不足无法访问此列表!", null);
+            DateTime starttime = web.GetValue<DateTime>("starttime");
+            DateTime endtime = web.GetValue<DateTime>("endtime");
+            return DAL.DAL.LC_Payment.GetPaymentDay(myuservo,starttime,endtime);
+        }
+
+        public static (bool, string, object) GetPaidCount(HttpContextBase web)
+        {
+            var myuservo = web.GetMyLoginUserVO();
+            if (myuservo.accountType != AccountTypeEnum.物流账号)
+                return (false, "您的权限不足无法访问此列表!", null);
+            int state = web.GetValue<int>("state");
+            int page = web.GetValue<int>("page");
+            int num = web.GetValue<int>("num");
+            if (page <= 0)
+                page = 1;
+            if (num <= 0)
+                num = 10;
+            return DAL.DAL.LC_Payment.GetPaidCount(myuservo, state, page, num);
         }
 
         /// <summary>

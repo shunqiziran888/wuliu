@@ -44,10 +44,10 @@ $(window).load(function() {
             <input placeholder='请输入密码' class="txt-input txt-password ciphertext" name="Password" type="password" id="Password" style="display: inline;" >
           <input id="ptext" class="txt-input txt-password plaintext" type="text" placeholder="请输入密码" style="display: none;" name="ptext">
           <b class="tp-btn btn-off"></b> </div>
-        <div class="item item-login-option"> <span class="retrieve-password"> <a class="" href="#"> 找回密码</a> </span>
+        <div class="item item-login-option"> <span class="retrieve-password"> <a class="" href="#"  onclick="No()"> 找回密码</a> </span>
           <div class="clr"></div>
         </div>
-        <div class="ui-btn-wrap"> <a class="ui-btn-lg ui-btn-primary" href="#" onclick="loginwl()">用户登录</a> </div>
+        <div class="ui-btn-wrap"> <a class="ui-btn-lg ui-btn-primary" href="#" onclick="loginwl()">登录</a> </div>
       </form>
     </div>
     <script type="text/javascript" >
@@ -144,5 +144,9 @@ $(window).load(function() {
     function loginwl()
     {
         document.getElementById("form1").submit();
+    }
+    function No()
+    {
+        alert("请联系开发人员！ 0000x0001");
     }
 </script>

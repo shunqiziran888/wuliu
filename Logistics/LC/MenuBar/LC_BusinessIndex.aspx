@@ -40,8 +40,8 @@
         <div class="page page-current">
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
-                <p class="add_wuliu">
-                    <a class="add_icon icon iconfont icon-plus pull-right" href="/manage/line_share.html"></a>
+                <p class="add_wuliu" onclick="window.location.href='/LC/OwnBilling/LC_DeliverGoods.aspx'">
+                    <a class="add_icon icon iconfont icon-kaidan pull-right" style="font-size:1rem;" href="javascript:;"></a>
                     <i class="add_txt">自主开单</i>
                 </p>
                 <h1 class="title">物流业务</h1>
@@ -49,23 +49,23 @@
 
             <nav class="bar bar-tab">
                 <a class="tab-item external active" href="/LC/MenuBar/LC_BusinessIndex.aspx">
-                  <span class="icon iconfont icon-filetexto"></span>
-                  <span class="tab-label">物流业务</span>
-              </a>
-                <a class="tab-item external" href="/count/">
-                  <span class="icon iconfont icon-fcstubiao19"></span>
-                  <span class="tab-label">运营统计</span>
-              </a>
+                    <span class="icon iconfont icon-filetexto"></span>
+                    <span class="tab-label">物流业务</span>
+                </a>
+                <a class="tab-item external" href="/count/index.html">
+                    <span class="icon iconfont icon-fcstubiao19"></span>
+                    <span class="tab-label">运营统计</span>
+                </a>
                 <a class="tab-item external" href="/manage/index.html">
-                  <span class="icon iconfont icon-guanli"></span>
-                  <span class="tab-label">物流管理</span>
-              </a>
+                    <span class="icon iconfont icon-guanli"></span>
+                    <span class="tab-label">物流管理</span>
+                </a>
                 <a class="tab-item external" href="/LC/MenuBar/Personal.aspx">
-                  <span class="icon iconfont icon-user-circle"></span>
-                  <span class="tab-label">我的</span>
-              </a>
+                    <span class="icon iconfont icon-user-circle"></span>
+                    <span class="tab-label">我的</span>
+                </a>
             </nav>
-            <div class="content" style="background:#f2f2f2;">
+            <div class="content" style="background: #f2f2f2;">
                 <div class="page-index">
                     <!-- <div class="searchbar">
                 <div class="search-input">
@@ -81,7 +81,10 @@
                                 </div>
                                 <div class="col-50 shangjia-center">
                                     收货
-                                    <span class="prompt_msg" ><%=list.Count%></span>
+                                    <%if (list.Count > 0)
+                                    {%>
+                                    <span class="prompt_msg"><%=list.Count%></span>
+                                    <%} %>
                                 </div>
                                 <div class="col-20 shangjia-right">
                                     <span class="iconfont icon-gengduo"></span>
@@ -95,6 +98,10 @@
                                 </div>
                                 <div class="col-50 shangjia-center">
                                     装车
+                                     <%if (PretendCarCountList.Rows.Count > 0)
+                                    {%>
+                                    <span class="prompt_msg"><%=PretendCarCountList.Rows.Count%></span>
+                                    <%} %>
                                 </div>
                                 <div class="col-20 shangjia-right">
                                     <span class="iconfont icon-gengduo"></span>
@@ -102,12 +109,13 @@
                             </a>
                         </li>
                         <li class="shangjia-li3">
-                            <a href="/LC/Business/MeetCar/LC_IndexMC.aspx" class="row">
+                            <a href="/LC/Business/MeetCar/LC_IndexMC.aspx" class="row" id="content_list">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-beenhere"></span>
                                 </div>
                                 <div class="col-50 shangjia-center">
                                     接车
+                                    <span class="prompt_msg" style="display:none" id="jc_num">0</span>
                                 </div>
                                 <div class="col-20 shangjia-right">
                                     <span class="iconfont icon-gengduo"></span>
@@ -121,6 +129,10 @@
                                 </div>
                                 <div class="col-50 shangjia-center">
                                     放货
+                                      <%if (FHlist.Count > 0)
+                                    {%>
+                                    <span class="prompt_msg"><%=FHlist.Count%></span>
+                                    <%} %>
                                 </div>
                                 <div class="col-20 shangjia-right">
                                     <span class="iconfont icon-gengduo"></span>
@@ -141,7 +153,7 @@
                             </a>
                         </li>
                         <li class="shangjia-li6">
-                             <a href="/LC/Business/CollectDebts/LC_Index.aspx" class="row">
+                            <a href="/LC/Business/CollectDebts/LC_Index.aspx" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-money"></span>
                                 </div>
@@ -155,7 +167,8 @@
                         </li>
 
                         <li class="shangjia-li7">
-                             <a href="/LC/Business/Exception/LC_Index.aspx" class="row">
+                            <a href="/LC/Business/Exception/LC_Index.aspx" class="row">
+                            <%--<a onclick="No()" class="row">--%>
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-usertimes1"></span>
                                 </div>
@@ -168,7 +181,7 @@
                             </a>
                         </li>
                         <li class="shangjia-li8">
-                             <a href="/business/huokuanguanli.html"  class="row">
+                            <a href="/business/huokuanguanli.html" class="row">
                                 <div class="col-30 shangjia-left">
                                     <span class="iconfont icon-jpy"></span>
                                 </div>
@@ -182,18 +195,35 @@
                         </li>
                     </ul>
                 </div>
-
-
             </div>
         </div>
     </div>
 
-  <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
-
+    <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
     <script>
         $(function () {
             $.init();
             $.config = { router: false }
+        });
+
+        PageInit(function () {
+            GetHTML("GetMeetCarList", {}, function (data) {
+                if (CheckHTMLData(data)) {
+                    let num = data.data.Count;
+                    if (num > 0) {
+                        $("#jc_num").css("display", "");
+                        $("#jc_num").text(data.data.Count);
+                    }
+
+                    //let html = TempToHtml("content_list_temp", data);
+                    //$("#content_list").html(html);
+                    RemoveLuyou();
+                }
+            });
+
+
+
+
         });
     </script>
 
@@ -201,8 +231,7 @@
 
 </html>
 <script type="text/javascript">
-    function No()
-    {
-        alert("功能暂未开放！");
-    }
+        function No() {
+            Msg("功能测试阶段中！");
+        }
 </script>

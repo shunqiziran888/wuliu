@@ -25,6 +25,8 @@ namespace Logistics.Command
                     x.MyPhone,
                     x.Start,
                     x.UID,
+                    ShengName = DAL.DAL.DALBase.GetAllAddressNames(x.End.ConvertData<int>()).sheng,
+                    QuName = DAL.DAL.DALBase.GetAllAddressNames(x.End.ConvertData<int>()).shi
                 };
             })).ToJson());
             Response.End();

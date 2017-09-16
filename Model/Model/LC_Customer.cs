@@ -12,7 +12,7 @@ namespace Model.Model
         /// <summary>
         /// 
         /// </summary>
-        private long? _ID;
+        private int? _ID;
         /// <summary>
         /// 订单ID
         /// </summary>
@@ -146,17 +146,58 @@ namespace Model.Model
         /// </summary>
         private string _finishUID;
         /// <summary>
-        /// 详细地址
+        /// 送货详细地址
         /// </summary>
-        private string _DetaileAddress;
+        private string _DetailedAddress;
         /// <summary>
-        /// 送货费
+        /// 送货费用
         /// </summary>
         private decimal? _DeliveryCost;
         /// <summary>
-        /// 
+        /// 欠款操作时间
         /// </summary>
-        public long? ID
+        private DateTime? _ArrearsTime;
+        /// <summary>
+        /// 盘点时间
+        /// </summary>
+        private DateTime? _DeliveryTime;
+        /// <summary>
+        /// 提货时间
+        /// </summary>
+        private DateTime? _InventoryTime;
+        /// <summary>
+        /// 撤销时间
+        /// </summary>
+        private DateTime? _RevokeTime;
+        /// <summary>
+        /// 上缴时间
+        /// </summary>
+        private DateTime? _PaidTime;
+        /// <summary>
+        /// 回收时间
+        /// </summary>
+        private DateTime? _RecoveryTime;
+        /// <summary>
+        /// 放款时间
+        /// </summary>
+        private DateTime? _LoanTime;
+        /// <summary>
+        /// 申请中转时间
+        /// </summary>
+        private DateTime? _TransferTime;
+        /// <summary>
+        /// 送货时间
+        /// </summary>
+        private DateTime? _GiveGoodTime;
+        /// <summary>
+        /// 取货费
+        /// </summary>
+        private decimal? _PickupCost;
+        /// <summary>
+        /// 送货费
+        /// </summary>
+        private decimal _GivegoodCost;
+        public int? ID
         {
             set { _ID = value;}
             get { return _ID; }
@@ -425,21 +466,19 @@ namespace Model.Model
             set { _finishUID = value;}
             get { return _finishUID; }
         }
-        /// <summary>
-        /// 详细地址
-        /// </summary>
-        public string DetaileAddress
-        {
-            set { _DetaileAddress = value;}
-            get { return _DetaileAddress; }
-        }
-        /// <summary>
-        /// 送货费
-        /// </summary>
-        public decimal? DeliveryCost
-        {
-            set { _DeliveryCost = value;}
-            get { return _DeliveryCost; }
-        }
+
+        public string DetailedAddress { get => _DetailedAddress; set => _DetailedAddress = value; }
+        public decimal? DeliveryCost { get => _DeliveryCost; set => _DeliveryCost = value; }
+        public DateTime? ArrearsTime { get => _ArrearsTime; set => _ArrearsTime = value; }
+        public DateTime? InventoryTime { get => _InventoryTime; set => _InventoryTime = value; }
+        public DateTime? DeliveryTime { get => _DeliveryTime; set => _DeliveryTime = value; }
+        public DateTime? RevokeTime { get => _RevokeTime; set => _RevokeTime = value; }
+        public DateTime? PaidTime { get => _PaidTime; set => _PaidTime = value; }
+        public DateTime? RecoveryTime { get => _RecoveryTime; set => _RecoveryTime = value; }
+        public DateTime? LoanTime { get => _LoanTime; set => _LoanTime = value; }
+        public DateTime? TransferTime { get => _TransferTime; set => _TransferTime = value; }
+        public DateTime? GiveGoodTime { get => _GiveGoodTime; set => _GiveGoodTime = value; }
+        public decimal? PickupCost { get => _PickupCost; set => _PickupCost = value; }
+        public decimal GivegoodCost { get => _GivegoodCost; set => _GivegoodCost = value; }
     }
 }

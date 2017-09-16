@@ -175,8 +175,8 @@
 
                     <div class="zongji mart_10">
                         <p class="zongji_top dis_flex  marb_10">
-                            <i class="col_50 fz_16">汇总运费： <span class="fz_14">1201.1</span></i>
-                            <i class="col_50 fz_16">汇总代收： <span class="fz_14">1201.1</span></i>
+                            <i class="col_50 fz_16">汇总运费： <span class="fz_14" id="testyf"></span></i>
+                            <i class="col_50 fz_16">汇总代收： <span class="fz_14" id="testdsk"></span></i>
                         </p>
                         <p class="zongji_top dis_flex">
                             <i class="col_50 fz_16">未装运费： <span class="fz_14">1201.1</span></i>
@@ -197,31 +197,32 @@
         {{if data.length>0}}
         {{each data as v}}
         <li class="zbsh-li">
+            <input type="checkbox" name="checkCommd" value="{{v.lcc.OrderID}},{{v.lcc.Freight}},{{v.lcc.GReceivables}}" style="display:none" />
             <a href="#">
                 <div class="col-100">
                     <i class="zbsh-xd2">
-                        <p class="zbsh-zffs fz_16">货号： <span class="fc_ash fz_14">xxx2222</span></p>
+                        <p class="zbsh-zffs fz_16">货号： <span class="fc_ash fz_14">{{v.lcc.GoodNo}}</span></p>
                     </i>
                     <i class="zbsh-xd2">
                         <p class="zbsh-zffs fz_16">
-                            货物名： <span class="huo_name fc_ash fz_14">一大箱可口可乐 <i class="huo_num">x12</i></span>
-                            <span class="huo_fnagshi">(现付)</span>
+                            货物名： <span class="huo_name fc_ash fz_14">{{v.lcc.GoodName}} <i class="huo_num">x{{v.lcc.Number}}</i></span>
+                            <span class="huo_fnagshi">({{v.freightModeName}})</span>
                         </p>
                     </i>
                     <i class="zbsh-xd1">
-                        <p class="zbsh-shr col_50 fz_16">发货人： <span class="ft_color_ash fz_14">司马相如</span></p>
-                        <p class="zbsh-hh fc_ash col_50 fz_16">收货人： <span class="fz_14">包大人</span></p>
+                        <p class="zbsh-shr col_50 fz_16">发货人： <span class="ft_color_ash fz_14">{{v.lcc.Consignor}}</span></p>
+                        <p class="zbsh-hh fc_ash col_50 fz_16">收货人： <span class="fz_14">{{v.lcc.Consignee}}</span></p>
 
                     </i>
                     <i class="zbsh-xd1">
-                        <p class="zbsh-shr col_50 fz_16">运费： <span class="yunfei ft_color_ash fz_14">3010</span></p>
-                        <p class="zbsh-hh fc_ash col_50 fz_16">代收款： <span class="fz_14">1899</span></p>
+                        <p class="zbsh-shr col_50 fz_16">运费： <span class="yunfei ft_color_ash fz_14">{{v.lcc.Freight}}</span></p>
+                        <p class="zbsh-hh fc_ash col_50 fz_16">代收款： <span class="fz_14">{{v.lcc.GReceivables}}</span></p>
 
                     </i>
                     <i class="zbsh-xd2">
-                        <p class="zbsh-zffs fz_16">目的地： <span class="mudidi fc_ash fz_14">火星</span></p>
+                        <p class="zbsh-zffs fz_16">目的地： <span class="mudidi fc_ash fz_14">{{v.DestinationName}}</span></p>
                     </i>
-                    <p class="fz_16 dis_flex jus_bet ali_center fc_red" style="padding:0 10%;"><i>合计金额： <span>123</span></i><i class="fz_12 fc_ash">2016年-12月-23日 09：21</i></p>
+                    <p class="fz_16 dis_flex jus_bet ali_center fc_red" style="padding:0 10%;"><i>合计金额： <span>{{v.lcc.Total}}</span></i><i class="fz_12 fc_ash">{{v.lcc.DischargeTime}}</i></p>
                 </div>
             </a>
             <!-- <p class="dis_flex jus_center"><button class="change_btn line_he_30 padlr_30 green fc_white fz_14 mart_10" style="border:none;">更改</button></p> -->
@@ -247,6 +248,21 @@
                     let html = TempToHtml("content_list_temp", data);
                     $("#content_list").html(html);
                 }
+                $("input[type='checkbox']").each(function () {
+                    this.checked = true;
+                });
+                let yf = 0;
+                let dsk = 0;
+                var obj = document.getElementsByName("checkCommd");
+                for (var i = 0; i < obj.length; i++) {
+                    if (obj[i].checked) {
+                        let arr = obj[i].value.split(",");
+                        yf += parseFloat(arr[1]);
+                        dsk += parseFloat(arr[2]);
+                    }
+                }
+                document.getElementById("testyf").innerHTML = yf + "元";
+                document.getElementById("testdsk").innerHTML = dsk + "元";
             });
         });
     </script>

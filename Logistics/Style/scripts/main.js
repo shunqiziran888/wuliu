@@ -54,6 +54,8 @@ function InitSystem() {
  * @param {any} desc
  */
 function SetShare(title, link, imgUrl, desc) {
+    if ($.shareData == null)
+        return;
     $.shareData.title=title;
     $.shareData.link = (link);
     $.shareData.imgUrl = (imgUrl);

@@ -156,6 +156,10 @@ namespace GlobalBLL
         /// </summary>
         Country,
         IsLogin,
+        /// <summary>
+        /// 物流名称
+        /// </summary>
+        LogisticsName,
     }
 
 
@@ -172,7 +176,9 @@ namespace GlobalBLL
         客户取货=5,
         订单完成=6,
         货物已中转=7,
-        盘点成功 = 8
+        盘点成功 = 8,
+        欠款提货=9,
+        已撤销=10
     }
 
     /// <summary>

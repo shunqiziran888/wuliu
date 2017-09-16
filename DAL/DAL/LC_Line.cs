@@ -74,6 +74,7 @@ namespace DAL.DAL
                     x.DFResponsibleName,
                     x.Start,
                     x.End,
+                    x.BindLogisticsUid,
                     x.ID,
                     x.LineID,
                     x.Lineletter,

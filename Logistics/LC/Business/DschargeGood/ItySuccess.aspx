@@ -33,7 +33,6 @@
         <div class="page page-current">
             <!-- 你的html代码 -->
             <header class="bar bar-nav">
-                <a href="index.html" class="icon iconfont icon-zuo pull-left"></a>
                 
                 <h1 class="title">成功</h1>
             </header>
@@ -47,8 +46,6 @@
                         <p class="fz_12 fc_ash txt_center mart_20"><%=DateTime.Now %></p>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -62,7 +59,7 @@
         });
         setInterval(function(){
             window.location.href ="/LC/Business/DschargeGood/LC_Inventory.aspx"
-        },2000)
+        },500)
     </script>
 
 </body>

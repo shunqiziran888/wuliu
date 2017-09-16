@@ -83,73 +83,122 @@
             </header>
 
 
-            <div class="content" style="background:#f2f2f2;">
-                <div class="page-index">
-                    <div class="white box" style="padding:2rem .5rem;margin-top:1rem;">
-                         <p class="dis_flex" style="justify-content:center;">
-                            <a href="/LC/Business/CollectDebts/LC_Payment.aspx" class="btn queren_btn fc_white green fz_14">确认收款</a>
-                        </p> 
-                        <!-- <p class="txt_center"> <i class="iconfont fc_green" style="font-size:55px;">&#xe67b;</i></p>
-                        <p class="txt_center">原返成功</p> -->
-                    </div>
-                    <div style="line-height:1.5rem;margin-top:1rem;flex-wrap:wrap;" class="dis_flex white">
-                        <p class="col_100 txt_center" ><i class="txt_right fz_16 line_he_44">货号：</i><i class="txt_left fc_ash line_he_44">bx110111</i></p>
-                         <p class="col_100 txt_left" style="padding-left:5%;" >
-                             <i class="txt_right fz_16 col_20 line_he_44">货物名： </i>
-                             <i class="txt_left fc_ash fz_14 col_80 line_he_44">加多宝
-                                 <span class="fc_red">x15件</span>
-                                 <span class="fc_green" style="margin-left:.5rem;">(现付)</span>
-                            </i>
-                            </p>
-                        <p class="dis_flex   col_50" style="flex-direction: column;padding-left:5%;">
-                            
-                            <i class="txt_left fz_16 line_he_40">收货人： <span class=" fz_14 fc_ash">宿管大妈</span></i>
-                            <i class="txt_left fz_16 line_he_40">发货人： <span class=" fz_14 fc_ash">宿管大妈</span></i>
-                            <i class="txt_left fz_16 line_he_40">运费：<span class=" fz_14 fc_ash">23221</span></i>
-                            <i class="txt_left fz_16 line_he_40">代收款：<span class=" fz_14 fc_ash">23221</span></i>
-                            <i class="txt_left fz_16 line_he_40 ">运费提付：<span class=" fz_14 fc_ash">2331</span></i>
-                            <i class="txt_left fz_16 line_he_40 ">合计金额：<span class=" fz_14 fc_ash">2331</span></i>
-                        </p>
-                        <p class="dis_flex col_50 line_he_44" style="flex-direction: column;padding-left:.5rem;">
-                            
-                            <i class="txt_left fz_16 line_he_40">电话： <span class=" fz_14 fc_ash">12345678901</span></i>
-                            <i class="txt_left fz_16 line_he_40">电话： <span class=" fz_14 fc_ash">12345678901</span></i>
-                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="12331.1"></i>
-                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="12331.1"></i>
-                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="12331.1"></i>
-                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="12331.1"></i>
-                        </p>
-                    </div>
-                    <div style="line-height:1.5rem;margin-top:.5rem; margin-bottom:.5rem;padding:.5rem;" class=" white">
-                        <p class="dis_flex ali_center col_100" style="flex-direction: column;">
-                            <i class="txt_right fz_16 line_he_30">应收合计： <span class=" fz_14 fc_ash">12221</span></i>
-                            <i class="txt_right fz_16 line_he_30">实收合计： <span class=" fz_14 fc_ash">12221</span></i>
-                            <i class="txt_right fz_16 line_he_30">欠款金额： <span class=" fz_14 fc_ash">12221</span></i>
-                        </p>
-                        <p class="txt_right fz_12 fc_ash">2016年-12月-23日  09：21</p>
-                    </div>
-
-
-
-                </div>
-
-
+            <div class="content" style="background:#f2f2f2;" id="content_list">
+           <%--数据--%>
             </div>
         </div>
     </div>
 
    <script type="text/javascript" src="/Style/scripts/all.js" charset='utf-8'></script>
-     <script src="/Style/scripts/all.js"></script>
+    <script type="text/html" id="content_list_temp">
+         {{if data.length>0}}
+        {{each data as v}}
+                 <div class="page-index" >
+                    <div class="white box" style="padding:2rem .5rem;margin-top:1rem;">
+                         <p class="dis_flex" style="justify-content:center;">
+                            <a onclick="Next()" class="btn queren_btn fc_white green fz_14">确认收款</a>
+                        </p> 
+                        <!-- <p class="txt_center"> <i class="iconfont fc_green" style="font-size:55px;">&#xe67b;</i></p>
+                        <p class="txt_center">原返成功</p> -->
+                    </div>
+                    <div style="line-height:1.5rem;margin-top:1rem;flex-wrap:wrap;" class="dis_flex white">
+                               <p class="col_100 txt_center" ><i class="txt_right fz_16 line_he_44">货号：</i><i class="txt_left fc_ash line_he_44">{{v.GoodNo}}</i></p>
+                         <p class="col_100 txt_left" style="padding-left:5%;" >
+                             <i class="txt_right fz_16 col_20 line_he_44">货物名： </i>
+                             <i class="txt_left fc_ash fz_14 col_80 line_he_44">{{v.GoodName}}
+                                 <span class="fc_red">x{{v.Number}}件</span>
+                                {{if v.freightMode==1}}
+                                 <span class="fc_green" style="margin-left:.5rem;">(提付)</span>
+                                 {{/if}}
+                                 {{if v.freightMode==2}}
+                                 <span class="fc_green" style="margin-left:.5rem;">(现付)</span>
+                                 {{/if}}
+                                 {{if v.freightMode==3}}
+                                 <span class="fc_green" style="margin-left:.5rem;">(扣付)</span>
+                                 {{/if}}
+                            </i>
+                            </p>
+                        <p class="dis_flex   col_50" style="flex-direction: column;padding-left:5%;">
+                            
+                            <i class="txt_left fz_16 line_he_40">收货人： <span class=" fz_14 fc_ash">{{v.Consignee}}</span></i>
+                            <i class="txt_left fz_16 line_he_40">发货人： <span class=" fz_14 fc_ash">{{v.Consignor}}</span></i>
+                            <i class="txt_left fz_16 line_he_40">运费：<span class=" fz_14 fc_ash">{{v.Freight}}</span></i>
+                            <i class="txt_left fz_16 line_he_40">代收款：<span class=" fz_14 fc_ash">{{v.GReceivables}}</span></i>
+                            {{if v.freightMode==1}}
+                            <i class="txt_left fz_16 line_he_40 ">运费提付：<span class=" fz_14 fc_ash">{{v.Freight}}</span></i>
+                            {{/if}}
+                             {{if v.freightMode==2}}
+                            <i class="txt_left fz_16 line_he_40 ">运费现付：<span class=" fz_14 fc_ash">{{v.Freight}}</span></i>
+                            {{/if}}
+                             {{if v.freightMode==3}}
+                            <i class="txt_left fz_16 line_he_40 ">运费扣付：<span class=" fz_14 fc_ash">{{v.Freight}}</span></i>
+                            {{/if}}
+                            <i class="txt_left fz_16 line_he_40 ">合计金额：<span class=" fz_14 fc_ash" id="TotalAmount">{{v.Total}}</span></i>
+                        </p>
+                        <p class="dis_flex col_50 line_he_44" style="flex-direction: column;padding-left:.5rem;">
+                            
+                            <i class="txt_left fz_16 line_he_40">电话： <span class=" fz_14 fc_ash">{{v.SHPhone}}</span></i>
+                            <i class="txt_left fz_16 line_he_40">电话： <span class=" fz_14 fc_ash">{{v.FHPhone}}</span></i>
+                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="{{v.Freight}}" id="SSyf"></i>
+                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="{{v.GReceivables}}" id="SSdsk"></i>
+                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="{{v.Freight}}" id="SStf"></i>
+                            <i class="txt_left fz_16 line_he_40">实收： <input class=" fz_14 col_60" type="text" placeholder="{{v.Total}}" id="SShj" onkeyup="fillB()"></i>
+                        </p>
+                    </div>
+                    <div style="line-height:1.5rem;margin-top:.5rem; margin-bottom:.5rem;padding:.5rem;" class=" white">
+                        <p class="dis_flex ali_center col_100" style="flex-direction: column;">
+                            <i class="txt_left fz_16 line_he_30 ">应收合计：<span class=" fz_14 fc_ash">{{v.Total}}</span></i>
+                            <i class="txt_right fz_16 line_he_30">实收合计： <span class=" fz_14 fc_ash" id="TestSSHJ"></span></i>
+                            <i class="txt_right fz_16 line_he_30">欠款金额： <span class=" fz_14 fc_ash">0</span></i>
+                        </p>
+                        <p class="txt_right fz_12 fc_ash">{{v.ArrearsTime}}</p>
+                    </div>
+                </div>
+        {{/each}}
+        {{else}}
+        <div style="text-align: center; line-height: 200px; overflow: hidden;">无任何数据</div>
+        {{/if}}
+    </script>
     <script>
         $(function () {
             $.init();
-            $.config = { router: false };
-            $('.queren_btn').click(function(){
-                $(this).parents('.box').html('<p class="txt_center"> <i class="iconfont fc_green" style="font-size:55px;">&#xe67b;</i></p> <p class="txt_center">放货成功</p>');
-            })
+            $.config = { router: false }
+            var TotalAmount = document.getElementById("TotalAmount").innerHTML;
+            document.getElementById("TestSSHJ").innerHTML = "" + TotalAmount + "";
+        });
+        PageInit(function () {
+            let OID = GET("OID");
+            GetHTML("GetCollectDebtsEdit", { OID: OID }, function (data) {
+                if (CheckHTMLData(data)) {
+                    let html = TempToHtml("content_list_temp", data);
+                    $("#content_list").html(html);
+                    RemoveLuyou();
+                }
+            });
         });
     </script>
 
 </body>
 
 </html>
+<script type="text/javascript">
+        function Next()
+        {
+            let OID = GET("OID");
+            var SSyf = $("#SSyf").val();//实收运费
+            var SSdsk = $("#SSdsk").val();//实收代收款
+            var SShj = $("#SShj").val();//实收合计
+            var TotalAmount = document.getElementById("TotalAmount").innerHTML;
+            window.location.href = "/LC/Business/CollectDebts/LC_Payment.aspx?OID=" + OID + "&SSyf=" + SSyf + "&SSdsk=" + SSdsk + "&SShj=" + SShj + "&TotalAmount=" + TotalAmount;
+        }
+        function fillB() {
+            var a = document.getElementById("SShj").value;
+            if (a != "") {
+                document.getElementById("TestSSHJ").innerHTML = parseInt(a);
+            }
+            else if (a == "") {
+                var TotalAmount = document.getElementById("TotalAmount").innerHTML;
+                document.getElementById("TestSSHJ").innerHTML = "" + TotalAmount + "";
+            }
+        }
+</script>

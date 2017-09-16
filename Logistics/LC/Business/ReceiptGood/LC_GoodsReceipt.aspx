@@ -71,6 +71,10 @@
                                         %>
                         <li class="zbsh-li">
                             <a href="#">
+                                <input type="hidden" id="freightMode" value="<%=v.freightMode %>" />
+                                <input type="hidden" id="GReceivables" value="<%=v.GReceivables %>" />
+                                <input type="hidden" id="PickupCost"  value="<%=v.PickupCost %>"/>
+                                <input type="hidden" id="GivegoodCost"  value="<%=v.GivegoodCost %>"/>
                                 <div class="col-100">
                                     <i class="zbsh-xd2">
                                   <p class="zbsh-zffs">货物名： <span class="huo_name ft_color_ash"><%=v.GoodName %> <i class="huo_num">x<%=v.Number %></i></span> <span class="huo_fnagshi">(<%=v.freightMode.ConvertData<YFFSEnum>().EnumToName() %>)</span></p>
@@ -83,7 +87,10 @@
                                   <p class="zbsh-mdd">收货人： <span class="ft_color_ash"><%=v.Consignee %></span></p>
                                   <p class="zbsh-hm ft_color_ash">电话： <span><%=v.SHPhone %></span></p>
                                 </i>
-
+                                     <i class="zbsh-xd1">
+                                  <p class="zbsh-mdd">收货方式： <span class="ft_color_ash"><%=v.ReceiptGood.ConvertData<SHFSENum>().EnumToName() %></span></p>
+                                  <p class="zbsh-hm ft_color_ash">提货方式： <span><%=v.CarryGood.ConvertData<THFSEnum>().EnumToName() %></span></p>
+                                </i>
                                     <i class="zbsh-xd2">
                                   <p class="zbsh-yf">运费： <input type="text" name="Freight" id="Freight<%=v.OrderID %>" placeholder="￥0.00"></p>
                                 </i>
@@ -91,7 +98,7 @@
                                              var isshow = list2.Where(x => x.End.Value == v.Destination).Count()>0;
                                                         %>
                                     <i class="zbsh-xd2">
-                                  <p class="zbsh-yf">中转地： <select id="End<%=v.OrderID %>" name="End" style="width: 300px;">
+                                  <p class="zbsh-yf dis_flex ali_center"><span class="col_30">中转地：</span> <select class="col_70" id="End<%=v.OrderID %>" name="End" style="width: 300px;">
                                                                  <option>请选择</option>
                                                                  <%
                                                                      foreach (var v1 in list2)
@@ -120,8 +127,15 @@
 
                             </a>
                             <div class="xiangdan-btn">
+                                <%if (v.freightMode == 2)
+                                    { %>
+                                <a onclick="zhifu('<%=v.OrderID %>')">快速收货</a>
+                                <%} %>
+                                <%else if (v.freightMode == 1 || v.freightMode == 3)
+    { %>
                                 <a href="#" onclick="UpdateYF('<%=v.OrderID %>')">快速收货</a>
-                                <a href="/LC/Business/ReceiptGood/LC_RgDetails.aspx?OID=<%=v.OrderID %>">更多设置</a>
+                                <%} %>
+                                <a href="/LC/Business/ReceiptGood/LC_RgDetails.aspx?OID=<%=v.OrderID %>&Number=<%=v.Number %>">更多设置</a>
                             </div>
                         </li>
                           <%} %>
@@ -149,19 +163,59 @@
 
 </html>
 <script type="text/javascript">
+    //快速收货
     function UpdateYF(OID)
     {
         var yf = $("#Freight" + OID).val();
         let arr = $("#End" + OID).val().split("|");
         var finish = arr[0];
         let BindLogisticsUid = arr[1];
-        if (yf != "" && yf != undefined &&  finish!="请选择" && finish!=undefined)
+        var Total; //合计
+        var freightMode = $("#freightMode").val(); 
+        var GReceivables = $("#GReceivables").val();
+        if (freightMode == 1) {
+            //提付合计
+            Total = parseInt(yf) + parseInt(GReceivables);
+        }
+        //现付合计
+        else if (freightMode == 2) {
+            Total = GReceivables;
+        }
+        //扣付合计
+        else if (freightMode == 3 && parseInt(GReceivables) > yf) {
+            Total = parseInt(GReceivables) - parseInt(yf);
+        }
+        if (yf != "" && yf != undefined && finish != "请选择" && finish != undefined) {
+            if (parseInt(GReceivables) < parseInt(yf))
+            {
+                Msg("收货失败！运费不能大于代收款");
+            }
+            else if (parseInt(GReceivables) > parseInt(yf))
+            {
+                var PickupCost = $("#PickupCost").val();
+                var GivegoodCost = $("#GivegoodCost").val();
+                var newFreight = (parseInt(yf) + parseInt(PickupCost) + parseInt(GivegoodCost));
+                window.location.href = "/LC/Business/ReceiptGood/LC_Success.aspx?OrderID=" + OID + "&YF=" + newFreight + "&finish=" + finish + "&BindLogisticsUid=" + BindLogisticsUid + "&Total=" + Total;
+            }   
+        }
+        else {
+            Msg("内容不完整，请重试！");
+        }
+    }
+    //现付
+    function zhifu(OID)
+    {
+        var yf = $("#Freight" + OID).val();
+        let arr = $("#End" + OID).val().split("|");
+        var finish = arr[0];
+        let BindLogisticsUid = arr[1];
+        if (yf != "" && yf != undefined && finish != "请选择" && finish != undefined)
         {
-            window.location.href = "/LC/Business/ReceiptGood/LC_Success.aspx?OrderID=" + OID + "&YF=" + yf + "&finish=" + finish + "&BindLogisticsUid=" + BindLogisticsUid;
+            window.location.href = "/LC/Business/ReceiptGood/LC_Receivables.aspx?OrderID=" + OID + "&YF=" + yf + "&finish=" + finish + "&BindLogisticsUid=" + BindLogisticsUid;
         }
         else
         {
-            alert("内容不完整，请重试！");
+            Msg("内容不完整，请重试!");
         }
     }
 </script>
